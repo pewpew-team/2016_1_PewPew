@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 options: {
                     template: function (data) {
                         return grunt.template.process(
-                            'define(function() { return <%= contents =%>; })',
+                            'define(function () { return <%= contents %> ; });',
                             {data: data}
                         );
                     }

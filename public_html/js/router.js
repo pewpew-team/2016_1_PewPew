@@ -1,6 +1,6 @@
 define(
-    ['backbone'],
-    function (Backbone) {
+    ['backbone', 'views/main'],
+    function (Backbone, mainView) {
         var Router = Backbone.Router.extend({
             routes: {
                 'scoreboard': 'scoreboardAction',
@@ -18,7 +18,7 @@ define(
 
             },
             defaultAction: function () {
-
+                mainView.show();
             }
         })
 
