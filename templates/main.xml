@@ -1,3 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="main">Hi</div>
+    <div id="main">
+        <a href="#game"> Game </a>
+        <a href="#login"> Login </a>
+        <a href="#scoreboard"> Scoreboard </a>
+    </div>
 </fest:template>

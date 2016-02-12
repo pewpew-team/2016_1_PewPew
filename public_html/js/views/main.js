@@ -10,7 +10,7 @@ define(
                 this.$el.html(this.template());
             },
             show: function () {
-                $('#page').append(this.el);
+                $('#page').html(this.el);
                 this.$el.show();
             },
             hide: function () {
