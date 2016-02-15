@@ -1,1 +1,180 @@
-/* TODO */
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic);
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+}
+/*
+========================================================
+разметка
+========================================================
+*/
+.wrap {
+    width: 100%;
+    height: 100%;
+    min-width: 500px;
+    background-color: #EAEDF2;
+    /*
+    background-image: url(../bg-examples/pixel-bg.png);
+    */
+    position: absolute;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+}
+.wrap__layout {
+    width: 500px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom:40px;
+}
+/*
+========================================================
+логотип
+========================================================
+*/
+.logo {
+    margin: 0 auto;
+    width: 100%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 56px;
+    color: #ffffff;
+    background: #323A45;
+    text-align: center;
+    height: 120px;
+    line-height: 120px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*
+========================================================
+меню
+========================================================
+*/
+.menu {
+    margin-top: 40px;
+}
+.menu__btn {
+    width: 80%;
+    height: 40px;
+    background-color: #14B9D5;
+    border: 0;
+    margin: 10px 10% 10px 10%;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 40px;
+    transition: all 0.3s;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.menu__btn:focus {
+    outline: none;
+}
+.menu__btn:hover {
+    background: #0E778A;
+}
+.menu__btn--primary {
+    background-color: #C6DE64;
+}
+.menu__btn--primary:hover {
+    background-color: #8A9D43;
+}
+/*
+========================================================
+форма
+========================================================
+*/
+.form {
+
+}
+.form_name {
+    width: 100%;
+    font-size: 32px;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+/*
+========================================================
+ошибка
+*/
+#alert {
+    width: 80%;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    background: #F5696C;
+    color: #ffffff;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.open {
+    display: inline-block;
+}
+/*
+========================================================
+текстовые поля
+*/
+.text_input {
+    width: 80%;
+    height: 40px;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    transition: all 0.3s;
+
+    background: #e9ecf0;
+    color: #5E6D82;
+    padding-left: 2%;
+    padding-right: 2%;
+
+}
+
+.text_input:focus {
+    outline: none;
+    background-color: #F3F3F3
+}
+/*
+========================================================
+кнопка отправить
+*/
+.submit_input {
+    width: 80%;
+    height: 40px;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    transition: all 0.3s;
+
+    background: #14B9D5;
+    color: #FFFFFF;
+    text-align: center;
+}
+.submit_input:focus {
+    outline: none;
+}
+.submit_input:hover {
+    background: #0E778A;
+}
