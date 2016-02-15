@@ -5,13 +5,13 @@
                 PewPew
             </div>
             <div class = "menu">
-                <button class="menu__btn menu__btn--primary">
+                <button class="menu__btn menu__btn--primary" id="game">
                     Game
                 </button>
-                <button class="menu__btn">
+                <button class="menu__btn" id="login">
                     Login
                 </button>
-                <button class="menu__btn">
+                <button class="menu__btn" id="scoreboard">
                     Scoreboard
                 </button>
             </div>
