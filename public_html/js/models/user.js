@@ -10,7 +10,7 @@ define(
             authorize: function(login, password) {
                 // TODO
             },
-            registerNew: function(login, password1, password2, email) {
+            registerNew: function(login, password1, password2) {
                 // TODO
             }
         });

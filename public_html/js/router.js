@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'event'],
+    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'event'],
     function (Backbone, require) {
         var Router = Backbone.Router.extend({
             routes: {
