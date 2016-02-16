@@ -1,9 +1,9 @@
 {
-  "name": "epicgame",
+  "name": "pewpew",
   "version": "0.1.0",
-  "description": "SSPA - Simple Single Page Application",
+  "description": "Duel shooter",
   "main": "index.js",
-  "author": "a.mezin@corp.mail.ru",
+  "author": "",
   "license": "MIT",
   "devDependencies": {
     "backbone": "^1.2.3",

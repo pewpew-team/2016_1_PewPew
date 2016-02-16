@@ -11,10 +11,22 @@ define(
             },
             show: function () {
                 $('#page').html(this.el);
+                $('#login').on('click', function () {
+                    window.location.href = '#login'
+                })
+                $('#game').on('click', function () {
+                    window.location.href = '#game'
+                })
+                $('#scoreboard').on('click', function () {
+                    window.location.href = '#scoreboard'
+                })
                 this.$el.show();
             },
             hide: function () {
                 this.$el.hide();
+                $('login').off('**');
+                $('game').off('**');
+                $('scoreboard').off('**');
             }
         });
 

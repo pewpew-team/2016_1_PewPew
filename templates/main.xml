@@ -1,7 +1,20 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="main">
-        <a href="#game"> Game </a>
-        <a href="#login"> Login </a>
-        <a href="#scoreboard"> Scoreboard </a>
+    <div id="main" class = "wrap">
+        <div class="wrap__layout">
+            <div class="logo">
+                PewPew
+            </div>
+            <div class = "menu">
+                <button class="menu__btn menu__btn--primary" id="game">
+                    Game
+                </button>
+                <button class="menu__btn" id="login">
+                    Login
+                </button>
+                <button class="menu__btn" id="scoreboard">
+                    Scoreboard
+                </button>
+            </div>
+        </div>
     </div>
 </fest:template>
