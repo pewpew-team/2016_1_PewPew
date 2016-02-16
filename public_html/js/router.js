@@ -1,33 +1,26 @@
 define(
-    ['backbone', 'views/main', 'views/login', 'views/game', 'views/scoreboard'],
-    function (Backbone, mainView, loginView, gameView, scoreboardView) {
+    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard'],
+    function (Backbone, require) {
         var Router = Backbone.Router.extend({
             routes: {
-                'scoreboard': 'scoreboardAction',
-                'game': 'gameAction',
-                'login': 'loginAction',
+                ':query': 'displayView',
                 '*default': 'defaultAction'
             },
             initialize: function () {
-                this.currentView = mainView;
+                this.currentView = require('views/main');
             },
-            scoreboardAction: function () {
+            displayView: function (viewName) {
+                if (require.defined('views/' + viewName)) {
+                    var view = require('views/' + viewName);
+                } else {
+                    var view = require('views/main');   // Пока что кидает в мейн,
+                }                                       // потом сделаем что-то вроде 404 страницы
                 this.currentView.hide();
-                scoreboardView.show();
-                this.currentView = scoreboardView;
-            },
-            gameAction: function () {
-                this.currentView.hide();
-                gameView.show();
-                this.currentView = gameView;
-            },
-            loginAction: function () {
-                this.currentView.hide();
-                loginView.show();
-                this.currentView = loginView;
+                view.show();
+                this.currentView = view;
             },
             defaultAction: function () {
-                this.currentView.hide();
+                var mainView = require('views/main');
                 mainView.show();
                 this.currentView = mainView;
             }
