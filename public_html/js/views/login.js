@@ -1,20 +1,15 @@
 define(
-    ['backbone','tmpl/login'],
-    function (Backbone, tmpl) {
-        var View = Backbone.View.extend({
+    ['tmpl/login', 'views/baseView', 'models/user'],
+    function (tmpl, baseView, user) {
+        var View = baseView.extend({
             template: tmpl,
-            initialize: function () {
-                this.render();
-            },
-            render: function () {
-                this.$el.html(this.template());
-            },
-            show: function () {
-                $('#page').html(this.el);
-                this.$el.show();
-            },
-            hide: function () {
-                this.$el.hide();
+            events: {
+                'click #sign-in': function(e) {
+                    e.preventDefault();
+                    var login = this.$el.find('#login-input').value;
+                    var password = this.$el.find('#password-input').value;
+                    user.authorize(login, password);
+                }
             }
         });
 

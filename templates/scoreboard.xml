@@ -1,3 +1,16 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="scoreboard"></div>
+    <fest:template xmlns:fest="http://fest.mail.ru">
+        <div id="scoreboard" class = "wrap">
+            <div class="wrap__layout">
+                <div class="logo">
+                    Рейтинг
+                </div>
+                <div class = "menu">
+                    <button class="menu__btn" id="main">
+                        Назад
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fest:template>
 </fest:template>

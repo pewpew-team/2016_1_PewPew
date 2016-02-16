@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard'],
+    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'event'],
     function (Backbone, require) {
         var Router = Backbone.Router.extend({
             routes: {
@@ -8,6 +8,8 @@ define(
             },
             initialize: function () {
                 this.currentView = require('views/main');
+                event = require('event');
+                this.listenTo(event, 'navigate', this.changeRoute);
             },
             displayView: function (viewName) {
                 if (require.defined('views/' + viewName)) {
@@ -23,6 +25,9 @@ define(
                 var mainView = require('views/main');
                 mainView.show();
                 this.currentView = mainView;
+            },
+            changeRoute: function (route) {
+                this.navigate(route, {trigger: true});
             }
         })
 

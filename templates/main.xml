@@ -5,14 +5,14 @@
                 PewPew
             </div>
             <div class = "menu">
-                <button class="menu__btn menu__btn--primary" id="game">
-                    Game
+                <button class="menu__btn menu__btn--primary" id="login">
+                    Играть
                 </button>
-                <button class="menu__btn" id="login">
-                    Login
+                <button class="menu__btn" id="register">
+                    Регистрация
                 </button>
                 <button class="menu__btn" id="scoreboard">
-                    Scoreboard
+                    Рейтинг
                 </button>
             </div>
         </div>
