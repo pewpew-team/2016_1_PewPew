@@ -8,9 +8,9 @@
                 <div class="form_name">Вход</div>
                 <div id = "alert">Введен неверный пароль или логин</div>
                 <form name="authentication">
-                    <input name = "login" placeholder = "Логин" class="text_input"></input>
-                    <input name = "password" type = "password" placeholder = "Пароль" class="text_input"></input>
-                    <input type="submit" class="submit_input" value = "Войти"></input>
+                    <input name = "login" placeholder = "Логин" class="text_input" id="login-input"></input>
+                    <input name = "password" type = "password" placeholder = "Пароль" class="text_input" id="password-input"></input>
+                    <input type="submit" class="submit_input" value = "Войти" id = 'sign-in'></input>
                 </form>
             </div>
         </div>
