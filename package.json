@@ -7,7 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "backbone": "^1.2.3",
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.0",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
     "grunt": "^0.4.5",
