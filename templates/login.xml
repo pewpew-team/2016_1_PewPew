@@ -2,14 +2,22 @@
     <div id="main" class = "wrap">
         <div class="wrap__layout">
             <div class="logo">
-                Вход
+                PewPew
             </div>
-            <div class = "form">
-                <form name="authentication">
-                    <input name = "login" placeholder = "Логин" class="text_input" id="login-input"></input>
-                    <input name = "password" type = "password" placeholder = "Пароль" class="text_input" id="password-input"></input>
-                    <input type="submit" class="submit_input" value = "Войти" id = 'sign-in'></input>
-                </form>
+            <div class = "menu">
+                <div class = "menu__title">
+                    Вход
+                </div>
+                <div class = "form">
+                    <form name="authentication">
+                        <input name = "login" placeholder = "Логин" class="text_input" id="login-input"></input>
+                        <input name = "password" type = "password" placeholder = "Пароль" class="text_input" id="password-input"></input>
+                        <input type="submit" class="submit_input" value = "Войти" id = 'sign-in'></input>
+                    </form>
+                </div>
+                <button class="menu__btn  menu__btn--back" id="main">
+                    Назад
+                </button>
             </div>
         </div>
     </div>

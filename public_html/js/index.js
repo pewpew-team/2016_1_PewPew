@@ -15,8 +15,6 @@ require.config({
             exports: '_'
         }
     }
-
-
 });
 
 define(
