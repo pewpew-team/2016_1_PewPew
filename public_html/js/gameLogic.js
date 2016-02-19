@@ -3,24 +3,19 @@ define(
     function () {
 
         var application = function() {
-            var dynamicCanvas = document.getElementById("dynamicLayer");
-            var dynamicContext = dynamicCanvas.getContext("2d");
-
-            var staticContext = document.getElementById("staticLayer").getContext("2d");
-
-            var WIDTH = dynamicCanvas.width;
-            var HEIGHT = dynamicCanvas.height;
-
-            var player = new Player(1);
-            var enemy = new Player(-1);
-
-            var bullets = [];
-            var barriers = [];
-
-            var pushedButton = false;
-            var previousDirection = null;
-            var coolDown = false;
-            var blockKeys = false;
+            var dynamicCanvas,
+                dynamicContext,
+                staticContext,
+                WIDTH,
+                HEIGHT,
+                player,
+                enemy,
+                bullets = [],
+                barriers = [],
+                pushedButton = false,
+                previousDirection = null,
+                coolDown = false,
+                blockKeys = false;
 
             function Player(side) {
                 var playerSize = {
@@ -470,6 +465,14 @@ define(
             }
             return {
                 init : function (namePlayer, nameEnemy) {
+                    dynamicCanvas = document.getElementById("dynamicLayer");
+                    dynamicContext = dynamicCanvas.getContext("2d");
+
+                    staticContext = document.getElementById("staticLayer").getContext("2d");
+
+                    WIDTH = dynamicCanvas.width;
+                    HEIGHT = dynamicCanvas.height;
+
                     player = new Player(1);
                     enemy = new Player(-1);
 

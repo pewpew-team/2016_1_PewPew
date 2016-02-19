@@ -3,11 +3,12 @@ define([
     'tmpl/game',
     'gameLogic'
 ], function (baseView, tmpl, application) {
-        console.log(application);
         var View = baseView.extend({
             template: tmpl,
-            show: function(){
-                application.init("Alex", "Edgar");
+            show: function() {
+                $('#page').html(this.el);
+                this.$el.show();
+                application.init('Alex','Edgar');
                 application.run();
             }
         });
