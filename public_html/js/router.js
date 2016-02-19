@@ -3,21 +3,20 @@ define(
     function (Backbone, require) {
         var Router = Backbone.Router.extend({
             routes: {
-                ':query': 'displayView',
+                'main': 'displayView',
+                'login': 'displayView',
+                'register': 'displayView',
+                'scoreboard': 'displayView',
+                'game': 'displayView',
                 '*default': 'defaultAction'
             },
             initialize: function () {
                 this.currentView = require('views/main');
-                event = require('event');
-                this.listenTo(event, 'navigate', this.changeRoute);
+                this.listenTo(require('event'), 'navigate', this.changeRoute);
             },
-            displayView: function (viewName) {
-                var view;
-                if (require.defined('views/' + viewName)) {
-                    view = require('views/' + viewName);
-                } else {
-                    view = require('views/main');   // Пока что кидает в мейн,
-                }                                       // потом сделаем что-то вроде 404 страницы
+            displayView: function () {
+                var fragmentName = Backbone.history.getFragment();
+                var view = require('views/'+fragmentName);
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;
@@ -30,7 +29,7 @@ define(
             changeRoute: function (route) {
                 this.navigate(route, {trigger: true});
             }
-        })
+        });
 
         return new Router();
     }

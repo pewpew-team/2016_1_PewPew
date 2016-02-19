@@ -18,8 +18,7 @@ app
 	.use(bodyParser.json());
 
 app.use(function (req, res, done) {
-	console.log('Request #%s at %s \n\t URL: %s   method: %s \n\t body: ',
-		++counter, new Date(), req.url ,req.method);
+	console.log('Request #%s at %s \n\t URL: %s   method: %s \n\t body: ', ++counter, new Date(), req.url ,req.method);
 	console.log(req.body);
 	done();
 });
@@ -29,7 +28,7 @@ app.post('/login', function(req, res) {
 	var password = req.body.password;
 	// Hardcoded for dev
 	if (username === 'username' && password === 'userpass') {
-		res.send('{\'token\': authTokenExample}');
+		res.send('{\'token\': \'authTokenExample\'}');
 	}
 	res.send();
 });
