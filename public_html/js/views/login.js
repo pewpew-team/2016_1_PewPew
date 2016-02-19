@@ -6,12 +6,13 @@ define(
             events: {
                 'click #sign-in': function(e) {
                     e.preventDefault();
-                    var login = this.$el.find('#login-input').value;
-                    var password = this.$el.find('#password-input').value;
+                    var login = document.getElementById('login-input').value;
+                    var password = document.getElementById('password-input').value;
                     user.authorize(login, password);
                 }
             },
             initialize: function () {
+                this.render();
                 this.listenTo(event,'invalidLoginPassword', this.showErrorMessage);
             },
             showErrorMessage: function () {

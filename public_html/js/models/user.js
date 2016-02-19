@@ -10,6 +10,7 @@ define(
                 'port': 8080
             },
             authorize: function(login, password) {
+                console.log('%s %s', login, password);
                 if(login.length === 0 && password.length == 0) {
                     event.trigger('invalidLoginPassword');
                 } else {
@@ -28,9 +29,6 @@ define(
                     url: '/login',
                     data: {'login': this.get('username'),
                         'password': this.get('password')},
-                    done: function () {
-                        alert('Server still in dev :(');
-                    },
                     success: function (msg) {
                         if (msg['AuthToken']) {
                             this.set('token', msg['AuthToken']);
