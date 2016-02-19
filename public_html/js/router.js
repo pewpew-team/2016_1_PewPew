@@ -7,6 +7,7 @@ define(
                 'login': 'displayView',
                 'register': 'displayView',
                 'scoreboard': 'displayView',
+                'game': 'displayView',
                 '*default': 'defaultAction'
             },
             initialize: function () {
