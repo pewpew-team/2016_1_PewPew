@@ -1,6 +1,6 @@
 define(
-    ['tmpl/login', 'views/baseView', 'models/user'],
-    function (tmpl, baseView, user) {
+    ['tmpl/login', 'views/baseView', 'models/user', 'event'],
+    function (tmpl, baseView, user, event) {
         var View = baseView.extend({
             template: tmpl,
             events: {
@@ -10,6 +10,12 @@ define(
                     var password = this.$el.find('#password-input').value;
                     user.authorize(login, password);
                 }
+            },
+            initialize: function () {
+                this.listenTo(event,'invalidLoginPassword', this.showErrorMessage);
+            },
+            showErrorMessage: function () {
+                // TODO
             }
         });
 
