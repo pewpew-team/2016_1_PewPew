@@ -1,5 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="game">
-        <canvas id = 'gameScreen'> </canvas>
+    <div id = "score"></div>
+    <div class = "gameArea">
+        <canvas width = "600" height="600" class = "gameArea__canvas" id="staticLayer"></canvas>
+        <canvas width = "600" height="600" class = "gameArea__canvas" id="dynamicLayer"></canvas>
     </div>
 </fest:template>

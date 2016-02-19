@@ -212,3 +212,30 @@ html, body {
 .scoreboard__title {
     font-weight: bold;
 }
+
+/*
+=========================================================
+мусор
+*/
+.gameArea {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.gameArea__canvas {
+    border: 1px dashed;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#staticLayer {
+    z-index: 1;
+}
+#dynamicLayer {
+    z-index: 3;
+    cursor: crosshair;
+}
+#score {
+    height: 20px;
+}

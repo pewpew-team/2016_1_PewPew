@@ -12,10 +12,11 @@ define(
                 this.listenTo(event, 'navigate', this.changeRoute);
             },
             displayView: function (viewName) {
+                var view;
                 if (require.defined('views/' + viewName)) {
-                    var view = require('views/' + viewName);
+                    view = require('views/' + viewName);
                 } else {
-                    var view = require('views/main');   // Пока что кидает в мейн,
+                    view = require('views/main');   // Пока что кидает в мейн,
                 }                                       // потом сделаем что-то вроде 404 страницы
                 this.currentView.hide();
                 view.show();

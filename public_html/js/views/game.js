@@ -1,8 +1,15 @@
-define(
-    ['views/baseView','tmpl/game'],
-    function (baseView, tmpl) {
+define([
+    'views/baseView',
+    'tmpl/game',
+    'gameLogic'
+], function (baseView, tmpl, application) {
+        console.log(application);
         var View = baseView.extend({
-            template: tmpl
+            template: tmpl,
+            show: function(){
+                application.init("Alex", "Edgar");
+                application.run();
+            }
         });
 
         return new View();
