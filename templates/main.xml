@@ -6,7 +6,7 @@
             </div>
             <div class = "menu">
                 <button class="menu__btn menu__btn--primary" id="login">
-                    Играть
+                    Логин
                 </button>
                 <button class="menu__btn" id="register">
                     Регистрация

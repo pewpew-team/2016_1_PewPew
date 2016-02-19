@@ -3,10 +3,35 @@
         <div id="scoreboard" class = "wrap">
             <div class="wrap__layout">
                 <div class="logo">
-                    Рейтинг
+                    PewPew
                 </div>
                 <div class = "menu">
-                    <button class="menu__btn" id="main">
+                    <div class = "menu__title">
+                        Рейтинг игроков
+                    </div>
+                    <table class="scoreboard">
+                        <tr>
+                            <td class="scoreboard__name scoreboard__title" >Логин</td>
+                            <td class="scoreboard__rating scoreboard__title" >Рейтинг</td>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard__name">Alex</td>
+                            <td class="scoreboard__rating">3945</td>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard__name">Alex</td>
+                            <td class="scoreboard__rating">3945</td>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard__name">Alex</td>
+                            <td class="scoreboard__rating">3945</td>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard__name">Alex</td>
+                            <td class="scoreboard__rating">3945</td>
+                        </tr>
+                    </table>
+                    <button class="menu__btn  menu__btn--back" id="main">
                         Назад
                     </button>
                 </div>
