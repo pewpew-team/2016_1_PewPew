@@ -10,20 +10,19 @@ define(
                 'port': 8080
             },
             authorize: function(login, password) {
-                console.log('%s %s', login, password);
                 if(login.length === 0 && password.length == 0) {
                     event.trigger('invalidLoginPassword');
                 } else {
                     this.set('username', login);
                     this.set('password', password);
-                    this.sendData();
+                    this.sendLoginData();
                     this.set('password','');
                 }
             },
             registerNew: function(login, password1, password2) {
-                // TODO
+
             },
-            sendData: function () {
+            sendLoginData: function () {
                 $.ajax({
                     method: 'POST',
                     url: '/login',
