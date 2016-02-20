@@ -3,22 +3,24 @@ define(
     function() {
         var Backbone = require('backbone');
         var Bullet = Backbone.Model.extend({
-            init: function(posX, posY, velX, velY) {
+            initialize: function(posX, posY, velX, velY, sizeX, sizeY) {
                 this.set({
                     'posX': posX,
                     'posY': posY,
                     'velX': velX,
-                    'velY': velY
+                    'velY': velY,
+                    'sizeX': sizeX,
+                    'sizeY': sizeY
                 });
             },
-            sendData: function() {
-                // TODO
+            sync: function() {
+                // TODO отправляет данные на сервер через ws
             },
             iterate: function() {
-                // TODO
+                this.posX += this.velX;
+                this.posY += this.velY;
             }
         });
-
-
+        return Bullet;
     }
 );
