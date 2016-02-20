@@ -1,6 +1,6 @@
 define(
-    ['backbone', 'require', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'event'],
-    function (Backbone, require) {
+    ['backbone', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'event'],
+    function (Backbone) {
         var Router = Backbone.Router.extend({
             routes: {
                 'main': 'displayView',
