@@ -6,9 +6,6 @@ define(
         var barriersCollection = require('game/collections/barriersCollection');
 
         var BarriersView = Backbone.View.extend({
-            default: {
-                context: document.getElementById('dynamicLayer').getContext("2d"),
-            },
             render: function() {
                 this.collection.each(function(bullet) {
                     var barrierView = new BarrierView(bullet);

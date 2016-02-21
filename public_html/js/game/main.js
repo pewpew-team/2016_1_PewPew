@@ -11,14 +11,13 @@ define(
         var barriersView = require('game/views/allBarriersView');
         var playerView = require('game/views/playerView');
 
-        var game = {
+        return {
             init: function () {
-
+                alert('game init');
             },
             run: function() {
 
             }
-        }
-        return game;
+        };
     }
 );

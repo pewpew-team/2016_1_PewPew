@@ -9,10 +9,10 @@ define(
         var screen = require('game/models/screen');
 
         var ScreenView = Backbone.View.extend({
-            initialize: function (model) {
+            initialize: function (context) {
                 this.set({
-                    'model': model,
-                    'context': document.getElementById('staticLayer').getContext("2d")
+                    'model': screen,
+                    'context': context
                 });
             },
 
@@ -21,6 +21,6 @@ define(
             }
         });
 
-        return new ScreenView(screen);
+        return ScreenView;
     }
 );
