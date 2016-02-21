@@ -1,5 +1,5 @@
 define(
-    ['backbone','models/bullet'],
+    ['backbone','game/models/bullet'],
     function() {
         var Backbone = require('backbone');
         var Bullet = require('models/bullet');

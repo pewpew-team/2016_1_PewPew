@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'collections/bulletCollection', 'views/bulletView'],
+    ['backbone', 'game/collections/bulletCollection', 'game/views/bulletView'],
     function() {
         var Backbone = require('backbone');
         var bulletCollection = require('collections/bulletCollection');

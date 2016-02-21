@@ -1,5 +1,5 @@
 define(
-    ['backbone',],
+    ['backbone'],
     function() {
         var Backbone = require('backbone');
         var Bullet = Backbone.Model.extend({

@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'models/screen'],
+    ['backbone'],
   function() {
       var Backbone = require('backbone');
       var Player = Backbone.Model.extend({
