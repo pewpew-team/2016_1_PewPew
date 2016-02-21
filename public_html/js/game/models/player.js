@@ -8,14 +8,15 @@ define(
                   'nickname': nickname,
                   'canvasWidth': canvasWidth,
                   'position': canvasWidth/2,
-                  'playerSize': playerSize
+                  'playerSize': playerSize,
+                  'gunVectorX': 0,
+                  'gunVectorY': -1
               });
           },
           sync: function() {
               // TODO отправка данный через web socket
           },
           moveLeft: function() {
-              // TODO доработать отскакивание от стенки
               this.pos--;
           },
           moveRight: function() {

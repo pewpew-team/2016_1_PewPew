@@ -6,7 +6,7 @@ define(
             model: require('models/bullet'),
             initialize: function(model) {
                 this.set({
-                    'context': document.getElementById('dynamicLayer'),
+                    'context': document.getElementById('dynamicLayer').getContext("2d"),
                     'model': model
                 });
             },

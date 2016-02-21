@@ -6,5 +6,6 @@ define(
 
         });
 
+        return new Screen();
     }
 );

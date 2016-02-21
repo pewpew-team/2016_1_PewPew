@@ -7,7 +7,7 @@ define(
 
         var BulletsView = Backbone.View.extend({
             default: {
-                context: document.getElementById('dynamicLayer'),
+                context: document.getElementById('dynamicLayer').getContext("2d"),
             },
             render: function() {
                 this.collection.each(function(bullet) {
