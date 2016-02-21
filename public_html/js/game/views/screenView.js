@@ -9,11 +9,9 @@ define(
         var screen = require('game/models/screen');
 
         var ScreenView = Backbone.View.extend({
-            initialize: function (context) {
-                this.set({
-                    'model': screen,
-                    'context': context
-                });
+            initialize: function (canvas) {
+                this.model = screen;
+                this.canvas = canvas;
             },
 
             render: function () {

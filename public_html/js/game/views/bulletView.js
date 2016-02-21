@@ -3,11 +3,9 @@ define(
     function() {
         var Backbone = require('backbone');
         var bulletView = Backbone.View.extend({
-            initialize: function(model) {
-                this.set({
-                    'context': document.getElementById('dynamicLayer').getContext("2d"),
-                    'model': model
-                });
+            initialize: function(model, canvas) {
+                this.canvas = canvas;
+                this.model = model;
             },
             show: function() {
                 context.beginPath();

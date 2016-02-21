@@ -8,7 +8,7 @@ define(
         var BulletsView = Backbone.View.extend({
             render: function() {
                 this.collection.each(function(bullet) {
-                    var bulletView = new BulletView(bullet);
+                    var bulletView = new BulletView(bullet, document.getElementById('dynamicLayer'));
                     bulletView.render();
                 })
             }

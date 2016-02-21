@@ -7,8 +7,8 @@ define(
 
         var BarriersView = Backbone.View.extend({
             render: function() {
-                this.collection.each(function(bullet) {
-                    var barrierView = new BarrierView(bullet);
+                this.collection.each(function(barrier) {
+                    var barrierView = new BarrierView(barrier, document.getElementById('dynamicLayer'));
                     barrierView.render();
                 });
             }

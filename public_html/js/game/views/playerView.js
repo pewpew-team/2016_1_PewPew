@@ -4,25 +4,28 @@ define(
         var Backbone = require('backbone');
 
         var PlayerView = Backbone.View.extend({
-            events: {
-                'keypress #staticLayer' : function() {
-                    // TODO движение юзера
-                },
-                'mousemove #staticLayer' : function() {
-                    // TODO движение пушки
-                },
-                'click #staticLayer' : function() {
-                    // TODO выстрел
-                }
-            },
-            initialize: function (model) {
-                this.set({
-                    'model': model,
-                    'context': document.getElementById('dynamicLayer').getContext("2d")
-                });
+            initialize: function (model, canvas) {
+                this.model = model;
+                this.canvas = canvas;
+                console.log(canvas);
+                this.canvas.addEventListener('click', this.handleClick);
+                this.canvas.addEventListener('mousemove', this.handleMouseMove);
+                window.addEventListener('keydown', this.handleKeydown);
             },
             render: function () {
                 // TODO рисуем игрока по данным из модели(вместе с пушкой)
+            },
+            handleClick: function(e) {
+                e.preventDefault();
+                // TODO выстрел
+            },
+            handleMouseMove: function(e) {
+                e.preventDefault();
+                // TODO движение пушки
+            },
+            handleKeydown: function(e) {
+                e.preventDefault();
+                // TODO движение пользователя
             }
         });
 
