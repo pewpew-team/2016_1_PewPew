@@ -4,41 +4,11 @@
 html, body {
     padding: 0;
     margin: 0;
+    width: 100%;
+    height: 100%;
 }
 * {
     box-sizing: border-box;
-}
-/*
-========================================================
-разметка
-========================================================
-*/
-#page {
-    width: 100%;
-    height: 100%;
-}
-.wrap {
-    width: 100%;
-    height: 100%;
-    min-width: 500px;
-    background-color: #EAEDF2;
-    /*
-    background-image: url(../bg-examples/pixel-bg.png);
-    */
-    position: absolute;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    font-family: 'Open Sans', sans-serif;
-}
-.wrap__layout {
-    width: 500px;
-    background: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
 }
 /*
 ========================================================
@@ -46,15 +16,10 @@ html, body {
 ========================================================
 */
 .logo {
-    margin: 0 auto;
-    width: 100%;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 42px;
-    color: #ffffff;
     background: #323A45;
+    font-family: 'Press Start 2P', cursive;
+    color: #ffffff;
     text-align: center;
-    height: 120px;
-    line-height: 120px;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -63,10 +28,54 @@ html, body {
 }
 /*
 ========================================================
-меню
+page
+========================================================
+*/
+.page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 460px;
+}
+.page__background {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    overflow: hidden;
+}
+.page__layer {
+    width: 100%;
+    height: 100%;
+    background: limegreen;
+}
+/*
+========================================================
+menu
 ========================================================
 */
 .menu {
+    width: 460px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.menu__logo {
+    margin: 0 auto;
+    width: 100%;
+    font-size: 42px;
+    height: 120px;
+    line-height: 120px;
+}
+.menu__wrap {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -127,7 +136,7 @@ html, body {
 ========================================================
 ошибка
 */
-#alert {
+#form__alert {
     width: 80%;
     margin: 10px 10% 10px 10%;
     border: 0;
@@ -139,14 +148,14 @@ html, body {
     padding-left: 2%;
     padding-right: 2%;
 }
-.open {
+.form__open {
     display: inline-block;
 }
 /*
 ========================================================
 текстовые поля
 */
-.text_input {
+.form__text_input {
     width: 80%;
     height: 40px;
     margin: 10px 10% 10px 10%;
@@ -163,7 +172,7 @@ html, body {
 
 }
 
-.text_input:focus {
+.form__text_input:focus {
     outline: none;
     background-color: #F3F3F3;
 }
@@ -171,7 +180,7 @@ html, body {
 ========================================================
 кнопка отправить
 */
-.submit_input {
+.form__submit_input {
     width: 80%;
     height: 40px;
     margin: 10px 10% 10px 10%;
@@ -186,15 +195,15 @@ html, body {
     color: #FFFFFF;
     text-align: center;
 }
-.submit_input:focus {
+.form__submit_input:focus {
     outline: none;
 }
-.submit_input:hover {
+.form__submit_input:hover {
     background: #0E778A;
 }
 /*
 ========================================================
-рейтинг
+scoreboard рейтинг игроков
 ========================================================
 */
 .scoreboard {
@@ -212,30 +221,70 @@ html, body {
 .scoreboard__title {
     font-weight: bold;
 }
+/*
+========================================================
+header
+========================================================
+*/
+.header {
+    clear:both;
+    height: 50px;
+    line-height: 50px;
+    min-height: 50px;
+    font-family: 'Press Start 2P', cursive;
+    color: #FFFFFF;
+    background: #323A45;
+    width: 100%;
+    display: inline-block;
+    transition: all 0.3s;
+}
+.header__logo {
+    width: 200px;
+    font-size: 24px;
+    height: 50px;
+    float: left;
+    text-align: left;
+    padding-left: 5%;
+}
+.header__score {
+    text-align:center;
+    margin: 0 auto;
+}
+.header__user {
+    width: 200px;
+    float: right;
+    text-align: right;
+    padding-right: 5%;
+
+}
+
+
 
 /*
-=========================================================
-мусор
+========================================================
+game
+========================================================
 */
-.gameArea {
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-.gameArea__canvas {
-    border: 1px dashed;
-    position: absolute;
-    left: 0;
-    top: 0;
+.game {
+
 }
 #staticLayer {
-    z-index: 1;
+    z-index: 2;
+    position: absolute;
 }
 #dynamicLayer {
     z-index: 3;
+    position: absolute;
     cursor: crosshair;
 }
-#score {
-    height: 20px;
+
+@media screen and (max-width: 700px) {
+    .header {
+        height: 100px;
+        transition: all 0.3s;
+    }
+    .header__score {
+        width: 100%;
+        float: left;
+    }
 }

@@ -1,41 +1,41 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <fest:template xmlns:fest="http://fest.mail.ru">
-        <div id="scoreboard" class = "wrap">
-            <div class="wrap__layout">
-                <div class="logo">
-                    PewPew
-                </div>
-                <div class = "menu">
-                    <div class = "menu__title">
-                        Рейтинг игроков
-                    </div>
-                    <table class="scoreboard">
-                        <tr>
-                            <td class="scoreboard__name scoreboard__title" >Логин</td>
-                            <td class="scoreboard__rating scoreboard__title" >Рейтинг</td>
-                        </tr>
-                        <tr>
-                            <td class="scoreboard__name">Alex</td>
-                            <td class="scoreboard__rating">3945</td>
-                        </tr>
-                        <tr>
-                            <td class="scoreboard__name">Alex</td>
-                            <td class="scoreboard__rating">3945</td>
-                        </tr>
-                        <tr>
-                            <td class="scoreboard__name">Alex</td>
-                            <td class="scoreboard__rating">3945</td>
-                        </tr>
-                        <tr>
-                            <td class="scoreboard__name">Alex</td>
-                            <td class="scoreboard__rating">3945</td>
-                        </tr>
-                    </table>
-                    <button class="menu__btn  menu__btn--back" id="main">
-                        Назад
-                    </button>
-                </div>
-            </div>
+    <div id="scoreboard" class = "menu">
+        <div class="menu__logo logo">
+            PewPew
         </div>
-    </fest:template>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+                Рейтинг игроков
+            </div>
+            <table class="scoreboard">
+                <tr>
+                    <td class="scoreboard__name scoreboard__title" >Логин</td>
+                    <td class="scoreboard__rating scoreboard__title" >Рейтинг</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+            </table>
+            <button class="menu__btn  menu__btn--back" id="main">
+                Назад
+            </button>
+        </div>
+    </div>
 </fest:template>
+
+
+
+

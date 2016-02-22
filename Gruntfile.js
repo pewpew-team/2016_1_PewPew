@@ -47,6 +47,16 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // настройка jshint для валидации JS-файлов
+        jshint: {
+            options: {
+                reporter: require('jshint-stylish') // используйте jshint-stylish для наглядного представления ошибок
+            },
+            build: ['Gruntfile.js',
+                'public_html/js/*.js',
+                'public_html/js/**/*.js'
+            ]
+        },
         concurrent: {
             target: ['watch', 'shell'],
             options: {
@@ -59,6 +69,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-fest');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['concurrent']);
 
