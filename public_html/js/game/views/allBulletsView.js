@@ -9,7 +9,7 @@ define(
             render: function() {
                 this.collection.each(function(bullet) {
                     var bulletView = new BulletView(bullet, document.getElementById('dynamicLayer'));
-                    bulletView.render();
+                    bulletView.show();
                 })
             }
         });

@@ -10,6 +10,7 @@ define([
                 $('#page').html(this.el);
                 this.$el.show();
                 game.init();
+                game.run();
             }
         });
 

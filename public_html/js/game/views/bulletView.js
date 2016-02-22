@@ -8,6 +8,7 @@ define(
                 this.model = model;
             },
             show: function() {
+                var context = this.canvas.getContext('2d');
                 context.beginPath();
                 context.fillStyle = "orange";
                 var model = this.model;

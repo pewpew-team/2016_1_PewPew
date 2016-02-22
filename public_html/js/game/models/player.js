@@ -3,9 +3,9 @@ define(
   function() {
       var Backbone = require('backbone');
       var Player = Backbone.Model.extend({
-          initialize: function(nickname, canvasWidth, playerSize) {
+          initialize: function(nick, canvasWidth, playerSize) {
               this.set({
-                  'nickname': nickname,
+                  'nickname': nick,
                   'canvasWidth': canvasWidth,
                   'position': canvasWidth/2,
                   'playerSize': playerSize,
@@ -17,10 +17,10 @@ define(
               // TODO отправка данный через web socket
           },
           moveLeft: function() {
-              this.pos--;
+              this.set('position', this.get('position')-5);
           },
           moveRight: function() {
-              this.pos++;
+              this.set('position', this.get('position')+5);
           }
       });
       return Player;
