@@ -10,17 +10,17 @@ define(
                 this.canvas = document.getElementById('dynamicLayer');
                 // TODO проходит по всем пулям и препятствиям считает столкновения
                 this.each(_.bind(function (bullet) {
+                    bullet.iterate();
                     var posX = bullet.get('posX');
                     var posY = bullet.get('posY');
                     if (posX < 0 || posX > this.canvas.width) {
                         bullet.set('velX', -1*bullet.get('velX'));
                     }
-                    if (posY < 0) {
-                        this.remove(bullet);
-                    } else {
-                        bullet.iterate();
-                    }
                 }, this));
+                var outOfBox = this.filter(function (bullet) {
+                    return bullet.get('posY') < 0;
+                });
+                this.remove(outOfBox);
             },
             fire: function(x0, y0, Vx, Vy) {
                 var bullet = new Bullet({
