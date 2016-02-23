@@ -25,6 +25,7 @@ define(
                         if (randomNumber < max*ratio) {
                             isRemovable = false;
                         }
+                        console.log('%s %s %s', posX, posY, isRemovable);
                         var barrier = new Barrier(posX, posY, isRemovable);
                         this.add(barrier);
                     }

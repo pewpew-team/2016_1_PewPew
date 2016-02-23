@@ -7,12 +7,14 @@ define(
         'game/models/player',
         'models/user',
         'game/collections/bulletCollection',
+        'game/collections/barriersCollection',
         'underscore'
     ],
     function() {
         var ScreenView = require('game/views/screenView');
         var bulletsView = require('game/views/allBulletsView');
         var bulletsCollection = require('game/collections/bulletCollection');
+        var barriersCollection = require('game/collections/barriersCollection');
         var barriersView = require('game/views/allBarriersView');
         var PlayerView = require('game/views/playerView');
         var Player = require('game/models/player');
@@ -21,16 +23,11 @@ define(
 
         return {
             init: function () {
-                try {
-                    this.canvas = document.getElementById('dynamicLayer');
-                    this.staticCanvas = document.getElementById('staticLayer');
-                    this.player = new Player('Guest', this.canvas.width, 100);
-                    this.playerView = new PlayerView(this.player, this.canvas);
-                    this.screenView = new ScreenView(this.staticCanvas);
-                }
-                catch (e) {
-                    console.log('error');
-                }
+                this.canvas = document.getElementById('dynamicLayer');
+                this.staticCanvas = document.getElementById('staticLayer');
+                this.player = new Player('Guest', this.canvas);
+                this.playerView = new PlayerView(this.player, this.canvas);
+                barriersCollection.createRandom(10,5,0.5,40,40);
             },
             run: function() {
                 window.setInterval(_.bind(this.iterate, this), 1000/60);
@@ -39,7 +36,8 @@ define(
                 var context = this.canvas.getContext('2d');
                 context.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 bulletsView.render();
-                bulletsCollection.iterate();
+                barriersView.render();
+                bulletsCollection.iterate(barriersCollection);
                 this.playerView.render();
             }
         };

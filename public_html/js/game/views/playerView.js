@@ -15,64 +15,63 @@ define(
                 window.addEventListener('keydown', _.bind(this.handleKeydown, this));
             },
             render: function () {
-                // Рисуем платформу
+                this.model.iterate();
+                this.drawBase();
+                this.drawGun();
+            },
+            drawBase: function() {
                 var context = this.canvas.getContext('2d');
+                var posX = this.model.get('position');
+                var sizeX = this.model.get('playerSizeX');
+                var posY = this.canvas.height;
+                var sizeY = this.model.get('playerSizeY');
                 context.beginPath();
                 context.fillStyle = "black";
-                var model = this.model;
-                context.fillRect(model.get('position') - model.get('playerSize') / 2, this.canvas.height - 20,
-                    model.get('playerSize'), 40);
+                context.fillRect(posX-sizeX/2, posY-sizeY, sizeX, sizeY);
                 context.closePath();
-                // Рисуем пушку
+            },
+            drawGun: function() {
+                var context = this.canvas.getContext('2d');
+                var angle = this.model.get('gunAngle');
+                var angle_sin = Math.sin(angle);
+                var angle_cos = Math.cos(angle);
+                var gunLength = this.model.get('gunLength');
+                var posX = this.model.get('position');
+                var posY = this.canvas.height-this.model.get('playerSizeY');
                 context.beginPath();
-                var gunVectorX = this.model.get('gunVectorX');
-                var gunVectorY = this.model.get('gunVectorY');
-                var angle_sin = gunVectorY/Math.sqrt(gunVectorX*gunVectorX+gunVectorY*gunVectorY);
-                var angle_cos = gunVectorX/Math.sqrt(gunVectorX*gunVectorX+gunVectorY*gunVectorY);
-                var GUN_LENGTH = 40;
-                context.moveTo(this.model.get('position'), this.canvas.height);
+                context.moveTo(posX, posY);
                 context.strokeStyle = "purple";
                 context.lineWidth = 5;
-                context.lineTo(this.model.get('position') + angle_cos * GUN_LENGTH, this.canvas.height
-                    - angle_sin * GUN_LENGTH);
+                context.lineTo(posX + angle_cos * gunLength, posY + angle_sin * gunLength);
                 context.stroke();
                 context.closePath();
-
             },
             handleClick: function(e) {
                 e.preventDefault();
                 var x = e.clientX;
                 var y = e.clientY;
-                var posX = this.model.get('position');
-                var posY = this.canvas.height;
-                var Vx = x-posX;
-                var Vy = y-posY;
-                var V = 5;
-                console.log('%s %s',Vx,Vy);
-                Vx = V*Vx/Math.sqrt(Vx*Vx+Vy*Vy);
-                Vy = V*Vy/Math.sqrt(Vx*Vx+Vy*Vy);
-                bulletCollection.fire(posX, posY, Vx, Vy);
+                this.model.pointGunTo(x,y);
+                this.model.shoot();
             },
             handleMouseMove: function(e) {
                 e.preventDefault();
                 var x = e.clientX;
                 var y = e.clientY;
-                var posX = this.model.get('position');
-                var posY = this.canvas.height;
-                var dx = x-posX;
-                var dy = y-posY;
-                dx = dx/Math.sqrt(dx*dx+dy*dy);
-                dy = dy/Math.sqrt(dx*dx+dy*dy);
-                this.model.set({'gunVectorX': dx, 'gunVectorY': dy});
+                this.model.pointGunTo(x, y);
             },
             handleKeydown: function(e) {
                 e.preventDefault();
-                console.log(e.keyCode);
                 switch (e.keyCode) {
                     case 37:
                         this.model.moveLeft();
                         break;
                     case 39:
+                        this.model.moveRight();
+                        break;
+                    case 65:
+                        this.model.moveLeft();
+                        break;
+                    case 68:
                         this.model.moveRight();
                         break;
                 }

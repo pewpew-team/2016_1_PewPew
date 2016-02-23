@@ -9,7 +9,20 @@ define(
                 this.model = model;
             },
             render: function() {
-                // TODO рисует барьер по модели
+                var context = this.canvas.getContext('2d');
+                var model = this.model;
+                var posX = model.get('posX');
+                var posY = model.get('posY');
+                var sizeX = model.get('sizeX');
+                var sizeY = model.get('sizeY');
+                context.beginPath();
+                if (model.get('isRemovable')) {
+                    context.fillStyle = "green";
+                } else {
+                    context.fillStyle = "black";
+                }
+                context.fillRect(posX - sizeX / 2, posY - sizeY / 2, sizeY, sizeX);
+                context.closePath();
             }
         });
 

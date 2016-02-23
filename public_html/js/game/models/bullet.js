@@ -3,6 +3,9 @@ define(
     function() {
         var Backbone = require('backbone');
         var Bullet = Backbone.Model.extend({
+            defaults: {
+              V: 5
+            },
             sync: function() {
                 // TODO отправляет данные на сервер через ws
             },
