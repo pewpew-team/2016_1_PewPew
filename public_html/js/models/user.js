@@ -6,8 +6,7 @@ define(
                 'token' : '',
                 'username' : 'Guest',
                 'password': '',
-                'endPoint': 'localhost',
-                'port': 8080
+                'endPoint': 'localhost'
             },
             authorize: function(login, password) {
                 if(login.length === 0 && password.length == 0) {

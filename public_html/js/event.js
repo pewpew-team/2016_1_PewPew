@@ -3,4 +3,4 @@ define(
     function (_, Backbone) {
         return _.extend({}, Backbone.Events);
     }
-)
+);
