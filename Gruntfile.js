@@ -52,6 +52,9 @@ module.exports = function (grunt) {
             options: {
                 logConcurrentOutput: true
             }
+        },
+        qunit: {
+            all: ['./public_html/tests/index.html']
         }
     });
 
@@ -59,7 +62,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-fest');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
 
+    grunt.registerTask('test', ['qunit:all']);
     grunt.registerTask('default', ['concurrent']);
 
 };
