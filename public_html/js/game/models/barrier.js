@@ -1,22 +1,20 @@
 define(
     ['backbone'],
     function () {
-        var Backbone = require('backbone');
-
-        var Barrier = Backbone.Model.extend({
-            defaults: {
-                sizeX: 20,
-                sizeY: 20
-            },
-            initialize: function(posX, posY, isRemovable) {
-                this.set({
-                    'posX': posX,
-                    'posY': posY,
-                    'isRemovable': isRemovable
-                });
-            }
-        });
-
+        var Backbone = require('backbone'),
+            Barrier = Backbone.Model.extend({
+                defaults: {
+                    sizeX: 30,
+                    sizeY: 30
+                },
+                initialize: function(posX, posY, isRemovable) {
+                    this.set({
+                        'posX': posX,
+                        'posY': posY,
+                        'isRemovable': isRemovable
+                    });
+                }
+            });
         return Barrier;
     }
 );

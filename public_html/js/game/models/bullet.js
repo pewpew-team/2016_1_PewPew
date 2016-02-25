@@ -4,16 +4,19 @@ define(
         var Backbone = require('backbone');
         var Bullet = Backbone.Model.extend({
             defaults: {
-              V: 5
             },
             sync: function() {
                 // TODO отправляет данные на сервер через ws
             },
             iterate: function() {
-                var velX = this.get('velX');
-                var velY = this.get('velY');
-                this.set('posX', this.get('posX')+velX);
-                this.set('posY', this.get('posY')+velY);
+                this.set('posX', this.get('posX') + this.get('velX'));
+                this.set('posY', this.get('posY') + this.get('velY'));
+            },
+            getPreviousPosition: function() {
+                return {
+                    x: this.get('posX') - this.get('velX'),
+                    y: this.get('posY') - this.get('velY')
+                }
             }
         });
         return Bullet;
