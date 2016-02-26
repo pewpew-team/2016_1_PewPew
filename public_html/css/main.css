@@ -84,7 +84,7 @@ menu
 .menu__btn {
     width: 80%;
     height: 40px;
-    background-color: #14B9D5;
+    background-color: #323A45;
     border: 0;
     margin: 10px 10% 10px 10%;
     border-radius: 5px;
@@ -106,7 +106,7 @@ menu
     background: #0E778A;
 }
 .menu__btn--primary {
-    background-color: #C6DE64;
+    background-color: #323A45;
 }
 .menu__btn--primary:hover {
     background-color: #8A9D43;
@@ -186,7 +186,7 @@ menu
     transition: all 0.3s;
     cursor : pointer;
 
-    background: #14B9D5;
+    background-color: #323A45;
     color: #FFFFFF;
     text-align: center;
 }
