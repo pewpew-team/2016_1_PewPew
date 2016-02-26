@@ -50,6 +50,9 @@ define(
                     size = themeObject.theme.size;
                 //рисуем фон
                 graphElement = new createjs.Bitmap(themeObject.theme.background);
+                graphElement.image.onload = function () {
+                    stage.update();
+                };
                 for (var i = 0, counti = width / size.x + 1; i < counti; i++) {
                     for (var j = 0, countj = height / size.y + 1; j < countj; j++) {
                         var tempBitMap = graphElement.clone();
@@ -58,7 +61,6 @@ define(
                         stage.addChild(tempBitMap);
                     }
                 }
-                stage.update();
                 //рисуем изображения
                 for (var i = themeObject.positions.length - 1; i >= 0; i--) {
                     graphElement = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
@@ -66,7 +68,6 @@ define(
                     graphElement.y = themeObject.positions[i].y;
                     stage.addChild(graphElement);
                 }
-                stage.update();
             },
             resizeInterface: function () {
                 var backgroundCanvas = document.getElementById("pageBackground"),

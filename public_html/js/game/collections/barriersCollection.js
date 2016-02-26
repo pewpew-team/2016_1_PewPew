@@ -12,8 +12,7 @@ define(
                  */
                 createRandom: function(nX, nY, ratio, x0, y0) {
                     var max = 100,
-                        period = 50,
-                        randomNumber;
+                        period = 50;
                     for (var i = 0; i < nX; i++ ) {
                         for(var j = 0; j< nY; j++) {
                             var posX = i * period + x0,
@@ -26,8 +25,6 @@ define(
                             if (randomNumber < max*ratio) {
                                 isRemovable = false;
                             }
-
-                            console.log('%s %s %s', posX, posY, isRemovable);
 
                             this.add( new Barrier(posX, posY, isRemovable) );
                         }
