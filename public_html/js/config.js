@@ -1,4 +1,4 @@
-require.config({
+var require = {
     urlArgs: '_=' + (new Date()).getTime(),
     baseUrl: 'js',
     paths: {
@@ -19,4 +19,4 @@ require.config({
             exports: 'createjs'
         }
     }
-});
+}
