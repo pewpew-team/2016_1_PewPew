@@ -37,6 +37,7 @@ define(
                     themeObject = backgroundModel.getTheme(),
                     stage = new createjs.Stage(backgroundCanvas),
                     graphElement,
+                    item,
                     size = themeObject.theme.size;
                 //рисуем фон
                 graphElement = new createjs.Bitmap(themeObject.theme.background);
@@ -52,7 +53,6 @@ define(
                     }
                 }
                 //рисуем изображения
-                var item;
                 for (var i = themeObject.positions.length - 1; i >= 0; i--) {
                     item = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
                     item.x = themeObject.positions[i].x;

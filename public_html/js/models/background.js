@@ -1,7 +1,8 @@
 define(
-    ['backbone'],
+    ['backbone', 'createjs'],
     function () {
         var Backbone = require('backbone');
+        var createjs = require('createjs');
         var BackgroundThemes = Backbone.Model.extend({
             defaults: {
                 positionItems: [],
@@ -134,7 +135,6 @@ define(
                 }
                 //сортировка по перспективе
                 positionItems.sort(this.comparePosition);
-                console.log(positionItems);
             }
         });
         return BackgroundThemes;
