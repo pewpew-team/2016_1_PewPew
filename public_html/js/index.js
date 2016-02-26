@@ -14,6 +14,9 @@ require.config({
         },
         'underscore': {
             exports: '_'
+        },
+        'createjs': {
+            exports: 'createjs'
         }
     }
 });

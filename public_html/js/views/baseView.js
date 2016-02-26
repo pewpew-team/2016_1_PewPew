@@ -2,7 +2,9 @@ define(
     ['backbone', 'event', 'models/background', 'createjs'],
     function (Backbone, event, backgroundModelConstructor) {
         var backgroundCanvas = document.getElementById("pageBackground"),
-            backgroundModel = new backgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height);
+            backgroundModel = new backgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height),
+            createjs = require('createjs');
+        console.log(createjs);
         var View = Backbone.View.extend({
             template: {},
             initialize: function () {
@@ -69,7 +71,7 @@ define(
             resizeInterface: function () {
                 var backgroundCanvas = document.getElementById("pageBackground"),
                     newWidth = backgroundCanvas.parentElement.offsetWidth,
-                    newHeight = backgroundCanvas.parentElement.offsetWidth;
+                    newHeight = backgroundCanvas.parentElement.offsetHeight;
                 backgroundCanvas.width = newWidth;
                 backgroundCanvas.height = newHeight;
                 backgroundModel.resizeCanvas(newWidth, newHeight);
