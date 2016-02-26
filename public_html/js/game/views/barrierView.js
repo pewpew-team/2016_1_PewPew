@@ -16,6 +16,7 @@ define(
                     sizeX = model.get('sizeX'),
                     sizeY = model.get('sizeY');
                 context.beginPath();
+                // TODO добавить выбор цветов в зависимости от фона экрана
                 if (model.get('isRemovable')) {
                     context.fillStyle = "green";
                 } else {

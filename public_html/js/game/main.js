@@ -1,6 +1,5 @@
 define(
     [
-        'game/views/screenView',
         'game/views/allBarriersView',
         'game/views/allBulletsView',
         'game/views/playerView',
@@ -11,8 +10,7 @@ define(
         'underscore'
     ],
     function() {
-        var ScreenView = require('game/views/screenView'),
-            bulletsView = require('game/views/allBulletsView'),
+        var bulletsView = require('game/views/allBulletsView'),
             bulletsCollection = require('game/collections/bulletCollection'),
             barriersCollection = require('game/collections/barriersCollection'),
             barriersView = require('game/views/allBarriersView'),
@@ -23,10 +21,14 @@ define(
         return {
             init: function () {
                 this.dynamicCanvas = document.getElementById('dynamicLayer');
-                this.staticCanvas = document.getElementById('staticLayer');
                 this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height, "ally");
                 this.playerView = new PlayerView(this.player, this.dynamicCanvas);
-                barriersCollection.createRandom(8,2,0.5,40,40);
+                var NUMBER_X = 16,
+                    NUMBER_Y = 4,
+                    RATIO = 0.3,
+                    LEFT_CORNER_POS_X = 40,
+                    LEFT_CORNER_POS_Y = 40;
+                barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
             },
             run: function() {
                 requestAnimationFrame(_.bind(this.iterate, this));

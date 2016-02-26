@@ -6,27 +6,10 @@ define(
 
       var Player = Backbone.Model.extend({
           defaults: {
-              /*
-              перечислены все поля, чтобы проще было ориентироваться
-              закоменчены те, которые потом будут переприсвоены
-               */
-              //nickname
-              //pushedButton
               previousDirection: null,
-
               minAngle: 20,
               gunLength: 40,
-              //gunAngle
-              //currentPointerX
-              //currentPointerY
-              //minLevelPointer
-              //maxLevelPointer
-
-              bulletSpeed: 10,
-
-              //positionX
-              //positionY
-              //maxPositionX
+              bulletSpeed: 20,
               minPositionX: 0,
               playerSizeX: 40,
               playerSizeY: 20,
