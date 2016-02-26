@@ -1,4 +1,13 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
+<<<<<<< HEAD
+    <div id="scoreboard" class = "menu">
+        <div class="menu__logo logo">
+            PewPew
+        </div>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+                Рейтинг игроков
+=======
     <fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
         <div id="scoreboard" class = "wrap">
             <div class="wrap__layout">
@@ -25,7 +34,37 @@
                         Назад
                     </button>
                 </div>
+>>>>>>> refactoring
             </div>
+            <table class="scoreboard">
+                <tr>
+                    <td class="scoreboard__name scoreboard__title" >Логин</td>
+                    <td class="scoreboard__rating scoreboard__title" >Рейтинг</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+                <tr>
+                    <td class="scoreboard__name">Alex</td>
+                    <td class="scoreboard__rating">3945</td>
+                </tr>
+            </table>
+            <button class="menu__btn  menu__btn--back" id="main">
+                Назад
+            </button>
         </div>
-    </fest:template>
+    </div>
 </fest:template>
+
+
+
+
