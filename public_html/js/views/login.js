@@ -6,9 +6,7 @@ define(
             events: {
                 'click #sign-in': function(e) {
                     e.preventDefault();
-                    var login = document.getElementById('login-input').value;
-                    var password = document.getElementById('password-input').value;
-                    user.authorize(login, password);
+                    event.trigger('navigate', 'game');
                 }
             },
             initialize: function () {

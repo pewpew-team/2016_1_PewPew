@@ -1,15 +1,16 @@
 define([
     'views/baseView',
     'tmpl/game',
-    'gameLogic'
-], function (baseView, tmpl, application) {
+    'game/main'
+], function (baseView, tmpl) {
+        var game = require('game/main');
         var View = baseView.extend({
             template: tmpl,
-            show: function() {
+            show: function () {
                 $('#page').html(this.el);
                 this.$el.show();
-                application.init('Alex','Edgar');
-                application.run();
+                game.init();
+                game.run();
             }
         });
 
