@@ -31,16 +31,6 @@ define(
                 // Отключаем прослушку событий
                 this.$el.off();
             },
-            createBitmap: function(img, x, y, regX, regY, stage) {
-                var bmp = new createjs.Bitmap(img);
-                bmp.x = x;
-                bmp.y = y;
-                bmp.regX = regX;
-                bmp.regY = regY;
-                stage.addChild(bmp);
-                stage.update();
-                return bmp;
-            },
             drawBackground: function () {
                 var width = backgroundCanvas.width,
                     height = backgroundCanvas.height,
@@ -52,7 +42,7 @@ define(
                 graphElement = new createjs.Bitmap(themeObject.theme.background);
                 graphElement.image.onload = function () {
                     stage.update();
-                };
+                }
                 for (var i = 0, counti = width / size.x + 1; i < counti; i++) {
                     for (var j = 0, countj = height / size.y + 1; j < countj; j++) {
                         var tempBitMap = graphElement.clone();
@@ -62,11 +52,15 @@ define(
                     }
                 }
                 //рисуем изображения
+                var item;
                 for (var i = themeObject.positions.length - 1; i >= 0; i--) {
-                    graphElement = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
-                    graphElement.x = themeObject.positions[i].x;
-                    graphElement.y = themeObject.positions[i].y;
-                    stage.addChild(graphElement);
+                    item = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
+                    item.x = themeObject.positions[i].x;
+                    item.y = themeObject.positions[i].y;
+                    item.image.onload = function () {
+                        stage.update();
+                    }
+                    stage.addChild(item);
                 }
             },
             resizeInterface: function () {
