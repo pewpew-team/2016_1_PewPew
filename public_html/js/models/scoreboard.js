@@ -11,13 +11,13 @@ define(['backbone', 'underscore'],
             sync : function () {
                 this.set('scores',
                     [{name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100},
-                    {name: 'Alex', score: 100}]);
+                    {name: 'Sasha', score: 100},
+                    {name: 'Ed', score: 100},
+                    {name: 'Dima', score: 100},
+                    {name: 'Lex', score: 100},
+                    {name: 'Unknown', score: 100},
+                    {name: 'test', score: 100},
+                    {name: 'player', score: 100}]);
             },
             order: function () {
                 var scores = this.get('scores');
