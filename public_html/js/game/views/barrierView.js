@@ -9,13 +9,14 @@ define(
                 this.model = model;
             },
             render: function() {
-                var context = this.canvas.getContext('2d');
-                var model = this.model;
-                var posX = model.get('posX');
-                var posY = model.get('posY');
-                var sizeX = model.get('sizeX');
-                var sizeY = model.get('sizeY');
+                var context = this.canvas.getContext('2d'),
+                    model = this.model,
+                    posX = model.get('posX'),
+                    posY = model.get('posY'),
+                    sizeX = model.get('sizeX'),
+                    sizeY = model.get('sizeY');
                 context.beginPath();
+                // TODO добавить выбор цветов в зависимости от фона экрана
                 if (model.get('isRemovable')) {
                     context.fillStyle = "green";
                 } else {

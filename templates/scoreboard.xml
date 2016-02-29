@@ -1,5 +1,4 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
-    <fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+ <fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
         <div id="scoreboard" class = "wrap">
             <div class="wrap__layout">
                 <div class="logo">
@@ -27,5 +26,8 @@
                 </div>
             </div>
         </div>
-    </fest:template>
 </fest:template>
+
+
+
+

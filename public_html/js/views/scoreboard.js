@@ -1,5 +1,5 @@
 define(
-    ['views/baseView','tmpl/scoreboard','models/scoreboard'],
+    ['views/baseView','tmpl/scoreboard', 'models/scoreboard'],
     function (baseView, tmpl) {
         var scoreboard = require('models/scoreboard');
         var View = baseView.extend({

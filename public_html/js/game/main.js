@@ -1,6 +1,5 @@
 define(
     [
-        'game/views/screenView',
         'game/views/allBarriersView',
         'game/views/allBulletsView',
         'game/views/playerView',
@@ -11,34 +10,37 @@ define(
         'underscore'
     ],
     function() {
-        var ScreenView = require('game/views/screenView');
-        var bulletsView = require('game/views/allBulletsView');
-        var bulletsCollection = require('game/collections/bulletCollection');
-        var barriersCollection = require('game/collections/barriersCollection');
-        var barriersView = require('game/views/allBarriersView');
-        var PlayerView = require('game/views/playerView');
-        var Player = require('game/models/player');
-        var user = require('models/user');
-        var _ = require('underscore');
-
+        var bulletsView = require('game/views/allBulletsView'),
+            bulletsCollection = require('game/collections/bulletCollection'),
+            barriersCollection = require('game/collections/barriersCollection'),
+            barriersView = require('game/views/allBarriersView'),
+            PlayerView = require('game/views/playerView'),
+            Player = require('game/models/player'),
+            user = require('models/user'),
+            _ = require('underscore');
         return {
             init: function () {
-                this.canvas = document.getElementById('dynamicLayer');
-                this.staticCanvas = document.getElementById('staticLayer');
-                this.player = new Player('Guest', this.canvas);
-                this.playerView = new PlayerView(this.player, this.canvas);
-                barriersCollection.createRandom(10,5,0.5,40,40);
+                this.dynamicCanvas = document.getElementById('dynamicLayer');
+                this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height, "ally");
+                this.playerView = new PlayerView(this.player, this.dynamicCanvas);
+                var NUMBER_X = 16,
+                    NUMBER_Y = 4,
+                    RATIO = 0.3,
+                    LEFT_CORNER_POS_X = 40,
+                    LEFT_CORNER_POS_Y = 40;
+                barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
             },
             run: function() {
-                window.setInterval(_.bind(this.iterate, this), 1000/60);
+                requestAnimationFrame(_.bind(this.iterate, this));
             },
             iterate: function() {
-                var context = this.canvas.getContext('2d');
-                context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                var context = this.dynamicCanvas.getContext('2d');
+                context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
                 bulletsView.render();
                 barriersView.render();
                 bulletsCollection.iterate(barriersCollection);
                 this.playerView.render();
+                requestAnimationFrame(_.bind(this.iterate, this));
             }
         };
     }

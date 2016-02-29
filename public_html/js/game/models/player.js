@@ -6,60 +6,155 @@ define(
 
       var Player = Backbone.Model.extend({
           defaults: {
+              previousDirection: null,
               minAngle: 20,
-              playerSizeX: 60,
-              playerSizeY: 20,
               gunLength: 40,
-              velX: 0,
-              maxVel: 10,
-              bulletSpeed: 5
+              bulletSpeed: 20,
+              minPositionX: 0,
+              playerSizeX: 40,
+              playerSizeY: 20,
+              velocity: 0,
+              maxVelocity: 10
           },
-          initialize: function(nick, canvas) {
+          initialize: function(nick, canvasWidth, canvasHeight, type) {
               this.set({
                   'nickname': nick,
-                  'canvas': canvas,
-                  'position': canvas.width/2,
-                  'gunAngle': 0
+                  'positionX': canvasWidth/2,
+                  'maxPositionX': canvasWidth,
+                  'currentPointerX': canvasWidth/2,
+                  'currentPointerY': canvasHeight/2
               });
+              switch (type) {
+                  case "ally":
+                      this.set('positionY', canvasHeight - this.get('playerSizeY') / 2);
+                      this.set('minLevelPointer', 0);
+                      this.set('maxLevelPointer', canvasHeight - this.get('playerSizeY') - this.get('gunLength'));
+                      break;
+                  case "enemy":
+                      this.set('positionY', this.get('playerSizeY') / 2);
+                      this.set('minLevelPointer', this.get('playerSizeY') + this.get('gunLength'));
+                      this.set('maxLevelPointer', canvasHeight);
+                      break;
+              }
+              this.set('angle', this.getAngle());
           },
           sync: function() {
               // TODO отправка данный через web socket
           },
           moveLeft: function() {
-              this.set('velX', -5);
+              this.set('pushedButton', -1);
           },
           moveRight: function() {
-              this.set('velX', 5);
+              this.set('pushedButton', 1);
           },
-          pointGunTo: function(x, y) {
-              var posX = this.get('position');
-              var posY = this.get('canvas').height;
-              var angle = Math.atan2(y-posY, x-posX);
-              var angleInDeg = -1*angle/Math.PI*180;
-              var minAngle = this.get('minAngle');
-              if (angleInDeg > minAngle && angleInDeg < (180-minAngle)) {
-                  this.set('gunAngle', angle);
+          pointGunTo: function(offsetX, offsetY) {
+              var minLevelPointer = this.get('minLevelPointer'),
+                  maxLevelPointer = this.get('maxLevelPointer'),
+                  newPointerPosX,
+                  newPointerPosY;
+              if (offsetX && offsetY) {
+                    newPointerPosX = offsetX;
+                    newPointerPosY = offsetY;
+                    if ((minLevelPointer >= newPointerPosY)) {
+                        newPointerPosY = minLevelPointer;
+                    }
+                    if ((maxLevelPointer <= newPointerPosY)) {
+                        newPointerPosY = maxLevelPointer;
+                    }
+                    this.set('currentPointerX', newPointerPosX);
+                    this.set('currentPointerY', newPointerPosY);
               }
+              this.set('gunAngle', this.getAngle());
+          },
+          getAngle : function () {
+              var posX = this.get('positionX'),
+                  posY = this.get('positionY'),
+                  pointerX = this.get('currentPointerX'),
+                  pointerY = this.get('currentPointerY');
+              return Math.atan2(pointerY - posY, pointerX - posX);
           },
           iterate: function() {
-              var velX = this.get('velX');
-              var posX = this.get('position');
-              var sizeX = this.get('playerSizeX');
-              var maxPos = this.get('canvas').width - sizeX/2;
-              posX+=velX;
-              if (posX >= sizeX/2 && posX <= maxPos) {
-                  this.set('position', posX);
+              var pushedButton = this.get('pushedButton'),
+                  previousDirection = this.get('previousDirection'),
+                  velX = this.get('velocity');
+              this.pointGunTo();
+              if (!pushedButton) {
+                  //клавиши не нажаты
+                  this.decreaseVelocity();
               } else {
-                  this.set('velX', 0);
+                  if (pushedButton !== previousDirection) {
+                      //резкий тормоз
+                      this.stay();
+                      this.set('previousDirection', pushedButton);
+                      return;
+                  }
+                  this.increaseVelocity();
+              }
+              this.move();
+          },
+          move: function () {
+              var velX = this.get('velocity'),
+                  posX = this.get('positionX'),
+                  sizeX = this.get('playerSizeX'),
+                  maxPosX = this.get('maxPositionX'),
+                  minPosX = this.get('minPositionX'),
+                  FADING = 2;
+              //правая граница
+              if ((posX + sizeX / 2 ) > maxPosX) {
+                  this.set('positionX', maxPosX - sizeX / 2);
+                  this.set('velocity', -velX / FADING);
+                  return;
+              }
+              //левая граница
+              if ((posX - sizeX / 2 ) < minPosX) {
+                  this.set('positionX', sizeX / 2);
+                  this.set('velocity', -velX / FADING);
+                  return;
+              }
+              this.set('positionX', (posX + velX) );
+          },
+          increaseVelocity: function () {
+              var velX = this.get('velocity'),
+                  maxVelocity = this.get('maxVelocity'),
+                  direction = this.get('pushedButton'),
+                  START_VELOCITY = 3.3,
+                  STEP_UP_VELOCITY = 0.9;
+              //стартовый прыжок, чтобы не было тупки
+              if (velX === 0) {
+                  this.set('velocity', direction * START_VELOCITY);
+                  return;
+              }
+              if ((Math.abs(velX) < maxVelocity)) {
+                  this.set('velocity', velX + STEP_UP_VELOCITY * direction);
               }
           },
+          decreaseVelocity: function () {
+              var velX = this.get('velocity'),
+                  START_VELOCITY = 3.3,
+                  STEP_DOWN_VELOCITY = 0.6;
+
+              if (velX === 0) return;
+              if (Math.abs(velX) < START_VELOCITY) {
+                  //всегда круглое число не получается ((
+                  this.set('velocity', 0);
+              } else {
+                  this.set('velocity', velX - Math.sign(velX) * STEP_DOWN_VELOCITY);
+              }
+          },
+          dropPushedButton : function() {
+              this.set("pushedButton", 0);
+          },
+          stay: function () {
+              this.set('velocity', 0);
+          },
           shoot: function () {
-              var angle = this.get('gunAngle');
-              var V = this.get('bulletSpeed');
-              var velX = V*Math.cos(angle) + this.get('velX');
-              var velY = V*Math.sin(angle);
-              var posX = this.get('position');
-              var posY = this.get('canvas').height-this.get('playerSizeY');
+              var angle = this.get('gunAngle'),
+                  V = this.get('bulletSpeed'),
+                  velX = V*Math.cos(angle) + this.get('velocity'),
+                  velY = V*Math.sin(angle),
+                  gunLength = this.get('gunLength'),
+                  posX = this.get('positionX') + Math.cos(angle) * gunLength,
+                  posY = this.get('positionY') + Math.sin(angle) * gunLength;
               bulletCollection.fire(posX, posY, velX, velY);
           }
       });
