@@ -11,8 +11,11 @@ define(
                 this.canvas = document.getElementById('dynamicLayer');
                 this.barriers = barriersCollection;
                 this.each(_.bind(this.iterateBullet, this));
+                this.deleteOutOfBoxBullets();
+            },
+            deleteOutOfBoxBullets: function() {
                 var outOfBox = this.filter(function (bullet) {
-                    return bullet.get('posY') < 0;
+                    return bullet.get('posY') < 0 || bullet.get('posY') > this.maxPosY;
                 });
                 this.remove(outOfBox);
             },

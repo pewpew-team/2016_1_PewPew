@@ -10,10 +10,10 @@ define(
         'underscore'
     ],
     function() {
-        var bulletsView = require('game/views/allBulletsView'),
+        var BulletsView = require('game/views/allBulletsView'),
             bulletsCollection = require('game/collections/bulletCollection'),
             barriersCollection = require('game/collections/barriersCollection'),
-            barriersView = require('game/views/allBarriersView'),
+            BarriersView = require('game/views/allBarriersView'),
             PlayerView = require('game/views/playerView'),
             Player = require('game/models/player'),
             user = require('models/user'),
@@ -23,6 +23,8 @@ define(
                 this.dynamicCanvas = document.getElementById('dynamicLayer');
                 this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height, "ally");
                 this.playerView = new PlayerView(this.player, this.dynamicCanvas);
+                this.bulletsView = new BulletsView(bulletsCollection);
+                this.barriersView = new BarriersView({collection : barriersCollection});
                 var NUMBER_X = 16,
                     NUMBER_Y = 4,
                     RATIO = 0.3,
@@ -36,8 +38,8 @@ define(
             iterate: function() {
                 var context = this.dynamicCanvas.getContext('2d');
                 context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
-                bulletsView.render();
-                barriersView.render();
+                this.bulletsView.render();
+                this.barriersView.render();
                 bulletsCollection.iterate(barriersCollection);
                 this.playerView.render();
                 requestAnimationFrame(_.bind(this.iterate, this));

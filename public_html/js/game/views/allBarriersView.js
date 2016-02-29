@@ -14,6 +14,6 @@ define(
             }
         });
 
-        return new BarriersView({collection: barriersCollection});
+        return BarriersView;
     }
 );
