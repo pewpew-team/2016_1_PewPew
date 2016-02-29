@@ -40,23 +40,9 @@ define(
                     return (collisionDistX > distSquare) || (collisionDistY > distSquare);
                 },
                 collide: function(bullet, barrier) {
-                    var previousPosition = bullet.getPreviousPosition(),
-                        bulletPosX = bullet.get('posX'),
-                        bulletPosY = bullet.get('posY'),
-
-                        bulletSizeX = bullet.get('sizeX'),
-                        bulletSizeY = bullet.get('sizeY'),
-
-                        bulletVelX = bullet.get('velX'),
-                        bulletVelY = bullet.get('velY'),
-
-                        barrierPosX = barrier.get('posX'),
-                        barrierPosY = barrier.get('posY'),
-
-                        barrierSizeX = barrier.get('sizeX'),
-                        barrierSizeY = barrier.get('sizeY'),
-
-                        k = (previousPosition.y - bulletPosY) / (previousPosition.x - bulletPosX),
+                    var bulletPosX = bullet.get('posX') - (barrier.get('posX') - barrier.get('sizeX')/2),
+                        bulletPosY = bullet.get('posY') - (barrier.get('posY') - barrier.get('sizeY')/2),
+                        k = bullet.get('velY')/ bullet.get('velX'),
                         b = bulletPosY - k * bulletPosX,
                         possiblePosition = {
                             deltaX : {},
@@ -65,35 +51,33 @@ define(
                         fault = 3,
                         deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
 
-                    //возможные отклонения
-                    possiblePosition.deltaX.x = barrierPosX - Math.sign(bulletVelX) * (barrierSizeX / 2 + bulletSizeX / 2);
+                    //возможные отклонения ????
+                    possiblePosition.deltaX.x = bullet.get('velX') ?  0 : barrier.get('sizeX');
                     possiblePosition.deltaX.y = k * possiblePosition.deltaX.x + b;
-                    possiblePosition.deltaY.y = barrierPosY - Math.sign(bulletVelY) * (barrierSizeY / 2 + bulletSizeY / 2);
+                    possiblePosition.deltaY.y = bullet.get('velY') ?  0 : barrier.get('sizeY');
                     possiblePosition.deltaY.x = (possiblePosition.deltaY.y - b) / k;
 
                     //попадание на угол
                     if (((Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x) < fault) ||
                         (Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x)) < fault)) {
-                        bullet.set('posX', possiblePosition.deltaX.x);
-                        bullet.set('posY', possiblePosition.deltaX.y);
-                        bullet.set('velX', -1 * bulletVelX + deviation);
-                        bullet.set('velY', -1 * bulletVelY + deviation);
+                        bullet.set('posX', possiblePosition.deltaX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', possiblePosition.deltaX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        bullet.set('velX', -1 * bullet.get('velX') + deviation);
+                        bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
                     //левая или правая грань
-                    if (((barrierPosY - barrierSizeY / 2 - bulletSizeY / 2) <= possiblePosition.deltaX.y) &&
-                        (possiblePosition.deltaX.y <= (barrierPosY + barrierSizeY / 2 + bulletSizeY / 2))) {
-                        bullet.set('posX', possiblePosition.deltaX.x);
-                        bullet.set('posY', possiblePosition.deltaX.y);
-                        bullet.set('velX', -1 * bulletVelX + deviation);
+                    if ((possiblePosition.deltaX.y >= 0) && (possiblePosition.deltaX.y <= barrier.get('sizeY'))) {
+                        bullet.set('posX', possiblePosition.deltaX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', possiblePosition.deltaX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         return;
                     }
                     //нижняя или верхняя грань
-                    if (((barrierPosX - barrierSizeX / 2 - bulletSizeX / 2) <= possiblePosition.deltaY.x) &&
-                        (possiblePosition.deltaY.x <= (barrierPosX + barrierSizeX / 2 + bulletSizeX / 2))) {
-                        bullet.set('posX', possiblePosition.deltaY.x);
-                        bullet.set('posY', possiblePosition.deltaY.y);
-                        bullet.set('velY', -1 * bulletVelY + deviation);
+                    if ((possiblePosition.deltaY.x >= 0) && (possiblePosition.deltaY.x <= barrier.get('sizeX'))) {
+                        bullet.set('posX', possiblePosition.deltaY.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', possiblePosition.deltaY.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
                 },
