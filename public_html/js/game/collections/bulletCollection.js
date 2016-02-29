@@ -26,9 +26,7 @@ define(
                             if (this.barriers.at(i).get("isRemovable")) {
                                 this.barriers.remove(this.barriers.at(i));
                             }
-                            break;
                         }
-
                     }
                     if (bullet.get('posX') < 0 || bullet.get('posX') > this.canvas.width) {
                         bullet.set('velX', -1*bullet.get('velX'));
