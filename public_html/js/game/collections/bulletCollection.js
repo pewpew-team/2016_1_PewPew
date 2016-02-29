@@ -44,39 +44,41 @@ define(
                         bulletPosY = bullet.get('posY') - (barrier.get('posY') - barrier.get('sizeY')/2),
                         k = bullet.get('velY')/ bullet.get('velX'),
                         b = bulletPosY - k * bulletPosX,
-                        possiblePosition = {
-                            deltaX : {},
-                            deltaY : {}
+                        intersectionPoint = {
+                            sideParallelX : {},
+                            sideParallelY : {}
                         },
                         fault = 3,
                         deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
 
-                    //возможные отклонения ????
-                    possiblePosition.deltaX.x = bullet.get('velX') ?  0 : barrier.get('sizeX');
-                    possiblePosition.deltaX.y = k * possiblePosition.deltaX.x + b;
-                    possiblePosition.deltaY.y = bullet.get('velY') ?  0 : barrier.get('sizeY');
-                    possiblePosition.deltaY.x = (possiblePosition.deltaY.y - b) / k;
+                    //точки столкновения со сторонами паралельно X или Y
+                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
+                    intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
+                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  0 : barrier.get('sizeY');
+                    intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
 
                     //попадание на угол
-                    if (((Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x) < fault) ||
-                        (Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x)) < fault)) {
-                        bullet.set('posX', possiblePosition.deltaX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', possiblePosition.deltaX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                    if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
+                        console.log("x and y");
+                        bullet.set('posX', intersectionPoint.sideParallelX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', intersectionPoint.sideParallelX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
                     //левая или правая грань
-                    if ((possiblePosition.deltaX.y >= 0) && (possiblePosition.deltaX.y <= barrier.get('sizeY'))) {
-                        bullet.set('posX', possiblePosition.deltaX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', possiblePosition.deltaX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                    if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
+                        console.log("y");
+                        bullet.set('posX', intersectionPoint.sideParallelX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', intersectionPoint.sideParallelX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         return;
                     }
                     //нижняя или верхняя грань
-                    if ((possiblePosition.deltaY.x >= 0) && (possiblePosition.deltaY.x <= barrier.get('sizeX'))) {
-                        bullet.set('posX', possiblePosition.deltaY.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', possiblePosition.deltaY.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                    if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
+                        console.log("x");
+                        bullet.set('posX', intersectionPoint.sideParallelY.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                        bullet.set('posY', intersectionPoint.sideParallelY.y + (barrier.get('posY') - barrier.get('sizeY')/2));
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
