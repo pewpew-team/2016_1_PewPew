@@ -21,7 +21,7 @@ define(
         return {
             init: function () {
                 this.dynamicCanvas = document.getElementById('dynamicLayer');
-                this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height, "ally");
+                this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height);
                 this.playerView = new PlayerView(this.player, this.dynamicCanvas);
                 this.bulletsView = new BulletsView(bulletsCollection);
                 this.barriersView = new BarriersView({collection : barriersCollection});

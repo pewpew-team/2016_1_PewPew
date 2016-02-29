@@ -7,9 +7,8 @@ define(
     function() {
         var Backbone = require('backbone'),
             bulletCollection = require('game/collections/bulletCollection'),
-            BulletView = require('game/views/bulletView');
-
-        var BulletsView = Backbone.View.extend({
+            BulletView = require('game/views/bulletView'),
+            BulletsView = Backbone.View.extend({
                 /**
                  * Initialize view by collection instance
                  * @constructor
