@@ -52,9 +52,9 @@ define(
                         deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
 
                     //точки столкновения со сторонами паралельно X или Y
-                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
+                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  - bullet.get('sizeX')/2 : barrier.get('sizeX') + bullet.get('sizeX')/2;
                     intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
-                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  0 : barrier.get('sizeY');
+                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  - bullet.get('sizeY')/2 : barrier.get('sizeY') + bullet.get('sizeY')/2;
                     intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
 
                     //попадание на угол
