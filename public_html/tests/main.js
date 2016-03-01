@@ -19,7 +19,8 @@ require.config({
 });
 
 var tests = [
-    'models/scoreboard.test'
+    'models/scoreboard.test',
+    'game/collections/bulletCollection.test'
 ];
 
 require(tests, function () {
