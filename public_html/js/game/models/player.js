@@ -19,11 +19,11 @@ define(function(require) {
                       'positionX': canvasWidth/2,
                       'maxPositionX': canvasWidth,
                       'currentPointerX': canvasWidth/2,
-                      'currentPointerY': canvasHeight/2
+                      'currentPointerY': canvasHeight/2,
+                      'positionY': canvasHeight - this.get('playerSizeY') / 2,
+                      'minLevelPointer': 0,
+                      'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
                   });
-                  this.set('positionY', canvasHeight - this.get('playerSizeY') / 2);
-                  this.set('minLevelPointer', 0);
-                  this.set('maxLevelPointer', canvasHeight - this.get('playerSizeY') - this.get('gunLength'));
                   this.set('angle', this.getAngle());
               },
               sync: function() {
@@ -64,12 +64,6 @@ define(function(require) {
                       //клавиши не нажаты
                       this.decreaseVelocity();
                   } else {
-                      if (pushedButton !== this.get('previousDirection')) {
-                          //резкий тормоз
-                          this.stay();
-                          this.set('previousDirection', pushedButton);
-                          return;
-                      }
                       this.increaseVelocity();
                   }
                   this.move();
