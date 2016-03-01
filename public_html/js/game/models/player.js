@@ -1,6 +1,4 @@
-define(
-    ['backbone', 'game/collections/bulletCollection'],
-  function() {
+define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
           Player = Backbone.Model.extend({

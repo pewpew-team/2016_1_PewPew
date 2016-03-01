@@ -1,9 +1,8 @@
-define([
-    'views/baseView',
-    'tmpl/game',
-    'game/main'
-], function (baseView, tmpl) {
-        var game = require('game/main');
+define(function (require) {
+        var tmpl = require('tmpl/game'),
+            game = require('game/main'),
+            baseView = require('views/baseView');
+
         var View = baseView.extend({
             template: tmpl,
             show: function () {

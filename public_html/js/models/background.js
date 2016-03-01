@@ -1,6 +1,4 @@
-define(
-    ['backbone', 'createjs'],
-    function () {
+define(function (require) {
         var Backbone = require('backbone');
         var createjs = require('createjs');
         var BackgroundThemes = Backbone.Model.extend({

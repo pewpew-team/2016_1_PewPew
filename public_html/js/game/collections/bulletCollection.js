@@ -1,6 +1,4 @@
-define(
-    ['backbone','game/models/bullet','underscore'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             Bullet = require('game/models/bullet'),
             _ = require('underscore'),

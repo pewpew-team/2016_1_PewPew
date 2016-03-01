@@ -1,7 +1,4 @@
-define(['backbone'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone');
-
-        var Session
     }
 );

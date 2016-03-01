@@ -1,6 +1,4 @@
-    define(
-    ['backbone'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             bulletView = Backbone.View.extend({
                 initialize: function(model, canvas) {

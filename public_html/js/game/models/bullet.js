@@ -1,6 +1,4 @@
-define(
-    ['backbone'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             Bullet = Backbone.Model.extend({
                 defaults: {
