@@ -109,7 +109,6 @@ define(function(require) {
                       STEP_DOWN_VELOCITY = 0.6;
                   if (velX === 0) return;
                   if (Math.abs(velX) < START_VELOCITY) {
-                      //всегда круглое число не получается ((
                       this.set('velocity', 0);
                   } else {
                       this.set('velocity', velX - Math.sign(velX) * STEP_DOWN_VELOCITY);
