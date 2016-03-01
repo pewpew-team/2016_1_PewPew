@@ -50,38 +50,34 @@ define(
                         },
                         fault = 3,
                         deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
-
                     //точки столкновения со сторонами паралельно X или Y
-                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  - bullet.get('sizeX')/2 : barrier.get('sizeX') + bullet.get('sizeX')/2;
+                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
                     intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
-                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  - bullet.get('sizeY')/2 : barrier.get('sizeY') + bullet.get('sizeY')/2;
+                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  0 : barrier.get('sizeY');
                     intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
-
                     //попадание на угол
                     if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
-                        console.log("x and y");
-                        bullet.set('posX', intersectionPoint.sideParallelX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', intersectionPoint.sideParallelX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
                     //левая или правая грань
                     if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
-                        console.log("y");
-                        bullet.set('posX', intersectionPoint.sideParallelX.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', intersectionPoint.sideParallelX.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         return;
                     }
                     //нижняя или верхняя грань
                     if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
-                        console.log("x");
-                        bullet.set('posX', intersectionPoint.sideParallelY.x + (barrier.get('posX') - barrier.get('sizeX')/2));
-                        bullet.set('posY', intersectionPoint.sideParallelY.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
                     }
+                },
+                moveToIntersectionPoint: function(bullet, barrier, intersectionPoint) {
+                    bullet.set('posX', intersectionPoint.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                    bullet.set('posY', intersectionPoint.y + (barrier.get('posY') - barrier.get('sizeY')/2));
                 },
                 fire: function(posX0, posY0, Vx, Vy) {
                     var bullet = new Bullet({
