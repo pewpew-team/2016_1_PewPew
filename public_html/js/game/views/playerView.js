@@ -23,29 +23,20 @@ define(
                     this.drawGun();
                 },
                 drawBase: function() {
-                    var context = this.canvas.getContext('2d'),
-                        posX = this.model.get('positionX'),
-                        posY = this.model.get('positionY'),
-                        sizeX = this.model.get('playerSizeX'),
-                        sizeY = this.model.get('playerSizeY');
+                    var context = this.canvas.getContext('2d');
                     context.beginPath();
                     context.fillStyle = "black";
-                    context.fillRect(posX-sizeX/2, posY-sizeY/2, sizeX, sizeY);
+                    context.fillRect(this.model.get('positionX') - this.model.get('playerSizeX')/2, this.model.get('positionY') - this.model.get('playerSizeY')/2, this.model.get('playerSizeX'), this.model.get('playerSizeY'));
                     context.closePath();
                 },
                 drawGun: function() {
                     var context = this.canvas.getContext('2d'),
-                        angle = this.model.get('gunAngle'),
-                        angleSin = Math.sin(angle),
-                        angleCos = Math.cos(angle),
-                        gunLength = this.model.get('gunLength'),
-                        posX = this.model.get('positionX'),
-                        posY = this.model.get('positionY');
+                        angle = this.model.get('gunAngle');
                     context.beginPath();
-                    context.moveTo(posX, posY);
+                    context.moveTo(this.model.get('positionX'), this.model.get('positionY'));
                     context.strokeStyle = "purple";
                     context.lineWidth = 5;
-                    context.lineTo(posX + angleCos * gunLength, posY + angleSin * gunLength);
+                    context.lineTo(this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'), this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();
                     context.closePath();
                 },

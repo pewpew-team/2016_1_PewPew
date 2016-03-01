@@ -5,10 +5,13 @@ define(
             Barrier = require('game/models/barrier'),
             BarrierCollection = Backbone.Collection.extend({
                 model: Barrier,
-                /*
-                    Создает рандомное поле nX на nY блоков по центру экрана
-                    ration - вероятность появления неразрушаемого блока ration <= 1
-                    x0 y0 - координаты верхней левой границы
+                /**
+                 *  Generate random barriers
+                 *  @param {!number} nX - Number of blocks in X direction
+                 *  @param {!number} nY - Number of blocks in Y direction
+                 *  @param {!number} ratio - Removable and not removable blocks ration
+                 *  @param {!number} x0 - Left upper corner X position
+                 *  @param {!number} y0 - Left upper corner Y position
                  */
                 createRandom: function(nX, nY, ratio, x0, y0) {
                     var max = 100,

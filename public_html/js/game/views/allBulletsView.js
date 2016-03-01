@@ -9,6 +9,18 @@ define(
             bulletCollection = require('game/collections/bulletCollection'),
             BulletView = require('game/views/bulletView'),
             BulletsView = Backbone.View.extend({
+                /**
+                 * Initialize view by collection instance
+                 * @constructor
+                 * @param {object} collection - BulletCollection instance
+                 */
+                initialize: function(collection) {
+                    this.collection = collection;
+                    collection.maxPosY = document.getElementById('dynamicLayer').height;
+                },
+                /**
+                 * Render bullets to canvas with id = dynamicLayer
+                 */
                 render: function() {
                     this.collection.each(function(bullet) {
                         var bulletView = new BulletView(bullet, document.getElementById('dynamicLayer'));
@@ -16,6 +28,6 @@ define(
                     });
                 }
             });
-        return new BulletsView({collection: bulletCollection});
+        return BulletsView;
     }
 );

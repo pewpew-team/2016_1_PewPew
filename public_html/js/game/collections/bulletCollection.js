@@ -1,130 +1,97 @@
 define(
     ['backbone','game/models/bullet','underscore'],
     function() {
-        var Backbone = require('backbone');
-        var Bullet = require('game/models/bullet');
-        var _ = require('underscore');
-
-        var BulletCollection = Backbone.Collection.extend({
-            model: Bullet,
-            iterate: function(barriersCollection) {
-                this.canvas = document.getElementById('dynamicLayer');
-                this.barriers = barriersCollection;
-                this.each(_.bind(this.iterateBullet, this));
-                var outOfBox = this.filter(function (bullet) {
-                    return bullet.get('posY') < 0;
-                });
-                this.remove(outOfBox);
-            },
-            iterateBullet: function (bullet) {
-                bullet.iterate();
-                for (var i = 0; i < this.barriers.length; i++) {
-                    if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
-                        this.collide(bullet, this.barriers.at(i));
-                        switch (this.barriers.at(i).get("isRemovable")) {
-                            case true:
-                                console.log("delete");
+        var Backbone = require('backbone'),
+            Bullet = require('game/models/bullet'),
+            _ = require('underscore'),
+            BulletCollection = Backbone.Collection.extend({
+                model: Bullet,
+                iterate: function(barriersCollection) {
+                    this.canvas = document.getElementById('dynamicLayer');
+                    this.barriers = barriersCollection;
+                    this.each(_.bind(this.iterateBullet, this));
+                    this.deleteOutOfBoxBullets();
+                },
+                deleteOutOfBoxBullets: function() {
+                    var outOfBox = this.filter(function (bullet) {
+                        return bullet.get('posY') < 0 || bullet.get('posY') > this.maxPosY;
+                    });
+                    this.remove(outOfBox);
+                },
+                iterateBullet: function (bullet) {
+                    bullet.iterate();
+                    for (var i = 0; i < this.barriers.length; i++) {
+                        if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
+                            this.collide(bullet, this.barriers.at(i));
+                            if (this.barriers.at(i).get("isRemovable")) {
                                 this.barriers.remove(this.barriers.at(i));
-                                break;
-                            case false:
-                                //не исчезающий блок
-                                break;
+                            }
                         }
                     }
-
+                    if (bullet.get('posX') < 0 || bullet.get('posX') > this.canvas.width) {
+                        bullet.set('velX', -1*bullet.get('velX'));
+                    }
+                },
+                tryToCollide: function(bullet, barrier) {
+                    var collisionDistX = Math.pow((bullet.get('sizeX') + barrier.get('sizeX')) / 2, 2),
+                        collisionDistY = Math.pow((bullet.get('sizeY') + barrier.get('sizeY')) / 2, 2),
+                        distSquare = Math.pow((bullet.get('posX') - barrier.get('posX')), 2) +
+                            Math.pow((bullet.get('posY') - barrier.get('posY')), 2);
+                    return (collisionDistX > distSquare) || (collisionDistY > distSquare);
+                },
+                collide: function(bullet, barrier) {
+                    var bulletPosX = bullet.get('posX') - (barrier.get('posX') - barrier.get('sizeX')/2),
+                        bulletPosY = bullet.get('posY') - (barrier.get('posY') - barrier.get('sizeY')/2),
+                        k = bullet.get('velY')/ bullet.get('velX'),
+                        b = bulletPosY - k * bulletPosX,
+                        intersectionPoint = {
+                            sideParallelX : {},
+                            sideParallelY : {}
+                        },
+                        fault = 3,
+                        deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
+                    //точки столкновения со сторонами паралельно X или Y
+                    intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
+                    intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
+                    intersectionPoint.sideParallelY.y = (bullet.get('velY') > 0) ?  0 : barrier.get('sizeY');
+                    intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
+                    //попадание на угол
+                    if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
+                        bullet.set('velX', -1 * bullet.get('velX') + deviation);
+                        bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                        return;
+                    }
+                    //левая или правая грань
+                    if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
+                        bullet.set('velX', -1 * bullet.get('velX') + deviation);
+                        return;
+                    }
+                    //нижняя или верхняя грань
+                    if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
+                        this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
+                        bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                        return;
+                    }
+                },
+                moveToIntersectionPoint: function(bullet, barrier, intersectionPoint) {
+                    bullet.set('posX', intersectionPoint.x + (barrier.get('posX') - barrier.get('sizeX')/2));
+                    bullet.set('posY', intersectionPoint.y + (barrier.get('posY') - barrier.get('sizeY')/2));
+                },
+                fire: function(posX0, posY0, Vx, Vy) {
+                    var bullet = new Bullet({
+                        'posX': posX0,
+                        'posY': posY0,
+                        'VELOCITY' : 1,
+                        'velX': Vx,
+                        'velY': Vy,
+                        'sizeX': 10,
+                        'sizeY': 10
+                    });
+                    this.add(bullet);
                 }
-                var posX = bullet.get('posX');
-                var posY = bullet.get('posY');
-                if (posX < 0 || posX > this.canvas.width) {
-                    bullet.set('velX', -1*bullet.get('velX'));
-                }
-            },
-            tryToCollide: function(bullet, barrier) {
-                var bulletPosX = bullet.get('posX'),
-                    bulletPosY = bullet.get('posY'),
-                    bulletSizeX = bullet.get('sizeX'),
-                    bulletSizeY = bullet.get('sizeY'),
-                    barrierPosX = barrier.get('posX'),
-                    barrierPosY = barrier.get('posY'),
-                    barrierSizeX = barrier.get('sizeX'),
-                    barrierSizeY = barrier.get('sizeY'),
-                    collisionDistX = Math.pow((bulletSizeX + barrierSizeX) / 2, 2),
-                    collisionDistY = Math.pow((bulletSizeY + barrierSizeY) / 2, 2),
-                    distSquare = Math.pow((bulletPosX - barrierPosX), 2) +
-                        Math.pow((bulletPosY - barrierPosY), 2);
-                return (collisionDistX > distSquare) || (collisionDistY > distSquare);
-            },
-            collide: function(bullet, barrier) {
-                var previousPosition = bullet.getPreviousPosition(),
-                    bulletPosX = bullet.get('posX'),
-                    bulletPosY = bullet.get('posY'),
-
-                    bulletSizeX = bullet.get('sizeX'),
-                    bulletSizeY = bullet.get('sizeY'),
-
-                    bulletVelX = bullet.get('velX'),
-                    bulletVelY = bullet.get('velY'),
-
-                    barrierPosX = barrier.get('posX'),
-                    barrierPosY = barrier.get('posY'),
-
-                    barrierSizeX = barrier.get('sizeX'),
-                    barrierSizeY = barrier.get('sizeY'),
-
-                    k = (previousPosition.y - bulletPosY) / (previousPosition.x - bulletPosX),
-                    b = bulletPosY - k * bulletPosX,
-                    possiblePosition = {
-                        deltaX : {},
-                        deltaY : {}
-                    },
-                    fault = 3,
-                    deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
-
-                //возможные отклонения
-                possiblePosition.deltaX.x = barrierPosX - Math.sign(bulletVelX) * (barrierSizeX / 2 + bulletSizeX / 2);
-                possiblePosition.deltaX.y = k * possiblePosition.deltaX.x + b;
-                possiblePosition.deltaY.y = barrierPosY - Math.sign(bulletVelY) * (barrierSizeY / 2 + bulletSizeY / 2);
-                possiblePosition.deltaY.x = (possiblePosition.deltaY.y - b) / k;
-
-                //попадание на угол
-                if (((Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x) < fault) ||
-                    (Math.abs(possiblePosition.deltaY.x - possiblePosition.deltaX.x)) < fault)) {
-                    bullet.set('posX', possiblePosition.deltaX.x);
-                    bullet.set('posY', possiblePosition.deltaX.y);
-                    bullet.set('velX', -1 * bulletVelX + deviation);
-                    bullet.set('velY', -1 * bulletVelY + deviation);
-                    return;
-                }
-                //левая или правая грань
-                if (((barrierPosY - barrierSizeY / 2 - bulletSizeY / 2) <= possiblePosition.deltaX.y) &&
-                    (possiblePosition.deltaX.y <= (barrierPosY + barrierSizeY / 2 + bulletSizeY / 2))) {
-                    bullet.set('posX', possiblePosition.deltaX.x);
-                    bullet.set('posY', possiblePosition.deltaX.y);
-                    bullet.set('velX', -1 * bulletVelX + deviation);
-                    return;
-                }
-                //нижняя или верхняя грань
-                if (((barrierPosX - barrierSizeX / 2 - bulletSizeX / 2) <= possiblePosition.deltaY.x) &&
-                    (possiblePosition.deltaY.x <= (barrierPosX + barrierSizeX / 2 + bulletSizeX / 2))) {
-                    bullet.set('posX', possiblePosition.deltaY.x);
-                    bullet.set('posY', possiblePosition.deltaY.y);
-                    bullet.set('velY', -1 * bulletVelY + deviation);
-                    return;
-                }
-            },
-            fire: function(posX0, posY0, Vx, Vy) {
-                var bullet = new Bullet({
-                    'posX': posX0,
-                    'posY': posY0,
-                    'VELOCITY' : 1,
-                    'velX': Vx,
-                    'velY': Vy,
-                    'sizeX': 10,
-                    'sizeY': 10
-                });
-                this.add(bullet);
-            }
-        });
-        return new BulletCollection();
-    }
+            });
+            return new BulletCollection();
+        }
 );
