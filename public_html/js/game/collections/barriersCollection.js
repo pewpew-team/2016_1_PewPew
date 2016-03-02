@@ -1,6 +1,4 @@
-define(
-    ['backbone', 'game/models/barrier'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             Barrier = require('game/models/barrier'),
             BarrierCollection = Backbone.Collection.extend({

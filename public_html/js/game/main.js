@@ -1,22 +1,10 @@
-define(
-    [
-        'game/views/allBarriersView',
-        'game/views/allBulletsView',
-        'game/views/playerView',
-        'game/models/player',
-        'models/user',
-        'game/collections/bulletCollection',
-        'game/collections/barriersCollection',
-        'underscore'
-    ],
-    function() {
+define(function(require) {
         var BulletsView = require('game/views/allBulletsView'),
             bulletsCollection = require('game/collections/bulletCollection'),
             barriersCollection = require('game/collections/barriersCollection'),
             BarriersView = require('game/views/allBarriersView'),
             PlayerView = require('game/views/playerView'),
             Player = require('game/models/player'),
-            user = require('models/user'),
             _ = require('underscore');
         return {
             init: function () {
@@ -40,7 +28,7 @@ define(
                 context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
                 this.bulletsView.render();
                 this.barriersView.render();
-                bulletsCollection.iterate(barriersCollection);
+                bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width);
                 this.playerView.render();
                 requestAnimationFrame(_.bind(this.iterate, this));
             }

@@ -1,6 +1,4 @@
-define(
-    ['backbone'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             BarrierView = Backbone.View.extend({
                 initialize: function(model, canvas) {

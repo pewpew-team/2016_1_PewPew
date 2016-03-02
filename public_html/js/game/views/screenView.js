@@ -1,10 +1,4 @@
-/*
-Вьюха для отрисовки статической части экрана
- */
-
-define(
-    ['backbone', 'game/models/screen'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             screen = require('game/models/screen'),
             ScreenView = Backbone.View.extend({

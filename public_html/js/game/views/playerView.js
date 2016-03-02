@@ -1,10 +1,4 @@
-define(
-    [
-        'backbone',
-        'game/collections/bulletCollection',
-        'underscore'
-    ],
-    function () {
+define(function (require) {
         var Backbone = require('backbone'),
             _ = require('underscore'),
             bulletCollection = require('game/collections/bulletCollection'),

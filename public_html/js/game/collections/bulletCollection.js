@@ -1,13 +1,11 @@
-define(
-    ['backbone','game/models/bullet','underscore'],
-    function() {
+define(function(require) {
         var Backbone = require('backbone'),
             Bullet = require('game/models/bullet'),
             _ = require('underscore'),
             BulletCollection = Backbone.Collection.extend({
                 model: Bullet,
-                iterate: function(barriersCollection) {
-                    this.canvas = document.getElementById('dynamicLayer');
+                iterate: function(barriersCollection, screenWidth) {
+                    this.screenWidth = screenWidth;
                     this.barriers = barriersCollection;
                     this.each(_.bind(this.iterateBullet, this));
                     this.deleteOutOfBoxBullets();
@@ -28,7 +26,7 @@ define(
                             }
                         }
                     }
-                    if (bullet.get('posX') < 0 || bullet.get('posX') > this.canvas.width) {
+                    if (bullet.get('posX') < 0 || bullet.get('posX') > this.screenWidth) {
                         bullet.set('velX', -1*bullet.get('velX'));
                     }
                 },
@@ -57,6 +55,7 @@ define(
                     intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
                     //попадание на угол
                     if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
+                        console.log("xy",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
@@ -64,12 +63,14 @@ define(
                     }
                     //левая или правая грань
                     if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
+                        console.log("x",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         return;
                     }
                     //нижняя или верхняя грань
                     if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
+                        console.log("y",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;

@@ -1,6 +1,4 @@
-define(
-    ['backbone', 'game/collections/bulletCollection'],
-  function() {
+define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
           Player = Backbone.Model.extend({
@@ -21,11 +19,11 @@ define(
                       'positionX': canvasWidth/2,
                       'maxPositionX': canvasWidth,
                       'currentPointerX': canvasWidth/2,
-                      'currentPointerY': canvasHeight/2
+                      'currentPointerY': canvasHeight/2,
+                      'positionY': canvasHeight - this.get('playerSizeY') / 2,
+                      'minLevelPointer': 0,
+                      'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
                   });
-                  this.set('positionY', canvasHeight - this.get('playerSizeY') / 2);
-                  this.set('minLevelPointer', 0);
-                  this.set('maxLevelPointer', canvasHeight - this.get('playerSizeY') - this.get('gunLength'));
                   this.set('angle', this.getAngle());
               },
               sync: function() {
@@ -66,12 +64,6 @@ define(
                       //клавиши не нажаты
                       this.decreaseVelocity();
                   } else {
-                      if (pushedButton !== this.get('previousDirection')) {
-                          //резкий тормоз
-                          this.stay();
-                          this.set('previousDirection', pushedButton);
-                          return;
-                      }
                       this.increaseVelocity();
                   }
                   this.move();
@@ -117,7 +109,6 @@ define(
                       STEP_DOWN_VELOCITY = 0.6;
                   if (velX === 0) return;
                   if (Math.abs(velX) < START_VELOCITY) {
-                      //всегда круглое число не получается ((
                       this.set('velocity', 0);
                   } else {
                       this.set('velocity', velX - Math.sign(velX) * STEP_DOWN_VELOCITY);

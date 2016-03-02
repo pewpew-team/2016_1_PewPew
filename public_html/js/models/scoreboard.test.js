@@ -1,4 +1,4 @@
-define(['backbone', 'models/scoreboard', 'underscore'],function () {
+define(function (require) {
     QUnit.module("models/scoreboard");
 
     QUnit.test("Scoreboard - экземпляр Backbone.Model", function () {

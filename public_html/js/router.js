@@ -1,6 +1,8 @@
-define(
-    ['backbone', 'views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'event'],
-    function (Backbone) {
+define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register'],
+    function () {
+        var Backbone = require('backbone'),
+            session = require('models/session');
+
         var Router = Backbone.Router.extend({
             routes: {
                 'main': 'displayView',
@@ -12,8 +14,9 @@ define(
             },
             initialize: function () {
                 this.currentView = require('views/main');
-                this.listenTo(require('event'), 'navigate', this.changeRoute);
-                this.listenTo(require('event'), 'startGame', this.startGame)
+                var event = require('event');
+                this.listenTo(event, 'navigate', this.changeRoute);
+                this.listenTo(event, 'startGame', this.startGame)
             },
             displayView: function () {
                 var fragmentName = Backbone.history.getFragment();
@@ -40,4 +43,4 @@ define(
 
         return new Router();
     }
-)
+);
