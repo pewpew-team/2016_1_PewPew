@@ -1,6 +1,7 @@
 define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register'],
     function () {
-        var Backbone = require('backbone');
+        var Backbone = require('backbone'),
+            session = require('models/session');
 
         var Router = Backbone.Router.extend({
             routes: {

@@ -78,6 +78,13 @@ define(function(require) {
             jQuery.ajax({
                 beforeSend: setHeader.bind(this)
             });
+        },
+        disable: function () {
+            jQuery.ajax({
+                beforeSend: function () {
+
+                }
+            });
         }
     });
 
