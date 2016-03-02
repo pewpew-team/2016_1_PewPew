@@ -9,10 +9,8 @@ define(function (require) {
             show: function () {
                 $('#page').html(this.el);
                 this.$el.show();
-                if(session.get('isAzuth')) {
-                    game.init();
-                    game.run();
-                }
+                game.init();
+                game.run();
             }
         });
 
