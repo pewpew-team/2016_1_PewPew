@@ -1,29 +1,8 @@
-function showScoreboardScreen() {
-	// TODO
-}
-function hideScoreboardScreen() {
-	// TODO
-}
+define(function (require) {
+    var Backbone = require('backbone'),
+        router = require('router');
 
-function showGameScreen() {
-	// TODO
-}
-function hideGameScreen() {
-	// TODO
-}
+    Backbone.history.start();
+});
 
-function showLoginScreen() {
-	// TODO
-}
-function hideLoginScreen() {
-	// TODO
-}
-
-function showMainScreen() {
-	// TODO
-}
-
-function hideMainScreen() {
-	// TODO
-}
 

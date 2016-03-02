@@ -1,0 +1,26 @@
+<fest:template xmlns:fest="http://fest.mail.ru">
+    <div id="registration" class = "menu">
+        <div class="menu__logo logo">
+            PewPew
+        </div>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+                Регистрация
+            </div>
+            <div class = "form">
+                <form name="registration">
+                    <input name = "email" placeholder = "EMail" class="form__text_input" id="email-input"></input>
+                    <input name = "login" placeholder = "Логин" class="form__text_input" id="login-input"></input>
+                    <input name = "password" type = "password" placeholder = "Пароль" class="form__text_input" id="password-input"></input>
+                    <input name = "password" type = "password" placeholder = "Повторите пароль" class="form__text_input" id="repeat-password-input"></input>
+                    <input type = "submit" class="form__submit_input" value = "Зарегистрировать" id = 'sign-up'></input>
+                </form>
+            </div>
+            <button class="menu__btn  menu__btn--back" id="main">
+                Назад
+            </button>
+        </div>
+    </div>
+</fest:template>
+
+

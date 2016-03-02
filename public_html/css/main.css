@@ -1,1 +1,285 @@
-/* TODO */
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic);
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+/*
+========================================================
+логотип
+========================================================
+*/
+.logo {
+    background: #323A45;
+    font-family: 'Press Start 2P', cursive;
+    color: #ffffff;
+    text-align: center;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*
+========================================================
+page
+========================================================
+*/
+.page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 460px;
+}
+.page__background {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    overflow: hidden;
+}
+/*
+========================================================
+menu
+========================================================
+*/
+.menu {
+    width: 460px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.menu__logo {
+    margin: 0 auto;
+    width: 100%;
+    font-size: 42px;
+    height: 120px;
+    line-height: 120px;
+}
+.menu__wrap {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.menu__title {
+    width: 100%;
+    font-size: 32px;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+.menu__btn {
+    width: 80%;
+    height: 40px;
+    background-color: #323A45;
+    border: 0;
+    margin: 10px 10% 10px 10%;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 40px;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.menu__btn:focus {
+    outline: none;
+}
+.menu__btn:hover {
+    background: #0E778A;
+}
+.menu__btn--primary {
+    background-color: #323A45;
+}
+.menu__btn--primary:hover {
+    background-color: #8A9D43;
+}
+.menu__btn--back {
+    background: #e9ecf0;
+    color: #5E6D82;
+}
+.menu__btn--back:hover {
+    background-color: #F3F3F3;
+}
+
+/*
+========================================================
+форма
+========================================================
+*/
+.form {
+
+}
+/*
+========================================================
+ошибка
+*/
+#form__alert {
+    width: 80%;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    background: #F5696C;
+    color: #ffffff;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.form__open {
+    display: inline-block;
+}
+/*
+========================================================
+текстовые поля
+*/
+.form__text_input {
+    width: 80%;
+    height: 40px;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    transition: all 0.3s;
+
+    background: #e9ecf0;
+    color: #5E6D82;
+    padding-left: 2%;
+    padding-right: 2%;
+
+}
+
+.form__text_input:focus {
+    outline: none;
+    background-color: #F3F3F3;
+}
+/*
+========================================================
+кнопка отправить
+*/
+.form__submit_input {
+    width: 80%;
+    height: 40px;
+    margin: 10px 10% 10px 10%;
+    border: 0;
+    border-radius: 5px;
+    line-height: 40px;
+    font-size: 16px;
+    transition: all 0.3s;
+    cursor : pointer;
+
+    background-color: #323A45;
+    color: #FFFFFF;
+    text-align: center;
+}
+.form__submit_input:focus {
+    outline: none;
+}
+.form__submit_input:hover {
+    background: #0E778A;
+}
+/*
+========================================================
+scoreboard рейтинг игроков
+========================================================
+*/
+.scoreboard {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.scoreboard__name {
+    width: 80%;
+}
+.scoreboard__rating {
+    width: 20%;
+    text-align: center;
+}
+.scoreboard__title {
+    font-weight: bold;
+}
+/*
+========================================================
+header
+========================================================
+*/
+.header {
+    clear:both;
+    height: 50px;
+    line-height: 50px;
+    min-height: 50px;
+    font-family: 'Press Start 2P', cursive;
+    color: #FFFFFF;
+    background: #323A45;
+    width: 100%;
+    display: inline-block;
+    transition: all 0.3s;
+}
+.header__logo {
+    width: 200px;
+    font-size: 24px;
+    height: 50px;
+    float: left;
+    text-align: left;
+    padding-left: 5%;
+}
+.header__score {
+    text-align:center;
+    margin: 0 auto;
+}
+.header__user {
+    width: 200px;
+    float: right;
+    text-align: right;
+    padding-right: 5%;
+
+}
+
+
+
+/*
+========================================================
+game
+========================================================
+*/
+.game {
+
+}
+#staticLayer {
+    z-index: 2;
+    position: absolute;
+}
+#dynamicLayer {
+    z-index: 3;
+    position: absolute;
+    cursor: crosshair;
+}
+
+@media screen and (max-width: 700px) {
+    .header {
+        height: 100px;
+        transition: all 0.3s;
+    }
+    .header__score {
+        width: 100%;
+        float: left;
+    }
+}

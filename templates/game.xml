@@ -1,3 +1,11 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="game"></div>
+    <div class = "header">
+        <div class = "header__logo logo"> PewPew </div>
+        <div class = "header__user">Выход</div>
+        <div class = "header__score" id = "score"></div>
+    </div>
+    <div class = "game">
+        <canvas width = "700" height="500" class = "gameArea__canvas" id="staticLayer"></canvas>
+        <canvas width = "700" height="500" class = "gameArea__canvas" id="dynamicLayer"></canvas>
+    </div>
 </fest:template>

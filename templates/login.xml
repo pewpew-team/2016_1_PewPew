@@ -1,3 +1,22 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="login"></div>
+    <div id="login" class = "menu">
+        <div class="menu__logo logo">
+            PewPew
+        </div>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+                Вход
+            </div>
+            <div class = "form">
+                <form name="authentication">
+                    <input name = "login" placeholder = "Логин" class="form__text_input" id="login-input"></input>
+                    <input name = "password" type = "password" placeholder = "Пароль" class="form__text_input" id="password-input"></input>
+                    <input type = "submit" class="form__submit_input" value = "Войти" id = 'sign-in'></input>
+                </form>
+            </div>
+            <button class="menu__btn  menu__btn--back" id="main">
+                Назад
+            </button>
+        </div>
+    </div>
 </fest:template>
