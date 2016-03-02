@@ -1,7 +1,6 @@
 define(function (require) {
     var tmpl = require('tmpl/login'),
         baseView = require('views/baseView'),
-        user = require('models/user'),
         event = require('event');
 
 
@@ -15,9 +14,9 @@ define(function (require) {
         },
         initialize: function () {
             this.render();
-            this.listenTo(event,'invalidLoginPassword', this.showErrorMessage);
+            this.listenTo(event, 'invalidLoginPassword', this.showErrorMessage);
         },
-        showErrorMessage: function () {
+        showErrorMessage: function (message) {
             // TODO
         }
     });

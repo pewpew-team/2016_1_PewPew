@@ -4,7 +4,6 @@ define(function(require) {
             _ = require('underscore'),
             BulletCollection = Backbone.Collection.extend({
                 model: Bullet,
-
                 iterate: function(barriersCollection, screenWidth) {
                     this.screenWidth = screenWidth;
                     this.barriers = barriersCollection;

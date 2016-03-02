@@ -20,6 +20,7 @@ require.config({
 
 var tests = [
     'models/scoreboard.test',
+    'game/models/player.test',
     'game/collections/bulletCollection.test'
 ];
 
