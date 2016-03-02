@@ -8,11 +8,13 @@ define(function (require) {
         bullet,
         barrier;
     barriersCollection.createRandom(16, 4, 0.3, 40, 40);
+
     QUnit.module("game/collections/bulletCollection");
     QUnit.test("bulletCollection - экземпляр Backbone.Collection", function () {
         QUnit.ok(bulletCollection instanceof Backbone.Collection, 'bulletCollection is instance of Backbone.Collection');
     });
     QUnit.test("bulletCollection функция iterate и iterateBullet", function () {
+        bulletCollection.reset();
         var width = 100;
         bullet =  new Bullet({
             'posX': width,
