@@ -28,7 +28,7 @@ define(function(require) {
                 context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
                 this.bulletsView.render();
                 this.barriersView.render();
-                bulletsCollection.iterate(barriersCollection);
+                bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width);
                 this.playerView.render();
                 requestAnimationFrame(_.bind(this.iterate, this));
             }

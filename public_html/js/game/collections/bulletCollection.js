@@ -4,8 +4,8 @@ define(function(require) {
             _ = require('underscore'),
             BulletCollection = Backbone.Collection.extend({
                 model: Bullet,
-                iterate: function(barriersCollection) {
-                    this.canvas = document.getElementById('dynamicLayer');
+                iterate: function(barriersCollection, screenWidth) {
+                    this.screenWidth = screenWidth;
                     this.barriers = barriersCollection;
                     this.each(_.bind(this.iterateBullet, this));
                     this.deleteOutOfBoxBullets();
@@ -26,7 +26,7 @@ define(function(require) {
                             }
                         }
                     }
-                    if (bullet.get('posX') < 0 || bullet.get('posX') > this.canvas.width) {
+                    if (bullet.get('posX') < 0 || bullet.get('posX') > this.screenWidth) {
                         bullet.set('velX', -1*bullet.get('velX'));
                     }
                 },
