@@ -10,8 +10,8 @@ define(function (require) {
         events: {
             'click #sign-in': function(e) {
                 e.preventDefault();
-                var login = this.$el.find('#login-input').value;
-                var password = this.$el.find('#password-input').value;
+                var login = document.getElementById('login-input').value;
+                var password = document.getElementById('password-input').value;
                 if (this.validate(login, password)) {
                     session.login(login, password);
                 }
