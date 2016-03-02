@@ -11,10 +11,10 @@ define(function (require) {
         events: {
             'click #sign-up': function(e) {
                 e.preventDefault();
-                var login = this.$el.find('#login-input').value;
-                var password1 = this.$el.find('#password-input').value;
-                var password2 = this.$el.find('#repeat-password-input').value;
-                var email = this.$el.find('#email-input').value;
+                var login = document.getElementById('login-input').value;
+                var password1 = document.getElementById('password-input').value;
+                var password2 = document.getElementById('repeat-password-input').value;
+                var email = document.getElementById('email-input').value;
                 if (this.validate(email, login, password1, password2)) {
                     session.register(login, password1, email);
                 }
