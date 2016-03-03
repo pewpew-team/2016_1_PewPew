@@ -7,22 +7,15 @@ define(function(require) {
         defaults: {
             'isAuth': false
         },
-        initialize: function() {
-            jQuery.ajax({
-               beforeSend: function() {
-
-               }
-            });
-        },
         login: function(login, password) {
             jQuery.ajax({
                 method: 'POST',
                 url: '/session',
-                data: {
+                data: JSON.stringify({
                     'login': login,
                     'password': password
-                },
-                contentType: 'application/json: charset=utf-8',
+                }),
+                contentType: 'application/json',
                 success: function () {
                     event.trigger('login');
                 },
@@ -38,7 +31,7 @@ define(function(require) {
                 success: function() {
                     event.trigger('navigate', 'main');
                 },
-                contentType: 'application/json: charset=utf-8',
+                contentType: 'application/json',
                 error: function () {
                     event.trigger('invalidLogout');
                 }
@@ -51,12 +44,12 @@ define(function(require) {
                 success: function () {
                     event.trigger('login');
                 },
-                contentType: 'application/json: charset=utf-8',
-                data: {
+                contentType: 'application/json',
+                data: JSON.stringify({
                     'login': login,
                     'password': password,
                     'email': email
-                },
+                }),
                 error: function () {
                     event.trigger('invalidLoginPassword');
                 }
