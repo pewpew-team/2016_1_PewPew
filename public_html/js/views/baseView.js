@@ -4,7 +4,7 @@ define(function (require) {
         Backbone = require('backbone'),
         event = require('event'),
         BackgroundModelConstructor = require('models/background'),
-        backgroundModel = new BackgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height);
+        backgroundModel = new BackgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height, require('backgroundThemes'));
 
     var View = Backbone.View.extend({
         template: {},

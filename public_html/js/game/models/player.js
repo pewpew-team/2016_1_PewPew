@@ -60,11 +60,10 @@ define(function(require) {
               iterate: function() {
                   var pushedButton = this.get('pushedButton');
                   this.pointGunTo();
-                  if (!pushedButton) {
-                      //клавиши не нажаты
-                      this.decreaseVelocity();
-                  } else {
+                  if (pushedButton) {
                       this.increaseVelocity();
+                  } else {
+                      this.decreaseVelocity();
                   }
                   this.move();
               },
