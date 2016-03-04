@@ -20,6 +20,7 @@ define(function(require) {
                     event.trigger('login');
                 },
                 error: function () {
+                    event.trigger('login'); // dev
                     event.trigger('invalidLoginPassword', 'Invalid login or password');
                 }
             });
@@ -34,6 +35,7 @@ define(function(require) {
                 contentType: 'application/json',
                 error: function () {
                     event.trigger('invalidLogout');
+                    event.trigger('navigate', 'main'); // dev
                 }
             });
         },

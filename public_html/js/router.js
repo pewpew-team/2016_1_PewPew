@@ -1,7 +1,8 @@
-define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register'],
+define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'views/gameMenu'],
     function () {
         var Backbone = require('backbone'),
             session = require('models/session');
+
 
         var Router = Backbone.Router.extend({
             routes: {
@@ -9,14 +10,14 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
                 'login': 'displayView',
                 'register': 'displayView',
                 'scoreboard': 'displayView',
-                'game': 'displayView',
                 '*default': 'defaultAction'
             },
             initialize: function () {
                 this.currentView = require('views/main');
                 var event = require('event');
                 this.listenTo(event, 'navigate', this.changeRoute);
-                this.listenTo(event, 'startGame', this.startGame)
+                this.listenTo(event, 'login', this.toGameScreen);
+                this.listenTo(event, 'startTraining', this.startTraining);
             },
             displayView: function () {
                 var fragmentName = Backbone.history.getFragment();
@@ -33,7 +34,14 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
             changeRoute: function (route) {
                 this.navigate(route, {trigger: true});
             },
-            startGame: function() {
+            toGameScreen: function() {
+                var view = require('views/gameMenu');
+                this.navigate('game', {trigger: false});
+                this.currentView.hide();
+                view.show();
+                this.currentView = view;
+            },
+            startTraining: function() {
                 var view = require('views/game');
                 this.currentView.hide();
                 view.show();
