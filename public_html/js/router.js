@@ -1,7 +1,15 @@
 define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'views/gameMenu'],
     function () {
         var Backbone = require('backbone'),
-            session = require('models/session');
+            session = require('models/session'),
+            views = {
+                main: require('views/main'),
+                game: require('views/game'),
+                login: require('views/login'),
+                scoreboard: require('views/scoreboard'),
+                register: require('views/register'),
+                gameMenu: require('views/gameMenu')
+            };
 
 
         var Router = Backbone.Router.extend({
@@ -21,13 +29,13 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
             },
             displayView: function () {
                 var fragmentName = Backbone.history.getFragment();
-                var view = require('views/'+fragmentName);
+                var view = views[fragmentName];
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;
             },
             defaultAction: function () {
-                var mainView = require('views/main');
+                var mainView = views['main'];
                 mainView.show();
                 this.currentView = mainView;
             },
@@ -35,14 +43,14 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
                 this.navigate(route, {trigger: true});
             },
             toGameScreen: function() {
-                var view = require('views/gameMenu');
+                var view = views['gameMenu'];
                 this.navigate('game', {trigger: false});
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;
             },
             startTraining: function() {
-                var view = require('views/game');
+                var view = views['game'];
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;

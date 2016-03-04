@@ -30,6 +30,14 @@ define(function (require) {
                 return false;
             }
             return true;
+        },
+        show: function () {
+            $('#page').html(this.el);
+            this.$el.show();
+            this.$el.find('#main').click(function(e) {
+                e.preventDefault();
+                event.trigger('navigate', 'main');
+            })
         }
     });
 
