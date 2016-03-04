@@ -24,6 +24,10 @@ define(function (require) {
             this.render();
             this.listenTo(event, 'invalidLoginPassword', this.showErrorMessage);
         },
+        show: function () {
+            $('#page').html(this.el);
+            this.$el.show();
+        },
         validate: function (email, login, password1, password2) {
             if ( !(email && login && password1 && password2) ) {
                 event.trigger('invalidLoginPassword', 'All fields required');
