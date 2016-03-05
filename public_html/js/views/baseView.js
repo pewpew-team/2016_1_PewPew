@@ -19,10 +19,12 @@ define(function (require) {
             this.$el.html(this.template());
         },
         show: function () {
+            this.$el.appendTo("#page");
             this.$el.show();
         },
         hide: function () {
             this.$el.hide();
+            this.$el.detach();
         },
         drawBackground: function () {
             var width = backgroundCanvas.width,
