@@ -10,6 +10,8 @@ define(function (require) {
         template: {},
         initialize: function () {
             this.render();
+            $('#page').append(this.el);
+            this.hide();
             this.resizeInterface();
             window.addEventListener('resize', _.bind(this.resizeInterface, this));
         },
@@ -17,7 +19,6 @@ define(function (require) {
             this.$el.html(this.template());
         },
         show: function () {
-            $('#page').html(this.el);
             this.$el.show();
         },
         hide: function () {
