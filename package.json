@@ -6,6 +6,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "almond": "^0.3.1",
     "backbone": "^1.2.3",
     "body-parser": "^1.15.0",
     "errorhandler": "^1.4.3",
@@ -14,6 +15,7 @@
     "grunt-concurrent": "^2.1.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-qunit": "^1.0.1",
+    "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-fest": "^0.1.6",
     "grunt-shell": "^1.1.2",

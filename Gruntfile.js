@@ -65,7 +65,16 @@ module.exports = function (grunt) {
         },
         qunit: {
             all: ['./public_html/tests/index.html']
+        },
+        requirejs: {
+            baseUrl: '.',
+            name: './node_modules/almond/almond',
+            include: ['index'],
+            insertRequire: ['index'],
+            out: 'main-built.js',
+            wrap: true
         }
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -74,6 +83,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-fest');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.registerTask('test', ['qunit:all']);
     grunt.registerTask('default', ['concurrent']);
