@@ -6,17 +6,17 @@ define(function(require) {
 
     var GameMenu = baseView.extend({
         template: tmpl,
-        show: function () {
-            $('#page').html(this.el);
-            this.$el.show();
-            this.$el.find('#logout').click(function(e) {
-                e.preventDefault();
-                session.logout();
-            });
-            this.$el.find('#training').click(function(e) {
-                e.preventDefault();
-                event.trigger('startTraining');
-            })
+        events: {
+            'click #logout' : 'handleLogout',
+            'click #training' : 'startTraining'
+        },
+        handleLogout: function(e) {
+            e.preventDefault();
+            session.logout();
+        },
+        startTraining: function(e) {
+            e.preventDefault();
+            event.trigger('startTraining');
         }
     });
 

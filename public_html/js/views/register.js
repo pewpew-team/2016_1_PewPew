@@ -9,24 +9,21 @@ define(function (require) {
     var View = baseView.extend({
         template: tmpl,
         events: {
-            'click #sign-up': function(e) {
-                e.preventDefault();
-                var login = document.getElementById('login-input').value;
-                var password1 = document.getElementById('password-input').value;
-                var password2 = document.getElementById('repeat-password-input').value;
-                var email = document.getElementById('email-input').value;
-                if (this.validate(email, login, password1, password2)) {
-                    session.register(login, password1, email);
-                }
+            'click #sign-up': 'handleSignUp'
+        },
+        handleSignUp: function (e) {
+            e.preventDefault();
+            var login = document.getElementById('login-input').value;
+            var password1 = document.getElementById('password-input').value;
+            var password2 = document.getElementById('repeat-password-input').value;
+            var email = document.getElementById('email-input').value;
+            if (this.validate(email, login, password1, password2)) {
+                session.register(login, password1, email);
             }
         },
         initialize: function () {
             this.render();
             this.listenTo(event, 'invalidLoginPassword', this.showErrorMessage);
-        },
-        show: function () {
-            $('#page').html(this.el);
-            this.$el.show();
         },
         validate: function (email, login, password1, password2) {
             if ( !(email && login && password1 && password2) ) {

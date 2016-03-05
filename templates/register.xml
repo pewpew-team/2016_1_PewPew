@@ -13,12 +13,12 @@
                     <input name = "login" placeholder = "Логин" class="form__text_input" id="login-input"></input>
                     <input name = "password" type = "password" placeholder = "Пароль" class="form__text_input" id="password-input"></input>
                     <input name = "password" type = "password" placeholder = "Повторите пароль" class="form__text_input" id="repeat-password-input"></input>
-                    <button class="form__submit_input" id = 'sign-up'> Зарегистрировать </button>
+                    <input type="submit" class="form__submit_input" placeholder = "Зарегистрировать" id = 'sign-up'></input>
                 </form>
             </div>
-            <button class="menu__btn  menu__btn--back" id="main">
+            <a href = "#main" class="menu__btn  menu__btn--back">
                 Назад
-            </button>
+            </a>
         </div>
     </div>
 </fest:template>
