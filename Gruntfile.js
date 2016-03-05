@@ -67,12 +67,26 @@ module.exports = function (grunt) {
             all: ['./public_html/tests/index.html']
         },
         requirejs: {
-            baseUrl: '.',
-            name: './node_modules/almond/almond',
-            include: ['index'],
-            insertRequire: ['index'],
-            out: 'main-built.js',
-            wrap: true
+            compile: {
+                options: {
+                    baseUrl: "./public_html/js",
+                    mainConfigFile: "./public_html/js/config.js",
+                    include: [ "index.js" ],
+                    out: "dist/js/build.min.js",
+                    findNestedDependencies: true
+                }
+            }
+        },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: './public_html/css',
+                    src: ['*.css'],
+                    dest: './dist/css',
+                    ext: '.min.css'
+                }]
+            }
         }
 
     });
@@ -84,7 +98,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
+    grunt.registerTask('compile', ['requirejs', 'cssmin']);
     grunt.registerTask('test', ['qunit:all']);
     grunt.registerTask('default', ['concurrent']);
 
