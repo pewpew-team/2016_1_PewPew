@@ -71,9 +71,11 @@ module.exports = function (grunt) {
                 options: {
                     baseUrl: "./public_html/js",
                     mainConfigFile: "./public_html/js/config.js",
-                    include: [ "index.js" ],
+                    include: ["../../node_modules/almond/almond.js", "index.js" ],
                     out: "dist/js/build.min.js",
-                    findNestedDependencies: true
+                    findNestedDependencies: true,
+                    wrap: true,
+                    optimize: 'none'
                 }
             }
         },
