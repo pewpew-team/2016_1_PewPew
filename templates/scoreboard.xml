@@ -19,9 +19,9 @@
                     </tr>
                 </fest:for>
             </table>
-            <button class="menu__btn  menu__btn--back" id="main">
+            <a href="#main" class="menu__btn  menu__btn--back">
                 Назад
-            </button>
+            </a>
         </div>
     </div>
 </fest:template>

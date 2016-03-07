@@ -93,6 +93,9 @@ menu
     line-height: 40px;
     transition: all 0.3s;
     cursor: pointer;
+    display: block;
+    text-align: center;
+    text-decoration: none;
 
     -webkit-user-select: none;
     -moz-user-select: none;
