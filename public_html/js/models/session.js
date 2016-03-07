@@ -23,6 +23,7 @@ define(function(require) {
                 },
                 error: function () {
                     self.trigger('invalidLoginPassword', 'Invalid login or password');
+                    self.trigger('login'); // dev
                 }
             });
         },
