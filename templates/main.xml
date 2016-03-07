@@ -1,16 +1,16 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="main" class = "menu">
-        <div class="menu__logo logo">
+<fest:template xmlns:fest = "http://fest.mail.ru">
+    <div id = "main" class = "menu">
+        <div class = "menu__logo logo">
             PewPew
         </div>
         <div class = "menu__wrap">
-            <a href="#login" class="menu__btn menu__btn--primary">
+            <a href = "#login" class = "menu__btn menu__btn--primary">
                 Вход
             </a>
-            <a href="#register" class="menu__btn">
+            <a href = "#register" class = "menu__btn">
                 Регистрация
             </a>
-            <a href="#scoreboard" class="menu__btn">
+            <a href = "#scoreboard" class = "menu__btn">
                 Рейтинг
             </a>
         </div>
