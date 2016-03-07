@@ -14,7 +14,12 @@ define(function (require) {
             size: {
                 x : 47,
                 y : 45
-            }
+            },
+            removableBlockColor: '#E08E4A',
+            unremovableBlockColor: 'black',
+            playerColor: 'black',
+            bulletsColor: '#CC0C39'
+
         },{
             background : "img/grey/bg.png",
             items : [
@@ -27,7 +32,11 @@ define(function (require) {
             size: {
                 x : 41,
                 y : 46
-            }
+            },
+            removableBlockColor: '#38A57C',
+            unremovableBlockColor: 'black',
+            playerColor: 'black',
+            bulletsColor: '#CC0C39'
         },{
             background : "img/sandy/bg.png",
             items : [
@@ -40,7 +49,11 @@ define(function (require) {
             size: {
                 x : 62,
                 y : 54
-            }
+            },
+            removableBlockColor: '#036564',
+            unremovableBlockColor: 'black',
+            playerColor: 'black',
+            bulletsColor: '#CC0C39'
         },{
             background : "img/green2/bg.png",
             items : [
@@ -54,7 +67,11 @@ define(function (require) {
             size: {
                 x : 65,
                 y : 49
-            }
+            },
+            removableBlockColor: '#E6781E',
+            unremovableBlockColor: 'black',
+            playerColor: 'black',
+            bulletsColor: '#FF6C5E'
         }
     ];
 });
