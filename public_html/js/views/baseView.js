@@ -2,7 +2,6 @@ define(function (require) {
     var backgroundCanvas = document.getElementById("pageBackground"),
         createjs = require('createjs'),
         Backbone = require('backbone'),
-        event = require('event'),
         BackgroundModelConstructor = require('models/background'),
         backgroundModel = new BackgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height, require('backgroundThemes'));
 

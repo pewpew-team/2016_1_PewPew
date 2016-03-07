@@ -1,8 +1,7 @@
 define(function(require) {
     var baseView = require('views/baseView'),
         tmpl = require('tmpl/gameMenu'),
-        session = require('models/session'),
-        event = require('event');
+        session = require('models/session');
 
     var GameMenu = baseView.extend({
         template: tmpl,
@@ -16,7 +15,7 @@ define(function(require) {
         },
         startTraining: function(e) {
             e.preventDefault();
-            event.trigger('startTraining');
+            this.trigger('startTraining');
         }
     });
 

@@ -5,7 +5,7 @@
         </div>
         <div class = "menu__wrap">
             <a href="#login" class="menu__btn menu__btn--primary">
-                Логин
+                Вход
             </a>
             <a href="#register" class="menu__btn">
                 Регистрация

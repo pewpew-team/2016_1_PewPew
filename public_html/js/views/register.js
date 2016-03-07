@@ -2,7 +2,6 @@ define(function (require) {
     var tmpl = require('tmpl/register'),
         baseView = require('views/baseView'),
         session = require('models/session'),
-        event = require('event'),
         _ = require('underscore');
 
 
@@ -17,24 +16,13 @@ define(function (require) {
             var password1 = document.getElementById('password-input').value;
             var password2 = document.getElementById('repeat-password-input').value;
             var email = document.getElementById('email-input').value;
-            if (this.validate(email, login, password1, password2)) {
+            if (session.validateRegistration(email, login, password1, password2)) {
                 session.register(login, password1, email);
             }
         },
         initialize: function () {
             this.render();
-            this.listenTo(event, 'invalidLoginPassword', this.showErrorMessage);
-        },
-        validate: function (email, login, password1, password2) {
-            if ( !(email && login && password1 && password2) ) {
-                event.trigger('invalidLoginPassword', 'All fields required');
-                return false;
-            }
-            if (password1 !== password2) {
-                event.trigger('invalidLoginPassword', 'Passwords must match');
-                return false;
-            }
-            return true;
+            this.listenTo(session, 'invalidLoginPassword', this.showErrorMessage);
         },
         showErrorMessage: function (message) {
             //TODO

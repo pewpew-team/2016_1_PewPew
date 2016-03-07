@@ -1,7 +1,6 @@
 define(function (require) {
     var tmpl = require('tmpl/login'),
         baseView = require('views/baseView'),
-        event = require('event'),
         session = require('models/session');
 
 
@@ -14,23 +13,16 @@ define(function (require) {
             e.preventDefault();
             var login = document.getElementById('login-input').value;
             var password = document.getElementById('password-input').value;
-            if (this.validate(login, password)) {
+            if (session.validateLogin(login, password)) {
                 session.login(login, password);
             }
         },
         initialize: function () {
             baseView.prototype.initialize.call(this);
-            this.listenTo(event, 'invalidLoginPassword', this.showErrorMessage);
+            this.listenTo(session, 'invalidLoginPassword', this.showErrorMessage);
         },
         showErrorMessage: function (message) {
             // TODO
-        },
-        validate: function (login, password) {
-            if ( !(login && password) ) {
-                event.trigger('invalidLoginPassword', 'All fields required');
-                return false;
-            }
-            return true;
         }
     });
 
