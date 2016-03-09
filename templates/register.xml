@@ -7,9 +7,7 @@
             <div class = "menu__title">
                 Регистрация
             </div>
-            <div id = "form__alert">
-                Ошибка
-            </div>
+            <div id = "form__alert"></div>
             <div class = "form">
                 <form name="registration">
                     <input name = "email" placeholder = "EMail" class = "form__text_input" id = "email-input"></input>

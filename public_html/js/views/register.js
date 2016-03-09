@@ -25,7 +25,7 @@ define(function (require) {
             this.listenTo(session, 'invalidLoginPassword', this.showErrorMessage);
         },
         showErrorMessage: function (message) {
-            //TODO
+            document.getElementById('form__alert').textContent = message;
         }
     });
 
