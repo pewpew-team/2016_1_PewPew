@@ -1,6 +1,8 @@
 define(function (require) {
         var Backbone = require('backbone'),
-            createjs = require('createjs');
+            createjs = require('createjs'),
+            backgroundCanvas = document.getElementById("pageBackground"),
+            themes = require('models/backgroundThemes');
 
         var BackgroundThemes = Backbone.Model.extend({
             defaults: {
@@ -80,6 +82,6 @@ define(function (require) {
                 positionItems.sort(this.comparePosition);
             }
         });
-        return BackgroundThemes;
+        return new BackgroundThemes(backgroundCanvas.width, backgroundCanvas.height, themes);
     }
 );

@@ -87,8 +87,8 @@ define(function(require) {
                         'VELOCITY' : 1,
                         'velX': Vx,
                         'velY': Vy,
-                        'sizeX': 10,
-                        'sizeY': 10
+                        'sizeX': 15,
+                        'sizeY': 15
                     });
                     this.add(bullet);
                 }

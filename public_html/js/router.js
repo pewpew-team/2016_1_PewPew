@@ -21,11 +21,9 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
                 '*default': 'defaultAction'
             },
             initialize: function () {
-                this.currentView = require('views/main');
-                var event = require('event');
-                this.listenTo(event, 'navigate', this.changeRoute);
-                this.listenTo(event, 'login', this.toGameScreen);
-                this.listenTo(event, 'startTraining', this.startTraining);
+                this.currentView = views['main'];
+                this.listenTo(session, 'login', this.toGameScreen);
+                this.listenTo(views['gameMenu'], 'startTraining', this.startTraining);
             },
             displayView: function () {
                 var fragmentName = Backbone.history.getFragment();
@@ -38,9 +36,6 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
                 var mainView = views['main'];
                 mainView.show();
                 this.currentView = mainView;
-            },
-            changeRoute: function (route) {
-                this.navigate(route, {trigger: true});
             },
             toGameScreen: function() {
                 var view = views['gameMenu'];
