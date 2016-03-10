@@ -6,7 +6,7 @@ define(function(require) {
                   previousDirection: null,
                   minAngle: 20,
                   gunLength: 40,
-                  bulletSpeed: 20,
+                  bulletSpeed: 15,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
@@ -60,11 +60,10 @@ define(function(require) {
               iterate: function() {
                   var pushedButton = this.get('pushedButton');
                   this.pointGunTo();
-                  if (!pushedButton) {
-                      //клавиши не нажаты
-                      this.decreaseVelocity();
-                  } else {
+                  if (pushedButton) {
                       this.increaseVelocity();
+                  } else {
+                      this.decreaseVelocity();
                   }
                   this.move();
               },

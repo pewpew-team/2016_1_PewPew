@@ -7,16 +7,17 @@
             <div class = "menu__title">
                 Вход
             </div>
+            <div id = "form__alert"></div>
             <div class = "form">
                 <form name="authentication">
-                    <input name = "login" placeholder = "Логин" class="form__text_input" id="login-input"></input>
-                    <input name = "password" type = "password" placeholder = "Пароль" class="form__text_input" id="password-input"></input>
-                    <input type = "submit" class="form__submit_input" value = "Войти" id = 'sign-in'></input>
+                    <input name = "login" placeholder = "Логин" class = "form__text_input" id = "login-input"></input>
+                    <input name = "password" placeholder = "Пароль" class = "form__text_input" id = "password-input" type = "password"></input>
+                    <input type = "submit" placeholder = "Войти" class = "form__submit_input" id = 'sign-in'></input>
                 </form>
             </div>
-            <button class="menu__btn  menu__btn--back" id="main">
+            <a href = "#main" class = "menu__btn  menu__btn--back">
                 Назад
-            </button>
+            </a>
         </div>
     </div>
 </fest:template>

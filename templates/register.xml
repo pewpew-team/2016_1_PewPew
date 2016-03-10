@@ -7,18 +7,19 @@
             <div class = "menu__title">
                 Регистрация
             </div>
+            <div id = "form__alert"></div>
             <div class = "form">
                 <form name="registration">
-                    <input name = "email" placeholder = "EMail" class="form__text_input" id="email-input"></input>
-                    <input name = "login" placeholder = "Логин" class="form__text_input" id="login-input"></input>
-                    <input name = "password" type = "password" placeholder = "Пароль" class="form__text_input" id="password-input"></input>
-                    <input name = "password" type = "password" placeholder = "Повторите пароль" class="form__text_input" id="repeat-password-input"></input>
-                    <input type = "submit" class="form__submit_input" value = "Зарегистрировать" id = 'sign-up'></input>
+                    <input name = "email" placeholder = "EMail" class = "form__text_input" id = "email-input"></input>
+                    <input name = "login" placeholder = "Логин" class = "form__text_input" id = "login-input"></input>
+                    <input name = "password" placeholder = "Пароль" type = "password" class = "form__text_input" id = "password-input"></input>
+                    <input name = "password" placeholder = "Повторите пароль" type = "password" class = "form__text_input" id = "repeat-password-input"></input>
+                    <input placeholder = "Зарегистрировать" type = "submit" class = "form__submit_input" id = 'sign-up'></input>
                 </form>
             </div>
-            <button class="menu__btn  menu__btn--back" id="main">
+            <a href = "#main" class="menu__btn  menu__btn--back">
                 Назад
-            </button>
+            </a>
         </div>
     </div>
 </fest:template>

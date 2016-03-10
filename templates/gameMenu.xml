@@ -1,0 +1,18 @@
+<fest:template xmlns:fest = "http://fest.mail.ru">
+    <div id = "main" class = "menu">
+        <div class = "menu__logo logo">
+            PewPew
+        </div>
+        <div class = "menu__wrap">
+            <button class = "menu__btn" id = "training">
+                Training
+            </button>
+            <button class = "menu__btn" id = "time-attack">
+                Time Attack
+            </button>
+            <a href = "#main" class = "menu__btn">
+                Exit
+            </a>
+        </div>
+    </div>
+</fest:template>

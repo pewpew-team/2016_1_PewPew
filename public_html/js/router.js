@@ -1,7 +1,16 @@
-define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register'],
+define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/register', 'views/gameMenu'],
     function () {
         var Backbone = require('backbone'),
-            session = require('models/session');
+            session = require('models/session'),
+            views = {
+                main: require('views/main'),
+                game: require('views/game'),
+                login: require('views/login'),
+                scoreboard: require('views/scoreboard'),
+                register: require('views/register'),
+                gameMenu: require('views/gameMenu')
+            };
+
 
         var Router = Backbone.Router.extend({
             routes: {
@@ -9,32 +18,34 @@ define(['views/main', 'views/game', 'views/login', 'views/scoreboard', 'views/re
                 'login': 'displayView',
                 'register': 'displayView',
                 'scoreboard': 'displayView',
-                'game': 'displayView',
                 '*default': 'defaultAction'
             },
             initialize: function () {
-                this.currentView = require('views/main');
-                var event = require('event');
-                this.listenTo(event, 'navigate', this.changeRoute);
-                this.listenTo(event, 'startGame', this.startGame)
+                this.currentView = views['main'];
+                this.listenTo(session, 'login', this.toGameScreen);
+                this.listenTo(views['gameMenu'], 'startTraining', this.startTraining);
             },
             displayView: function () {
                 var fragmentName = Backbone.history.getFragment();
-                var view = require('views/'+fragmentName);
+                var view = views[fragmentName];
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;
             },
             defaultAction: function () {
-                var mainView = require('views/main');
+                var mainView = views['main'];
                 mainView.show();
                 this.currentView = mainView;
             },
-            changeRoute: function (route) {
-                this.navigate(route, {trigger: true});
+            toGameScreen: function() {
+                var view = views['gameMenu'];
+                this.navigate('game', {trigger: false});
+                this.currentView.hide();
+                view.show();
+                this.currentView = view;
             },
-            startGame: function() {
-                var view = require('views/game');
+            startTraining: function() {
+                var view = views['game'];
                 this.currentView.hide();
                 view.show();
                 this.currentView = view;
