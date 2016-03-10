@@ -1,6 +1,6 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        jQuery = require('jquery'),
+        $ = require('jquery'),
         _ = require('underscore');
 
     var Session = Backbone.Model.extend({
@@ -8,8 +8,7 @@ define(function(require) {
             'isAuth': false
         },
         login: function(login, password) {
-            var self = this;
-            jQuery.ajax({
+            $.ajax({
                 method: 'POST',
                 url: '/session',
                 data: JSON.stringify({
@@ -18,33 +17,31 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function () {
-                    self.trigger('login');
-                    self.isAuth = true;
-                },
+                    this.trigger('login');
+                    this.isAuth = true;
+                }.bind(this),
                 error: function () {
-                    self.trigger('invalidLoginPassword', 'Invalid login or password');
-                    self.trigger('login'); // dev
-                }
+                    this.trigger('invalidLoginPassword', 'Invalid login or password');
+                    this.trigger('login'); // dev
+                }.bind(this)
             });
         },
         logout: function() {
-            var self = this;
-            jQuery.ajax({
+            $.ajax({
                 method: 'DELETE',
                 url: '/session',
                 contentType: 'application/json',
                 success: function() {
                     window.location.hash = 'main';
-                    self.isAuth = false;
-                },
+                    this.isAuth = false;
+                }.bind(this),
                 error: function () {
-                    self.trigger('invalidLogout');
-                }
+                    this.trigger('invalidLogout');
+                }.bind(this)
             });
         },
         register: function(login, password, email) {
-            var self = this;
-            jQuery.ajax({
+            $.ajax({
                 method: 'POST',
                 url: '/user',
                 data: JSON.stringify({
@@ -54,11 +51,11 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function () {
-                    self.trigger('login');
-                },
+                    this.trigger('login');
+                }.bind(this),
                 error: function () {
-                    self.trigger('invalidLoginPassword');
-                }
+                    this.trigger('invalidLoginPassword');
+                }.bind(this)
             });
         },
         validateLogin: function (login, password1) {
