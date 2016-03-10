@@ -23,6 +23,10 @@ define(function (require) {
         },
         showErrorMessage: function (message) {
             document.getElementById('form__alert').textContent = message;
+        },
+        hide: function() {
+            document.getElementById('form__alert').textContent = '';
+            baseView.prototype.hide.call(this);
         }
     });
 
