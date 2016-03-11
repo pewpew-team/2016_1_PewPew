@@ -5,6 +5,7 @@ define(function(require) {
 
     var GameMenu = baseView.extend({
         template: tmpl,
+        loginRequired: true,
         events: {
             'click #logout' : 'handleLogout',
             'click #training' : 'startTraining'

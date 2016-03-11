@@ -4,7 +4,9 @@ define(function (require) {
         Backbone = require('backbone'),
         backgroundModel = require('models/background');
 
+
     var View = Backbone.View.extend({
+        loginRequired: false,
         template: {},
         initialize: function () {
             this.render();

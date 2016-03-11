@@ -17,11 +17,12 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function () {
-                    this.trigger('login');
                     this.isAuth = true;
+                    this.trigger('login');
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
+                    this.isAuth = true; // dev
                     this.trigger('login'); // dev
                 }.bind(this)
             });
@@ -51,7 +52,9 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function () {
+                    this.isAuth = true;
                     this.trigger('login');
+
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword');
@@ -66,16 +69,19 @@ define(function(require) {
             return true;
         },
         validateRegistration: function (email, login, password1, password2) {
-        if ( !(email && login && password1 && password2) ) {
-            this.trigger('invalidLoginPassword', 'All fields required');
-            return false;
+            if ( !(email && login && password1 && password2) ) {
+                this.trigger('invalidLoginPassword', 'All fields required');
+                return false;
+            }
+            if (password1 !== password2) {
+                this.trigger('invalidLoginPassword', 'Passwords must match');
+                return false;
+            }
+            return true;
+        },
+        isLoggedIn: function() {
+            return this.isAuth;
         }
-        if (password1 !== password2) {
-            this.trigger('invalidLoginPassword', 'Passwords must match');
-            return false;
-        }
-        return true;
-    }
     });
 
     return new Session();
