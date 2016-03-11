@@ -15,6 +15,9 @@
                     <input placeholder = "Изменить" type = "submit" class = "form__submit_input" id = 'change-data'></input>
                 </form>
             </div>
+            <a href = "#changePass" class="menu__btn">
+                Изменить пароль
+            </a>
             <a href = "#gameMenu" class="menu__btn  menu__btn--back">
                 Назад
             </a>
