@@ -19,6 +19,9 @@ define(function(require) {
                 LEFT_CORNER_POS_X = 40,
                 LEFT_CORNER_POS_Y = 40;
             barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
+            this.player.on('userDestroyed', function() {
+                this.gameOver();
+            }.bind(this));
         },
         run: function() {
             requestAnimationFrame(_.bind(this.iterate, this));
@@ -31,6 +34,9 @@ define(function(require) {
             bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
             this.playerView.render();
             requestAnimationFrame(_.bind(this.iterate, this));
+        },
+        gameOver: function() {
+            // TODO
         }
     };
 });

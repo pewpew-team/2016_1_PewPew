@@ -26,9 +26,6 @@ define(function(require) {
                   });
                   this.set('angle', this.getAngle());
               },
-              sync: function() {
-                  // TODO отправка данный через web socket
-              },
               moveLeft: function() {
                   this.set('pushedButton', -1);
               },
@@ -65,6 +62,7 @@ define(function(require) {
                   } else {
                       this.decreaseVelocity();
                   }
+                  this.checkPlayerCollision();
                   this.move();
               },
               move: function () {
@@ -128,7 +126,20 @@ define(function(require) {
                       posX = this.get('positionX') + Math.cos(angle) * gunLength,
                       posY = this.get('positionY') + Math.sin(angle) * gunLength;
                   bulletCollection.fire(posX, posY, velX, velY);
+              },
+              checkPlayerCollision: function() {
+                  bulletCollection.each(function(bullet) {
+                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX'),
+                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX'),
+                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY'),
+                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY');
+                      if ( bullet.get('posX') < rightPlayerEdge && bullet.get('posX') > leftPlayerEdge &&
+                             bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
+                          this.trigger('userDestroyed');
+                      }
+                  }.bind(this))
               }
+
           });
       return Player;
   }
