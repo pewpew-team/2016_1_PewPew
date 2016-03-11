@@ -75,7 +75,7 @@ module.exports = function (grunt) {
                     out: "dist/js/build.min.js",
                     findNestedDependencies: true,
                     wrap: true,
-                    optimize: 'none'
+                    insertRequire: ["index.js"],
                 }
             }
         },

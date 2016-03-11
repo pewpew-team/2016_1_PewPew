@@ -1,6 +1,7 @@
 define(function (require) {
     var Backbone = require('backbone'),
         session = require('models/session'),
+        game = require('game/main'),
         views = {
             main: require('views/main'),
             game: require('views/game'),
@@ -48,6 +49,8 @@ define(function (require) {
             this.currentView.hide();
             view.show();
             this.currentView = view;
+            game['training'].init();
+            game['training'].run();
         }
     });
 

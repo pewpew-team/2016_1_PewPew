@@ -5,12 +5,7 @@ define(function (require) {
 
         var View = baseView.extend({
             template: tmpl,
-            loginRequired: true,
-            show: function () {
-                baseView.prototype.show.call(this);
-                game.init();
-                game.run();
-            }
+            loginRequired: true
         });
 
         return new View();
