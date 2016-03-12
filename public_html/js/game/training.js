@@ -5,7 +5,8 @@ define(function(require) {
         BarriersView = require('game/views/allBarriersView'),
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
-        _ = require('underscore');
+        _ = require('underscore'),
+        resultsView = require('game/views/result');
     return {
         init: function () {
             this.dynamicCanvas = document.getElementById('dynamicLayer');
@@ -24,7 +25,7 @@ define(function(require) {
             }.bind(this));
         },
         run: function() {
-            requestAnimationFrame(_.bind(this.iterate, this));
+            this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
         },
         iterate: function() {
             var context = this.dynamicCanvas.getContext('2d');
@@ -36,7 +37,11 @@ define(function(require) {
             requestAnimationFrame(_.bind(this.iterate, this));
         },
         gameOver: function() {
-            // TODO
+            if (this.frameID) {
+                cancelAnimationFrame(this.frameID);
+                resultsView.render(false, '');
+                resultsView.show();
+            }
         }
     };
 });

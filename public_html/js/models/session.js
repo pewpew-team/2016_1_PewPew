@@ -1,11 +1,24 @@
 define(function(require) {
     var Backbone = require('backbone'),
         $ = require('jquery'),
-        _ = require('underscore');
+        _ = require('underscore'),
+        user = require('models/user');
 
     var Session = Backbone.Model.extend({
         defaults: {
-            'isAuth': false
+            'isAuth': false,
+        },
+        urlRoot: '/session',
+        initialize: function() {
+            this.fetch({
+              success: function(data) {
+                this.set('isAuth', true);
+                user.set('_id', data['id']);
+              }.bind(this),
+              error: function() {
+                this.set('isAuth', false);
+              }.bind(this)
+            });
         },
         login: function(login, password) {
             $.ajax({
@@ -16,14 +29,14 @@ define(function(require) {
                     'password': password
                 }),
                 contentType: 'application/json',
-                success: function () {
-                    this.isAuth = true;
+                success: function (data) {
+                    this.set('isAuth', true);
+                    user.fetch();
                     this.trigger('login');
+                    user.set('_id', data['id']);
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
-                    this.isAuth = true; // dev
-                    this.trigger('login'); // dev
                 }.bind(this)
             });
         },
@@ -34,7 +47,8 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function() {
                     window.location.hash = 'main';
-                    this.isAuth = false;
+                    this.set('isAuth', false);
+                    user.clear();
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
@@ -52,9 +66,10 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function () {
-                    this.isAuth = true;
+                    this.set('isAuth', true);
+                    user.set('_id', data['id']);
+                    user.fetch();
                     this.trigger('login');
-
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword');
@@ -80,7 +95,7 @@ define(function(require) {
             return true;
         },
         isLoggedIn: function() {
-            return this.isAuth;
+            return this.get('isAuth');
         }
     });
 

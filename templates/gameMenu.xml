@@ -13,9 +13,9 @@
             <a href = "#changeUserData" class = "menu__btn">
                 Change User Data
             </a>
-            <a href = "#main" class = "menu__btn">
+            <button class = "menu__btn" id = "logout">
                 Exit
-            </a>
+            </button>
         </div>
     </div>
 </fest:template>

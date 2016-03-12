@@ -13,6 +13,8 @@ define(function(require) {
         handleLogout: function(e) {
             e.preventDefault();
             session.logout();
+            console.log(session.isAuth);
+            window.location.hash = 'main';
         },
         startTraining: function(e) {
             e.preventDefault();
