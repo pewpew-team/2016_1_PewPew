@@ -1,5 +1,5 @@
 define(function(require) {
-    var trainingMain = require('game/training');
+    var trainingMain = require('game/views/training');
     return {
       training: trainingMain,
     }
