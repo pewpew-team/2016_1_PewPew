@@ -6,11 +6,13 @@ define(function(require) {
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
         _ = require('underscore'),
-        resultsView = require('game/views/result');
+        resultsView = require('game/views/result'),
+        user = require('models/user');
+
     return {
         init: function () {
             this.dynamicCanvas = document.getElementById('dynamicLayer');
-            this.player = new Player('Guest', this.dynamicCanvas.width, this.dynamicCanvas.height);
+            this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
             this.playerView = new PlayerView(this.player, this.dynamicCanvas);
             this.bulletsView = new BulletsView(bulletsCollection);
             this.barriersView = new BarriersView({collection : barriersCollection});
@@ -42,6 +44,8 @@ define(function(require) {
                 resultsView.render(false, '');
                 resultsView.show();
             }
+            this.player.destroy();
+            this.playerView.destroy();
         }
     };
 });

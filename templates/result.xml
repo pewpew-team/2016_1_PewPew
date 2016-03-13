@@ -10,7 +10,7 @@
           <div class = "menu__msg">
             <fest:value>json.message</fest:value>
           </div>
-          <a href = "#gameMenu" class = "menu__btn">
+          <a href = "#gameMenu" class = "menu__btn" id = "js-gameOver">
               Назад
           </a>
       </div>

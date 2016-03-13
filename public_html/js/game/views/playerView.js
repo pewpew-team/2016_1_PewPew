@@ -61,6 +61,12 @@ define(function (require) {
                 handleKeyup: function(e) {
                     e.preventDefault();
                     this.model.dropPushedButton();
+                },
+                destroy: function() {
+                    this.canvas.removeEventListener('click', _.bind(this.handleClick, this), true)
+                    this.canvas.removeEventListener('mousemove', _.bind(this.handleMouseMove, this), true);
+                    window.removeEventListener('keydown', _.bind(this.handleKeydown, this), true);
+                    window.removeEventListener('keyup', _.bind(this.handleKeyup, this), true);
                 }
             });
         return PlayerView;

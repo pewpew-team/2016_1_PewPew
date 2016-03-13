@@ -14,7 +14,7 @@ define(function (require) {
         changeData: function(login, email) {
             if ( this.validateLoginEmail(login, email) ) {
                 $.ajax({
-                    method: 'POST',
+                    method: 'PUT',
                     url: '/user/'+this.get('_id'),
                     data: JSON.stringify({
                         'login': login,
@@ -33,7 +33,7 @@ define(function (require) {
         changePassword: function (oldPass, newPass1, newPass2) {
             if ( this.validatePass(oldPass, newPass1, newPass2) ) {
                 $.ajax({
-                    method: 'POST',
+                    method: 'PUT',
                     url: '/user/'+this.get('_id'),
                     data: JSON.stringify({
                         'password': newPass1
@@ -67,13 +67,13 @@ define(function (require) {
             return true;
         },
         clear: function() {
-          if (login) {
+          if (this.has('login')) {
             this.set('login', 'Guest')
           }
-          if (email) {
+          if (this.has('email')) {
             this.set('email', '')
           }
-          if (id) {
+          if (this.has('_id')) {
             this.set('_id', '')
           }
         }

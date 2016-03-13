@@ -139,7 +139,6 @@ define(function(require) {
                       }
                   }.bind(this))
               }
-
           });
       return Player;
   }

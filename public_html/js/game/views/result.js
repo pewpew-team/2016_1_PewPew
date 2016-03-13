@@ -6,7 +6,7 @@ define(function (require) {
     var View = Backbone.View.extend({
         template: tmpl,
         events: {
-            'click #gameMenu': 'hide'
+            'click #js-gameOver': 'hide'
         },
         render: function (isWin, msg) {
             this.$el.html(this.template({
