@@ -1,57 +1,81 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        event = require('event'),
-        jQuery = require('jquery');
+        $ = require('jquery'),
+        _ = require('underscore');
 
     var Session = Backbone.Model.extend({
         defaults: {
             'isAuth': false
         },
         login: function(login, password) {
-            jQuery.ajax({
+            $.ajax({
                 method: 'POST',
                 url: '/session',
-                data: {
+                data: JSON.stringify({
                     'login': login,
                     'password': password
-                },
+                }),
+                contentType: 'application/json',
                 success: function () {
-                    event.trigger('login');
-                },
+                    this.trigger('login');
+                    this.isAuth = true;
+                }.bind(this),
                 error: function () {
-                    event.trigger('invalidLoginPassword', 'Invalid login or password');
-                }
+                    this.trigger('invalidLoginPassword', 'Invalid login or password');
+                    this.trigger('login'); // dev
+                }.bind(this)
             });
         },
         logout: function() {
-            jQuery.ajax({
+            $.ajax({
                 method: 'DELETE',
                 url: '/session',
+                contentType: 'application/json',
                 success: function() {
-                    event.trigger('navigate', 'main');
-                },
+                    window.location.hash = 'main';
+                    this.isAuth = false;
+                }.bind(this),
                 error: function () {
-                    event.trigger('invalidLogout');
-                }
+                    this.trigger('invalidLogout');
+                }.bind(this)
             });
         },
         register: function(login, password, email) {
-            jQuery.ajax({
+            $.ajax({
                 method: 'POST',
                 url: '/user',
-                success: function () {
-                    event.trigger('login');
-                },
-                data: {
+                data: JSON.stringify({
                     'login': login,
                     'password': password,
                     'email': email
-                },
+                }),
+                contentType: 'application/json',
+                success: function () {
+                    this.trigger('login');
+                }.bind(this),
                 error: function () {
-                    event.trigger('invalidLoginPassword');
-                }
+                    this.trigger('invalidLoginPassword');
+                }.bind(this)
             });
+        },
+        validateLogin: function (login, password1) {
+            if ( !(login && password1) ) {
+                this.trigger('invalidLoginPassword', 'All fields required');
+                return false;
+            }
+            return true;
+        },
+        validateRegistration: function (email, login, password1, password2) {
+        if ( !(email && login && password1 && password2) ) {
+            this.trigger('invalidLoginPassword', 'All fields required');
+            return false;
         }
+        if (password1 !== password2) {
+            this.trigger('invalidLoginPassword', 'Passwords must match');
+            return false;
+        }
+        return true;
+    }
     });
 
     return new Session();

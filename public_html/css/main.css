@@ -6,6 +6,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
 * {
     box-sizing: border-box;
@@ -93,6 +94,9 @@ menu
     line-height: 40px;
     transition: all 0.3s;
     cursor: pointer;
+    display: block;
+    text-align: center;
+    text-decoration: none;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -142,9 +146,6 @@ menu
     color: #ffffff;
     padding-left: 2%;
     padding-right: 2%;
-}
-.form__open {
-    display: inline-block;
 }
 /*
 ========================================================

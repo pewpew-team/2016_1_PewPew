@@ -2,14 +2,14 @@ define(function (require) {
     var backgroundCanvas = document.getElementById("pageBackground"),
         createjs = require('createjs'),
         Backbone = require('backbone'),
-        event = require('event'),
-        BackgroundModelConstructor = require('models/background'),
-        backgroundModel = new BackgroundModelConstructor(backgroundCanvas.width, backgroundCanvas.height);
+        backgroundModel = require('models/background');
 
     var View = Backbone.View.extend({
         template: {},
         initialize: function () {
             this.render();
+            $('#page').append(this.el);
+            this.hide();
             this.resizeInterface();
             window.addEventListener('resize', _.bind(this.resizeInterface, this));
         },
@@ -17,20 +17,12 @@ define(function (require) {
             this.$el.html(this.template());
         },
         show: function () {
-            $('#page').html(this.el);
-            // Добавляет всем кнопкам вызов события 'navigate'
-            // Внутри события передается id кнопки
-            this.$el.find('button').click(function (e) {
-                e.preventDefault();
-                event.trigger('navigate', $(this).attr('id'));
-                console.log('navigate');
-            });
+            this.$el.appendTo("#page");
             this.$el.show();
         },
         hide: function () {
             this.$el.hide();
-            // Отключаем прослушку событий
-            this.$el.off();
+            this.$el.detach();
         },
         drawBackground: function () {
             var width = backgroundCanvas.width,
@@ -44,7 +36,7 @@ define(function (require) {
             graphElement = new createjs.Bitmap(themeObject.theme.background);
             graphElement.image.onload = function () {
                 stage.update();
-            }
+            };
             for (var i = 0, counti = width / size.x + 1; i < counti; i++) {
                 for (var j = 0, countj = height / size.y + 1; j < countj; j++) {
                     var tempBitMap = graphElement.clone();

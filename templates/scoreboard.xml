@@ -1,33 +1,30 @@
- <fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
-        <div id="scoreboard" class = "wrap">
-            <div class="wrap__layout">
-                <div class="logo">
-                    PewPew
-                </div>
-                <div class = "menu">
-                    <div class = "menu__title">
-                        Рейтинг игроков
-                    </div>
-                    <table class="scoreboard">
-                        <fest:for iterate="json.scores" index="i" value="v">
-                            <tr>
-                                <td class="scoreboard__name">
-                                    <fest:value>v.name</fest:value>
-                                </td>
-                                <td class="scoreboard__rating">
-                                    <fest:value>v.score</fest:value>
-                                </td>
-                            </tr>
-                        </fest:for>
-                    </table>
-                    <button class="menu__btn  menu__btn--back" id="main">
-                        Назад
-                    </button>
-                </div>
-            </div>
+<fest:template xmlns:fest = "http://fest.mail.ru" context_name = "json">
+    <div id = "registration" class = "menu">
+        <div class = "menu__logo logo">
+            PewPew
         </div>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+                Рейтинг игроков
+            </div>
+            <table class = "scoreboard">
+                <fest:for iterate = "json.scores" index = "i" value = "v">
+                    <tr>
+                        <td class = "scoreboard__name">
+                            <fest:value>v.name</fest:value>
+                        </td>
+                        <td class = "scoreboard__rating">
+                            <fest:value>v.score</fest:value>
+                        </td>
+                    </tr>
+                </fest:for>
+            </table>
+            <a href = "#main" class = "menu__btn  menu__btn--back">
+                Назад
+            </a>
+        </div>
+    </div>
 </fest:template>
-
 
 
 

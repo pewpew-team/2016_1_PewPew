@@ -55,7 +55,6 @@ define(function(require) {
                     intersectionPoint.sideParallelY.x = (intersectionPoint.sideParallelY.y - b) / k;
                     //попадание на угол
                     if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
-                        console.log("xy",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
@@ -63,14 +62,12 @@ define(function(require) {
                     }
                     //левая или правая грань
                     if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
-                        console.log("x",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
                         bullet.set('velX', -1 * bullet.get('velX') + deviation);
                         return;
                     }
                     //нижняя или верхняя грань
                     if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
-                        console.log("y",bullet, barrier)
                         this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
                         bullet.set('velY', -1 * bullet.get('velY') + deviation);
                         return;
@@ -87,8 +84,8 @@ define(function(require) {
                         'VELOCITY' : 1,
                         'velX': Vx,
                         'velY': Vy,
-                        'sizeX': 10,
-                        'sizeY': 10
+                        'sizeX': 15,
+                        'sizeY': 15
                     });
                     this.add(bullet);
                 }

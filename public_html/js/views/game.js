@@ -6,8 +6,7 @@ define(function (require) {
         var View = baseView.extend({
             template: tmpl,
             show: function () {
-                $('#page').html(this.el);
-                this.$el.show();
+                baseView.prototype.show.call(this);
                 game.init();
                 game.run();
             }
