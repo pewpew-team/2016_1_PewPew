@@ -8,7 +8,8 @@ define(function(require) {
         loginRequired: true,
         events: {
             'click #logout' : 'handleLogout',
-            'click #training' : 'startTraining'
+            'click #training' : 'startTraining',
+            'click #time-attack' : 'startTimeAttack'
         },
         handleLogout: function(e) {
             e.preventDefault();
@@ -18,6 +19,10 @@ define(function(require) {
         startTraining: function(e) {
             e.preventDefault();
             this.trigger('startTraining');
+        },
+        startTimeAttack: function(e) {
+            e.preventDefault();
+            this.trigger('startTimeAttack');
         }
     });
 

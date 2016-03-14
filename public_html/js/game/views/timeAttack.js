@@ -17,7 +17,10 @@ define(function(require) {
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
-        this.barriersView = new BarriersView({collection : barriersCollection});
+        this.barriersView = new BarriersView({collection : barriersCollection}),
+        this.MAX_TIME = 180*1000,
+        this.RESET_TIME = 20*1000,
+        this.resetCount = 0;
         var NUMBER_X = 12,
             NUMBER_Y = 4,
             RATIO = 0.3,
@@ -29,6 +32,7 @@ define(function(require) {
       },
       run: function() {
           this.isRunning = true;
+          this.time = Date.now();
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -37,7 +41,17 @@ define(function(require) {
           this.bulletsView.render();
           this.barriersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
-          if ( !barriersCollection.checkForRemovable() ) {
+          if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
+              barriersCollection.reset();
+              var NUMBER_X = 12,
+                  NUMBER_Y = 4,
+                  RATIO = 0.3,
+                  LEFT_CORNER_POS_X = 40,
+                  LEFT_CORNER_POS_Y = 40;
+              barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
+              this.resetCount++;
+          }
+          if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
           this.playerView.render();
@@ -63,8 +77,11 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
-          resultsView.render('Победа!');
+          resultsView.render('Победа! Вы справились за ' + this._getTime()/1000 + ' сек');
           resultsView.show();
+      },
+      _getTime: function() {
+          return Date.now() - this.time;
       }
     })
 
