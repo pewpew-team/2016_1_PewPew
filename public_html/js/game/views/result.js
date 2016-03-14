@@ -8,9 +8,8 @@ define(function (require) {
         events: {
             'click #js-gameOver': 'hide'
         },
-        render: function (isWin, msg) {
+        render: function (msg) {
             this.$el.html(this.template({
-              isWin: false,
               message: msg
             }));
         },

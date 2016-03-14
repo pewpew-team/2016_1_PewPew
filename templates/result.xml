@@ -5,9 +5,6 @@
       </div>
       <div class = "menu__wrap">
           <div class = "menu__result">
-            Поражение :(
-          </div>
-          <div class = "menu__msg">
             <fest:value>json.message</fest:value>
           </div>
           <a href = "#gameMenu" class = "menu__btn" id = "js-gameOver">

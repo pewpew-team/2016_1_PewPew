@@ -17,15 +17,13 @@ define(function(require) {
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection});
-        var NUMBER_X = 16,
+        var NUMBER_X = 12,
             NUMBER_Y = 4,
             RATIO = 0.3,
             LEFT_CORNER_POS_X = 40,
             LEFT_CORNER_POS_Y = 40;
         barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
-        this.player.on('userDestroyed', function() {
-            this.gameOver();
-        }.bind(this));
+        this.player.on('userDestroyed', this.gameOver.bind(this));
       },
       run: function() {
           this.isRunning = true;
@@ -37,6 +35,9 @@ define(function(require) {
           this.bulletsView.render();
           this.barriersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          if ( !barriersCollection.checkForRemovable() ) {
+              this.win();
+          }
           this.playerView.render();
           if (this.isRunning) {
               requestAnimationFrame(_.bind(this.iterate, this));
@@ -48,7 +49,16 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
-          resultsView.render(false, '');
+          resultsView.render('Поражение :(');
+          resultsView.show();
+      },
+      win: function() {
+          this.isRunning = false;
+          this.player.destroy();
+          this.playerView.destroy();
+          bulletsCollection.reset();
+          barriersCollection.reset();
+          resultsView.render('Победа!');
           resultsView.show();
       }
     })
