@@ -65,7 +65,7 @@ define(function(require) {
                     'email': email
                 }),
                 contentType: 'application/json',
-                success: function () {
+                success: function (data) {
                     this.set('isAuth', true);
                     user.set('_id', data['id']);
                     user.fetch();

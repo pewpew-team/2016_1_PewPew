@@ -6,7 +6,7 @@ define(function(require) {
                   previousDirection: null,
                   minAngle: 20,
                   gunLength: 40,
-                  bulletSpeed: 15,
+                  bulletSpeed: 25,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
