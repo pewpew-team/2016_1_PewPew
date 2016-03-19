@@ -31,9 +31,7 @@ define(function (require) {
                 if (view.loginRequired && !session.isLoggedIn()) {
                     this.navigate('#login', {trigger: true})
                 } else {
-                    this.currentView.hide();
                     view.show();
-                    this.currentView = view;
                 }
             } else {
                 this.navigate('#error', {trigger: true})
@@ -42,23 +40,18 @@ define(function (require) {
         displayMain: function () {
             var mainView = views['main'];
             mainView.show();
-            this.currentView = mainView;
         },
         startTraining: function() {
             var view = views['game'];
             this.navigate('#training', {trigger: false})
-            this.currentView.hide();
             view.show();
-            this.currentView = view;
             game['training'].init();
             game['training'].run();
         },
         startTimeAttack: function() {
             var view = views['game'];
             this.navigate('#timeAttack', {trigger: false})
-            this.currentView.hide();
             view.show();
-            this.currentView = view;
             game['timeAttack'].init();
             game['timeAttack'].run();
         }

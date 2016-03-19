@@ -3,6 +3,7 @@ define(function (require) {
         createjs = require('createjs'),
         Backbone = require('backbone'),
         backgroundModel = require('models/background');
+        viewManager = require('general/viewManager')
 
 
     var View = Backbone.View.extend({
@@ -21,6 +22,7 @@ define(function (require) {
         show: function () {
             this.$el.appendTo("#page");
             this.$el.show();
+            viewManager.trigger('show', this)
         },
         hide: function () {
             this.$el.hide();
