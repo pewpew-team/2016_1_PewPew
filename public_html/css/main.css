@@ -265,15 +265,19 @@ game
 ========================================================
 */
 .game {
-
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 25px;
 }
 #staticLayer {
-    z-index: 2;
-    position: absolute;
+    position: relative;
 }
 #dynamicLayer {
-    z-index: 3;
     position: absolute;
+    top: 0;
+    left: 0;
     cursor: crosshair;
 }
 
