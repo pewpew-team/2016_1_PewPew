@@ -1,11 +1,24 @@
 define(function(require) {
     var Backbone = require('backbone'),
         $ = require('jquery'),
-        _ = require('underscore');
+        _ = require('underscore'),
+        user = require('models/user');
 
     var Session = Backbone.Model.extend({
         defaults: {
-            'isAuth': false
+            'isAuth': false,
+        },
+        urlRoot: '/session',
+        initialize: function() {
+            this.fetch({
+              success: function(data) {
+                this.set('isAuth', true);
+                user.set('_id', data['id']);
+              }.bind(this),
+              error: function() {
+                this.set('isAuth', false);
+              }.bind(this)
+            });
         },
         login: function(login, password) {
             $.ajax({
@@ -16,13 +29,14 @@ define(function(require) {
                     'password': password
                 }),
                 contentType: 'application/json',
-                success: function () {
+                success: function (data) {
+                    user.fetch();
+                    this.set('isAuth', true);
                     this.trigger('login');
-                    this.isAuth = true;
+                    user.set('_id', data['id']);
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
-                    this.trigger('login'); // dev
                 }.bind(this)
             });
         },
@@ -33,7 +47,8 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function() {
                     window.location.hash = 'main';
-                    this.isAuth = false;
+                    this.set('isAuth', false);
+                    user.clear();
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
@@ -50,7 +65,10 @@ define(function(require) {
                     'email': email
                 }),
                 contentType: 'application/json',
-                success: function () {
+                success: function (data) {
+                    this.set('isAuth', true);
+                    user.set('_id', data['id']);
+                    user.fetch();
                     this.trigger('login');
                 }.bind(this),
                 error: function () {
@@ -66,16 +84,19 @@ define(function(require) {
             return true;
         },
         validateRegistration: function (email, login, password1, password2) {
-        if ( !(email && login && password1 && password2) ) {
-            this.trigger('invalidLoginPassword', 'All fields required');
-            return false;
+            if ( !(email && login && password1 && password2) ) {
+                this.trigger('invalidLoginPassword', 'All fields required');
+                return false;
+            }
+            if (password1 !== password2) {
+                this.trigger('invalidLoginPassword', 'Passwords must match');
+                return false;
+            }
+            return true;
+        },
+        isLoggedIn: function() {
+            return this.get('isAuth');
         }
-        if (password1 !== password2) {
-            this.trigger('invalidLoginPassword', 'Passwords must match');
-            return false;
-        }
-        return true;
-    }
     });
 
     return new Session();

@@ -10,9 +10,12 @@
             <button class = "menu__btn" id = "time-attack">
                 Time Attack
             </button>
-            <a href = "#main" class = "menu__btn">
-                Exit
+            <a href = "#changeUserData" class = "menu__btn">
+                Change User Data
             </a>
+            <button class = "menu__btn" id = "logout">
+                Exit
+            </button>
         </div>
     </div>
 </fest:template>
