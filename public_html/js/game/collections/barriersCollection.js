@@ -30,6 +30,14 @@ define(function(require) {
                             this.add( new Barrier(posX, posY, isRemovable) );
                         }
                     }
+                },
+                checkForRemovable: function() {
+                    for( var i = 0; i < this.length; i++ ) {
+                        if (this.models[i].get('isRemovable')) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             });
         return new BarrierCollection();

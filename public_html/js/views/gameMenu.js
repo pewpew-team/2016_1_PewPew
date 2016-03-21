@@ -5,17 +5,24 @@ define(function(require) {
 
     var GameMenu = baseView.extend({
         template: tmpl,
+        loginRequired: true,
         events: {
             'click #logout' : 'handleLogout',
-            'click #training' : 'startTraining'
+            'click #training' : 'startTraining',
+            'click #time-attack' : 'startTimeAttack'
         },
         handleLogout: function(e) {
             e.preventDefault();
             session.logout();
+            window.location.hash = 'main';
         },
         startTraining: function(e) {
             e.preventDefault();
             this.trigger('startTraining');
+        },
+        startTimeAttack: function(e) {
+            e.preventDefault();
+            this.trigger('startTimeAttack');
         }
     });
 

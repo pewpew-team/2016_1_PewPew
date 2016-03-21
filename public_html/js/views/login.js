@@ -20,13 +20,13 @@ define(function (require) {
         initialize: function () {
             baseView.prototype.initialize.call(this);
             this.listenTo(session, 'invalidLoginPassword', this.showErrorMessage);
+            this.listenTo(session, 'login', this.hideErrorMessage);
         },
         showErrorMessage: function (message) {
             document.getElementById('form__alert').textContent = message;
         },
-        hide: function() {
+        hideErrorMessage: function () {
             document.getElementById('form__alert').textContent = '';
-            baseView.prototype.hide.call(this);
         }
     });
 

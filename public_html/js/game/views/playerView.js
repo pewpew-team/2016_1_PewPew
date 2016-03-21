@@ -6,10 +6,10 @@ define(function (require) {
                 initialize: function (model, canvas) {
                     this.model = model;
                     this.canvas = canvas;
-                    this.canvas.addEventListener('click', _.bind(this.handleClick, this))
-                    this.canvas.addEventListener('mousemove', _.bind(this.handleMouseMove, this));
-                    window.addEventListener('keydown', _.bind(this.handleKeydown, this));
-                    window.addEventListener('keyup', _.bind(this.handleKeyup, this));
+                    $(this.canvas).on('click', this.handleClick.bind(this))
+                    $(this.canvas).on('mousemove', this.handleMouseMove.bind(this));
+                    $(window).on('keydown', this.handleKeydown.bind(this));
+                    $(window).on('keyup', this.handleKeyup.bind(this));
                 },
                 render: function () {
                     this.model.iterate();
@@ -61,6 +61,10 @@ define(function (require) {
                 handleKeyup: function(e) {
                     e.preventDefault();
                     this.model.dropPushedButton();
+                },
+                destroy: function() {
+                    $(this.canvas).off('click mousemove');
+                    $(window).off('keydown keyup');
                 }
             });
         return PlayerView;

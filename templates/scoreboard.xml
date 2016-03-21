@@ -1,5 +1,5 @@
 <fest:template xmlns:fest = "http://fest.mail.ru" context_name = "json">
-    <div id = "registration" class = "menu">
+    <div id = "scoreboard" class = "menu">
         <div class = "menu__logo logo">
             PewPew
         </div>

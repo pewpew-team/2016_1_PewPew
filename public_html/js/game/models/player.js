@@ -6,7 +6,7 @@ define(function(require) {
                   previousDirection: null,
                   minAngle: 20,
                   gunLength: 40,
-                  bulletSpeed: 15,
+                  bulletSpeed: 25,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
@@ -25,9 +25,6 @@ define(function(require) {
                       'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
                   });
                   this.set('angle', this.getAngle());
-              },
-              sync: function() {
-                  // TODO отправка данный через web socket
               },
               moveLeft: function() {
                   this.set('pushedButton', -1);
@@ -65,6 +62,7 @@ define(function(require) {
                   } else {
                       this.decreaseVelocity();
                   }
+                  this.checkPlayerCollision();
                   this.move();
               },
               move: function () {
@@ -128,6 +126,18 @@ define(function(require) {
                       posX = this.get('positionX') + Math.cos(angle) * gunLength,
                       posY = this.get('positionY') + Math.sin(angle) * gunLength;
                   bulletCollection.fire(posX, posY, velX, velY);
+              },
+              checkPlayerCollision: function() {
+                  bulletCollection.each(function(bullet) {
+                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX'),
+                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX'),
+                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY'),
+                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY');
+                      if ( bullet.get('posX') < rightPlayerEdge && bullet.get('posX') > leftPlayerEdge &&
+                             bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
+                          this.trigger('userDestroyed');
+                      }
+                  }.bind(this))
               }
           });
       return Player;
