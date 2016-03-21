@@ -31,6 +31,7 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function (data) {
                     user.fetch();
+                    this.set('isAuth', true);
                     this.trigger('login');
                     user.set('_id', data['id']);
                 }.bind(this),
