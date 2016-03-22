@@ -30,8 +30,8 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
-                    this.set('isAuth', true);
                     user.fetch();
+                    this.set('isAuth', true);
                     this.trigger('login');
                     user.set('_id', data['id']);
                 }.bind(this),
@@ -95,8 +95,7 @@ define(function(require) {
             return true;
         },
         isLoggedIn: function() {
-            return true;
-            //return this.get('isAuth');
+            return this.get('isAuth');
         }
     });
 
