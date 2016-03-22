@@ -12,10 +12,10 @@ define(function (require) {
         },
         handleSignUp: function (e) {
             e.preventDefault();
-            var login = document.getElementById('login-input').value;
-            var password1 = document.getElementById('password-input').value;
-            var password2 = document.getElementById('repeat-password-input').value;
-            var email = document.getElementById('email-input').value;
+            var login = document.getElementById('login-input').value,
+                password1 = document.getElementById('password-input').value,
+                password2 = document.getElementById('repeat-password-input').value,
+                email = document.getElementById('email-input').value;
             if (session.validateRegistration(email, login, password1, password2)) {
                 session.register(login, password1, email);
             }

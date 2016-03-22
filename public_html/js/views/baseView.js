@@ -2,8 +2,8 @@ define(function (require) {
     var backgroundCanvas = document.getElementById("pageBackground"),
         createjs = require('createjs'),
         Backbone = require('backbone'),
-        backgroundModel = require('models/background');
-        viewManager = require('general/viewManager')
+        backgroundModel = require('models/background'),
+        viewManager = require('general/viewManager');
 
 
     var View = Backbone.View.extend({
@@ -13,8 +13,8 @@ define(function (require) {
             this.render();
             $('#page').append(this.el);
             this.hide();
-            this.resizeInterface();
-            window.addEventListener('resize', _.bind(this.resizeInterface, this));
+            this.resizeBackground();
+            $(window).on("resize", _.bind(this.resizeBackground, this));
         },
         render: function () {
             this.$el.html(this.template());
@@ -60,10 +60,11 @@ define(function (require) {
                 stage.addChild(item);
             }
         },
-        resizeInterface: function () {
+        resizeBackground: function () {
             var backgroundCanvas = document.getElementById("pageBackground"),
                 newWidth = backgroundCanvas.parentElement.offsetWidth,
                 newHeight = backgroundCanvas.parentElement.offsetHeight;
+            
             backgroundCanvas.width = newWidth;
             backgroundCanvas.height = newHeight;
             backgroundModel.resizeCanvas(newWidth, newHeight);

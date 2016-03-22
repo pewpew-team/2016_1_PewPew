@@ -11,7 +11,7 @@ define(function(require) {
         Backbone = require('backbone'),
         game = require('views/game');
 
-    var View = Backbone.Model.extend({
+    var View = Backbone.View.extend({
       init: function() {
         this.dynamicCanvas = document.getElementById('dynamicLayer');
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
