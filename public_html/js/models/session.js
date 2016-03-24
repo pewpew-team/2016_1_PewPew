@@ -30,11 +30,10 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
+                    user.set('_id', data['id']);
                     user.fetch();
                     this.set('isAuth', true);
                     this.trigger('login');
-                    user.set('_id', data['id']);
-                    console.log('ok')
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
@@ -73,7 +72,7 @@ define(function(require) {
                     this.trigger('login');
                 }.bind(this),
                 error: function () {
-                    this.trigger('invalidLoginPassword');
+                    this.trigger('invalidLoginPassword', 'Invalid data');
                 }.bind(this)
             });
         },
