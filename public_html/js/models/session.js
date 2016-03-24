@@ -34,6 +34,7 @@ define(function(require) {
                     this.set('isAuth', true);
                     this.trigger('login');
                     user.set('_id', data['id']);
+                    console.log('ok')
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
