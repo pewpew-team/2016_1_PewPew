@@ -3,7 +3,7 @@ define(function(require) {
       Booster = require('game/models/booster'),
       _ = require('underscore');
 
-  var BarrierCollection = Backbone.Collection.extend({
+  var BoosterCollection = Backbone.Collection.extend({
           model: Booster,
           deleteOld: function() {
             var oldBoosters = this.filter(function (booster) {

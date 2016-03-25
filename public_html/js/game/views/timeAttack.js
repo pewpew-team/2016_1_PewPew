@@ -2,7 +2,9 @@ define(function(require) {
     var BulletsView = require('game/views/allBulletsView'),
         bulletsCollection = require('game/collections/bulletCollection'),
         barriersCollection = require('game/collections/barriersCollection'),
+        boostersCollection = require('game/collections/boosterCollection'),
         BarriersView = require('game/views/allBarriersView'),
+        BoostersView = require('game/views/allBoostersView'),
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
         _ = require('underscore'),
@@ -25,6 +27,7 @@ define(function(require) {
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection}),
+        this.boostersView = new BoostersView({collection : boostersCollection}),
         this.MAX_TIME = 60*1000,
         this.RESET_TIME = 10*1000,
         this.resetCount = 0;
@@ -42,7 +45,7 @@ define(function(require) {
       },
       updateScore: function() {
           var minutes = Math.trunc((this._getTime()/1000) / 60);
-              seconds = String(Math.round((this._getTime()/1000) % 60));
+              seconds = String(Math.trunc((this._getTime()/1000) % 60));
           if (seconds.length == 1) {
             seconds = '0' + seconds;
           }
@@ -55,12 +58,14 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
+          this.boostersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
               barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
               this.resetCount++;
           }
+          this.generateBooster();
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
@@ -74,6 +79,16 @@ define(function(require) {
           resultsView.render('Поражение :(');
           resultsView.show();
           this.quitGame();
+      },
+      generateBooster: function() {
+          if ( this._getTime() / this.RESET_TIME > this.resetCount) {
+            var BOOSTER_LIFE = 10*1000,
+                RADIUS = 50,
+                posY = this.dynamicCanvas.height - RADIUS/2,
+                posX = RADIUS + Math.random() * (this.dynamicCanvas.width - 2*RADIUS),
+                booster = new Booster(posX, posY, RADIUS, BOOSTER_LIFE);
+            boostersCollection.add(booster);
+          }
       },
       quitGame : function() {
           bulletsCollection.off('barrierDestroy');

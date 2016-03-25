@@ -10,6 +10,6 @@ define(function(require) {
                     });
                 }
             });
-        return BarriersView;
+        return BoostersView;
     }
 );
