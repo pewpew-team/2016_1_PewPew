@@ -24,6 +24,7 @@ define(function(require) {
                         this.collide(bullet, this.barriers.at(i));
                         if (this.barriers.at(i).get("isRemovable")) {
                             this.barriers.remove(this.barriers.at(i));
+                            this.trigger('barrierDestroy');
                         }
                     }
                 }
@@ -85,8 +86,7 @@ define(function(require) {
                     'VELOCITY' : 1,
                     'velX': Vx,
                     'velY': Vy,
-                    'sizeX': 15,
-                    'sizeY': 15
+
                 });
                 this.add(bullet);
             }

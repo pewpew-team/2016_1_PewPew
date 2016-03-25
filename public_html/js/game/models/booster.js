@@ -2,10 +2,19 @@ define(function(require) {
   var Backbone = require('backbone');
 
   var Booster = Backbone.Model.extend({
-    initialize: function(posX, posY) {
+    /**
+     *  Initialize random booster
+     *  @param {!numbe} posX - Initial position in X direction
+     *  @param {!number} posY - Initial position in Y direction
+     *  @param {!number} maxLifeTime - Maximum time of booster life
+     */
+    initialize: function(posX, posY, maxLifeTime) {
       this.set({
         'posX': posX,
-        'posY': posY
+        'posY': posY,
+        'startLifeTime': Date.now(),
+        'maxLifeTime': maxLifeTime,
+        'radius': 50
       });
       this.generateRandomType();
     },
@@ -13,7 +22,13 @@ define(function(require) {
       // TODO
     }
     generateRandomType() {
-      // TODO
+      // Speed up player type = 1
+      // Speed up bullets type = 2
+      // Crazy shooting type = 3
+      // Big bullets = 4
+      var MAX = 4;
+      var randomType = min + Math.random() * (MAX - 1)
+      this.set('type', Math.round(randomType));
     }
 
   })

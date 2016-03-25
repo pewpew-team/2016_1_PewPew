@@ -11,6 +11,13 @@ define(function(require) {
         Backbone = require('backbone'),
         game = require('views/game');
 
+    var NUMBER_X = 12,
+        NUMBER_Y = 4,
+        RATIO = 0.3,
+        LEFT_CORNER_POS_X = 40,
+        LEFT_CORNER_POS_Y = 40,
+        BOOSTER_PROBABILITY = 0.3;
+
     var View = Backbone.View.extend({
       init: function() {
         this.dynamicCanvas = document.getElementById('dynamicLayer');
@@ -18,22 +25,30 @@ define(function(require) {
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection}),
-        this.MAX_TIME = 180*1000,
-        this.RESET_TIME = 20*1000,
+        this.MAX_TIME = 60*1000,
+        this.RESET_TIME = 10*1000,
         this.resetCount = 0;
-        var NUMBER_X = 12,
-            NUMBER_Y = 4,
-            RATIO = 0.3,
-            LEFT_CORNER_POS_X = 40,
-            LEFT_CORNER_POS_Y = 40;
         barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
         this.player.on('userDestroyed', this.gameOver.bind(this));
-        game.on('gameOver', this.quitGame.bind(this));
+        game.on('quitGame', this.quitGame.bind(this));
+        game.on('gameOver', this.gameOver.bind(this));
       },
       run: function() {
+          this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
+          bulletsCollection.on('barrierDestroy', this.incBlockCount.bind(this));
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
+      },
+      updateScore: function() {
+          var minutes = Math.trunc((this._getTime()/1000) / 60);
+              seconds = String(Math.round((this._getTime()/1000) % 60));
+          if (seconds.length == 1) {
+            seconds = '0' + seconds;
+          }
+
+          document.getElementById('js-score').innerHTML = this.blockCount +
+                            ' блоков за ' + minutes + ':' + seconds;
       },
       iterate: function() {
           var context = this.dynamicCanvas.getContext('2d');
@@ -43,11 +58,6 @@ define(function(require) {
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
-              var NUMBER_X = 12,
-                  NUMBER_Y = 4,
-                  RATIO = 0.3,
-                  LEFT_CORNER_POS_X = 40,
-                  LEFT_CORNER_POS_Y = 40;
               barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
               this.resetCount++;
           }
@@ -55,6 +65,7 @@ define(function(require) {
               this.win();
           }
           this.playerView.render();
+          this.updateScore();
           if (this.isRunning) {
               requestAnimationFrame(_.bind(this.iterate, this));
           }
@@ -65,23 +76,29 @@ define(function(require) {
           this.quitGame();
       },
       quitGame : function() {
+          bulletsCollection.off('barrierDestroy');
           this.isRunning = false;
+          this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
       },
       win: function() {
+          bulletsCollection.off('barrierDestroy');
           this.isRunning = false;
           this.player.destroy();
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
-          resultsView.render('Победа! Вы справились за ' + this._getTime()/1000 + ' сек');
+          resultsView.render('Победа! Вы уничтожили ' + this.blockCount + ' блоков');
           resultsView.show();
       },
       _getTime: function() {
           return Date.now() - this.time;
+      },
+      incBlockCount: function() {
+        this.blockCount++;
       }
     })
 

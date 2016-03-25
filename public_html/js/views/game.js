@@ -1,11 +1,14 @@
 define(function (require) {
         var tmpl = require('tmpl/game'),
-			_ = require('underscore'),
+            _ = require('underscore'),
             baseView = require('views/baseView');
 
         var View = baseView.extend({
             template: tmpl,
             loginRequired: true,
+            events: {
+                'click #js-quit': 'gameOver'
+            },
             initialize: function () {
                 baseView.prototype.initialize.apply(this, arguments);
                 $(window).on("resize", _.bind(this.resizeGameArea, this));
@@ -13,6 +16,14 @@ define(function (require) {
             show: function () {
                 baseView.prototype.show.apply(this, arguments);
                 this.resizeGameArea();
+            },
+            hide: function () {
+                document.getElementById('js-score').innerHTML = '';
+                baseView.prototype.hide.apply(this);
+                this.trigger('quitGame');
+            },
+            gameOver: function() {
+                this.trigger('gameOver');
             },
             resizeGameArea: function () {
                 var staticLayer = document.getElementById("staticLayer"),
@@ -31,7 +42,7 @@ define(function (require) {
                         width: expectedWidth,
                         height: ( expectedWidth / 16) * 9
                     };
-                
+
                 if ((expectedSizefullHeight.width < expectedSizefullWidth.width) && (expectedSizefullHeight.height < expectedSizefullWidth.height)) {
                     dynamicLayer.width = staticLayer.width = expectedSizefullHeight.width;
                     dynamicLayer.height = staticLayer.height = expectedSizefullHeight.height;
