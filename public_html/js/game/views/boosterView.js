@@ -3,9 +3,9 @@ define(function(require) {
         background = require('models/background');
 
     var BoosterView = Backbone.View.extend({
-            initialize: function(model, canvas) {
-                this.canvas = canvas;
-                this.model = model;
+            initialize: function(_model, _canvas) {
+                this.canvas = _canvas;
+                this.model = _model;
             },
             render: function() {
                 var context = this.canvas.getContext('2d'),

@@ -7,14 +7,15 @@ define(function(require) {
      *  @param {!numbe} posX - Initial position in X direction
      *  @param {!number} posY - Initial position in Y direction
      *  @param {!number} maxLifeTime - Maximum time of booster life
+     *  @param {!number} _radius - Booster representation radius
      */
-    initialize: function(posX, posY, radius, maxLifeTime) {
+    initialize: function(temp, _posX, _posY, _radius, _maxLifeTime) {
       this.set({
-        'posX': posX,
-        'posY': posY,
+        'posX': _posX,
+        'posY': _posY,
         'startLifeTime': Date.now(),
-        'maxLifeTime': maxLifeTime,
-        'radius': radius
+        'maxLifeTime': _maxLifeTime,
+        'radius': _radius
       });
       this.generateRandomType();
     },

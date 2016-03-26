@@ -7,6 +7,7 @@ define(function(require) {
         BoostersView = require('game/views/allBoostersView'),
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
+        Booster = require('game/models/booster'),
         _ = require('underscore'),
         resultsView = require('game/views/result'),
         user = require('models/user'),
@@ -60,12 +61,13 @@ define(function(require) {
           this.barriersView.render();
           this.boostersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          boostersCollection.iterate(this.player);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
               barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
+              boostersCollection.createRandom(this.dynamicCanvas.height, this.dynamicCanvas.width);
               this.resetCount++;
           }
-          this.generateBooster();
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
@@ -80,16 +82,6 @@ define(function(require) {
           resultsView.show();
           this.quitGame();
       },
-      generateBooster: function() {
-          if ( this._getTime() / this.RESET_TIME > this.resetCount) {
-            var BOOSTER_LIFE = 10*1000,
-                RADIUS = 50,
-                posY = this.dynamicCanvas.height - RADIUS/2,
-                posX = RADIUS + Math.random() * (this.dynamicCanvas.width - 2*RADIUS),
-                booster = new Booster(posX, posY, RADIUS, BOOSTER_LIFE);
-            boostersCollection.add(booster);
-          }
-      },
       quitGame : function() {
           bulletsCollection.off('barrierDestroy');
           this.isRunning = false;
@@ -98,6 +90,7 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
+          boostersCollection.reset();
       },
       win: function() {
           bulletsCollection.off('barrierDestroy');
