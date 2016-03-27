@@ -138,6 +138,12 @@ define(function(require) {
                           this.trigger('userDestroyed');
                       }
                   }.bind(this))
+              },
+              speedUpPlayer: function() {
+                this.set('maxVelocity', this.get('maxVelocity') + 5);
+              },
+              speedUpBullets: function() {
+                this.set('bulletSpeed', this.get('bulletSpeed') + 5);
               }
           });
       return Player;

@@ -18,8 +18,8 @@ define(function (require) {
                 this.resizeGameArea();
             },
             hide: function () {
-                document.getElementById('js-score').innerHTML = '';
                 baseView.prototype.hide.apply(this);
+                this.$('#js-score').innerHTML = '';
                 this.trigger('quitGame');
             },
             gameOver: function() {

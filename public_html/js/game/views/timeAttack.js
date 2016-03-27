@@ -41,6 +41,7 @@ define(function(require) {
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
+          boostersCollection.reset();
           bulletsCollection.on('barrierDestroy', this.incBlockCount.bind(this));
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
@@ -50,9 +51,10 @@ define(function(require) {
           if (seconds.length == 1) {
             seconds = '0' + seconds;
           }
-
-          document.getElementById('js-score').innerHTML = this.blockCount +
-                            ' блоков за ' + minutes + ':' + seconds;
+          var scoreWrapper = document.getElementById('js-score');
+          if (scoreWrapper) {
+            scoreWrapper.innerHTML = this.blockCount + ' блоков за ' + minutes + ':' + seconds;
+          }
       },
       iterate: function() {
           var context = this.dynamicCanvas.getContext('2d');
@@ -99,6 +101,7 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
+          boostersCollection.reset();
           resultsView.render('Победа! Вы уничтожили ' + this.blockCount + ' блоков');
           resultsView.show();
       },

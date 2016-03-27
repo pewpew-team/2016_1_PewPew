@@ -1,6 +1,7 @@
 define(function(require) {
   var Backbone = require('backbone'),
       Booster = require('game/models/booster'),
+      bulletsCollection = require('game/collections/bulletCollection'),
       _ = require('underscore');
 
   var BoosterCollection = Backbone.Collection.extend({
@@ -18,11 +19,10 @@ define(function(require) {
             var crossedBoosters = this.filter(function (booster) {
               var distance = Math.abs(booster.get('posX') - this.get('positionX')),
                   criticalDistance = booster.get('radius') + this.get('playerSizeX')/2;
-                  console.log('%s %s',distance,criticalDistance  );
               return distance < criticalDistance;
             }.bind(player));
             _.each(crossedBoosters, function(booster) {
-              booster.apply();
+              booster.apply(player, bulletsCollection);
             })
             this.remove(crossedBoosters);
           },

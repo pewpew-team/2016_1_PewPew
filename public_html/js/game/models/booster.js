@@ -19,15 +19,24 @@ define(function(require) {
       });
       this.generateRandomType();
     },
-    apply: function() {
-      // TODO
+    apply: function(player, bulletsCollection) {
+      switch (this.get('type')) {
+        case 1:
+          player.speedUpPlayer();
+          break;
+        case 2:
+          player.speedUpBullets();
+          break;
+        case 3:
+          bulletsCollection.incSize();
+          break;
+      }
     },
     generateRandomType() {
       // Speed up player type = 1
       // Speed up bullets type = 2
-      // Crazy shooting type = 3
-      // Big bullets = 4
-      var MAX = 4;
+      // Big bullets = 3
+      var MAX = 3;
       var randomType = 1 + Math.random() * (MAX - 1)
       this.set('type', Math.round(randomType));
     }
