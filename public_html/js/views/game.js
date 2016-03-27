@@ -23,13 +23,13 @@ define(function (require) {
                     return;
                 }
                 model.setScreenSize(
-                        window.innerHeight - document.getElementsByClassName("header")[0].offsetHeight, 
+                        window.innerHeight - $(".header").height(), //document.getElementsByClassName("header")[0].offsetHeight, 
                         window.innerWidth,
-                        document.getElementsByClassName("header")[0].offsetHeight
+                        $(".header").height()
                     );
-                dynamicLayer.parentElement.style.marginTop = model.getCssSize("topSidebar");
                 dynamicLayer.parentElement.style.width  = model.getCssSize("width");
                 dynamicLayer.parentElement.style.height = model.getCssSize("height");
+                dynamicLayer.parentElement.style.marginTop = model.getCssSize("marginTop");
             }
         });
 

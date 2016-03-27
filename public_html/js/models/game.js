@@ -8,7 +8,7 @@ define(function(require) {
             "baseWidth": 1280,
             "scale": 1
         },
-        setScreenSize: function (expectedHeight, expectedWidth, heightSidebar) {
+        setScreenSize: function (expectedHeight, expectedWidth, topSidebarHeight) {
             var expectedSizefullHeight = {
                     height: expectedHeight,
                     width: expectedHeight * this.get('ratio') 
@@ -28,7 +28,7 @@ define(function(require) {
                     width: expectedSizefullWidth.width,
                 });
             }
-            this.set("topSidebar", heightSidebar/2);
+            this.set("marginTop", topSidebarHeight/2);
             this.setScale();
         },
         setScale: function () {
