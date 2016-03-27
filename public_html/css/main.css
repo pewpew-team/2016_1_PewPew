@@ -274,16 +274,10 @@ game
     transform: translate(-50%, -50%);
     margin-top: 25px;
 }
-#staticLayer {
-    position: relative;
-}
 #dynamicLayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: crosshair;
+    width: 100%;
+    height: 100%;
 }
-
 @media screen and (max-width: 700px) {
     .header {
         height: 100px;

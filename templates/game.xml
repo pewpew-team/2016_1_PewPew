@@ -5,7 +5,6 @@
         <div class = "header__score" id = "score"></div>
     </div>
     <div class = "game">
-        <canvas width = "700" height="500" class = "gameArea__canvas" id = "staticLayer"></canvas>
         <canvas width = "700" height="500" class = "gameArea__canvas" id = "dynamicLayer"></canvas>
     </div>
 </fest:template>
