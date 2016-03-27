@@ -258,8 +258,10 @@ header
     padding-right: 5%;
 
 }
-
-
+.header_a {
+    text-decoration: none;
+    color: white;
+}
 
 /*
 ========================================================
