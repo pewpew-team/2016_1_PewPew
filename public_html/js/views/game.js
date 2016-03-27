@@ -23,7 +23,7 @@ define(function (require) {
                     return;
                 }
                 model.setScreenSize(
-                        window.innerHeight - $(".header").height(), //document.getElementsByClassName("header")[0].offsetHeight, 
+                        window.innerHeight - $(".header").height(), 
                         window.innerWidth,
                         $(".header").height()
                     );

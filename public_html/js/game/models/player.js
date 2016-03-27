@@ -14,16 +14,16 @@ define(function(require) {
                   velocity: 0,
                   maxVelocity: 10
               },
-              initialize: function(nick, canvasWidth, canvasHeight) {
+              initialize: function(nick) {
                   this.set({
                       'nickname': nick,
-                      'positionX': canvasWidth/2,
-                      'maxPositionX': canvasWidth,
-                      'currentPointerX': canvasWidth/2,
-                      'currentPointerY': canvasHeight/2,
-                      'positionY': canvasHeight - this.get('playerSizeY') / 2,
+                      'positionX': screenModel.get("baseWidth")/2,
+                      'maxPositionX': screenModel.get("baseWidth"),
+                      'currentPointerX': screenModel.get("baseWidth")/2,
+                      'currentPointerY': screenModel.get("baseHeight")/2,
+                      'positionY': screenModel.get("baseHeight") - this.get('playerSizeY') / 2,
                       'minLevelPointer': 0,
-                      'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
+                      'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
                   });
                   this.set('angle', this.getAngle());
               },

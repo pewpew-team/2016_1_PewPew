@@ -14,7 +14,7 @@ define(function(require) {
     var View = Backbone.View.extend({
       init: function() {
         this.dynamicCanvas = document.getElementById('dynamicLayer');
-        this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
+        this.player = new Player(user.get('login'));
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection}),
