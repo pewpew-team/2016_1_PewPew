@@ -271,6 +271,12 @@ game
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    /*
+    border-image: ...
+    */
 }
 #dynamicLayer {
     width: 100%;
