@@ -1,7 +1,8 @@
 define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
-          Player = Backbone.Model.extend({
+          screenModel = require('models/game');
+      var Player = Backbone.Model.extend({
               defaults: {
                   previousDirection: null,
                   minAngle: 20,
@@ -38,8 +39,8 @@ define(function(require) {
                       newPointerPosX,
                       newPointerPosY;
                   if (offsetX && offsetY) {
-                        newPointerPosX = offsetX;
-                        newPointerPosY = offsetY;
+                        newPointerPosX = offsetX / screenModel.get("scale");
+                        newPointerPosY = offsetY / screenModel.get("scale");
                         if ((minLevelPointer >= newPointerPosY)) {
                             newPointerPosY = minLevelPointer;
                         }
