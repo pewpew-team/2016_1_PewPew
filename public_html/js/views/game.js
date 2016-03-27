@@ -11,10 +11,6 @@ define(function (require) {
                 this.model = model;
                 baseView.prototype.initialize.apply(this, arguments);
                 $(window).on("resize", _.bind(this.resizeGameArea, this));
-                //$("#exit").on("click", function(){console.log("exit")});
-                $('#dynamicLayer').on("click", function(){
-                  alert('Вы нажали на элемент "foo"');
-                });
             },
             show: function () {
                 baseView.prototype.show.apply(this, arguments);
