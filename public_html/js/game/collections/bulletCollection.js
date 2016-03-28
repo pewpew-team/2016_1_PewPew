@@ -24,6 +24,7 @@ define(function(require) {
                         this.collide(bullet, this.barriers.at(i));
                         if (this.barriers.at(i).get("isRemovable")) {
                             this.barriers.remove(this.barriers.at(i));
+                            this.trigger('barrierDestroy');
                         }
                     }
                 }
@@ -79,16 +80,36 @@ define(function(require) {
                 bullet.set('posY', intersectionPoint.y + (barrier.get('posY') - barrier.get('sizeY')/2));
             },
             fire: function(posX0, posY0, Vx, Vy) {
-                var bullet = new Bullet({
-                    'posX': posX0,
-                    'posY': posY0,
-                    'VELOCITY' : 1,
-                    'velX': Vx,
-                    'velY': Vy,
-                    'sizeX': 15,
-                    'sizeY': 15
-                });
+                var bullet;
+                if (this._bulletSize) {
+                  bullet = new Bullet({
+                      'posX': posX0,
+                      'posY': posY0,
+                      'velX': Vx,
+                      'velY': Vy,
+                      'sizeX': this._bulletSize,
+                      'sizeY': this._bulletSize
+                  });
+                } else {
+                  bullet = new Bullet({
+                      'posX': posX0,
+                      'posY': posY0,
+                      'velX': Vx,
+                      'velY': Vy
+                  });
+                }
                 this.add(bullet);
+            },
+            incSize: function() {
+                if (this._bulletSize) {
+                  this._bulletSize += 15;
+                } else {
+                  this._bulletSize = 15;
+                }
+            },
+            reset: function() {
+              Backbone.Collection.prototype.reset.call(this);
+              this._bulletSize = undefined;
             }
         });
 

@@ -20,7 +20,6 @@ define(function (require) {
         initialize: function () {
             this.render();
             this.listenTo(user, 'errorOnUpdate', this.showErrorMessage);
-            console.log(user.get('id'));
         },
         show: function() {
             baseView.prototype.show.call(this);

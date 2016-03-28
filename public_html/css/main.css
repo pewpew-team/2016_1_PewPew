@@ -248,7 +248,8 @@ header
     padding-left: 5%;
 }
 .header__score {
-    text-align:center;
+    text-align: center;
+    width: 50%;
     margin: 0 auto;
 }
 .header__user {
@@ -293,4 +294,3 @@ game
         float: left;
     }
 }
-

@@ -29,6 +29,7 @@ define(function(require) {
       },
       run: function() {
           this.isRunning = true;
+          document.getElementById('js-score').innerHTML = 'Тренировка';
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {

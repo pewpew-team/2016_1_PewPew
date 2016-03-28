@@ -7,7 +7,7 @@ define(function(require) {
                   previousDirection: null,
                   minAngle: 20,
                   gunLength: 40,
-                  bulletSpeed: 25,
+                  bulletSpeed: 15,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
@@ -139,6 +139,12 @@ define(function(require) {
                           this.trigger('userDestroyed');
                       }
                   }.bind(this))
+              },
+              speedUpPlayer: function() {
+                this.set('maxVelocity', this.get('maxVelocity') + 5);
+              },
+              speedUpBullets: function() {
+                this.set('bulletSpeed', this.get('bulletSpeed') + 5);
               }
           });
       return Player;
