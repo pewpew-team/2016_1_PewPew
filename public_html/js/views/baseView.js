@@ -37,18 +37,7 @@ define(function (require) {
                 item,
                 size = themeObject.theme.size;
             //рисуем фон
-            graphElement = new createjs.Bitmap(themeObject.theme.background);
-            graphElement.image.onload = function () {
-                stage.update();
-            };
-            for (var i = 0, counti = width / size.x + 1; i < counti; i++) {
-                for (var j = 0, countj = height / size.y + 1; j < countj; j++) {
-                    var tempBitMap = graphElement.clone();
-                    tempBitMap.x = i * size.x;
-                    tempBitMap.y = j * size.y;
-                    stage.addChild(tempBitMap);
-                }
-            }
+            $("#pageBackground").css("background", "url(" + themeObject.theme.background + ")");
             //рисуем изображения
             for (var i = themeObject.positions.length - 1; i >= 0; i--) {
                 item = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
