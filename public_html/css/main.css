@@ -257,7 +257,7 @@ header
     float: right;
     text-align: right;
     padding-right: 5%;
-
+    cursor: pointer;
 }
 .header_a {
     text-decoration: none;
