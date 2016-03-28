@@ -1,7 +1,7 @@
 define(function(require) {
     var Backbone = require('backbone');
     var _ = require('underscore');
-    var game = Backbone.Model.extend({
+    var Game = Backbone.Model.extend({
         defaults: {
             "ratio": 16/9,
             "baseHeight": 720,
@@ -11,11 +11,11 @@ define(function(require) {
         setScreenSize: function (expectedHeight, expectedWidth, topSidebarHeight) {
             var expectedSizefullHeight = {
                     height: expectedHeight,
-                    width: expectedHeight * this.get('ratio') 
+                    width: expectedHeight * this.get('ratio')
                 },
                 expectedSizefullWidth = {
                     width: expectedWidth,
-                    height: expectedWidth / this.get('ratio') 
+                    height: expectedWidth / this.get('ratio')
                 };
             if ((expectedSizefullHeight.width < expectedSizefullWidth.width) && (expectedSizefullHeight.height < expectedSizefullWidth.height)) {
                 this.set({
@@ -38,5 +38,5 @@ define(function(require) {
             return this.get(property) + "px";
         }
     });
-    return new game();
+    return new Game();
 })

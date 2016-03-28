@@ -32,7 +32,7 @@ define(function(require) {
           break;
       }
     },
-    generateRandomType() {
+    generateRandomType: function() {
       // Speed up player type = 1
       // Speed up bullets type = 2
       // Big bullets = 3
