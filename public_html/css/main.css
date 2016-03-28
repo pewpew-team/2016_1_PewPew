@@ -238,7 +238,6 @@ header
     background: #323A45;
     width: 100%;
     display: inline-block;
-    transition: all 0.3s;
 }
 .header__logo {
     width: 200px;
@@ -260,8 +259,10 @@ header
     padding-right: 5%;
 
 }
-
-
+.header_a {
+    text-decoration: none;
+    color: white;
+}
 
 /*
 ========================================================
@@ -273,22 +274,20 @@ game
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 25px;
-}
-#staticLayer {
-    position: relative;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    /*
+    border-image: ...
+    */
 }
 #dynamicLayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: crosshair;
+    width: 100%;
+    height: 100%;
 }
-
 @media screen and (max-width: 700px) {
     .header {
         height: 100px;
-        transition: all 0.3s;
     }
     .header__score {
         width: 100%;

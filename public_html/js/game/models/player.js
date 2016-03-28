@@ -1,7 +1,8 @@
 define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
-          Player = Backbone.Model.extend({
+          screenModel = require('models/game');
+      var Player = Backbone.Model.extend({
               defaults: {
                   previousDirection: null,
                   minAngle: 20,
@@ -13,16 +14,16 @@ define(function(require) {
                   velocity: 0,
                   maxVelocity: 10
               },
-              initialize: function(nick, canvasWidth, canvasHeight) {
+              initialize: function(nick) {
                   this.set({
                       'nickname': nick,
-                      'positionX': canvasWidth/2,
-                      'maxPositionX': canvasWidth,
-                      'currentPointerX': canvasWidth/2,
-                      'currentPointerY': canvasHeight/2,
-                      'positionY': canvasHeight - this.get('playerSizeY') / 2,
+                      'positionX': screenModel.get("baseWidth")/2,
+                      'maxPositionX': screenModel.get("baseWidth"),
+                      'currentPointerX': screenModel.get("baseWidth")/2,
+                      'currentPointerY': screenModel.get("baseHeight")/2,
+                      'positionY': screenModel.get("baseHeight") - this.get('playerSizeY') / 2,
                       'minLevelPointer': 0,
-                      'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
+                      'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
                   });
                   this.set('angle', this.getAngle());
               },
@@ -38,8 +39,8 @@ define(function(require) {
                       newPointerPosX,
                       newPointerPosY;
                   if (offsetX && offsetY) {
-                        newPointerPosX = offsetX;
-                        newPointerPosY = offsetY;
+                        newPointerPosX = offsetX / screenModel.get("scale");
+                        newPointerPosY = offsetY / screenModel.get("scale");
                         if ((minLevelPointer >= newPointerPosY)) {
                             newPointerPosY = minLevelPointer;
                         }
