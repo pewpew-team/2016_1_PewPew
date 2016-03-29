@@ -1,39 +1,14 @@
 define(function(require) {
     var Backbone = require('backbone'),
         background = require('models/background'),
+        dude = require('game/views/dude'),
         $ = require('jquery');
 
     var BoosterView = Backbone.View.extend({
             initialize: function(_model, _canvas) {
                 this.canvas = _canvas;
                 this.model = _model;
-                this.model.on('apply', this.showDude.bind(this));
-            },
-            showDude: function (type) {
-              var dudeMessage = $("#dudeMessage"),
-                  msg = "",
-                  dudeWrapper = dudeMessage.parent();
-              switch (type) {
-                case 1:
-                  msg = "Ты стал быстрей, <br> Чувак";
-                  break;
-                case 2:
-                  msg = "Пули стали быстрей, <br> Чувак";
-                  break;
-                case 3:
-                  msg = "Пули теперь больше, <br> Чувак";
-                  break;
-                default:
-                  msg = "Я не знаю что тебе сказать, <br> Чувак";
-                  break;
-              }
-              dudeMessage.html(msg);
-              dudeWrapper.removeClass('dude--out');
-              dudeWrapper.addClass('dude--in');
-              setTimeout(function () {
-                dudeWrapper.removeClass('dude--in');
-                dudeWrapper.addClass('dude--out');
-                }, 5000);
+                this.model.on('apply', dude.showDude);
             },
             render: function() {
                 var context = this.canvas.getContext('2d'),

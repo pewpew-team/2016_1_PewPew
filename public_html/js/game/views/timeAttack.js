@@ -12,6 +12,7 @@ define(function(require) {
         resultsView = require('game/views/result'),
         user = require('models/user'),
         Backbone = require('backbone'),
+        dude = require('game/views/dude'),
         game = require('views/game');
 
     var NUMBER_X = 24,
@@ -36,8 +37,10 @@ define(function(require) {
         this.player.on('userDestroyed', this.gameOver.bind(this));
         game.on('quitGame', this.quitGame.bind(this));
         game.on('gameOver', this.gameOver.bind(this));
+
       },
       run: function() {
+          dude.removeDude();
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
@@ -80,6 +83,7 @@ define(function(require) {
           }
       },
       gameOver: function() {
+          dude.hideDude();
           resultsView.render('Поражение :(');
           resultsView.show();
           this.quitGame();
