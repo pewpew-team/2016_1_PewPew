@@ -95,8 +95,7 @@ define(function(require) {
             return true;
         },
         isLoggedIn: function() {
-            return true;
-            //return this.get('isAuth');
+            return this.get('isAuth');
         }
     });
 
