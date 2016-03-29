@@ -22,6 +22,7 @@ define(function (require) {
         hide: function () {
             baseView.prototype.hide.apply(this);
             this.$('#js-score').innerHTML = '';
+            this.$('#js-dude').removeClass();
             this.trigger('quitGame');
         },
         gameOver: function() {

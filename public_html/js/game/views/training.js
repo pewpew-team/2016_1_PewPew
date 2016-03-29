@@ -18,7 +18,7 @@ define(function(require) {
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection});
-        var NUMBER_X = 12,
+        var NUMBER_X = 24,
             NUMBER_Y = 4,
             RATIO = 0.3,
             LEFT_CORNER_POS_X = 40,

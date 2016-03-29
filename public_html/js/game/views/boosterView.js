@@ -26,10 +26,14 @@ define(function(require) {
               dudeWrapper.attr("src", imgUrl);
               dudeWrapper.removeClass().addClass('dude-in');
               setTimeout(function () {
-                dudeWrapper.removeClass().addClass('dude-out');
-                setTimeout(function () {
-                  dudeWrapper.removeClass();
-                }, 3000);
+                if (dudeWrapper.attr('class') === 'dude-in'){
+                  dudeWrapper.removeClass().addClass('dude-out');
+                  setTimeout(function () {
+                    if (dudeWrapper.attr('class') === 'dude-out'){
+                      dudeWrapper.removeClass();
+                    }
+                  }, 3000);
+                }
               }, 5000);
 
             },

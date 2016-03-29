@@ -14,7 +14,7 @@ define(function(require) {
         Backbone = require('backbone'),
         game = require('views/game');
 
-    var NUMBER_X = 12,
+    var NUMBER_X = 24,
         NUMBER_Y = 4,
         RATIO = 0.3,
         LEFT_CORNER_POS_X = 40,
