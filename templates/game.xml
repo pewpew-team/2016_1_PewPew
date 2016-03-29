@@ -8,6 +8,6 @@
         <canvas width = "1280" height="720" class = "gameArea__canvas" id = "dynamicLayer"></canvas>
     </div>
     <div class="dude"> 
-    	<div class="dude__title" id="dudeMessage"></div>
+        <div class="dude__title" id="dudeMessage"></div>
     </div>
 </fest:template>

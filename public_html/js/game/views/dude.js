@@ -3,6 +3,16 @@ define(function(require) {
         $ = require('jquery');
 
     var Dude = Backbone.View.extend({
+            hideDude: function () {
+              if ($("#dudeMessage").parent().hasClass('dude--in')) {
+                $("#dudeMessage").parent().removeClass('dude--in');
+                $("#dudeMessage").parent().addClass('dude--out');
+              }
+            },
+            removeDude: function () {
+              $("#dudeMessage").parent().removeClass('dude--in');
+              $("#dudeMessage").parent().removeClass('dude--out');
+            },
             showDude: function (type) {
               var dudeMessage = $("#dudeMessage"),
                   msg = "",
@@ -24,19 +34,14 @@ define(function(require) {
               dudeMessage.html(msg);
               dudeWrapper.removeClass('dude--out');
               dudeWrapper.addClass('dude--in');
-              setTimeout(function () {
-                dudeWrapper.removeClass('dude--in');
-                dudeWrapper.addClass('dude--out');
-                }, 5000);
-            },
-            hideDude: function () {
-              $("#dudeMessage").parent().removeClass('dude--in');
-              $("#dudeMessage").parent().addClass('dude--out');
-            },
-            removeDude: function () {
-              $("#dudeMessage").parent().removeClass('dude--in');
-              $("#dudeMessage").parent().removeClass('dude--out');
+              setTimeout(function(){
+                if ($("#dudeMessage").parent().hasClass('dude--in')) {
+                  $("#dudeMessage").parent().removeClass('dude--in');
+                  $("#dudeMessage").parent().addClass('dude--out');
+                }
+              }, 2000);
             }
+            
         });
 
     return new Dude;
