@@ -9,14 +9,7 @@ define(function(require) {
      *  @param {!number} maxLifeTime - Maximum time of booster life
      *  @param {!number} _radius - Booster representation radius
      */
-    initialize: function(temp, _posX, _posY, _radius, _maxLifeTime) {
-      this.set({
-        'posX': _posX,
-        'posY': _posY,
-        'startLifeTime': Date.now(),
-        'maxLifeTime': _maxLifeTime,
-        'radius': _radius
-      });
+    initialize: function() {
       this.generateRandomType();
     },
     apply: function(player, bulletsCollection) {
@@ -31,6 +24,7 @@ define(function(require) {
           bulletsCollection.incSize();
           break;
       }
+      this.trigger('apply', this.get('type'));
     },
     generateRandomType: function() {
       // Speed up player type = 1

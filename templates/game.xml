@@ -7,4 +7,5 @@
     <div class = "game">
         <canvas width = "1280" height="720" class = "gameArea__canvas" id = "dynamicLayer"></canvas>
     </div>
+    <img src = "#" id = "js-dude" width = "300" height = "300"></img>
 </fest:template>

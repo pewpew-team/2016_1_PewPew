@@ -31,7 +31,13 @@ define(function(require) {
                 RADIUS = 20,
                 posY = Math.round(height - RADIUS-10),
                 posX = Math.round(RADIUS + Math.random() * (width - 2*RADIUS)),
-                booster = new Booster(undefined, posX, posY, RADIUS, BOOSTER_LIFE);
+                booster = new Booster({
+                  'posX': posX,
+                  'posY': posY,
+                  'startLifeTime': Date.now(),
+                  'maxLifeTime': BOOSTER_LIFE,
+                  'radius': RADIUS
+                });
             this.add(booster);
           }
       });

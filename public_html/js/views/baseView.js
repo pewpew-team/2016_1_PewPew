@@ -53,7 +53,7 @@ define(function (require) {
             var backgroundCanvas = document.getElementById("pageBackground"),
                 newWidth = backgroundCanvas.parentElement.offsetWidth,
                 newHeight = backgroundCanvas.parentElement.offsetHeight;
-            
+
             backgroundCanvas.width = newWidth;
             backgroundCanvas.height = newHeight;
             backgroundModel.resizeCanvas(newWidth, newHeight);

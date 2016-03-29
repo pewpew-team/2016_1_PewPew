@@ -102,9 +102,9 @@ define(function(require) {
             },
             incSize: function() {
                 if (this._bulletSize) {
-                  this._bulletSize += 15;
+                  this._bulletSize *= 1.2;
                 } else {
-                  this._bulletSize = 15;
+                  this._bulletSize = 17;
                 }
             },
             reset: function() {

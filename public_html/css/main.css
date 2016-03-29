@@ -294,3 +294,29 @@ game
         float: left;
     }
 }
+
+#js-dude {
+  position: fixed;
+  right: -50%;
+  bottom: -50%;
+}
+
+.dude-in {
+  position: fixed;
+  animation: dude-in-animation 2s 1 forwards;
+}
+
+.dude-out {
+  position: fixed;
+  animation: dude-out-animation 2s 1 forwards;
+}
+
+@-webkit-keyframes dude-in-animation {
+  0% {right: -50%; bottom: -50%;}
+  100% {bottom: 0; right: 0;}
+}
+
+@-webkit-keyframes dude-out-animation {
+  0% {bottom: 0; right: 0;}
+  100% {right: -50%; bottom: -50%;}
+}
