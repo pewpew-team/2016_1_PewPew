@@ -49,7 +49,7 @@ define(function(require) {
                         sideParallelY : {}
                     },
                     fault = 3,
-                    deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
+                    deviation = 3 * Math.pow(-1 ,Math.random() * (5) ^ 0);
                 //точки столкновения со сторонами паралельно X или Y
                 intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
                 intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
