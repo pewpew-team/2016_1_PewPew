@@ -10,32 +10,30 @@ define(function(require) {
                 this.model.on('apply', this.showDude.bind(this));
             },
             showDude: function (type) {
-              var imgUrl = 'img/';
+              var dudeMessage = $("#dudeMessage"),
+                  msg = "",
+                  dudeWrapper = dudeMessage.parent();
               switch (type) {
                 case 1:
-                  imgUrl += 'player_speed.png';
+                  msg = "Ты стал быстрей, <br> Чувак";
                   break;
                 case 2:
-                  imgUrl += 'bullet_speed.png';
+                  msg = "Пули стали быстрей, <br> Чувак";
                   break;
                 case 3:
-                  imgUrl += 'bullet_size.png';
+                  msg = "Пули теперь больше, <br> Чувак";
+                  break;
+                default:
+                  msg = "Я не знаю что тебе сказать, <br> Чувак";
                   break;
               }
-              var dudeWrapper = $('#js-dude');
-              dudeWrapper.attr("src", imgUrl);
-              dudeWrapper.removeClass().addClass('dude-in');
+              dudeMessage.html(msg);
+              dudeWrapper.removeClass('dude--out');
+              dudeWrapper.addClass('dude--in');
               setTimeout(function () {
-                if (dudeWrapper.attr('class') === 'dude-in'){
-                  dudeWrapper.removeClass().addClass('dude-out');
-                  setTimeout(function () {
-                    if (dudeWrapper.attr('class') === 'dude-out'){
-                      dudeWrapper.removeClass();
-                    }
-                  }, 3000);
-                }
-              }, 5000);
-
+                dudeWrapper.removeClass('dude--in');
+                dudeWrapper.addClass('dude--out');
+                }, 5000);
             },
             render: function() {
                 var context = this.canvas.getContext('2d'),
