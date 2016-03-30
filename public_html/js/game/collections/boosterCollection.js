@@ -9,8 +9,7 @@ define(function(require) {
           deleteOld: function() {
             var oldBoosters = this.filter(function (booster) {
               var currentTime = Date.now();
-              return (currentTime - booster.get('startLifeTime'))
-                            > booster.get('maxLifeTime');
+              return (currentTime - booster.get('startLifeTime')) > booster.get('maxLifeTime');
             }.bind(this));
             this.remove(oldBoosters);
           },
@@ -23,7 +22,7 @@ define(function(require) {
             }.bind(player));
             _.each(crossedBoosters, function(booster) {
               booster.apply(player, bulletsCollection);
-            })
+            });
             this.remove(crossedBoosters);
           },
           createRandom: function(height, width) {
