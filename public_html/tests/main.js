@@ -22,7 +22,8 @@ var tests = [
     'models/scoreboard.test',
     'game/models/player.test',
     'game/collections/bulletCollection.test',
-    'models/session.test'
+    'models/session.test',
+    'game/collections/barriersCollection.test'
 ];
 
 require(tests, function () {
