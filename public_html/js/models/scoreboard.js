@@ -1,22 +1,26 @@
 define(function(require) {
     var Backbone = require('backbone');
     var _ = require('underscore');
+    var $ = require('jquery');
     var ScoreboardModel = Backbone.Model.extend({
         getScores: function() {
-            this.sync();
             this.order();
             return {scores: this.get('scores')};
         },
-        sync : function () {
-            this.set('scores',
-                [{name: 'Alex', score: 100},
-                {name: 'Sasha', score: 100},
-                {name: 'Ed', score: 100},
-                {name: 'Dima', score: 100},
-                {name: 'Lex', score: 100},
-                {name: 'Unknown', score: 100},
-                {name: 'test', score: 100},
-                {name: 'player', score: 100}]);
+        sync : function (complete) {
+            $.ajax({
+                method: 'GET',
+                url: '/scoreboard',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    this.set('scores', data.scores);
+                    complete();
+                }.bind(this),
+                error: function () {
+                    this.trigger('errorScores', 'Cannot get scores');
+                }.bind(this)
+            });
         },
         order: function () {
             var scores = this.get('scores');
@@ -25,4 +29,4 @@ define(function(require) {
         }
     });
     return new ScoreboardModel();
-})
+});
