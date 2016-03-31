@@ -10,7 +10,6 @@ define(function (require) {
             this.model.sync(
                 function() {
                     this.$el.html(this.template(this.model.getScores()));
-                    console.log(this.model.getScores());
                 }.bind(this)
             );
         }

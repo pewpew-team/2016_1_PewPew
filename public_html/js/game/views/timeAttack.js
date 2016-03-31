@@ -28,10 +28,10 @@ define(function(require) {
         this.player = new Player(user.get('login'));
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
-        this.barriersView = new BarriersView({collection : barriersCollection}),
-        this.boostersView = new BoostersView({collection : boostersCollection}),
-        this.MAX_TIME = 60*1000,
-        this.RESET_TIME = 10*1000,
+        this.barriersView = new BarriersView({collection : barriersCollection});
+        this.boostersView = new BoostersView({collection : boostersCollection});
+        this.MAX_TIME = 60*1000;
+        this.RESET_TIME = 10*1000;
         this.resetCount = 0;
         barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
         this.player.on('userDestroyed', this.gameOver.bind(this));
@@ -99,6 +99,7 @@ define(function(require) {
           boostersCollection.reset();
       },
       win: function() {
+          this.player.sendResults(this.blockCount);
           bulletsCollection.off('barrierDestroy');
           this.isRunning = false;
           this.player.destroy();

@@ -13,7 +13,6 @@ define(function(require) {
                 url: '/scoreboard',
                 contentType: 'application/json',
                 success: function (data) {
-                    console.log(data);
                     this.set('scores', data.scores);
                     complete();
                 }.bind(this),
