@@ -22,7 +22,7 @@ define(function (require) {
         show: function () {
             this.$el.appendTo("#page");
             this.$el.show();
-            viewManager.trigger('show', this)
+            viewManager.trigger('show', this);
         },
         hide: function () {
             this.$el.hide();

@@ -31,10 +31,10 @@ define(function(require) {
       // Speed up bullets type = 2
       // Big bullets = 3
       var MAX = 3;
-      var randomType = 1 + Math.random() * (MAX - 1)
+      var randomType = 1 + Math.random() * (MAX - 1);
       this.set('type', Math.round(randomType));
     }
 
-  })
+  });
   return Booster;
-})
+});

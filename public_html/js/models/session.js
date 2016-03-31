@@ -13,7 +13,7 @@ define(function(require) {
             this.fetch({
               success: function(data) {
                 this.set('isAuth', true);
-                user.set('_id', data['id']);
+                user.set('_id', data.id);
               }.bind(this),
               error: function() {
                 this.set('isAuth', false);
@@ -30,7 +30,7 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
-                    user.set('_id', data['id']);
+                    user.set('_id', data.id);
                     user.fetch();
                     this.set('isAuth', true);
                     this.trigger('login');
@@ -67,7 +67,7 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function (data) {
                     this.set('isAuth', true);
-                    user.set('_id', data['id']);
+                    user.set('_id', data.id);
                     user.fetch();
                     this.trigger('login');
                 }.bind(this),
@@ -95,8 +95,7 @@ define(function(require) {
             return true;
         },
         isLoggedIn: function() {
-            return true;
-            //return this.get('isAuth');
+            return this.get('isAuth');
         }
     });
 
