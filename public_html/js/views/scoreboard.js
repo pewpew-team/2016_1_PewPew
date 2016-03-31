@@ -12,6 +12,10 @@ define(function (require) {
                     this.$el.html(this.template(this.model.getScores()));
                 }.bind(this)
             );
+        },
+        show: function () {
+            this.render();
+            baseView.prototype.show.call(this);
         }
     });
 

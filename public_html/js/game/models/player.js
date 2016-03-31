@@ -151,7 +151,7 @@ define(function(require) {
               sendResults: function(score) {
                     $.ajax({
                          method: 'PUT',
-                         url: '/rating',
+                         url: 'user/rating',
                          contentType: 'application/json',
                          data: JSON.stringify({
                                'score': score
