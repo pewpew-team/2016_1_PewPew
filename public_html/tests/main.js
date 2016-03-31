@@ -24,7 +24,8 @@ var tests = [
     'game/collections/bulletCollection.test',
     'models/session.test',
     'game/collections/barriersCollection.test',
-    'models/user.test'
+    'models/user.test',
+    'general/viewManager.test'
 ];
 
 require(tests, function () {
