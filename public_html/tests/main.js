@@ -23,7 +23,8 @@ var tests = [
     'game/models/player.test',
     'game/collections/bulletCollection.test',
     'models/session.test',
-    'game/collections/barriersCollection.test'
+    'game/collections/barriersCollection.test',
+    'models/user.test'
 ];
 
 require(tests, function () {

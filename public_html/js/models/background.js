@@ -59,7 +59,7 @@ define(function (require) {
                 return {
                     theme: this.get("themes")[indexTheme],
                     positions: this.get("positionItems")
-                }
+                };
             },
             resizeCanvas: function(newWidth, newHeight) {
                 var width = this.get("canvasWidth"),
