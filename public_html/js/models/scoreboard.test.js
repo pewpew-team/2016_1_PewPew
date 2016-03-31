@@ -14,8 +14,28 @@ define(function (require) {
         var Backbone = require('backbone'),
             _ = require('underscore'),
             scoreboard = require('models/scoreboard'),
-            scores = scoreboard.getScores();
+            server = sinon.fakeServer.create();
+        server.autoRespond = true;
+        server.autoRespondAfter = 400;
 
+        server.respondWith('GET', '/scoreboard',[
+                            200,
+                            {'Content-Type': 'application/json'},
+                            JSON.stringify({
+                                'scores':
+                                [{name: 'Alex', score: 100},
+                                {name: 'Sasha', score: 100},
+                                {name: 'Ed', score: 100},
+                                {name: 'Dima', score: 100},
+                                {name: 'Lex', score: 100},
+                                {name: 'Unknown', score: 100},
+                                {name: 'test', score: 100},
+                                {name: 'player', score: 100}]
+                            })
+        ]);
+
+        scoreboard.sync();
+        var scores = scoreboard.getScores();
 
         QUnit.ok(scores.scores, 'Scores has scores field');
         QUnit.ok(Array.isArray(scores.scores), 'Scores contains array');

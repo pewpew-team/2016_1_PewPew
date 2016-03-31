@@ -1,28 +1,31 @@
 define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
-          Player = Backbone.Model.extend({
+          screenModel = require('models/game'),
+          $ = require('jquery');
+
+      var Player = Backbone.Model.extend({
               defaults: {
                   previousDirection: null,
                   minAngle: 20,
                   gunLength: 40,
-                  bulletSpeed: 25,
+                  bulletSpeed: 15,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
                   velocity: 0,
                   maxVelocity: 10
               },
-              initialize: function(nick, canvasWidth, canvasHeight) {
+              initialize: function(nick) {
                   this.set({
                       'nickname': nick,
-                      'positionX': canvasWidth/2,
-                      'maxPositionX': canvasWidth,
-                      'currentPointerX': canvasWidth/2,
-                      'currentPointerY': canvasHeight/2,
-                      'positionY': canvasHeight - this.get('playerSizeY') / 2,
+                      'positionX': screenModel.get("baseWidth")/2,
+                      'maxPositionX': screenModel.get("baseWidth"),
+                      'currentPointerX': screenModel.get("baseWidth")/2,
+                      'currentPointerY': screenModel.get("baseHeight")/2,
+                      'positionY': screenModel.get("baseHeight") - this.get('playerSizeY') / 2,
                       'minLevelPointer': 0,
-                      'maxLevelPointer': canvasHeight - this.get('playerSizeY') - this.get('gunLength')
+                      'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
                   });
                   this.set('angle', this.getAngle());
               },
@@ -38,8 +41,8 @@ define(function(require) {
                       newPointerPosX,
                       newPointerPosY;
                   if (offsetX && offsetY) {
-                        newPointerPosX = offsetX;
-                        newPointerPosY = offsetY;
+                        newPointerPosX = offsetX / screenModel.get("scale");
+                        newPointerPosY = offsetY / screenModel.get("scale");
                         if ((minLevelPointer >= newPointerPosY)) {
                             newPointerPosY = minLevelPointer;
                         }
@@ -137,7 +140,26 @@ define(function(require) {
                              bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
                           this.trigger('userDestroyed');
                       }
-                  }.bind(this))
+                  }.bind(this));
+              },
+              speedUpPlayer: function() {
+                    this.set('maxVelocity', this.get('maxVelocity') + 5);
+              },
+              speedUpBullets: function() {
+                    this.set('bulletSpeed', this.get('bulletSpeed') + 5);
+              },
+              sendResults: function(score) {
+                    $.ajax({
+                         method: 'PUT',
+                         url: 'user/rating',
+                         contentType: 'application/json',
+                         data: JSON.stringify({
+                               'score': score
+                         }),
+                         error: function () {
+                               this.trigger('errorResult', 'Cannot send scores');
+                         }.bind(this)
+                   });
               }
           });
       return Player;

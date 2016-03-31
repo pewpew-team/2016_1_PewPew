@@ -57,6 +57,12 @@ define(function (require) {
                             this.model.moveRight();
                             break;
                     }
+                    //если человек резко сменил направление движения
+                    if (e.keyCode !== this.model.get("previousDirection")) {
+                        //резкий тормоз
+                        this.model.stay();
+                        this.model.set("previousDirection", e.keyCode);
+                    }
                 },
                 handleKeyup: function(e) {
                     e.preventDefault();

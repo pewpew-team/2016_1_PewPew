@@ -14,7 +14,7 @@ define(function (require) {
                 this.set('themes', themes);
                 var arrayBackgroundThemes = this.get("themes"),
                     norm = this.get("norm"),
-                    randomIndex = Math.random() * arrayBackgroundThemes.length  ^ 0,
+                    randomIndex = Math.random() * arrayBackgroundThemes.length ^ 0,
                     positionItems = [];
                 //запись того что получилось
                 this.set({
@@ -42,13 +42,14 @@ define(function (require) {
                 var arrayBackgroundThemes = this.get("themes"),
                     norm = this.get("norm"),
                     randomIndex = this.get("themeIndex"),
-                    countItem = ((maxX - minX)/norm  ^ 0) * ((maxY - minY)/norm ^ 0);
+                    countItem = ((maxX - minX)/norm  ^ 0) * ((maxY - minY)/norm ^ 0),
+                    theme = arrayBackgroundThemes[randomIndex];
                 //генерация обектов в заданной области
                 for (var i = countItem ; i > 0; i--) {
                     positionItems.push({
                         x : (Math.random() * (maxX - minX) + minX ^ 0),
                         y : (Math.random() * (maxY - minY) + minY ^ 0),
-                        item : Math.random() * arrayBackgroundThemes[randomIndex].items.length ^ 0
+                        item : Math.random() * theme.items.length ^ 0
                     });
                 }
             },
@@ -58,7 +59,7 @@ define(function (require) {
                 return {
                     theme: this.get("themes")[indexTheme],
                     positions: this.get("positionItems")
-                }
+                };
             },
             resizeCanvas: function(newWidth, newHeight) {
                 var width = this.get("canvasWidth"),
