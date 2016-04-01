@@ -66,7 +66,20 @@ define(function (require) {
                 },
                 handleKeyup: function(e) {
                     e.preventDefault();
-                    this.model.dropPushedButton();
+                    switch (e.keyCode) {
+                        case 65:
+                            //проваливание в 37 клавишу
+                        case 37:
+                            this.model.dropPushedButton(-1);
+                            //this.model.moveLeft();
+                            break;
+                        case 68:
+                            //проваливание в 39 клавишу
+                        case 39:
+                            this.model.dropPushedButton(1);
+                            //this.model.moveRight();
+                            break;
+                    }
                 },
                 destroy: function() {
                     $(this.canvas).off('click mousemove');

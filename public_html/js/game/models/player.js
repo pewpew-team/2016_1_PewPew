@@ -4,15 +4,12 @@ define(function(require) {
           screenModel = require('models/game');
       var Player = Backbone.Model.extend({
               defaults: {
-                  previousDirection: null,
-                  minAngle: 20,
                   gunLength: 40,
                   bulletSpeed: 15,
                   minPositionX: 0,
                   playerSizeX: 40,
                   playerSizeY: 20,
-                  velocity: 0,
-                  maxVelocity: 10
+                  maxVelocity: 10,
               },
               initialize: function(nick) {
                   this.set({
@@ -23,15 +20,24 @@ define(function(require) {
                       'currentPointerY': screenModel.get("baseHeight")/2,
                       'positionY': screenModel.get("baseHeight") - this.get('playerSizeY') / 2,
                       'minLevelPointer': 0,
+                      'arrDirections': [],
+                      'velocity': 0,
                       'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
                   });
                   this.set('angle', this.getAngle());
               },
               moveLeft: function() {
-                  this.set('pushedButton', -1);
+                  this.addPushedButton(-1);
               },
               moveRight: function() {
-                  this.set('pushedButton', 1);
+                  this.addPushedButton(1);
+              },
+              addPushedButton: function(pushedDirection) {
+                var arrDirections = this.get('arrDirections');
+                if (arrDirections[arrDirections.length - 1] !== pushedDirection) {
+                  arrDirections.push(pushedDirection);
+                  this.set('arrDirections', arrDirections);
+                }
               },
               pointGunTo: function(offsetX, offsetY) {
                   var minLevelPointer = this.get('minLevelPointer'),
@@ -56,9 +62,11 @@ define(function(require) {
                   return Math.atan2(this.get('currentPointerY') - this.get('positionY'), this.get('currentPointerX') - this.get('positionX'));
               },
               iterate: function() {
-                  var pushedButton = this.get('pushedButton');
+                  console.log(this.get('velocity'));
+                  var arrDirections = this.get('arrDirections');
+                  //console.log(arrDirections);
                   this.pointGunTo();
-                  if (pushedButton) {
+                  if (arrDirections.length) {
                       this.increaseVelocity();
                   } else {
                       this.decreaseVelocity();
@@ -89,16 +97,21 @@ define(function(require) {
               },
               increaseVelocity: function () {
                   var velX = this.get('velocity'),
-                      direction = this.get('pushedButton'),
+                      arrDirections = this.get('arrDirections'),
+                      direction = arrDirections[arrDirections.length - 1],
                       START_VELOCITY = 3.3,
-                      STEP_UP_VELOCITY = 0.9;
+                      STEP_UP_VELOCITY = 0.9,
+                      new_velocity = velX + STEP_UP_VELOCITY * direction;
+
                   //стартовый прыжок, чтобы не было тупки
                   if (velX === 0) {
                       this.set('velocity', direction * START_VELOCITY);
                       return;
                   }
-                  if ((Math.abs(velX) < this.get('maxVelocity'))) {
-                      this.set('velocity', velX + STEP_UP_VELOCITY * direction);
+                  //подходит ли новое значение скорости, если нет, не присваиваем его
+                  if (Math.abs(new_velocity) < this.get('maxVelocity')) {
+                      console.log(STEP_UP_VELOCITY * direction);
+                      this.set('velocity', new_velocity);
                   }
               },
               decreaseVelocity: function () {
@@ -112,8 +125,11 @@ define(function(require) {
                       this.set('velocity', velX - Math.sign(velX) * STEP_DOWN_VELOCITY);
                   }
               },
-              dropPushedButton : function() {
-                  this.set("pushedButton", 0);
+              dropPushedButton : function(direction) {
+                //console.log("drop");
+                  var arrDirections = this.get("arrDirections");
+                  arrDirections.splice(arrDirections.indexOf(direction), 1);
+                  this.set("arrDirections", arrDirections);
               },
               stay: function () {
                   this.set('velocity', 0);
