@@ -320,6 +320,7 @@ game
     width: 350px;
     height: 300px;
     background: url("../img/js-dude.png");
+    transition: all 0.7s;
 }
 .dude__title {
     position: absolute;
@@ -334,22 +335,8 @@ game
     overflow: hidden;
 }
 
-.dude--in {
-  position: fixed;
-  animation: dude-in-animation 2s 1 forwards;
-}
-
-.dude--out {
-  position: fixed;
-  animation: dude-out-animation 2s 1 forwards;
-}
-
-@-webkit-keyframes dude-in-animation {
-  0% {right: -50%; bottom: -50%;}
-  100% {bottom: 0; right: 0;}
-}
-
-@-webkit-keyframes dude-out-animation {
-  0% {bottom: 0; right: 0;}
-  100% {right: -50%; bottom: -50%;}
+.dude--show {
+  bottom: 0; 
+  right: 0;
+  transition: all 0.7s;
 }

@@ -8,7 +8,7 @@ define(function(require) {
             initialize: function(_model, _canvas) {
                 this.canvas = _canvas;
                 this.model = _model;
-                this.model.on('apply', dude.showDude);
+                this.model.on('apply', dude.showDude.bind(dude));
             },
             render: function() {
                 var context = this.canvas.getContext('2d'),

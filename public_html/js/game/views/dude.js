@@ -4,19 +4,18 @@ define(function(require) {
 
     var Dude = Backbone.View.extend({
             hideDude: function () {
-              if ($("#dudeMessage").parent().hasClass('dude--in')) {
-                $("#dudeMessage").parent().removeClass('dude--in');
-                $("#dudeMessage").parent().addClass('dude--out');
-              }
+              this.dudeWrapper && this.dudeWrapper.removeClass('dude--show');
             },
-            removeDude: function () {
-              $("#dudeMessage").parent().removeClass('dude--in');
-              $("#dudeMessage").parent().removeClass('dude--out');
+            diffenition: function () {
+              this.dudeMessage = $("#dudeMessage");
+              this.dudeWrapper = this.dudeMessage.parent();
+              this.dudeMessage.on("mousemove", this.hideDude.bind(this));
             },
             showDude: function (type) {
-              var dudeMessage = $("#dudeMessage"),
-                  msg = "",
-                  dudeWrapper = dudeMessage.parent();
+              //чтобы не обращаться к DOM дереву постоянно
+              //будет сохранено при первом обращении, после будет использовать готовое значение
+              this.dudeMessage || this.diffenition();
+              var msg = "";
               switch (type) {
                 case 1:
                   msg = "Ты стал быстрей, <br> Чувак";
@@ -31,15 +30,9 @@ define(function(require) {
                   msg = "Я не знаю что тебе сказать, <br> Чувак";
                   break;
               }
-              dudeMessage.html(msg);
-              dudeWrapper.removeClass('dude--out');
-              dudeWrapper.addClass('dude--in');
-              setTimeout(function(){
-                if ($("#dudeMessage").parent().hasClass('dude--in')) {
-                  $("#dudeMessage").parent().removeClass('dude--in');
-                  $("#dudeMessage").parent().addClass('dude--out');
-                }
-              }, 2000);
+              this.dudeMessage.html(msg);
+              this.dudeWrapper.addClass('dude--show');
+              setTimeout(this.hideDude.bind(this), 1000);
             }
             
         });
