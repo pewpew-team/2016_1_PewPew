@@ -11,14 +11,14 @@ define(function(require) {
         Backbone = require('backbone'),
         game = require('views/game');
 
-    var View = Backbone.Model.extend({
+    var View = Backbone.View.extend({
       init: function() {
         this.dynamicCanvas = document.getElementById('dynamicLayer');
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
         this.barriersView = new BarriersView({collection : barriersCollection});
-        var NUMBER_X = 12,
+        var NUMBER_X = 24,
             NUMBER_Y = 4,
             RATIO = 0.3,
             LEFT_CORNER_POS_X = 40,
@@ -29,6 +29,7 @@ define(function(require) {
       },
       run: function() {
           this.isRunning = true;
+          document.getElementById('js-score').innerHTML = 'Тренировка';
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {

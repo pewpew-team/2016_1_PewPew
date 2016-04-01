@@ -12,15 +12,17 @@ define(function(require) {
             render: function() {
                 var context = this.canvas.getContext('2d'),
                     model = this.model;
-                context.beginPath();
-                if (model.get('isRemovable')) {
-                    context.fillStyle = removableBlockColor;
-                } else {
-                    context.fillStyle = unremovableBlockColor;
+                if (context) {
+                    context.beginPath();
+                    if (model.get('isRemovable')) {
+                        context.fillStyle = removableBlockColor;
+                    } else {
+                        context.fillStyle = unremovableBlockColor;
+                    }
+                    context.fillRect(model.get('posX') - model.get('sizeX') / 2, model.get('posY') - model.get('sizeY') / 2,
+                        model.get('sizeY'), model.get('sizeX'));
+                    context.closePath();
                 }
-                context.fillRect(model.get('posX') - model.get('sizeX') / 2, model.get('posY') - model.get('sizeY') / 2,
-                    model.get('sizeY'), model.get('sizeX'));
-                context.closePath();
             }
         });
 

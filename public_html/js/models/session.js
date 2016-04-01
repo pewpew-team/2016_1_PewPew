@@ -13,7 +13,7 @@ define(function(require) {
             this.fetch({
               success: function(data) {
                 this.set('isAuth', true);
-                user.set('_id', data['id']);
+                user.set('_id', data._id);
               }.bind(this),
               error: function() {
                 this.set('isAuth', false);
@@ -30,10 +30,10 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
+                    user.set('_id', data._id);
                     user.fetch();
                     this.set('isAuth', true);
                     this.trigger('login');
-                    user.set('_id', data['id']);
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
@@ -67,12 +67,12 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function (data) {
                     this.set('isAuth', true);
-                    user.set('_id', data['id']);
+                    user.set('_id', data._id);
                     user.fetch();
                     this.trigger('login');
                 }.bind(this),
                 error: function () {
-                    this.trigger('invalidLoginPassword');
+                    this.trigger('invalidLoginPassword', 'Invalid data');
                 }.bind(this)
             });
         },

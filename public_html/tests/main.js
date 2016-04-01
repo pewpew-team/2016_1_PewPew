@@ -21,7 +21,11 @@ require.config({
 var tests = [
     'models/scoreboard.test',
     'game/models/player.test',
-    'game/collections/bulletCollection.test'
+    'game/collections/bulletCollection.test',
+    'models/session.test',
+    'game/collections/barriersCollection.test',
+    'models/user.test',
+    'general/viewManager.test'
 ];
 
 require(tests, function () {

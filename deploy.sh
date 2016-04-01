@@ -13,6 +13,5 @@ grunt compile
 echo "Deploy to $1 started"
 
 cd ./dist
-rsync -a --exclude=".*" ./ root@$1:~/frontend
-rsync -a --exclude=".*" ../public_html/img root@$1:~/frontend
-rsync ../node_modules/almond/almond.js root@$1:~/frontend/js/almond.js
+rsync -a --exclude=".*" ./ pewpew@$1:/home/pewpew/pewpew_project/frontend
+rsync -a --exclude=".*" ../public_html/img pewpew@$1:/home/pewpew/pewpew_project/frontend

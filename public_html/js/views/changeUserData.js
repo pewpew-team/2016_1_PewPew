@@ -20,7 +20,6 @@ define(function (require) {
         initialize: function () {
             this.render();
             this.listenTo(user, 'errorOnUpdate', this.showErrorMessage);
-            console.log(user.get('id'));
         },
         show: function() {
             baseView.prototype.show.call(this);
@@ -30,7 +29,7 @@ define(function (require) {
                     document.getElementById('login-input').value = user.get('login');
                 },
                 error: function() {
-                    this.showErrorMessage('Невозможно загрузить данные')
+                    this.showErrorMessage('Невозможно загрузить данные');
                 }.bind(this)
             });
         },

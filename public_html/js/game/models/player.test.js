@@ -11,11 +11,12 @@ define(function (require) {
 
     QUnit.test("Player constructor", function () {
         var Player = require('game/models/player'),
-            canvasWidth = 600,
-            canvasHeight = 800,
             nick = 'Nick';
 
-        var player = new Player(nick, canvasWidth, canvasHeight);
+        var player = new Player(nick),
+            screenModel = require('models/game'),
+            canvasWidth = screenModel.get('baseWidth'),
+            canvasHeight = screenModel.get('baseHeight');
 
         QUnit.equal(player.get('nickname'), nick, 'Nick correct');
         QUnit.equal(player.get('positionX'), canvasWidth/2, 'posX correct');

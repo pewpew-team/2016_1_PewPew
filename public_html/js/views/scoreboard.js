@@ -7,7 +7,15 @@ define(function (require) {
     var View = baseView.extend({
         template: tmpl,
         render: function () {
-            this.$el.html(this.template(this.model.getScores()));
+            this.model.sync(
+                function() {
+                    this.$el.html(this.template(this.model.getScores()));
+                }.bind(this)
+            );
+        },
+        show: function () {
+            this.render();
+            baseView.prototype.show.call(this);
         }
     });
 

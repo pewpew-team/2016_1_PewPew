@@ -6,7 +6,9 @@ define(function(require) {
                 posX: 0,
                 posY: 0,
                 velX: 0,
-                velY: 0
+                velY: 0,
+                sizeX: 15,
+                sizeY: 15
             },
             sync: function() {
                 // TODO отправляет данные на сервер через ws
