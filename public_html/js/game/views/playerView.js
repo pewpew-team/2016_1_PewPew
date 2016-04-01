@@ -17,12 +17,23 @@ define(function (require) {
                     this.drawBase();
                     this.drawGun();
                 },
+                preloaderQueue: {},
+                preloader: function(hash){
+                    if (!this.preloaderQueue[hash]) {
+                        var img = new Image();
+                        img.src = hash;
+                        this.preloaderQueue[hash] = img;
+                    }
+                    return this.preloaderQueue[hash];
+                },
                 drawBase: function() {
                     var context = this.canvas.getContext('2d');
                     context.beginPath();
-                    var img = new Image();
-                    img.src = 'img/spacecraft/' + this.model.getCurrentDirection() + ".png";
-                    context.drawImage(img, this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15, this.model.get('positionY') - this.model.get('playerSizeY')/2);
+                    context.drawImage(
+                        this.preloader( 'img/spacecraft/' + this.model.getCurrentDirection() + '.png' ), 
+                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15, 
+                        this.model.get('positionY') - this.model.get('playerSizeY')/2
+                        );
                     context.closePath();      
                 },
                 drawGun: function() {
