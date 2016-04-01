@@ -279,12 +279,18 @@ game
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border-width: 1px;
     border-style: solid;
-    border-color: black;
-    /*
-    border-image: ...
-    */
+    border-color: rgba(0, 0, 0, 0.41);
+    border-bottom-width: 0;
+    border-top-width: 0;
+    border-left-width: 2px;
+    border-right-width: 2px;
+}
+.game--horizontal_border {
+    border-bottom-width: 2px;
+    border-top-width: 2px;
+    border-left-width: 0;
+    border-right-width: 0;
 }
 #dynamicLayer {
     width: 100%;

@@ -17,7 +17,6 @@ define(function (require) {
                     this.drawBase();
                     this.drawGun();
                 },
-                left: 0,
                 drawBase: function() {
                     var context = this.canvas.getContext('2d');
                     context.beginPath();

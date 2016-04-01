@@ -21,11 +21,13 @@ define(function(require) {
                 this.set({
                     height: expectedSizefullHeight.height,
                     width: expectedSizefullHeight.width,
+                    horizPos: true 
                 });
             } else {
                 this.set({
                     height: expectedSizefullWidth.height,
                     width: expectedSizefullWidth.width,
+                    horizPos: false 
                 });
             }
             this.set("marginTop", topSidebarHeight/2);
