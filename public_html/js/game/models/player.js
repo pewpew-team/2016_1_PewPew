@@ -24,7 +24,7 @@ define(function(require) {
                       'minLevelPointer': 0,
                       'arrDirections': [],
                       'velocity': 0,
-                      'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
+                      'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
                   this.set('angle', this.getAngle());
               },

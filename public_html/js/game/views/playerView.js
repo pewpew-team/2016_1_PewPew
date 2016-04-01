@@ -71,13 +71,11 @@ define(function (require) {
                             //проваливание в 37 клавишу
                         case 37:
                             this.model.dropPushedButton(-1);
-                            //this.model.moveLeft();
                             break;
                         case 68:
                             //проваливание в 39 клавишу
                         case 39:
                             this.model.dropPushedButton(1);
-                            //this.model.moveRight();
                             break;
                     }
                 },
