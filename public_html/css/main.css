@@ -44,7 +44,7 @@ page
     z-index: 2;
     opacity: 1;
     font-family: 'Open Sans', sans-serif;
-    min-width: 460px;
+    min-width: 368px;
 }
 .page__background {
     position: absolute;
@@ -60,7 +60,7 @@ menu
 ========================================================
 */
 .menu {
-    width: 460px;
+    width: 500px;
     background: #ffffff;
     border-radius: 10px;
     overflow: hidden;
@@ -293,22 +293,6 @@ game
 
 /*
 ========================================================
-Адаптивность
-========================================================
-*/
-
-@media screen and (max-width: 700px) {
-    .header {
-        height: 100px;
-    }
-    .header__score {
-        width: 100%;
-        float: left;
-    }
-}
-
-/*
-========================================================
 Говорящий персонаж (dude)
 ========================================================
 */
@@ -339,4 +323,37 @@ game
   bottom: 0; 
   right: 0;
   transition: all 0.7s;
+}
+
+
+/*
+========================================================
+Адаптивность
+========================================================
+*/
+
+@media screen and (max-width: 700px) {
+    .dude {
+        display: none;
+    }
+    .header {
+        height: 40px;
+        line-height: 40px;
+        min-height: 40px;
+        font-size: 10px;
+    }
+    .header__logo {
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .header__user {
+        width: 90px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .menu {
+        width: 100%;
+    }
 }
