@@ -68,13 +68,13 @@ define(function (require) {
         },
         clear: function() {
           if (this.has('login')) {
-            this.set('login', 'Guest')
+            this.set('login', 'Guest');
           }
           if (this.has('email')) {
-            this.set('email', '')
+            this.set('email', '');
           }
           if (this.has('_id')) {
-            this.set('_id', '')
+            this.set('_id', '');
           }
         }
     });

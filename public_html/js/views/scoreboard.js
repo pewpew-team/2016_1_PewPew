@@ -10,9 +10,12 @@ define(function (require) {
             this.model.sync(
                 function() {
                     this.$el.html(this.template(this.model.getScores()));
-                    console.log('here');
                 }.bind(this)
             );
+        },
+        show: function () {
+            this.render();
+            baseView.prototype.show.call(this);
         }
     });
 

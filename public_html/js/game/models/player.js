@@ -1,7 +1,9 @@
 define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
-          screenModel = require('models/game');
+          screenModel = require('models/game'),
+          $ = require('jquery');
+
       var Player = Backbone.Model.extend({
               defaults: {
                   gunLength: 40,
@@ -154,13 +156,26 @@ define(function(require) {
                              bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
                           this.trigger('userDestroyed');
                       }
-                  }.bind(this))
+                  }.bind(this));
               },
               speedUpPlayer: function() {
-                this.set('maxVelocity', this.get('maxVelocity') + 5);
+                    this.set('maxVelocity', this.get('maxVelocity') + 5);
               },
               speedUpBullets: function() {
-                this.set('bulletSpeed', this.get('bulletSpeed') + 5);
+                    this.set('bulletSpeed', this.get('bulletSpeed') + 5);
+              },
+              sendResults: function(score) {
+                    $.ajax({
+                         method: 'PUT',
+                         url: 'user/rating',
+                         contentType: 'application/json',
+                         data: JSON.stringify({
+                               'score': score
+                         }),
+                         error: function () {
+                               this.trigger('errorResult', 'Cannot send scores');
+                         }.bind(this)
+                   });
               }
           });
       return Player;

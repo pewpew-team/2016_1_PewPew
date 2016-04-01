@@ -29,7 +29,7 @@ define(function (require) {
                     document.getElementById('login-input').value = user.get('login');
                 },
                 error: function() {
-                    this.showErrorMessage('Невозможно загрузить данные')
+                    this.showErrorMessage('Невозможно загрузить данные');
                 }.bind(this)
             });
         },

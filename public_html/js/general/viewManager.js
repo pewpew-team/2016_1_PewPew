@@ -1,7 +1,6 @@
 define(function(require){
   var Backbone = require('backbone'),
-      _ = require('underscore'),
-      $ = require('jquery');
+      _ = require('underscore');
 
   var ViewManager = Backbone.Model.extend({
       initialize: function() {
@@ -13,6 +12,6 @@ define(function(require){
         }
         this.set('_presentView', view);
       }
-  })
+  });
   return new ViewManager();
-})
+});

@@ -22,7 +22,7 @@ define(function (require) {
         show: function () {
             this.$el.appendTo("#page");
             this.$el.show();
-            viewManager.trigger('show', this)
+            viewManager.trigger('show', this);
         },
         hide: function () {
             this.$el.hide();
@@ -38,14 +38,15 @@ define(function (require) {
                 size = themeObject.theme.size;
             //рисуем фон
             $("#pageBackground").css("background", "url(" + themeObject.theme.background + ")");
+            var onloadCallback = function () {
+                stage.update();
+            };
             //рисуем изображения
             for (var i = themeObject.positions.length - 1; i >= 0; i--) {
                 item = new createjs.Bitmap( themeObject.theme.items[ themeObject.positions[i].item ] );
                 item.x = themeObject.positions[i].x;
                 item.y = themeObject.positions[i].y;
-                item.image.onload = function () {
-                    stage.update();
-                };
+                item.image.onload = onloadCallback;
                 stage.addChild(item);
             }
         },
