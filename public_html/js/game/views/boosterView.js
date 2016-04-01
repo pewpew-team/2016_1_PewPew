@@ -13,15 +13,11 @@ define(function(require) {
             render: function() {
                 var context = this.canvas.getContext('2d'),
                     model = this.model;
-                context.closePath();
                 context.beginPath();
-                context.arc(this.model.get('posX'), this.model.get('posY'),
-                  this.model.get('radius'), 0, 2 * Math.PI, false);
-                context.fillStyle = 'green';
-                context.fill();
-                context.lineWidth = 5;
-                context.strokeStyle = '#003300';
-                context.stroke();
+                var img = new Image();
+                img.src = "img/booster.png";
+                context.drawImage(img, this.model.get('posX') - img.width/2, this.model.get('posY') - img.height/3);
+                context.closePath();     
             }
         });
 

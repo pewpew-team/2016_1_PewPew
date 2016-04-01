@@ -9,8 +9,8 @@ define(function(require) {
                   gunLength: 40,
                   bulletSpeed: 15,
                   minPositionX: 0,
-                  playerSizeX: 40,
-                  playerSizeY: 20,
+                  playerSizeX: 50,
+                  playerSizeY: 35,
                   maxVelocity: 10,
               },
               initialize: function(nick) {
@@ -125,6 +125,11 @@ define(function(require) {
               },
               stay: function () {
                   this.set('velocity', 0);
+              },
+              getCurrentDirection: function () {
+                  var arrDirections = this.get("arrDirections");
+                  if (arrDirections.length === 0) return 0;
+                  else return arrDirections[arrDirections.length - 1];
               },
               shoot: function () {
                   var angle = this.get('gunAngle'),

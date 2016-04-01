@@ -1,6 +1,7 @@
 define(function (require) {
         var Backbone = require('backbone'),
             _ = require('underscore'),
+            createjs = require('createjs'),
             bulletCollection = require('game/collections/bulletCollection'),
             PlayerView = Backbone.View.extend({
                 initialize: function (model, canvas) {
@@ -16,12 +17,14 @@ define(function (require) {
                     this.drawBase();
                     this.drawGun();
                 },
+                left: 0,
                 drawBase: function() {
                     var context = this.canvas.getContext('2d');
                     context.beginPath();
-                    context.fillStyle = "black";
-                    context.fillRect(this.model.get('positionX') - this.model.get('playerSizeX')/2, this.model.get('positionY') - this.model.get('playerSizeY')/2, this.model.get('playerSizeX'), this.model.get('playerSizeY'));
-                    context.closePath();
+                    var img = new Image();
+                    img.src = 'img/spacecraft/' + this.model.getCurrentDirection() + ".png";
+                    context.drawImage(img, this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15, this.model.get('positionY') - this.model.get('playerSizeY')/2);
+                    context.closePath();      
                 },
                 drawGun: function() {
                     var context = this.canvas.getContext('2d'),

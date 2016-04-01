@@ -36,7 +36,7 @@ define(function (require) {
             removableBlockColor: '#38A57C',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#CC0C39'
+            bulletsColor: '#84D849'
         },{
             background : "img/sandy/bg.png",
             items : [
@@ -50,10 +50,10 @@ define(function (require) {
                 x : 62,
                 y : 54
             },
-            removableBlockColor: '#036564',
+            removableBlockColor: '#556F94',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#CC0C39'
+            bulletsColor: '#795697'
         },{
             background : "img/green2/bg.png",
             items : [
