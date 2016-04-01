@@ -28,12 +28,6 @@ define(function(require) {
                   });
                   this.set('angle', this.getAngle());
               },
-              moveLeft: function() {
-                  this.addPushedButton(-1);
-              },
-              moveRight: function() {
-                  this.addPushedButton(1);
-              },
               addPushedButton: function(pushedDirection) {
                 var arrDirections = this.get('arrDirections');
                 if (arrDirections[arrDirections.length - 1] !== pushedDirection) {
@@ -64,9 +58,7 @@ define(function(require) {
                   return Math.atan2(this.get('currentPointerY') - this.get('positionY'), this.get('currentPointerX') - this.get('positionX'));
               },
               iterate: function() {
-                  console.log(this.get('velocity'));
                   var arrDirections = this.get('arrDirections');
-                  //console.log(arrDirections);
                   this.pointGunTo();
                   if (arrDirections.length) {
                       this.increaseVelocity();
@@ -112,7 +104,6 @@ define(function(require) {
                   }
                   //подходит ли новое значение скорости, если нет, не присваиваем его
                   if (Math.abs(new_velocity) < this.get('maxVelocity')) {
-                      console.log(STEP_UP_VELOCITY * direction);
                       this.set('velocity', new_velocity);
                   }
               },
@@ -128,7 +119,6 @@ define(function(require) {
                   }
               },
               dropPushedButton : function(direction) {
-                //console.log("drop");
                   var arrDirections = this.get("arrDirections");
                   arrDirections.splice(arrDirections.indexOf(direction), 1);
                   this.set("arrDirections", arrDirections);

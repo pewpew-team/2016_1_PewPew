@@ -49,12 +49,12 @@ define(function (require) {
                         case 65:
                             //проваливание в 37 клавишу
                         case 37:
-                            this.model.moveLeft();
+                            this.model.addPushedButton(-1);
                             break;
                         case 68:
                             //проваливание в 39 клавишу
                         case 39:
-                            this.model.moveRight();
+                            this.model.addPushedButton(1);
                             break;
                     }
                     //если человек резко сменил направление движения
