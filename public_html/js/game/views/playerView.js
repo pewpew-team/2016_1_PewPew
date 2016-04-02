@@ -31,7 +31,7 @@ define(function (require) {
                     context.beginPath();
                     context.drawImage(
                         this.preloader( 'img/spacecraft/' + this.model.getCurrentDirection() + '.png' ), 
-                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15, 
+                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48, 
                         this.model.get('positionY') - this.model.get('playerSizeY')/2
                         );
                     context.closePath();      
