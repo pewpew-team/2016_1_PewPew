@@ -1,6 +1,5 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        background = require('models/background'),
         dude = require('game/views/dude'),
         $ = require('jquery');
 
@@ -8,7 +7,7 @@ define(function(require) {
             initialize: function(_model, _canvas) {
                 this.canvas = _canvas;
                 this.model = _model;
-                this.model.on('apply', dude.showDude.bind(dude));
+                dude.listenTo(this.model, 'apply', dude.showDude.bind(dude));
                 this.img = new Image();
                 this.img.src = "img/booster.png";
             },

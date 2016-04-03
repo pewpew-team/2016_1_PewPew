@@ -1,7 +1,7 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        background = require('models/background'),
-        bulletColor = background.getTheme()['theme']['bulletsColor'];
+        theme = require('models/theme'),
+        bulletColor = theme.getTheme()['bulletsColor'];
 
     var bulletView = Backbone.View.extend({
             initialize: function(model, canvas) {

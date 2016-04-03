@@ -1,8 +1,8 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        background = require('models/background'),
-        removableBlockColor = background.getTheme()['theme']['removableBlockColor'],
-        unremovableBlockColor = background.getTheme()['theme']['unremovableBlockColor'];
+        theme = require('models/theme'),
+        removableBlockColor = theme.getTheme()['removableBlockColor'],
+        unremovableBlockColor = theme.getTheme()['unremovableBlockColor'];
 
     var BarrierView = Backbone.View.extend({
             initialize: function(model, canvas) {
