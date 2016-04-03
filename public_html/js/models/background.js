@@ -1,14 +1,13 @@
 define(function (require) {
         var Backbone = require('backbone'),
             createjs = require('createjs'),
-            //TODO оптимизация вызова
-            theme = require('models/theme');
+            theme = require('models/theme').getTheme();
 
         var BackgroundThemes = Backbone.Model.extend({
             defaults: {
                 items: [],
-                //1 объект на поле 150*150
-                norm: 150,
+                //1 объект на поле 200*200
+                norm: 200,
                 width: 0,
                 height: 0
             },
@@ -22,7 +21,7 @@ define(function (require) {
                     items.push({
                         x : (Math.random() * (maxX - minX) + minX ^ 0),
                         y : (Math.random() * (maxY - minY) + minY ^ 0),
-                        imgIndex : Math.random() * theme.getTheme().items.length ^ 0
+                        imgIndex : Math.random() * theme.items.length ^ 0
                     });
                 }
                 this.set("items", items);
@@ -43,7 +42,6 @@ define(function (require) {
                 this.set("height", fillCanvasHeight);
                 this.set("width", fillCanvasWidth);
                 //вызов перерисовки
-                console.log("changeBackground");
                 this.trigger("changeBackground");
             },
             resizeBackground: function(newWidth, newHeight) {
