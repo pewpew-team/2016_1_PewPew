@@ -6,11 +6,11 @@ define(function(require) {
 
       var Player = Backbone.Model.extend({
               defaults: {
-                  gunLength: 40,
+                  gunLength: 50,
                   bulletSpeed: 15,
                   minPositionX: 0,
-                  playerSizeX: 50,
-                  playerSizeY: 35,
+                  playerSizeX: 80,
+                  playerSizeY: 50,
                   maxVelocity: 10,
               },
               initialize: function(nick) {
