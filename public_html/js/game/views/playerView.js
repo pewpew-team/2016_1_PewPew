@@ -7,7 +7,7 @@ define(function (require) {
                 initialize: function (model, canvas) {
                     this.model = model;
                     this.canvas = canvas;
-                    $(this.canvas).on('click', this.handleClick.bind(this))
+                    $(this.canvas).on('click', this.handleClick.bind(this));
                     $(this.canvas).on('mousemove', this.handleMouseMove.bind(this));
                     $(window).on('keydown', this.handleKeydown.bind(this));
                     $(window).on('keyup', this.handleKeyup.bind(this));
@@ -30,11 +30,11 @@ define(function (require) {
                     var context = this.canvas.getContext('2d');
                     context.beginPath();
                     context.drawImage(
-                        this.preloader( 'img/spacecraft/' + this.model.getCurrentDirection() + '.png' ), 
-                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15, 
+                        this.preloader( 'img/spacecraft/' + this.model.getCurrentDirection() + '.png' ),
+                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 15,
                         this.model.get('positionY') - this.model.get('playerSizeY')/2
                         );
-                    context.closePath();      
+                    context.closePath();
                 },
                 drawGun: function() {
                     var context = this.canvas.getContext('2d'),

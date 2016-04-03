@@ -143,13 +143,14 @@ define(function(require) {
               },
               checkPlayerCollision: function() {
                   bulletCollection.each(function(bullet) {
-                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX'),
-                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX'),
-                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY'),
-                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY');
+                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX')/2,
+                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX')/2,
+                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY')/2,
+                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY')/2;
                       if ( bullet.get('posX') < rightPlayerEdge && bullet.get('posX') > leftPlayerEdge &&
                              bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
                           this.trigger('userDestroyed');
+                          console.log('%s %s %s %s', leftPlayerEdge, rightPlayerEdge, bottomPlayerEdge, topPlayerEdge);
                       }
                   }.bind(this));
               },
