@@ -2,13 +2,6 @@ define(function(require) {
   var Backbone = require('backbone');
 
   var Booster = Backbone.Model.extend({
-    /**
-     *  Initialize random booster
-     *  @param {!numbe} posX - Initial position in X direction
-     *  @param {!number} posY - Initial position in Y direction
-     *  @param {!number} maxLifeTime - Maximum time of booster life
-     *  @param {!number} _radius - Booster representation radius
-     */
     initialize: function() {
       this.generateRandomType();
     },

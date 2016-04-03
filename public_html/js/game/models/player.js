@@ -6,15 +6,12 @@ define(function(require) {
 
       var Player = Backbone.Model.extend({
               defaults: {
-                  previousDirection: null,
-                  minAngle: 20,
-                  gunLength: 40,
+                  gunLength: 50,
                   bulletSpeed: 15,
                   minPositionX: 0,
-                  playerSizeX: 40,
-                  playerSizeY: 20,
-                  velocity: 0,
-                  maxVelocity: 10
+                  playerSizeX: 80,
+                  playerSizeY: 50,
+                  maxVelocity: 17,
               },
               initialize: function(nick) {
                   this.set({
@@ -25,15 +22,18 @@ define(function(require) {
                       'currentPointerY': screenModel.get("baseHeight")/2,
                       'positionY': screenModel.get("baseHeight") - this.get('playerSizeY') / 2,
                       'minLevelPointer': 0,
-                      'maxLevelPointer': screenModel.get("baseHeight") - this.get('playerSizeY') - this.get('gunLength')
+                      'arrDirections': [],
+                      'velocity': 0,
+                      'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
                   this.set('angle', this.getAngle());
               },
-              moveLeft: function() {
-                  this.set('pushedButton', -1);
-              },
-              moveRight: function() {
-                  this.set('pushedButton', 1);
+              addPushedButton: function(pushedDirection) {
+                var arrDirections = this.get('arrDirections');
+                if (arrDirections[arrDirections.length - 1] !== pushedDirection) {
+                  arrDirections.push(pushedDirection);
+                  this.set('arrDirections', arrDirections);
+                }
               },
               pointGunTo: function(offsetX, offsetY) {
                   var minLevelPointer = this.get('minLevelPointer'),
@@ -58,9 +58,9 @@ define(function(require) {
                   return Math.atan2(this.get('currentPointerY') - this.get('positionY'), this.get('currentPointerX') - this.get('positionX'));
               },
               iterate: function() {
-                  var pushedButton = this.get('pushedButton');
+                  var arrDirections = this.get('arrDirections');
                   this.pointGunTo();
-                  if (pushedButton) {
+                  if (arrDirections.length) {
                       this.increaseVelocity();
                   } else {
                       this.decreaseVelocity();
@@ -91,16 +91,20 @@ define(function(require) {
               },
               increaseVelocity: function () {
                   var velX = this.get('velocity'),
-                      direction = this.get('pushedButton'),
+                      arrDirections = this.get('arrDirections'),
+                      direction = arrDirections[arrDirections.length - 1],
                       START_VELOCITY = 3.3,
-                      STEP_UP_VELOCITY = 0.9;
+                      STEP_UP_VELOCITY = 0.9,
+                      new_velocity = velX + STEP_UP_VELOCITY * direction;
+
                   //стартовый прыжок, чтобы не было тупки
                   if (velX === 0) {
                       this.set('velocity', direction * START_VELOCITY);
                       return;
                   }
-                  if ((Math.abs(velX) < this.get('maxVelocity'))) {
-                      this.set('velocity', velX + STEP_UP_VELOCITY * direction);
+                  //подходит ли новое значение скорости, если нет, не присваиваем его
+                  if (Math.abs(new_velocity) < this.get('maxVelocity')) {
+                      this.set('velocity', new_velocity);
                   }
               },
               decreaseVelocity: function () {
@@ -114,11 +118,18 @@ define(function(require) {
                       this.set('velocity', velX - Math.sign(velX) * STEP_DOWN_VELOCITY);
                   }
               },
-              dropPushedButton : function() {
-                  this.set("pushedButton", 0);
+              dropPushedButton : function(direction) {
+                  var arrDirections = this.get("arrDirections");
+                  arrDirections.splice(arrDirections.indexOf(direction), 1);
+                  this.set("arrDirections", arrDirections);
               },
               stay: function () {
                   this.set('velocity', 0);
+              },
+              getCurrentDirection: function () {
+                  var arrDirections = this.get("arrDirections");
+                  if (arrDirections.length === 0) return 0;
+                  else return arrDirections[arrDirections.length - 1];
               },
               shoot: function () {
                   var angle = this.get('gunAngle'),
@@ -132,10 +143,10 @@ define(function(require) {
               },
               checkPlayerCollision: function() {
                   bulletCollection.each(function(bullet) {
-                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX'),
-                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX'),
-                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY'),
-                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY');
+                      var leftPlayerEdge = this.get('positionX') - this.get('playerSizeX')/2,
+                          rightPlayerEdge = this.get('positionX') + this.get('playerSizeX')/2,
+                          bottomPlayerEdge = this.get('positionY') + this.get('playerSizeY')/2,
+                          topPlayerEdge = this.get('positionY') - this.get('playerSizeY')/2;
                       if ( bullet.get('posX') < rightPlayerEdge && bullet.get('posX') > leftPlayerEdge &&
                              bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
                           this.trigger('userDestroyed');

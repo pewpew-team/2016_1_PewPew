@@ -41,6 +41,8 @@ define(function (require) {
             dynamicLayer.parentElement.style.width  = model.getCssSize("width");
             dynamicLayer.parentElement.style.height = model.getCssSize("height");
             dynamicLayer.parentElement.style.marginTop = model.getCssSize("marginTop");
+            if (!model.get("horizPos")) dynamicLayer.parentElement.classList.add('game--horizontal_border'); 
+            else dynamicLayer.parentElement.classList.remove('game--horizontal_border'); 
         }
     });
 

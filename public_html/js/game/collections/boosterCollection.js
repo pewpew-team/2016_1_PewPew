@@ -27,7 +27,7 @@ define(function(require) {
           },
           createRandom: function(height, width) {
             var BOOSTER_LIFE = 10*1000,
-                RADIUS = 20,
+                RADIUS = 10,
                 posY = Math.round(height - RADIUS-10),
                 posX = Math.round(RADIUS + Math.random() * (width - 2*RADIUS)),
                 booster = new Booster({

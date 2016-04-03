@@ -5,7 +5,7 @@
         </div>
         <div class = "menu__wrap">
             <div class = "menu__title">
-                Что-то пошло не так.
+                Что-то пошло не так...
             </div>
             <a href = "#main" class = "menu__btn  menu__btn--back">
                 На главную

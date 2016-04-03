@@ -40,7 +40,7 @@ define(function(require) {
 
       },
       run: function() {
-          dude.removeDude();
+          
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
@@ -83,12 +83,12 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          dude.hideDude();
           resultsView.render('Поражение :(');
           resultsView.show();
           this.quitGame();
       },
       quitGame : function() {
+          dude.hideDude();
           bulletsCollection.off('barrierDestroy');
           this.isRunning = false;
           this.playerView.remove();
