@@ -25,30 +25,9 @@ define(function (require) {
         QUnit.equal(player.get('currentPointerY'), canvasHeight/2, 'currentPointerY correct');
         QUnit.equal(player.get('positionY'), canvasHeight - player.get('playerSizeY') / 2, 'positionY correct');
         QUnit.equal(player.get('minLevelPointer'), 0, 'minLevelPointer correct');
-        QUnit.equal(player.get('maxLevelPointer'), canvasHeight - player.get('playerSizeY') - player.get('gunLength'),
-            'maxLevelPointer correct');
+        QUnit.equal(player.get('maxLevelPointer'), canvasHeight*2/3, 'maxLevelPointer correct');
     });
 
-    QUnit.test('Left and right move test', function() {
-        var Player = require('game/models/player'),
-            canvasWidth = 600,
-            canvasHeight = 800,
-            nick = 'Nick',
-            player = new Player(nick, canvasWidth, canvasHeight)
-
-        var prevPosX = player.get('positionX');
-        player.moveLeft();
-        player.iterate();
-        QUnit.ok(player.get('positionX') < prevPosX, 'Player moved left');
-        QUnit.ok(player.get('velocity') < 0, player.get('velocity'));
-        player.stay();
-        QUnit.ok(player.get('velocity') === 0, 'Player moving to left');
-        prevPosX = player.get('positionX');
-        player.moveRight();
-        player.iterate();
-        QUnit.ok(player.get('positionX') > prevPosX, 'Player moved right');
-        QUnit.ok(player.get('velocity') > 0, 'Player moving to right');
-    });
 
     QUnit.test('Testing player shooting', function() {
         var Player = require('game/models/player'),
@@ -60,7 +39,7 @@ define(function (require) {
 
         var collectionLength = bulletsCollection.length;
         player.shoot();
-        QUnit.equal(collectionLength + 1, bulletsCollection.length, 'Bullet added to collection')
+        QUnit.equal(collectionLength + 1, bulletsCollection.length, 'Bullet added to collection');
     });
 
     QUnit.test('Testing player gun moving', function() {
