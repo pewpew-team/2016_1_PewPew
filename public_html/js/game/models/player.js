@@ -11,7 +11,7 @@ define(function(require) {
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
-                  maxVelocity: 10,
+                  maxVelocity: 17,
               },
               initialize: function(nick) {
                   this.set({

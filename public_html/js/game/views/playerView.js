@@ -3,7 +3,9 @@ define(function (require) {
             _ = require('underscore'),
             createjs = require('createjs'),
             bulletCollection = require('game/collections/bulletCollection'),
-            PlayerView = Backbone.View.extend({
+            theme = require('models/theme').getTheme();
+
+        var PlayerView = Backbone.View.extend({
                 initialize: function (model, canvas) {
                     this.model = model;
                     this.canvas = canvas;
@@ -11,6 +13,10 @@ define(function (require) {
                     $(this.canvas).on('mousemove', this.handleMouseMove.bind(this));
                     $(window).on('keydown', this.handleKeydown.bind(this));
                     $(window).on('keyup', this.handleKeyup.bind(this));
+                    //прелоадим все положения игрока
+                    this.preloader(0);
+                    this.preloader(-1);
+                    this.preloader(1);
                 },
                 render: function () {
                     this.model.iterate();
@@ -19,6 +25,7 @@ define(function (require) {
                 },
                 preloaderQueue: {},
                 preloader: function(hash){
+                    hash = 'img/spacecraft/' + hash + '.png';
                     if (!this.preloaderQueue[hash]) {
                         var img = new Image();
                         img.src = hash;
@@ -30,7 +37,7 @@ define(function (require) {
                     var context = this.canvas.getContext('2d');
                     context.beginPath();
                     context.drawImage(
-                        this.preloader( 'img/spacecraft/' + this.model.getCurrentDirection() + '.png' ),
+                        this.preloader( this.model.getCurrentDirection() ),
                         this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48,
                         this.model.get('positionY') - this.model.get('playerSizeY')/2
                         );
@@ -41,7 +48,7 @@ define(function (require) {
                         angle = this.model.get('gunAngle');
                     context.beginPath();
                     context.moveTo(this.model.get('positionX'), this.model.get('positionY'));
-                    context.strokeStyle = "purple";
+                    context.strokeStyle = theme['playerGunColor'];
                     context.lineWidth = 5;
                     context.lineTo(this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'), this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();

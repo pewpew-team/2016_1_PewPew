@@ -1,4 +1,3 @@
-
 define(function (require) {
     return [
         {
@@ -15,11 +14,13 @@ define(function (require) {
                 x : 47,
                 y : 45
             },
-            removableBlockColor: '#E08E4A',
+            removableBlockColor: '#0986B2',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#CC0C39'
-
+            bulletsColor: '#FFF119',
+            boosterColor: '#FFF119',
+            boosterBorderColor: '#0986B2',
+            playerGunColor: '#CC0C39'
         },{
             background : "img/grey/bg.png",
             items : [
@@ -33,10 +34,13 @@ define(function (require) {
                 x : 41,
                 y : 46
             },
-            removableBlockColor: '#38A57C',
+            removableBlockColor: '#E92F2F',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#84D849'
+            bulletsColor: '#FFFC19',
+            boosterColor: '#FFFC19',
+            boosterBorderColor: '#E92F2F',
+            playerGunColor: '#292929'
         },{
             background : "img/sandy/bg.png",
             items : [
@@ -53,7 +57,10 @@ define(function (require) {
             removableBlockColor: '#556F94',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#795697'
+            bulletsColor: '#E92F2F',
+            boosterColor: '#E92F2F',
+            boosterBorderColor: '#556F94',
+            playerGunColor: '#AA14CC'
         },{
             background : "img/green2/bg.png",
             items : [
@@ -71,7 +78,10 @@ define(function (require) {
             removableBlockColor: '#E6781E',
             unremovableBlockColor: 'black',
             playerColor: 'black',
-            bulletsColor: '#FF6C5E'
+            bulletsColor: '#00FF61',
+            boosterColor: '#00FF61',
+            boosterBorderColor: '#E6781E',
+            playerGunColor: '#9819FF'
         }
     ];
 });
