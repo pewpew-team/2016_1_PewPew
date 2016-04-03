@@ -150,7 +150,6 @@ define(function(require) {
                       if ( bullet.get('posX') < rightPlayerEdge && bullet.get('posX') > leftPlayerEdge &&
                              bullet.get('posY') < bottomPlayerEdge && bullet.get('posY') > topPlayerEdge ) {
                           this.trigger('userDestroyed');
-                          console.log('%s %s %s %s', leftPlayerEdge, rightPlayerEdge, bottomPlayerEdge, topPlayerEdge);
                       }
                   }.bind(this));
               },
