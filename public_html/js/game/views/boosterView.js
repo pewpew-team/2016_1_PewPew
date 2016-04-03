@@ -2,7 +2,7 @@ define(function(require) {
     var Backbone = require('backbone'),
         dude = require('game/views/dude'),
         $ = require('jquery'),
-        theme = require('models/theme').getTheme();
+        theme = require('models/theme');
 
     var BoosterView = Backbone.View.extend({
             initialize: function(_model, _canvas) {

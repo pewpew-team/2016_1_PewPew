@@ -11,5 +11,5 @@ define(function (require) {
         },
     });
 
-    return new Themes();
+    return (new Themes()).getTheme();
 });

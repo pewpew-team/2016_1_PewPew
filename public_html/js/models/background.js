@@ -1,7 +1,7 @@
 define(function (require) {
         var Backbone = require('backbone'),
             createjs = require('createjs'),
-            theme = require('models/theme').getTheme();
+            theme = require('models/theme');
 
         var BackgroundThemes = Backbone.Model.extend({
             defaults: {

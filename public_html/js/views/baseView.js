@@ -3,7 +3,7 @@ define(function (require) {
         createjs = require('createjs'),
         Backbone = require('backbone'),
         backgroundModel = require('models/background'),
-        theme = require('models/theme').getTheme(),
+        theme = require('models/theme'),
         viewManager = require('general/viewManager');
 
 

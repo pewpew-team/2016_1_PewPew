@@ -1,6 +1,6 @@
 define(function(require) {
     var Backbone = require('backbone'),
-        theme = require('models/theme').getTheme();
+        theme = require('models/theme');
 
     var BarrierView = Backbone.View.extend({
             initialize: function(model, canvas) {

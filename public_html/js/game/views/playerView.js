@@ -3,7 +3,7 @@ define(function (require) {
             _ = require('underscore'),
             createjs = require('createjs'),
             bulletCollection = require('game/collections/bulletCollection'),
-            theme = require('models/theme').getTheme();
+            theme = require('models/theme');
 
         var PlayerView = Backbone.View.extend({
                 initialize: function (model, canvas) {
