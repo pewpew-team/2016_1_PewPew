@@ -24,7 +24,15 @@ define(function (require) {
                         imgIndex : Math.random() * theme.items.length ^ 0
                     });
                 }
+                items.sort(this.comparePosition);
                 this.set("items", items);
+            },
+            comparePosition: function (a, b) {
+                if (a.y > b.y) {
+                    return -1;
+                } else {
+                    return 1;
+                }
             },
             getItems: function() {
                 return this.get("items");
