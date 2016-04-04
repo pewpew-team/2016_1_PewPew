@@ -9,6 +9,7 @@ define(function(require) {
         resultsView = require('game/views/result'),
         user = require('models/user'),
         Backbone = require('backbone'),
+        dude = require('game/views/dude'),
         game = require('views/game');
 
     var View = Backbone.View.extend({
