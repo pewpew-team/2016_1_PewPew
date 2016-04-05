@@ -11,9 +11,9 @@
           <a href = "#gameMenu" class = "menu__btn menu__btn--small" id = "js-gameOver">
               Назад
           </a>
-          <a href = "#gameMenu" class = "menu__btn menu__btn--small" id = "js-restart">
+          <span class = "menu__btn menu__btn--small" id = "js-gameRestart">
               Заново
-          </a>
+          </span>
         </div>
       </div>
     </div>

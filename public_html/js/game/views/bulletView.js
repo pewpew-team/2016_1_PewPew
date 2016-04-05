@@ -12,8 +12,9 @@ define(function(require) {
                     model = this.model;
                 context.beginPath();
                 context.fillStyle = theme['bulletsColor'];
-                context.fillRect(model.get('posX') - model.get('sizeX') / 2, model.get('posY') - model.get('sizeY') / 2,
-                    model.get('sizeX'), model.get('sizeY'));
+                context.arc(this.model.get('posX'), this.model.get('posY') ,
+                            model.get('sizeX') / 2, 0, 2 * Math.PI, false);
+                context.fill();
                 context.closePath();
             }
         });
