@@ -131,6 +131,15 @@ menu
 .menu__result {
     text-align: center;
 }
+.menu__double-btn-wrap {
+    margin: 10px 2.5%;
+}
+.menu__btn--small {
+    width: 35%;
+    display: inline-block;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+}
 
 /*
 ========================================================
