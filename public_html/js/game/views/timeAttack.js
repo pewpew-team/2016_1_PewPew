@@ -111,7 +111,7 @@ define(function(require) {
       },
       restart: function() {
           this.quitGame();
-          resultsView.off('restart');
+          resultsView.off('restart', this.restart.bind(this));
           this.init();
           this.run();
       },

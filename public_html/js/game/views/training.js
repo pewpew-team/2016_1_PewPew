@@ -27,6 +27,7 @@ define(function(require) {
         barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
         this.player.on('userDestroyed', this.gameOver.bind(this));
         game.on('gameOver', this.quitGame.bind(this));
+        resultsView.on('restart', this.restart.bind(this));
       },
       run: function() {
           this.isRunning = true;
@@ -58,6 +59,12 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
+      },
+      restart: function() {
+          this.quitGame();
+          resultsView.off('restart', this.restart.bind(this));
+          this.init();
+          this.run();
       },
       win: function() {
           this.isRunning = false;
