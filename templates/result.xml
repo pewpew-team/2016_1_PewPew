@@ -1,4 +1,4 @@
-<fest:template xmlns:fest = "http://fest.mail.ru" context_name = "json">
+<fest:template xmlns:fest = "http://fest.mail.ru">
     <div id = "results" class = "menu">
       <div class = "menu__logo logo">
           PewPew

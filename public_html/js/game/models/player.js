@@ -27,6 +27,7 @@ define(function(require) {
                       'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
                   this.set('angle', this.getAngle());
+                  console.log(this.get('maxVelocity'));
               },
               addPushedButton: function(pushedDirection) {
                 var arrDirections = this.get('arrDirections');
