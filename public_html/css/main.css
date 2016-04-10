@@ -131,26 +131,15 @@ menu
 .menu__result {
     text-align: center;
 }
-.menu__btn--small {
-    width: 30%;
-    height: 40px;
-    background-color: #323A45;
-    border: 0;
-    margin: 10px 10% 10px 10%;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 16px;
-    line-height: 40px;
-    transition: all 0.3s;
-    cursor: pointer;
-    display: block;
-    text-align: center;
-    text-decoration: none;
 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.menu__double-btn-wrap {
+    margin: 10px 2.5%;
+}
+.menu__btn--small {
+    width: 35%;
+    display: inline-block;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
 }
 
 /*

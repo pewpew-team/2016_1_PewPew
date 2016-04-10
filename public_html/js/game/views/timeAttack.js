@@ -37,10 +37,10 @@ define(function(require) {
         this.player.on('userDestroyed', this.gameOver.bind(this));
         game.on('quitGame', this.quitGame.bind(this));
         game.on('gameOver', this.gameOver.bind(this));
-
+        resultsView.off('restart');
+        resultsView.on('restart', this.restart.bind(this));
       },
       run: function() {
-          
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
@@ -83,14 +83,14 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          resultsView.render('Поражение :(');
           resultsView.show();
+          resultsView.addMessage('Поражение :(');
           this.quitGame();
       },
       quitGame : function() {
+          this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
-          this.isRunning = false;
           this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
@@ -99,9 +99,9 @@ define(function(require) {
           boostersCollection.reset();
       },
       win: function() {
+          this.isRunning = false;
           this.player.sendResults(this.blockCount);
           bulletsCollection.off('barrierDestroy');
-          this.isRunning = false;
           this.player.destroy();
           this.playerView.destroy();
           bulletsCollection.reset();
@@ -110,13 +110,18 @@ define(function(require) {
           resultsView.render('Победа! Вы уничтожили ' + this.blockCount + ' блоков');
           resultsView.show();
       },
+      restart: function() {
+          this.quitGame();
+          this.init();
+          this.run();
+      },
       _getTime: function() {
           return Date.now() - this.time;
       },
       incBlockCount: function() {
         this.blockCount++;
       }
-    })
+    });
 
     return new View();
 });
