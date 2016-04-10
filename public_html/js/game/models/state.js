@@ -41,7 +41,7 @@ define(function(require) {
         'bullets': bulletArray,
         'barriers': barrierArray
       };
-      this.get('socket').send(JSON.stringify(stateObj));
+      socket.send(JSON.stringify(stateObj));
     },
     sendNewBullet: function(bullet, collection, options) {
       var bulletObj = {
@@ -52,14 +52,14 @@ define(function(require) {
         sizeX: bullet.get('sizeX'),
         sizeY: bullet.get('sizeY')
       };
-      this.get('socket').send(JSON.stringify({bullets: bulletObj}));
+      socket.send(JSON.stringify({bullets: bulletObj}));
     },
     sendPlayerPosition: function() {
       var playerObj = {
         posX: this.get('player').get('positionX'),
         velX: this.get('player').get('velocity')
       };
-      this.get('socket').send(JSON.stringify({player: playerObj}));
+      socket.send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
