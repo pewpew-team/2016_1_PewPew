@@ -6,14 +6,42 @@ define(function(require) {
       Barrier = require('game/models/barrier');
 
   var GameState = Backbone.Model.extend({
-    // ПЕредать игрока и врага
+    // Передать игрока и врага
     initialize: function() {
       this.set('socket', new WebSocket("ws://pewpew.pro/ws"));
       bulletCollection.listenTo(bulletCollection, 'add', this.sendNewBullet.bind(this));
-      socket.onmessage = this.handleMessage.bind(this);
+      this.get('socket').onmessage = this.handleMessage.bind(this);
     },
     sendState: function() {
-      // TODO
+      var bulletArray = [];
+      bulletCollection.each(function(bullet) {
+        bulletArray.push({
+          posX: bullet.get('posX'),
+          posY: bullet.get('posY'),
+          velX: bullet.get('velX'),
+          velY: bullet.get('velY'),
+          sizeX: bullet.get('sizeX'),
+          sizeY: bullet.get('sizeY')
+        });
+      }.bind(this));
+      var barrierArray = [];
+      barrierCollection.each(function(barrier) {
+        barrierArray.push({
+          posX: barrier.get('posX'),
+          posY: barrier.get('posY'),
+          isRemovable: barrier.get('isRemovable')
+        });
+      }.bind(this));
+      var player = {
+        posX: this.get('player').get('positionX'),
+        velX: this.get('player').get('velocity')
+      };
+      var stateObj = {
+        'player': player,
+        'bullets': bulletArray,
+        'barriers': barrierArray
+      };
+      this.get('socket').send(JSON.stringify(stateObj));
     },
     sendNewBullet: function(bullet, collection, options) {
       var bulletObj = {
@@ -24,14 +52,14 @@ define(function(require) {
         sizeX: bullet.get('sizeX'),
         sizeY: bullet.get('sizeY')
       };
-      socket.send(JSON.stringify({bullets: bulletObj}));
+      this.get('socket').send(JSON.stringify({bullets: bulletObj}));
     },
     sendPlayerPosition: function() {
       var playerObj = {
         posX: this.get('player').get('positionX'),
         velX: this.get('player').get('velocity')
       };
-      socket.send(JSON.stringify({player: playerObj}));
+      this.get('socket').send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
