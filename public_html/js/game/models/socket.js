@@ -7,8 +7,8 @@ define(function(require) {
     },
     open: function() {
       this.set('socket', new WebSocket("ws://pewpew.pro/ws"));
-      this.get('socket').onmessage = messageHandler.bind(this);
-      this.get('socket').onopen = openHandler.bind(this);
+      this.get('socket').onmessage = this.messageHandler.bind(this);
+      this.get('socket').onopen = this.openHandler.bind(this);
     },
     addMessageHandler: function(handler) {
       this.set('messageHandlers', this.get('messageHandlers').push(handler));

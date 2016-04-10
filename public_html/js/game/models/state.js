@@ -25,7 +25,7 @@ define(function(require) {
         });
       }.bind(this));
       var barrierArray = [];
-      barrierCollection.each(function(barrier) {
+      barriersCollection.each(function(barrier) {
         barrierArray.push({
           posX: barrier.get('posX'),
           posY: barrier.get('posY'),

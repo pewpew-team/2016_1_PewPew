@@ -16,33 +16,46 @@ define(function(require) {
         game = require('views/game'),
         State = require('game/models/state'),
         waitingView = require('game/views/waiting'),
-        socket = require('game/models/socket');
+        socket = require('game/models/socket'),
+        Enemy = require('game/models/enemy'),
+        EnemyView = require('game/views/enemyView');
+
+    var NUMBER_X = 24,
+        NUMBER_Y = 3,
+        RATIO = 0.3,
+        LEFT_CORNER_POS_X = 50,
+        LEFT_CORNER_POS_Y = 300;
 
 
     var View = Backbone.View.extend({
       init: function() {
-          waitingView.show();
+          //waitingView.show();
           this.dynamicCanvas = document.getElementById('dynamicLayer');
           this.player = new Player(user.get('login'));
           this.playerView = new PlayerView(this.player, this.dynamicCanvas);
+          this.enemy = new Enemy(user.get('login'));
+          this.enemyView = new EnemyView(this.enemy, this.dynamicCanvas);
           this.bulletsView = new BulletsView(bulletsCollection);
           this.barriersView = new BarriersView({collection : barriersCollection});
           this.boostersView = new BoostersView({collection : boostersCollection});
           this.MAX_TIME = 120*1000;
-          socket.addMessageHandler(function (event) {
+          /*socket.addMessageHandler(function (event) {
               var data = JSON.parse(event.data);
               if (data.startGame) {
                   waitingView.hide();
                   this.run();
               }
-          }.bind(this));
+          }.bind(this));*/
           socket.open();
+          this.run();
       },
       run: function() {
-          this.state = new State({
-              'player': this.player
-          });
+          /*this.state = new State({
+              'player': this.player,
+              'enemy': this.enemy
+          });*/
           this.player.on('userDestroyed', this.gameOver.bind(this));
+          this.enemy.on('userDestroyed', this.win.bind(this));
           game.on('quitGame', this.quitGame.bind(this));
           game.on('gameOver', this.gameOver.bind(this));
           resultsView.off('restart');
@@ -51,7 +64,7 @@ define(function(require) {
           this.isRunning = true;
           this.time = Date.now();
           boostersCollection.reset();
-          bulletsCollection.on('barrierDestroy', this.incBlockCount.bind(this));
+          barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -62,6 +75,7 @@ define(function(require) {
           this.boostersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
           boostersCollection.iterate(this.player);
+          boostersCollection.iterate(this.enemy);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
               barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
@@ -71,17 +85,17 @@ define(function(require) {
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
-          if (this._getTime() % 1000 === 0) {
+          /*if (this._getTime() % 1000 === 0) {
               this.state.sendState();
-          }
+          }*/
           this.playerView.render();
-          this.updateScore();
+          this.enemyView.render();
           if (this.isRunning) {
               requestAnimationFrame(_.bind(this.iterate, this));
           }
       },
       gameOver: function() {
-          socket.close('Game Over');
+          //socket.close('Game Over');
           resultsView.show();
           resultsView.addMessage('Поражение :(');
           this.quitGame();
@@ -99,7 +113,7 @@ define(function(require) {
       },
       win: function() {
           this.quitGame();
-          socket.close('Game Over');
+          //socket.close('Game Over');
           resultsView.show();
           resultsView.addMessage('Победа!');
       },
