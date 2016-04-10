@@ -13,24 +13,37 @@ define(function(require) {
         user = require('models/user'),
         Backbone = require('backbone'),
         dude = require('game/views/dude'),
-        game = require('views/game');
+        game = require('views/game'),
+        State = require('game/models/state'),
+        waitingView = require('game/views/waiting');
 
-    var NUMBER_X = 24,
-        NUMBER_Y = 4,
-        RATIO = 0.3,
-        LEFT_CORNER_POS_X = 40,
-        LEFT_CORNER_POS_Y = 40,
-        BOOSTER_PROBABILITY = 0.3;
 
     var View = Backbone.View.extend({
       init: function() {
-        // TODO
+          waitingView.show();
+          this.dynamicCanvas = document.getElementById('dynamicLayer');
+          this.player = new Player(user.get('login'));
+          this.state = new State({
+              'player': this.player
+          });
+          this.playerView = new PlayerView(this.player, this.dynamicCanvas);
+          this.bulletsView = new BulletsView(bulletsCollection);
+          this.barriersView = new BarriersView({collection : barriersCollection});
+          this.boostersView = new BoostersView({collection : boostersCollection});
+          this.MAX_TIME = 120*1000;
+          this.player.on('userDestroyed', this.gameOver.bind(this));
+          game.on('quitGame', this.quitGame.bind(this));
+          game.on('gameOver', this.gameOver.bind(this));
+          resultsView.off('restart');
+          resultsView.on('restart', this.restart.bind(this));
       },
       run: function() {
-        // TODO
-      },
-      updateScore: function() {
-        // TODO
+          this.blockCount = 0;
+          this.isRunning = true;
+          this.time = Date.now();
+          boostersCollection.reset();
+          bulletsCollection.on('barrierDestroy', this.incBlockCount.bind(this));
+          this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
         // TODO
@@ -72,7 +85,7 @@ define(function(require) {
           return Date.now() - this.time;
       },
       incBlockCount: function() {
-        this.blockCount++;
+          this.blockCount++;
       }
     });
 

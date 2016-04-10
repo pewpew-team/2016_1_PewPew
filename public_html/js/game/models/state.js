@@ -3,14 +3,14 @@ define(function(require) {
       bulletCollection = require('game/collections/bulletCollection'),
       barriersCollection = require('game/collections/barriersCollection'),
       Bullet = require('game/models/bullet'),
-      Barrier = require('game/models/barrier');
+      Barrier = require('game/models/barrier'),
+      socket = require('game/models/socket');
 
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
     initialize: function() {
-      this.set('socket', new WebSocket("ws://pewpew.pro/ws"));
       bulletCollection.listenTo(bulletCollection, 'add', this.sendNewBullet.bind(this));
-      this.get('socket').onmessage = this.handleMessage.bind(this);
+      socket.addMessageHandler(this.handleMessage.bind(this));
     },
     sendState: function() {
       var bulletArray = [];

@@ -24,6 +24,10 @@ define(function(require) {
         startTimeAttack: function(e) {
             e.preventDefault();
             this.trigger('startTimeAttack');
+        },
+        startMultiplayer: function(e) {
+            e.preventDefault();
+            this.trigger('startMultiplayer');
         }
     });
 

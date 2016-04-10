@@ -63,7 +63,6 @@ define(function (require) {
             this.navigate('#multiplayer', {trigger: false});
             view.show();
             game['multiplayer'].init();
-            game['multiplayer'].run();
         }
     });
 
