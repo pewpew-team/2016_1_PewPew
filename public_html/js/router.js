@@ -21,9 +21,12 @@ define(function (require) {
         },
         initialize: function () {
             this.currentView = views['main'];
-            this.listenTo(session, 'login', function () { this.navigate('#gameMenu', {trigger: true})}.bind(this));
+            this.listenTo(session, 'login', function () {
+                this.navigate('#gameMenu', {trigger: true})
+            }.bind(this));
             this.listenTo(views['gameMenu'], 'startTraining', this.startTraining);
             this.listenTo(views['gameMenu'], 'startTimeAttack', this.startTimeAttack);
+            this.listenTo(views['gameMenu'], 'startMultiplayer', this.startMultiplayer);
         },
         displayView: function () {
             var view = views[Backbone.history.getFragment()];
@@ -54,6 +57,13 @@ define(function (require) {
             view.show();
             game['timeAttack'].init();
             game['timeAttack'].run();
+        },
+        startMultiplayer: function() {
+            var view = views['game'];
+            this.navigate('#multiplayer', {trigger: false});
+            view.show();
+            game['multiplayer'].init();
+            game['multiplayer'].run();
         }
     });
 
