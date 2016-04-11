@@ -3,11 +3,11 @@
 Динамичная реализация арканодина с возможностью игры для двух человек.
 
 # Разработка
-Технологии: HTML5, CSS3, JS, Backbone, CreateJS.
+Технологии: HTML5, CSS3, JS, Backbone, CreateJS, Grunt, node.js
 Запуск на локальной машине:
-'''shell
+```shell
 npm install
 grunt
-'''
+```
 Node.js сервер будет запущен на порту 8080.
 
