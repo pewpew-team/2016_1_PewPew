@@ -4,16 +4,20 @@ define(function(require) {
   var Socket = Backbone.Model.extend({
     initialize: function() {
       this.set('messageHandlers', []);
+      this.set('openHandlers', []);
     },
     open: function() {
-      this.set('socket', new WebSocket("ws://pewpew.pro/ws"));
+      this.set('socket', new WebSocket("ws://pewpew.pro:8080/ws"));
       this.get('socket').onmessage = this.messageHandler.bind(this);
       this.get('socket').onopen = this.openHandler.bind(this);
     },
     addMessageHandler: function(handler) {
-      this.set('messageHandlers', this.get('messageHandlers').push(handler));
+      var messageHandlers = this.get('messageHandlers');
+      messageHandlers.push(handler);
+      this.set('messageHandlers', messageHandlers);
     },
     messageHandler: function(event) {
+      console.log(event);
       this.get('messageHandlers').forEach(function(handler) {
         handler(event);
       });
@@ -22,9 +26,12 @@ define(function(require) {
       this.get('socket').send(message);
     },
     addOpenHandler: function (handler) {
-      this.set('openHandlers', this.get('openHandlers').push(handler));
+      var openHandlers = this.get('openHandlers');
+      openHandlers.push(handler);
+      this.set('openHandlers', messageHandlers);
     },
     openHandler: function (event) {
+      console.log(event);
       this.get('openHandlers').forEach(function(handler) {
         handler(event);
       });

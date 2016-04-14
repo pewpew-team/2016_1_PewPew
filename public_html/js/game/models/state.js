@@ -9,7 +9,7 @@ define(function(require) {
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
     initialize: function() {
-      bulletCollection.listenTo(bulletCollection, 'add', this.sendNewBullet.bind(this));
+      console.log('init');
       socket.addMessageHandler(this.handleMessage.bind(this));
     },
     sendState: function() {
@@ -34,13 +34,19 @@ define(function(require) {
       }.bind(this));
       var player = {
         posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity')
+        velX: this.get('player').get('velocity'),
+        currentPointerX: this.get('player').get('currentPointerX'),
+        currentPointerY: this.get('player').get('currentPointerY')
       };
       var stateObj = {
         'player': player,
-        'bullets': bulletArray,
-        'barriers': barrierArray
+        'bullets': {
+          isReset : true,
+          bullets: bulletArray
+        }//,
+        //'barriers': barrierArray
       };
+      console.log(JSON.stringify(stateObj));
       socket.send(JSON.stringify(stateObj));
     },
     sendNewBullet: function(bullet, collection, options) {
@@ -57,29 +63,46 @@ define(function(require) {
     sendPlayerPosition: function() {
       var playerObj = {
         posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity')
+        velX: this.get('player').get('velocity'),
+        currentPointerX: this.get('player').get('currentPointerX'),
+        currentPointerY: this.get('player').get('currentPointerY')
       };
       socket.send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
+      console.log(data);
       if(data.player) {
         this.updatePlayer(data.player);
       }
       if(data.bullets) {
-        this.updateBullets(data.bullet);
+        this.updateBullets(data.bullets);
       }
       if(data.barriers) {
         this.updateBarriers(data.barriers);
       }
+      if(data.enemy) {
+        this.updateEnemy(data.enemy);
+      }
+    },
+    updateEnemy: function(data) {
+      this.get('enemy').set({
+        'positionX': data.posX,
+        'velocity': data.velX,
+        'currentPointerX': data.currentPointerX,
+        'currentPointerY': data.currentPointerY
+      });
     },
     updatePlayer: function(data) {
       this.get('player').set({
         'positionX': data.posX,
-        'velocity': data.velX
+        'velocity': data.velX,
+        'currentPointerX': data.currentPointerX,
+        'currentPointerY': data.currentPointerY
       });
     },
-    updateBullet: function(data) {
+    updateBullets: function(data) {
+      console.log(data);
       if (data.isReset) {
         bulletCollection.reset();
       }

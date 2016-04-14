@@ -55,6 +55,7 @@ define(function (require) {
                     context.closePath();
                 },
                 handleClick: function(e) {
+                        console.log('click');
                     e.preventDefault();
                     this.model.pointGunTo( e.offsetX , e.offsetY );
                     this.model.shoot();

@@ -29,7 +29,8 @@ define(function(require) {
 
     var View = Backbone.View.extend({
       init: function() {
-          //waitingView.show();
+          waitingView.show();
+          waitingView.on('cancel', this.quitGame.bind(this));
           this.dynamicCanvas = document.getElementById('dynamicLayer');
           this.player = new Player(user.get('login'));
           this.playerView = new PlayerView(this.player, this.dynamicCanvas);
@@ -39,21 +40,24 @@ define(function(require) {
           this.barriersView = new BarriersView({collection : barriersCollection});
           this.boostersView = new BoostersView({collection : boostersCollection});
           this.MAX_TIME = 120*1000;
-          /*socket.addMessageHandler(function (event) {
+          var context = this.dynamicCanvas.getContext('2d');
+          context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          socket.addMessageHandler(function (event) {
               var data = JSON.parse(event.data);
               if (data.startGame) {
                   waitingView.hide();
                   this.run();
               }
-          }.bind(this));*/
+          }.bind(this));
           socket.open();
-          this.run();
       },
       run: function() {
-          /*this.state = new State({
+          this.state = new State({
               'player': this.player,
               'enemy': this.enemy
-          });*/
+          });
+          this.state.sendState();
+          console.log('sended');
           this.player.on('userDestroyed', this.gameOver.bind(this));
           this.enemy.on('userDestroyed', this.win.bind(this));
           game.on('quitGame', this.quitGame.bind(this));
@@ -85,9 +89,10 @@ define(function(require) {
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
-          /*if (this._getTime() % 1000 === 0) {
+          if (this._getTime() % 1000 === 0) {
+              this.updateScore();
               this.state.sendState();
-          }*/
+          }
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {
@@ -95,32 +100,46 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          //socket.close('Game Over');
+          socket.close('Game Over');
           resultsView.show();
           resultsView.addMessage('Поражение :(');
           this.quitGame();
       },
+      updateScore: function() {
+          var minutes = Math.trunc((this._getTime()/1000) / 60);
+              seconds = String(Math.trunc((this._getTime()/1000) % 60));
+          if (seconds.length == 1) {
+            seconds = '0' + seconds;
+          }
+          var scoreWrapper = document.getElementById('js-score');
+          if (scoreWrapper) {
+            scoreWrapper.innerHTML = minutes + ':' + seconds;
+          }
+      },
       quitGame : function() {
+          console.log('here');
           this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
           this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
+          this.enemyView.remove();
+          this.enemy.destroy();
+          this.enemyView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
       },
       win: function() {
           this.quitGame();
-          //socket.close('Game Over');
+          socket.close('Game Over');
           resultsView.show();
           resultsView.addMessage('Победа!');
       },
       restart: function() {
           this.quitGame();
           this.init();
-          this.run();
       },
       _getTime: function() {
           return Date.now() - this.time;

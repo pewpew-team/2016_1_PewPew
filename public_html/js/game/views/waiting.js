@@ -1,12 +1,13 @@
 define(function (require) {
     var Backbone = require('backbone'),
         tmpl = require('tmpl/waiting'),
-        $ = require('jquery');
+        $ = require('jquery'),
+        socket = require('game/models/socket');
 
     var View = Backbone.View.extend({
         template: tmpl,
         events: {
-            'click #js-cansel': 'cancel',
+            'click #js-cancel': 'cancel'
         },
         initialize: function() {
             this.render();
@@ -21,6 +22,10 @@ define(function (require) {
         hide: function () {
             this.$el.hide();
             this.$el.detach();
+        },
+        cancel: function() {
+            this.trigger('cancel');
+            this.hide();
         }
     });
 
