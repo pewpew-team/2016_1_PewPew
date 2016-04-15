@@ -98,6 +98,7 @@ define(function(require) {
                       'velY': Vy
                   });
                 }
+                this.trugger('shoot', bullet);
                 this.add(bullet);
             },
             incSize: function() {

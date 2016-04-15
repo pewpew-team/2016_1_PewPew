@@ -11,7 +11,7 @@ define(function(require) {
     // Передать игрока и врага
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
-      bulletCollection.on('add', this.sendNewBullet.bind(this));
+      bulletCollection.on('shoot', this.sendNewBullet.bind(this));
     },
     sendState: function() {
       var barrierArray = [];
@@ -34,7 +34,7 @@ define(function(require) {
       };
       socket.send(JSON.stringify(stateObj));
     },
-    sendNewBullet: function(bullet, collection, options) {
+    sendNewBullet: function(bullet) {
       var bulletObj = {
         posX: bullet.get('posX'),
         posY: bullet.get('posY'),
