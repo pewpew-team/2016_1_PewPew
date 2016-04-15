@@ -30,25 +30,24 @@ define(function (require) {
                     return this.preloaderQueue[hash];
                 },
                 drawBase: function() {
-                    var context = this.canvas.getContext('2d'),
-                        width = screenModel.get("baseWidth");
+                    var context = this.canvas.getContext('2d');
                     context.beginPath();
                     context.drawImage(
                         this.preloader( 'enemy_' + this.model.getCurrentDirection() ),
-                        width - this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48,
+                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48,
                         this.model.get('positionY') - this.model.get('playerSizeY')/2
                         );
                     context.closePath();
                 },
                 drawGun: function() {
                     var context = this.canvas.getContext('2d'),
-                        angle = -1*this.model.get('gunAngle'),
-                        width = screenModel.get("baseWidth");
+                        angle = this.model.get('gunAngle');
+
                     context.beginPath();
-                    context.moveTo(width - this.model.get('positionX'), this.model.get('positionY'));
+                    context.moveTo(this.model.get('positionX'), this.model.get('positionY'));
                     context.strokeStyle = theme['playerGunColor'];
                     context.lineWidth = 5;
-                    context.lineTo(width - this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'),
+                    context.lineTo(this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'),
                         this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();
                     context.closePath();

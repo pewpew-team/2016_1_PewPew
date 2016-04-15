@@ -4,7 +4,8 @@ define(function(require) {
       barriersCollection = require('game/collections/barriersCollection'),
       Bullet = require('game/models/bullet'),
       Barrier = require('game/models/barrier'),
-      socket = require('game/models/socket');
+      socket = require('game/models/socket'),
+      screenModel = require('models/game');
 
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
@@ -39,7 +40,7 @@ define(function(require) {
       var stateObj = {
         'player': player,
         'bullets': {
-          isReset : true,
+          isReset : false,
           bullets: bulletArray
         }//,
         //'barriers': barrierArray
@@ -81,10 +82,10 @@ define(function(require) {
       }
     },
     updateEnemy: function(data) {
+      var width = screenModel.get("baseWidth");
       this.get('enemy').set({
-        'positionX': data.posX,
-        'velocity': data.velX,
-        'gunAngle': data.gunAngle
+        'positionX': width - data.posX,
+        'gunAngle': (Math.PI + data.gunAngle) % (Math.PI*2)
       });
     },
     updatePlayer: function(data) {
