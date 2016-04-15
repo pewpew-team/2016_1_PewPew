@@ -3,7 +3,8 @@ define(function (require) {
             _ = require('underscore'),
             createjs = require('createjs'),
             bulletCollection = require('game/collections/bulletCollection'),
-            theme = require('models/theme');
+            theme = require('models/theme'),
+            screenModel = require('models/game');
 
         var EnemyView = Backbone.View.extend({
                 initialize: function (model, canvas) {
@@ -29,24 +30,26 @@ define(function (require) {
                     return this.preloaderQueue[hash];
                 },
                 drawBase: function() {
-                    var context = this.canvas.getContext('2d');
+                    var context = this.canvas.getContext('2d'),
+                        width = screenModel.get("baseWidth");
                     context.beginPath();
                     context.drawImage(
                         this.preloader( 'enemy_' + this.model.getCurrentDirection() ),
-                        this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48,
+                        width - this.model.get('positionX') - this.model.get('playerSizeX')/2 - 48,
                         this.model.get('positionY') - this.model.get('playerSizeY')/2
                         );
                     context.closePath();
                 },
                 drawGun: function() {
                     var context = this.canvas.getContext('2d'),
-                        angle = this.model.get('gunAngle');
+                        angle = -1*this.model.get('gunAngle'),
+                        width = screenModel.get("baseWidth");
                     context.beginPath();
-                    context.moveTo(this.model.get('positionX'), this.model.get('positionY'));
+                    context.moveTo(width - this.model.get('positionX'), this.model.get('positionY'));
                     context.strokeStyle = theme['playerGunColor'];
                     context.lineWidth = 5;
-                    context.lineTo(this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'),
-                                this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
+                    context.lineTo(width - this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'),
+                        this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();
                     context.closePath();
                 },
