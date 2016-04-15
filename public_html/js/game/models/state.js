@@ -43,7 +43,7 @@ define(function(require) {
         sizeX: bullet.get('sizeX'),
         sizeY: bullet.get('sizeY')
       };
-      socket.send(JSON.stringify({bullets: bulletObj}));
+      socket.send(JSON.stringify({bullet: bulletObj}));
     },
     sendPlayerPosition: function() {
       var playerObj = {
