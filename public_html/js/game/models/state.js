@@ -11,19 +11,9 @@ define(function(require) {
     // Передать игрока и врага
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
+      bulletCollection.on('add', this.sendNewBullet.bind(this));
     },
     sendState: function() {
-      var bulletArray = [];
-      bulletCollection.each(function(bullet) {
-        bulletArray.push({
-          posX: bullet.get('posX'),
-          posY: bullet.get('posY'),
-          velX: bullet.get('velX'),
-          velY: bullet.get('velY'),
-          sizeX: bullet.get('sizeX'),
-          sizeY: bullet.get('sizeY')
-        });
-      }.bind(this));
       var barrierArray = [];
       barriersCollection.each(function(barrier) {
         barrierArray.push({
@@ -39,10 +29,7 @@ define(function(require) {
       };
       var stateObj = {
         'player': player,
-        'bullets': {
-          isReset : true,
-          bullets: bulletArray
-        }//,
+        //,
         //'barriers': barrierArray
       };
       socket.send(JSON.stringify(stateObj));
@@ -96,12 +83,10 @@ define(function(require) {
       });
     },
     updateBullets: function(data) {
-      if (data.isReset) {
-        bulletCollection.reset();
-      }
+      bulletCollection.reset();
       var width = screenModel.get("baseWidth"),
           height = screenModel.get("baseHeight");
-      data.bullets.forEach(function(bulletData) {
+      data.forEach(function(bulletData) {
           var bullet = new Bullet({
                        'posX': width - bulletData.posX,
                        'posY': height - bulletData.posY,
