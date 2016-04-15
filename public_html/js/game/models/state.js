@@ -100,7 +100,6 @@ define(function(require) {
         bulletCollection.reset();
       }
       data.bullets.forEach(function(bulletData) {
-        if(bulletData.friendly) {
           var bullet = new Bullet({
                        'posX': bulletData.posX,
                        'posY': bulletData.posY,
@@ -110,7 +109,6 @@ define(function(require) {
                        'sizeY': bulletData.sizeY
                    });
           bulletCollection.add(bullet);
-        }
       });
     },
     updateBarriers: function(data) {
