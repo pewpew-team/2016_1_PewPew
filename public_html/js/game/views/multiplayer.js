@@ -57,7 +57,6 @@ define(function(require) {
               'enemy': this.enemy
           });
           this.state.sendState();
-          console.log('sended');
           this.player.on('userDestroyed', this.gameOver.bind(this));
           this.enemy.on('userDestroyed', this.win.bind(this));
           game.on('quitGame', this.quitGame.bind(this));
@@ -91,6 +90,8 @@ define(function(require) {
           }
           if (this._getTime() % 1000 === 0) {
               this.updateScore();
+          }
+          if (this._getTime() % 100 === 0) {
               this.state.sendState();
           }
           this.playerView.render();
@@ -100,7 +101,7 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          socket.close('Game Over');
+          socket.close();
           resultsView.show();
           resultsView.addMessage('Поражение :(');
           this.quitGame();
@@ -117,7 +118,6 @@ define(function(require) {
           }
       },
       quitGame : function() {
-          console.log('here');
           this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
@@ -133,7 +133,7 @@ define(function(require) {
       },
       win: function() {
           this.quitGame();
-          socket.close('Game Over');
+          socket.close();
           resultsView.show();
           resultsView.addMessage('Победа!');
       },

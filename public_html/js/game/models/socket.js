@@ -36,8 +36,8 @@ define(function(require) {
         handler(event);
       });
     },
-    close: function (message) {
-      this.get('socket').close(message);
+    close: function () {
+      this.get('socket').close();
     }
   });
 
