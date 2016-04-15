@@ -9,7 +9,6 @@ define(function(require) {
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
     initialize: function() {
-      console.log('init');
       socket.addMessageHandler(this.handleMessage.bind(this));
     },
     sendState: function() {
@@ -35,8 +34,7 @@ define(function(require) {
       var player = {
         posX: this.get('player').get('positionX'),
         velX: this.get('player').get('velocity'),
-        currentPointerX: this.get('player').get('currentPointerX'),
-        currentPointerY: this.get('player').get('currentPointerY')
+        gunAngle: this.get('player').get('gunAngle')
       };
       var stateObj = {
         'player': player,
@@ -46,7 +44,6 @@ define(function(require) {
         }//,
         //'barriers': barrierArray
       };
-      console.log(JSON.stringify(stateObj));
       socket.send(JSON.stringify(stateObj));
     },
     sendNewBullet: function(bullet, collection, options) {
@@ -64,14 +61,12 @@ define(function(require) {
       var playerObj = {
         posX: this.get('player').get('positionX'),
         velX: this.get('player').get('velocity'),
-        currentPointerX: this.get('player').get('currentPointerX'),
-        currentPointerY: this.get('player').get('currentPointerY')
+        gunAngle: this.get('player').get('gunAngle')
       };
       socket.send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
-      console.log(data);
       if(data.player) {
         this.updatePlayer(data.player);
       }
@@ -89,20 +84,17 @@ define(function(require) {
       this.get('enemy').set({
         'positionX': data.posX,
         'velocity': data.velX,
-        'currentPointerX': data.currentPointerX,
-        'currentPointerY': data.currentPointerY
+        'gunAngle': data.gunAngle
       });
     },
     updatePlayer: function(data) {
       this.get('player').set({
         'positionX': data.posX,
         'velocity': data.velX,
-        'currentPointerX': data.currentPointerX,
-        'currentPointerY': data.currentPointerY
+        'gunAngle': data.gunAngle
       });
     },
     updateBullets: function(data) {
-      console.log(data);
       if (data.isReset) {
         bulletCollection.reset();
       }
