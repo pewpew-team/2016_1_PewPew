@@ -40,7 +40,7 @@ define(function(require) {
       var stateObj = {
         'player': player,
         'bullets': {
-          isReset : false,
+          isReset : true,
           bullets: bulletArray
         }//,
         //'barriers': barrierArray
@@ -99,12 +99,14 @@ define(function(require) {
       if (data.isReset) {
         bulletCollection.reset();
       }
+      var width = screenModel.get("baseWidth"),
+          height = screenModel.get("baseHeight");
       data.bullets.forEach(function(bulletData) {
           var bullet = new Bullet({
-                       'posX': bulletData.posX,
-                       'posY': bulletData.posY,
-                       'velX': bulletData.velX,
-                       'velY': bulletData.velY,
+                       'posX': width - bulletData.posX,
+                       'posY': height - bulletData.posY,
+                       'velX': -1*bulletData.velX,
+                       'velY': -1*bulletData.velY,
                        'sizeX': bulletData.sizeX,
                        'sizeY': bulletData.sizeY
                    });
