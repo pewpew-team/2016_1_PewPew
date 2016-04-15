@@ -31,7 +31,6 @@ define(function(require) {
       this.set('openHandlers', messageHandlers);
     },
     openHandler: function (event) {
-      console.log(event);
       this.get('openHandlers').forEach(function(handler) {
         handler(event);
       });

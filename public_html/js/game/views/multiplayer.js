@@ -91,9 +91,7 @@ define(function(require) {
           if (this._getTime() % 1000 === 0) {
               this.updateScore();
           }
-          if (this._getTime() % 100 === 0) {
-              this.state.sendState();
-          }
+          this.state.sendState();
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {
