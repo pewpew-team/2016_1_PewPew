@@ -1,5 +1,12 @@
 @import "variables.less";
 
+@alert-background-color: #F5696C;
+@alert-text-color: #ffffff;
+
+@input-background-color: #e9ecf0;
+@input-text-color: #5E6D82;
+@input-text-color-focus: #F3F3F3;
+
 #form__alert {
     width: 80%;
     margin: 10px 10% 10px 10%;
@@ -7,8 +14,8 @@
     border-radius: 5px;
     line-height: 40px;
     font-size: 16px;
-    background: #F5696C;
-    color: #ffffff;
+    background: @alert-background-color;
+    color: @alert-text-color;
     padding-left: 2%;
     padding-right: 2%;
 }
@@ -23,8 +30,8 @@
     font-size: 16px;
     transition: all 0.3s;
 
-    background: #e9ecf0;
-    color: #5E6D82;
+    background: @input-background-color;
+    color: @input-text-color;
     padding-left: 2%;
     padding-right: 2%;
 
@@ -32,7 +39,7 @@
 
 .form__text_input:focus {
     outline: none;
-    background-color: #F3F3F3;
+    background-color: @input-text-color-focus;
 }
 
 .form__submit_input {
@@ -46,13 +53,13 @@
     transition: all 0.3s;
     cursor : pointer;
 
-    background-color: #323A45;
-    color: #FFFFFF;
+    background-color: @button-color-main;
+    color: @button-text-color;
     text-align: center;
 }
 .form__submit_input:focus {
     outline: none;
 }
 .form__submit_input:hover {
-    background: #0E778A;
+    background: @button-color-hover;
 }

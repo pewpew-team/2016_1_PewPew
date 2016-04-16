@@ -81,7 +81,7 @@ body {
 }
 .menu__btn--back {
   background: #e9ecf0;
-  color: #5E6D82;
+  color: #F3F3F3;
 }
 .menu__btn--back:hover {
   background-color: #F3F3F3;
@@ -139,7 +139,7 @@ body {
   transition: all 0.3s;
   cursor: pointer;
   background-color: #323A45;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 }
 .form__submit_input:focus {

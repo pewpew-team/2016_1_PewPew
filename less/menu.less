@@ -1,8 +1,10 @@
 @import 'variables.less';
 
+@menu-background-color: #ffffff;
+
 .menu {
     width: 500px;
-    background: #ffffff;
+    background: @menu-background-color;
     border-radius: 10px;
     overflow: hidden;
     position: absolute;
@@ -32,11 +34,11 @@
 .menu__btn {
     width: 80%;
     height: 40px;
-    background-color: #323A45;
+    background-color: @button-color-main;
     border: 0;
     margin: 10px 10% 10px 10%;
     border-radius: 5px;
-    color: #ffffff;
+    color: @button-text-color;
     font-size: 16px;
     line-height: 40px;
     transition: all 0.3s;
@@ -51,14 +53,14 @@
     outline: none;
 }
 .menu__btn:hover {
-    background: #0E778A;
+    background: @button-color-hover;
 }
 .menu__btn--back {
-    background: #e9ecf0;
-    color: #5E6D82;
+    background: @button-back-color-main;
+    color: @button-back-text-color;
 }
 .menu__btn--back:hover {
-    background-color: #F3F3F3;
+    background-color: @button-back-text-color;
 }
 .menu__result {
     text-align: center;
