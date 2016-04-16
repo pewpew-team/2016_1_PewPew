@@ -12,27 +12,7 @@ define(function(require) {
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
       bulletCollection.on('shoot', this.sendNewBullet.bind(this));
-    },
-    sendState: function() {
-      var barrierArray = [];
-      barriersCollection.each(function(barrier) {
-        barrierArray.push({
-          posX: barrier.get('posX'),
-          posY: barrier.get('posY'),
-          isRemovable: barrier.get('isRemovable')
-        });
-      }.bind(this));
-      var player = {
-        posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity'),
-        gunAngle: this.get('player').get('gunAngle')
-      };
-      var stateObj = {
-        'player': player,
-        //,
-        //'barriers': barrierArray
-      };
-      socket.send(JSON.stringify(stateObj));
+      this.get('player').on('move', this.sendPlayerEvent.bind(this));
     },
     sendNewBullet: function(bullet) {
       var bulletObj = {
@@ -52,6 +32,9 @@ define(function(require) {
         gunAngle: this.get('player').get('gunAngle')
       };
       socket.send(JSON.stringify({player: playerObj}));
+    },
+    sendPlayerEvent: function(direction) {
+      socket.send(JSON.stringify({playerEvent: direction}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
@@ -84,14 +67,12 @@ define(function(require) {
     },
     updateBullets: function(data) {
       bulletCollection.reset();
-      var width = screenModel.get("baseWidth"),
-          height = screenModel.get("baseHeight");
       data.forEach(function(bulletData) {
           var bullet = new Bullet({
-                       'posX': width - bulletData.posX,
-                       'posY': height - bulletData.posY,
-                       'velX': -1*bulletData.velX,
-                       'velY': -1*bulletData.velY,
+                       'posX': bulletData.posX,
+                       'posY': bulletData.posY,
+                       'velX': bulletData.velX,
+                       'velY': bulletData.velY,
                        'sizeX': bulletData.sizeX,
                        'sizeY': bulletData.sizeY
                    });

@@ -67,7 +67,7 @@ define(function(require) {
           this.isRunning = true;
           this.time = Date.now();
           boostersCollection.reset();
-          barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
+          //barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -91,7 +91,6 @@ define(function(require) {
           if (this._getTime() % 1000 === 0) {
               this.updateScore();
           }
-          this.state.sendState();
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {

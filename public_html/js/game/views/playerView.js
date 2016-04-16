@@ -55,7 +55,6 @@ define(function (require) {
                     context.closePath();
                 },
                 handleClick: function(e) {
-                        console.log('click');
                     e.preventDefault();
                     this.model.pointGunTo( e.offsetX , e.offsetY );
                     this.model.shoot();
@@ -71,11 +70,13 @@ define(function (require) {
                             //проваливание в 37 клавишу
                         case 37:
                             this.model.addPushedButton(-1);
+                            this.model.trigger('move', 'left');
                             break;
                         case 68:
                             //проваливание в 39 клавишу
                         case 39:
                             this.model.addPushedButton(1);
+                            this.model.trigger('move', 'right');
                             break;
                     }
                     //если человек резко сменил направление движения
