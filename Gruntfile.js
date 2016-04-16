@@ -102,7 +102,7 @@ module.exports = function(grunt) {
           ],
         },
         files: {
-          'public_html/css/build.css': 'less/main.less'
+          'public_html/css/main.css': 'less/main.less'
         }
       }
     }
