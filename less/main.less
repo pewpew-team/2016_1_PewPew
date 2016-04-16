@@ -1,6 +1,9 @@
-// Mixins
-@import "mixins.less";
 @import "variables.less";
+
+.fullscreen() {
+  width: 100%;
+  height: 100%;
+}
 
 html, body {
   padding: 0;
@@ -32,14 +35,14 @@ html, body {
         line-height: 40px;
         min-height: 40px;
         font-size: 10px;
-    }
-    .header__logo {
-        width: 120px;
-        height: 40px;
-        font-size: 16px;
-    }
-    .header__user {
-        width: 90px;
+        &__logo {
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+        }
+        &__user {
+            width: 90px;
+        }
     }
 }
 

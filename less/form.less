@@ -7,59 +7,49 @@
 @input-text-color: #5E6D82;
 @input-text-color-focus: #F3F3F3;
 
-#form__alert {
+.base-form-element() {
     width: 80%;
+    height: 40px;
     margin: 10px 10% 10px 10%;
     border: 0;
     border-radius: 5px;
     line-height: 40px;
     font-size: 16px;
+}
+
+#form__alert {
+    .base-form-element;
     background: @alert-background-color;
     color: @alert-text-color;
     padding-left: 2%;
     padding-right: 2%;
 }
+.form{
+    &__text_input {
+        .base-form-element;
+        transition: all 0.3s;
+        background: @input-background-color;
+        color: @input-text-color;
+        padding-left: 2%;
+        padding-right: 2%;
+        &:hover {
+            outline: none;
+            background-color: @input-text-color-focus;
+        }
+    }
+    &__submit_input {
+        .base-form-element;
+        transition: all 0.3s;
+        cursor : pointer;
 
-.form__text_input {
-    width: 80%;
-    height: 40px;
-    margin: 10px 10% 10px 10%;
-    border: 0;
-    border-radius: 5px;
-    line-height: 40px;
-    font-size: 16px;
-    transition: all 0.3s;
-
-    background: @input-background-color;
-    color: @input-text-color;
-    padding-left: 2%;
-    padding-right: 2%;
-
-}
-
-.form__text_input:focus {
-    outline: none;
-    background-color: @input-text-color-focus;
-}
-
-.form__submit_input {
-    width: 80%;
-    height: 40px;
-    margin: 10px 10% 10px 10%;
-    border: 0;
-    border-radius: 5px;
-    line-height: 40px;
-    font-size: 16px;
-    transition: all 0.3s;
-    cursor : pointer;
-
-    background-color: @button-color-main;
-    color: @button-text-color;
-    text-align: center;
-}
-.form__submit_input:focus {
-    outline: none;
-}
-.form__submit_input:hover {
-    background: @button-color-hover;
+        background-color: @button-color-main;
+        color: @button-text-color;
+        text-align: center;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            background: @button-color-hover;
+        }
+    }
 }

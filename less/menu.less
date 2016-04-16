@@ -12,66 +12,64 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 4;
-}
-.menu__logo {
-    margin: 0 auto;
-    width: 100%;
-    font-size: 42px;
-    height: 120px;
-    line-height: 120px;
-}
-.menu__wrap {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.menu__title {
-    width: 100%;
-    font-size: 32px;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-}
-.menu__btn {
-    width: 80%;
-    height: 40px;
-    background-color: @button-color-main;
-    border: 0;
-    margin: 10px 10% 10px 10%;
-    border-radius: 5px;
-    color: @button-text-color;
-    font-size: 16px;
-    line-height: 40px;
-    transition: all 0.3s;
-    cursor: pointer;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-
-    user-select: none;
-}
-.menu__btn:focus {
-    outline: none;
-}
-.menu__btn:hover {
-    background: @button-color-hover;
-}
-.menu__btn--back {
-    background: @button-back-color-main;
-    color: @button-back-text-color;
-}
-.menu__btn--back:hover {
-    background-color: @button-back-color-hover;
-}
-.menu__result {
-    text-align: center;
-}
-
-.menu__double-btn-wrap {
-    margin: 10px 2.5%;
-}
-.menu__btn--small {
-    width: 35%;
-    display: inline-block;
-    margin-left: 7.5%;
-    margin-right: 7.5%;
+    &__logo {
+        margin: 0 auto;
+        width: 100%;
+        font-size: 42px;
+        height: 120px;
+        line-height: 120px;
+    }
+    &__wrap {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    &__title {
+        width: 100%;
+        font-size: 32px;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
+    &__btn {
+        width: 80%;
+        height: 40px;
+        background-color: @button-color-main;
+        border: 0;
+        margin: 10px 10% 10px 10%;
+        border-radius: 5px;
+        color: @button-text-color;
+        font-size: 16px;
+        line-height: 40px;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            background: @button-color-hover;
+        }
+        &--back {
+            background: @button-back-color-main;
+            color: @button-back-text-color;
+            &:hover {
+                background-color: @button-back-color-hover;
+            }
+        }
+        &--small {
+            width: 35%;
+            display: inline-block;
+            margin-left: 7.5%;
+            margin-right: 7.5%;
+        }
+    }
+    &__result {
+        text-align: center;
+    }
+    &__double-btn-wrap {
+        margin: 10px 2.5%;
+    }
 }

@@ -86,20 +86,21 @@ body {
 .menu__btn--back:hover {
   background-color: #F3F3F3;
 }
-.menu__result {
-  text-align: center;
-}
-.menu__double-btn-wrap {
-  margin: 10px 2.5%;
-}
 .menu__btn--small {
   width: 35%;
   display: inline-block;
   margin-left: 7.5%;
   margin-right: 7.5%;
 }
+.menu__result {
+  text-align: center;
+}
+.menu__double-btn-wrap {
+  margin: 10px 2.5%;
+}
 #form__alert {
   width: 80%;
+  height: 40px;
   margin: 10px 10% 10px 10%;
   border: 0;
   border-radius: 5px;
@@ -124,7 +125,7 @@ body {
   padding-left: 2%;
   padding-right: 2%;
 }
-.form__text_input:focus {
+.form__text_input:hover {
   outline: none;
   background-color: #F3F3F3;
 }
@@ -155,7 +156,7 @@ body {
   padding-left: 10%;
   padding-right: 10%;
 }
-.scoreboard__name {
+.scoreboard_name {
   width: 80%;
 }
 .scoreboard__rating {
@@ -165,44 +166,6 @@ body {
 .scoreboard__title {
   font-weight: bold;
 }
-/*@header-background-color: #323A45;
-@header-text-color: #FFFFFF;
-
-.header {
-    clear:both;
-    height: 50px;
-    line-height: 50px;
-    min-height: 50px;
-    font-family: 'Press Start 2P', cursive;
-    color: @header-text-color;
-    background: @header-background-color;
-    width: 100%;
-    display: inline-block;
-}
-.header__logo {
-    width: 200px;
-    font-size: 24px;
-    height: 50px;
-    float: left;
-    text-align: left;
-    padding-left: 5%;
-}
-.header__score {
-    text-align: center;
-    width: 50%;
-    margin: 0 auto;
-}
-.header__user {
-    width: 200px;
-    float: right;
-    text-align: right;
-    padding-right: 5%;
-    cursor: pointer;
-}
-.header_a {
-    text-decoration: none;
-    color: white;
-}*/
 .header {
   clear: both;
   height: 50px;
