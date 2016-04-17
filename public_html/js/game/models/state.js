@@ -34,6 +34,7 @@ define(function(require) {
       socket.send(JSON.stringify({player: playerObj}));
     },
     sendPlayerEvent: function(direction) {
+      console.log(JSON.stringify({playerEvent: direction}));
       socket.send(JSON.stringify({playerEvent: direction}));
     },
     handleMessage: function(event) {
@@ -62,7 +63,7 @@ define(function(require) {
       this.get('player').set({
         'positionX': data.posX,
         'velocity': data.velX,
-        'gunAngle': data.gunAngle
+        'gunAngle': (data.gunAngle) % (Math.PI*2)
       });
     },
     updateBullets: function(data) {

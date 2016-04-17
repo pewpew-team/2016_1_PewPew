@@ -56,7 +56,6 @@ define(function(require) {
               'player': this.player,
               'enemy': this.enemy
           });
-          this.state.sendState();
           this.player.on('userDestroyed', this.gameOver.bind(this));
           this.enemy.on('userDestroyed', this.win.bind(this));
           game.on('quitGame', this.quitGame.bind(this));
