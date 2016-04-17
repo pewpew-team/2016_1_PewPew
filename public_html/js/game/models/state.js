@@ -5,7 +5,7 @@ define(function(require) {
       Bullet = require('game/models/bullet'),
       Barrier = require('game/models/barrier'),
       socket = require('game/models/socket'),
-      screenModel = require('models/game');
+      _ = require('underscore');
 
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
@@ -68,10 +68,7 @@ define(function(require) {
     },
     updateBullets: function(data) {
       data.forEach(function(bulletData) {
-          var hasSameId = function(item) {
-            return item.get('id_') === bulletData.bulletId;
-          };
-          var bulletFromCollection = bulletCollection.find(hasSameId.bind(this));
+          var bulletFromCollection = bulletCollection.where({'id_': bulletData.bulletId})[0];
           if ( bulletFromCollection ) {
             bulletFromCollection.set({
                          'posX': bulletData.posX,
@@ -93,6 +90,7 @@ define(function(require) {
                          'id_': bulletData.bulletId
                      });
             bulletCollection.add(bullet);
+            console.log(bulletData.posX, bulletData.posY);
           }
       });
     },
