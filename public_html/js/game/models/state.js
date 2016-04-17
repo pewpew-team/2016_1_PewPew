@@ -80,7 +80,7 @@ define(function(require) {
                          'velY': bulletData.velY,
                          'sizeX': bulletData.sizeX,
                          'sizeY': bulletData.sizeY,
-                         'id_': bulletdata.bulletId
+                         'id_': bulletData.bulletId
                      });
           } else {
             var bullet = new Bullet({
