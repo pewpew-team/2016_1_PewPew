@@ -15,6 +15,7 @@ define(function(require) {
       this.get('player').on('move', this.sendPlayerEvent.bind(this));
     },
     sendNewBullet: function(bullet) {
+      bulletCollection.remove(bullet);
       var bulletObj = {
         posX: bullet.get('posX'),
         posY: bullet.get('posY'),
@@ -34,7 +35,6 @@ define(function(require) {
       socket.send(JSON.stringify({player: playerObj}));
     },
     sendPlayerEvent: function(direction) {
-      console.log(JSON.stringify({playerEvent: direction}));
       socket.send(JSON.stringify({playerEvent: direction}));
     },
     handleMessage: function(event) {
@@ -67,17 +67,33 @@ define(function(require) {
       });
     },
     updateBullets: function(data) {
-      bulletCollection.reset();
       data.forEach(function(bulletData) {
-          var bullet = new Bullet({
-                       'posX': bulletData.posX,
-                       'posY': bulletData.posY,
-                       'velX': bulletData.velX,
-                       'velY': bulletData.velY,
-                       'sizeX': bulletData.sizeX,
-                       'sizeY': bulletData.sizeY
-                   });
-          bulletCollection.add(bullet);
+          var hasSameId = function(item) {
+            return item.get('id_') === bulletData.bulletId;
+          };
+          var bulletFromCollection = bulletCollection.find(hasSameId.bind(this));
+          if ( bulletFromCollection ) {
+            bulletFromCollection.set({
+                         'posX': bulletData.posX,
+                         'posY': bulletData.posY,
+                         'velX': bulletData.velX,
+                         'velY': bulletData.velY,
+                         'sizeX': bulletData.sizeX,
+                         'sizeY': bulletData.sizeY,
+                         'id_': bulletdata.bulletId
+                     });
+          } else {
+            var bullet = new Bullet({
+                         'posX': bulletData.posX,
+                         'posY': bulletData.posY,
+                         'velX': bulletData.velX,
+                         'velY': bulletData.velY,
+                         'sizeX': bulletData.sizeX,
+                         'sizeY': bulletData.sizeY,
+                         'id_': bulletdata.bulletId
+                     });
+            bulletCollection.add(bullet);
+          }
       });
     },
     updateBarriers: function(data) {

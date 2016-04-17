@@ -8,7 +8,8 @@ define(function(require) {
                 velX: 0,
                 velY: 0,
                 sizeX: 15,
-                sizeY: 15
+                sizeY: 15,
+                id_: 0
             },
             iterate: function() {
                 this.set('posX', this.get('posX') + this.get('velX'));

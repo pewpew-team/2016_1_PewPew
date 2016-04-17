@@ -17,7 +17,6 @@ define(function(require) {
       this.set('messageHandlers', messageHandlers);
     },
     messageHandler: function(event) {
-      console.log(event);
       this.get('messageHandlers').forEach(function(handler) {
         handler(event);
       });

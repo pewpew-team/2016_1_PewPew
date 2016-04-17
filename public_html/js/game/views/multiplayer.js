@@ -78,12 +78,6 @@ define(function(require) {
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
           boostersCollection.iterate(this.player);
           boostersCollection.iterate(this.enemy);
-          if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
-              barriersCollection.reset();
-              barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
-              boostersCollection.createRandom(this.dynamicCanvas.height, this.dynamicCanvas.width);
-              this.resetCount++;
-          }
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
