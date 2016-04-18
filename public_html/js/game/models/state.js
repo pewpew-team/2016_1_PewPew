@@ -89,7 +89,6 @@ define(function(require) {
                          'id_': bulletData.bulletId
                      });
             bulletCollection.add(bullet);
-            console.log(bulletData.posX, bulletData.posY);
           }
       });
     },
