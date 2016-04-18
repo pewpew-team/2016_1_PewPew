@@ -20,13 +20,13 @@ define(function (require) {
             '*default': 'displayMain'
         },
         initialize: function () {
-            this.currentView = views['main'];
+            this.currentView = views.main;
             this.listenTo(session, 'login', function () {
-                this.navigate('#gameMenu', {trigger: true})
+                this.navigate('#gameMenu', {trigger: true});
             }.bind(this));
-            this.listenTo(views['gameMenu'], 'startTraining', this.startTraining);
-            this.listenTo(views['gameMenu'], 'startTimeAttack', this.startTimeAttack);
-            this.listenTo(views['gameMenu'], 'startMultiplayer', this.startMultiplayer);
+            this.listenTo(views.gameMenu, 'startTraining', this.startTraining);
+            this.listenTo(views.gameMenu, 'startTimeAttack', this.startTimeAttack);
+            this.listenTo(views.gameMenu, 'startMultiplayer', this.startMultiplayer);
         },
         displayView: function () {
             var view = views[Backbone.history.getFragment()];
@@ -41,28 +41,28 @@ define(function (require) {
             }
         },
         displayMain: function () {
-            var mainView = views['main'];
+            var mainView = views.main;
             mainView.show();
         },
         startTraining: function() {
-            var view = views['game'];
+            var view = views.game;
             this.navigate('#training', {trigger: false});
             view.show();
-            game['training'].init();
-            game['training'].run();
+            game.training.init();
+            game.training.run();
         },
         startTimeAttack: function() {
-            var view = views['game'];
+            var view = views.game;
             this.navigate('#timeAttack', {trigger: false});
             view.show();
-            game['timeAttack'].init();
-            game['timeAttack'].run();
+            game.timeAttack.init();
+            game.timeAttack.run();
         },
         startMultiplayer: function() {
-            var view = views['game'];
+            var view = views.game;
             this.navigate('#multiplayer', {trigger: false});
             view.show();
-            game['multiplayer'].init();
+            game.multiplayer.init();
         }
     });
 
