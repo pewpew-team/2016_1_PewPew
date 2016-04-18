@@ -53,10 +53,9 @@ define(function(require) {
       }
     },
     updateEnemy: function(data) {
-      var width = screenModel.get("baseWidth");
       this.get('enemy').set({
-        'positionX': width - data.posX,
-        'gunAngle': (Math.PI + data.gunAngle) % (Math.PI*2)
+        'positionX': data.posX,
+        'gunAngle': data.gunAngle
       });
     },
     updatePlayer: function(data) {
