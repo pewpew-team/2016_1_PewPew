@@ -57,8 +57,8 @@ define(function(require) {
               'player': this.player,
               'enemy': this.enemy
           });
-          this.player.on('userDestroyed', this.gameOver.bind(this));
-          this.enemy.on('userDestroyed', this.win.bind(this));
+          socket.addMessageHandler(this.player.updateFromWS.bind(this.player));
+          socket.addMessageHandler(this.enemy.updateFromWS.bind(this.enemy));
           game.on('quitGame', this.quitGame.bind(this));
           game.on('gameOver', this.gameOver.bind(this));
           resultsView.off('restart');
@@ -67,7 +67,6 @@ define(function(require) {
           this.isRunning = true;
           this.time = Date.now();
           boostersCollection.reset();
-          //barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -77,8 +76,6 @@ define(function(require) {
           this.barriersView.render();
           this.boostersView.render();
           bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
-          boostersCollection.iterate(this.player);
-          boostersCollection.iterate(this.enemy);
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }

@@ -26,7 +26,7 @@ define(function(require) {
                       'velocity': 0,
                       'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
-                  this.set('angle', this.getAngle());
+                  this.set('gunAngle', this.getAngle());
               },
               addPushedButton: function(pushedDirection) {
                 var arrDirections = this.get('arrDirections');
@@ -171,7 +171,16 @@ define(function(require) {
                                this.trigger('errorResult', 'Cannot send scores');
                          }.bind(this)
                    });
-              }
+             },
+             updateFromWS: function(data) {
+                  if(data.player) {
+                        this.set({
+                              'positionX': data.posX,
+                              'velocity': data.velX,
+                              'gunAngle': (data.gunAngle) % (Math.PI*2)
+                        });
+                  }
+            }
           });
       return Player;
   }

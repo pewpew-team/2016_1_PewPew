@@ -12,7 +12,7 @@ define(function(require) {
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
       bulletCollection.on('shoot', this.sendNewBullet.bind(this));
-      this.get('player').on('move', this.sendPlayerEvent.bind(this));
+      this.get('player').on('change', this.sendPlayerPosition);
     },
     sendNewBullet: function(bullet) {
       bulletCollection.remove(bullet);
@@ -26,44 +26,22 @@ define(function(require) {
       };
       socket.send(JSON.stringify({bullet: bulletObj}));
     },
-    sendPlayerPosition: function() {
+    sendPlayerPosition: function(playerModel) {
       var playerObj = {
-        posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity'),
-        gunAngle: this.get('player').get('gunAngle')
+        posX: playerModel.get('positionX'),
+        velX: playerModel.get('velocity'),
+        gunAngle: playerModel.get('angle')
       };
       socket.send(JSON.stringify({player: playerObj}));
     },
-    sendPlayerEvent: function(direction) {
-      socket.send(JSON.stringify({playerEvent: direction}));
-    },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
-      if(data.player) {
-        this.updatePlayer(data.player);
-      }
       if(data.bullets) {
         this.updateBullets(data.bullets);
       }
       if(data.barriers) {
         this.updateBarriers(data.barriers);
       }
-      if(data.enemy) {
-        this.updateEnemy(data.enemy);
-      }
-    },
-    updateEnemy: function(data) {
-      this.get('enemy').set({
-        'positionX': data.posX,
-        'gunAngle': data.gunAngle
-      });
-    },
-    updatePlayer: function(data) {
-      this.get('player').set({
-        'positionX': data.posX,
-        'velocity': data.velX,
-        'gunAngle': (data.gunAngle) % (Math.PI*2)
-      });
     },
     updateBullets: function(data) {
       data.forEach(function(bulletData) {

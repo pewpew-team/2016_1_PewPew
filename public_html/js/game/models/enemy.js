@@ -40,6 +40,14 @@ define(function(require) {
                 if (this.get('velocity') === 0) {
                   return 0;
                 }
+              },
+              updateFromWS: function(data) {
+                if(data.enemy) {
+                  this.set({
+                    'positionX': data.posX,
+                    'gunAngle': data.gunAngle
+                  });
+                }
               }
           });
       return Enemy;
