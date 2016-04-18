@@ -2,7 +2,8 @@ define(function (require) {
     var tmpl = require('tmpl/game'),
         _ = require('underscore'),
         model = require('models/game'),
-        baseView = require('views/baseView');
+        baseView = require('views/baseView'),
+        bulletsCollection = require('game/collections/bulletCollection');
 
     var View = baseView.extend({
         template: tmpl,
@@ -16,6 +17,7 @@ define(function (require) {
             $(window).on("resize", _.bind(this.resizeGameArea, this));
         },
         show: function () {
+            bulletsCollection.isAddable = true;
             baseView.prototype.show.apply(this, arguments);
             this.resizeGameArea();
         },
@@ -41,8 +43,8 @@ define(function (require) {
             dynamicLayer.parentElement.style.width  = model.getCssSize("width");
             dynamicLayer.parentElement.style.height = model.getCssSize("height");
             dynamicLayer.parentElement.style.marginTop = model.getCssSize("marginTop");
-            if (!model.get("horizPos")) dynamicLayer.parentElement.classList.add('game--horizontal_border'); 
-            else dynamicLayer.parentElement.classList.remove('game--horizontal_border'); 
+            if (!model.get("horizPos")) dynamicLayer.parentElement.classList.add('game--horizontal_border');
+            else dynamicLayer.parentElement.classList.remove('game--horizontal_border');
         }
     });
 

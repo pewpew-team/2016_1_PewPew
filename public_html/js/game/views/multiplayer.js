@@ -40,6 +40,7 @@ define(function(require) {
           this.barriersView = new BarriersView({collection : barriersCollection});
           this.boostersView = new BoostersView({collection : boostersCollection});
           this.MAX_TIME = 120*1000;
+          bulletsCollection.isAddable = false;
           var context = this.dynamicCanvas.getContext('2d');
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           socket.addMessageHandler(function (event) {

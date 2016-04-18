@@ -4,6 +4,9 @@ define(function(require) {
         _ = require('underscore'),
         BulletCollection = Backbone.Collection.extend({
             model: Bullet,
+            initialize: function() {
+                this.isAddable = true;
+            },
             iterate: function(barriersCollection, screenWidth, screenHeight) {
                 this.screenWidth = screenWidth;
                 this.screenHeight = screenHeight;
@@ -99,7 +102,9 @@ define(function(require) {
                   });
                 }
                 this.trigger('shoot', bullet);
-                this.add(bullet);
+                if (this.isAddable) {
+                    this.add(bullet);
+                }
             },
             incSize: function() {
                 if (this._bulletSize) {
