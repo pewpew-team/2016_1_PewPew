@@ -45,8 +45,8 @@ define(function(require) {
                 var data = JSON.parse(event.data);
                 if(data.enemy) {
                   this.set({
-                    'positionX': data.posX,
-                    'gunAngle': data.gunAngle
+                    'positionX': data.enemy.posX,
+                    'gunAngle': data.enemy.gunAngle
                   });
                 }
               }

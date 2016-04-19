@@ -174,11 +174,12 @@ define(function(require) {
              },
              updateFromWS: function(event) {
                   var data = JSON.parse(event.data);
+                  console.log(data.player.posX);
                   if(data.player) {
                         this.set({
-                              'positionX': data.posX,
-                              'velocity': data.velX,
-                              'gunAngle': (data.gunAngle) % (Math.PI*2)
+                              'positionX': data.player.posX,
+                              'velocity': data.player.velX,
+                              'gunAngle': (data.player.gunAngle) % (Math.PI*2)
                         });
                   }
             }

@@ -57,7 +57,6 @@ define(function(require) {
               'player': this.player,
               'enemy': this.enemy
           });
-          socket.addMessageHandler(this.player.updateFromWS.bind(this.player));
           socket.addMessageHandler(this.enemy.updateFromWS.bind(this.enemy));
           game.on('quitGame', this.quitGame.bind(this));
           game.on('gameOver', this.gameOver.bind(this));
