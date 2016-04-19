@@ -41,7 +41,8 @@ define(function(require) {
                   return 0;
                 }
               },
-              updateFromWS: function(data) {
+              updateFromWS: function(event) {
+                var data = JSON.parse(event.data);
                 if(data.enemy) {
                   this.set({
                     'positionX': data.posX,

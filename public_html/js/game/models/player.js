@@ -172,7 +172,8 @@ define(function(require) {
                          }.bind(this)
                    });
              },
-             updateFromWS: function(data) {
+             updateFromWS: function(event) {
+                  var data = JSON.parse(event.data);
                   if(data.player) {
                         this.set({
                               'positionX': data.posX,
