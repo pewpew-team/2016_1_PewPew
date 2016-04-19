@@ -30,7 +30,7 @@ define(function(require) {
       var playerObj = {
         posX: playerModel.get('positionX'),
         velX: playerModel.get('velocity'),
-        gunAngle: playerModel.get('angle')
+        gunAngle: playerModel.get('gunAngle')
       };
       socket.send(JSON.stringify({player: playerObj}));
     },
