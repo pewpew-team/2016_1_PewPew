@@ -79,6 +79,7 @@ define(function(require) {
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
+          this.timeForDiff = Date.now();
           boostersCollection.reset();
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
@@ -88,7 +89,10 @@ define(function(require) {
           this.bulletsView.render();
           this.barriersView.render();
           this.boostersView.render();
-          bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          bulletsCollection.iterate(barriersCollection,
+                                    this.dynamicCanvas.width,
+                                    this.dynamicCanvas.height,
+                                    this._getFrameTimeDiff());
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
@@ -142,6 +146,11 @@ define(function(require) {
       },
       _getTime: function() {
           return Date.now() - this.time;
+      },
+      _getFrameTimeDiff: function() {
+          var result = Date.now() - this.timeForDiff;
+          this.timeForDiff = Date.now();
+          return result;
       }
     });
 
