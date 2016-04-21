@@ -33,6 +33,7 @@ define(function(require) {
       run: function() {
           this.isRunning = true;
           document.getElementById('js-score').innerHTML = 'Тренировка';
+          this.timeForDiff = Date.now();
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -40,7 +41,10 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
-          bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          bulletsCollection.iterate(barriersCollection,
+                                    this.dynamicCanvas.width,
+                                    this.dynamicCanvas.height,
+                                    this._getFrameTimeDiff()/1000);
           if ( !barriersCollection.checkForRemovable() ) {
               this.win();
           }
@@ -74,8 +78,13 @@ define(function(require) {
           barriersCollection.reset();
           resultsView.render('Победа!');
           resultsView.show();
+      },
+      _getFrameTimeDiff: function() {
+          var result = Date.now() - this.timeForDiff;
+          this.timeForDiff = Date.now();
+          return result;
       }
-    })
+  });
 
     return new View();
 });

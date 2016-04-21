@@ -10,7 +10,10 @@ define(function(require) {
       this.set('socket', new WebSocket("ws://pewpew.pro:8080/ws"));
       this.get('socket').onmessage = this.messageHandler.bind(this);
       this.get('socket').onopen = this.openHandler.bind(this);
-      this.get('socket').onclose = function() {console.log('closed');};
+      this.get('socket').onclose = function(arg) {
+        console.log('closed');
+        this.trigger('closed', arg);
+      }.bind(this);
     },
     addMessageHandler: function(handler) {
       var messageHandlers = this.get('messageHandlers');

@@ -24,26 +24,27 @@ define(function(require) {
 
     var View = Backbone.View.extend({
       init: function() {
-        this.dynamicCanvas = document.getElementById('dynamicLayer');
-        this.player = new Player(user.get('login'));
-        this.playerView = new PlayerView(this.player, this.dynamicCanvas);
-        this.bulletsView = new BulletsView(bulletsCollection);
-        this.barriersView = new BarriersView({collection : barriersCollection});
-        this.boostersView = new BoostersView({collection : boostersCollection});
-        this.MAX_TIME = 60*1000;
-        this.RESET_TIME = 10*1000;
-        this.resetCount = 0;
-        barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
-        this.player.on('userDestroyed', this.gameOver.bind(this));
-        game.on('quitGame', this.quitGame.bind(this));
-        game.on('gameOver', this.gameOver.bind(this));
-        resultsView.off('restart');
-        resultsView.on('restart', this.restart.bind(this));
+          this.dynamicCanvas = document.getElementById('dynamicLayer');
+          this.player = new Player(user.get('login'));
+          this.playerView = new PlayerView(this.player, this.dynamicCanvas);
+          this.bulletsView = new BulletsView(bulletsCollection);
+          this.barriersView = new BarriersView({collection : barriersCollection});
+          this.boostersView = new BoostersView({collection : boostersCollection});
+          this.MAX_TIME = 60*1000;
+          this.RESET_TIME = 10*1000;
+          this.resetCount = 0;
+          barriersCollection.createRandom(NUMBER_X, NUMBER_Y, RATIO, LEFT_CORNER_POS_X, LEFT_CORNER_POS_Y);
+          this.player.on('userDestroyed', this.gameOver.bind(this));
+          game.on('quitGame', this.quitGame.bind(this));
+          game.on('gameOver', this.gameOver.bind(this));
+          resultsView.off('restart');
+          resultsView.on('restart', this.restart.bind(this));
       },
       run: function() {
           this.blockCount = 0;
           this.isRunning = true;
           this.time = Date.now();
+          this.timeForDiff = Date.now();
           boostersCollection.reset();
           bulletsCollection.on('barrierDestroy', this.incBlockCount.bind(this));
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
@@ -65,7 +66,10 @@ define(function(require) {
           this.bulletsView.render();
           this.barriersView.render();
           this.boostersView.render();
-          bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          bulletsCollection.iterate(barriersCollection,
+                                    this.dynamicCanvas.width,
+                                    this.dynamicCanvas.height,
+                                    this._getFrameTimeDiff()/1000);
           boostersCollection.iterate(this.player);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
@@ -119,7 +123,12 @@ define(function(require) {
           return Date.now() - this.time;
       },
       incBlockCount: function() {
-        this.blockCount++;
+          this.blockCount++;
+      },
+      _getFrameTimeDiff: function() {
+          var result = Date.now() - this.timeForDiff;
+          this.timeForDiff = Date.now();
+          return result;
       }
     });
 

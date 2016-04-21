@@ -32,6 +32,7 @@ define(function(require) {
         velX: playerModel.get('velocity'),
         gunAngle: playerModel.get('gunAngle')
       };
+      console.log('send');
       socket.send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {

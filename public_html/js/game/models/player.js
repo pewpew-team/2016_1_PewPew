@@ -7,7 +7,7 @@ define(function(require) {
       var Player = Backbone.Model.extend({
               defaults: {
                   gunLength: 50,
-                  bulletSpeed: 15,
+                  bulletSpeed: 600,
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
@@ -154,10 +154,10 @@ define(function(require) {
                   }.bind(this));
               },
               speedUpPlayer: function() {
-                    this.set('maxVelocity', this.get('maxVelocity') + 5);
+                    this.set('maxVelocity', this.get('maxVelocity')*1.20);
               },
               speedUpBullets: function() {
-                    this.set('bulletSpeed', this.get('bulletSpeed') + 5);
+                    this.set('bulletSpeed', this.get('bulletSpeed')*1.20);
               },
               sendResults: function(score) {
                     $.ajax({

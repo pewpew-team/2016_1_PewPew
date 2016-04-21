@@ -51,6 +51,7 @@ define(function(require) {
               }
           }.bind(this));
           socket.open();
+          this.run();
       },
       run: function() {
           this.state = new State({
@@ -58,6 +59,19 @@ define(function(require) {
               'enemy': this.enemy
           });
           socket.addMessageHandler(this.enemy.updateFromWS.bind(this.enemy));
+          socket.addMessageHandler(function (event) {
+              var data = JSON.parse(event.data);
+              if (typeof data.win !== 'undefined') {
+                  socket.close();
+                  resultsView.show();
+                  if (data.win) {
+                      resultsView.addMessage('Победа!');
+                  } else {
+                      resultsView.addMessage('Поражение :(');
+                  }
+                  this.quitGame();
+              }
+          }.bind(this));
           game.on('quitGame', this.quitGame.bind(this));
           game.on('gameOver', this.gameOver.bind(this));
           resultsView.off('restart');
@@ -88,7 +102,6 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          socket.close();
           resultsView.show();
           resultsView.addMessage('Поражение :(');
           this.quitGame();
@@ -105,24 +118,23 @@ define(function(require) {
           }
       },
       quitGame : function() {
+          socket.close();
           this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
-          this.playerView.remove();
-          this.player.destroy();
-          this.playerView.destroy();
-          this.enemyView.remove();
-          this.enemy.destroy();
-          this.enemyView.destroy();
+          delete this.playerView;
+          delete this.player;
+          delete this.enemyView;
+          delete this.enemy;
+          console.log(this.playerView, this.player);
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
       },
       win: function() {
-          this.quitGame();
-          socket.close();
           resultsView.show();
           resultsView.addMessage('Победа!');
+          this.quitGame();
       },
       restart: function() {
           this.quitGame();

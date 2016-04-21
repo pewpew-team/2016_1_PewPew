@@ -7,11 +7,12 @@ define(function(require) {
             initialize: function() {
                 this.isAddable = true;
             },
-            iterate: function(barriersCollection, screenWidth, screenHeight) {
+            iterate: function(barriersCollection, screenWidth, screenHeight, dt) {
                 this.screenWidth = screenWidth;
                 this.screenHeight = screenHeight;
                 this.barriers = barriersCollection;
-                this.each(_.bind(this.iterateBullet, this));
+                this.dt = dt;
+                this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
             },
             deleteOutOfBoxBullets: function() {
@@ -21,7 +22,7 @@ define(function(require) {
                 this.remove(outOfBox);
             },
             iterateBullet: function (bullet) {
-                bullet.iterate();
+                bullet.iterate(this.dt);
                 for (var i = 0; i < this.barriers.length; i++) {
                     if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
                         this.collide(bullet, this.barriers.at(i));
