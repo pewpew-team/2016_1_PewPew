@@ -51,7 +51,6 @@ define(function(require) {
               }
           }.bind(this));
           socket.open();
-          this.run();
       },
       run: function() {
           this.state = new State({
@@ -130,7 +129,6 @@ define(function(require) {
           delete this.player;
           delete this.enemyView;
           delete this.enemy;
-          console.log(this.playerView, this.player);
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();

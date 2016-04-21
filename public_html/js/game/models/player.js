@@ -7,7 +7,7 @@ define(function(require) {
       var Player = Backbone.Model.extend({
               defaults: {
                   gunLength: 50,
-                  bulletSpeed: 600,
+                  bulletSpeed: 1,
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
@@ -174,7 +174,6 @@ define(function(require) {
              },
              updateFromWS: function(event) {
                   var data = JSON.parse(event.data);
-                  console.log(data.player.posX);
                   if(data.player) {
                         this.set({
                               'positionX': data.player.posX,

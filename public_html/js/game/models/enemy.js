@@ -43,7 +43,6 @@ define(function(require) {
               },
               updateFromWS: function(event) {
                 var data = JSON.parse(event.data);
-                console.log(data.enemy.posX);
                 if(data.enemy) {
                   this.set({
                     'positionX': data.enemy.posX,
