@@ -44,7 +44,7 @@ define(function(require) {
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,
-                                    this._getFrameTimeDiff()/1000);
+                                    this._getFrameTimeDiff());
           if ( !barriersCollection.checkForRemovable() ) {
               this.win();
           }
@@ -54,8 +54,9 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          resultsView.render('Поражение :(');
+          resultsView.render();
           resultsView.show();
+          resultsView.addMessage('Поражение :(');
           this.quitGame();
       },
       quitGame : function() {
@@ -76,8 +77,9 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
-          resultsView.render('Победа!');
+          resultsView.render();
           resultsView.show();
+          resultsView.addMessage('Победа!');
       },
       _getFrameTimeDiff: function() {
           var result = Date.now() - this.timeForDiff;

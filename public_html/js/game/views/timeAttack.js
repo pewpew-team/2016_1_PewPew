@@ -69,7 +69,7 @@ define(function(require) {
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,
-                                    this._getFrameTimeDiff()/1000);
+                                    this._getFrameTimeDiff());
           boostersCollection.iterate(this.player);
           if ( !barriersCollection.checkForRemovable() || this._getTime() / this.RESET_TIME > this.resetCount) {
               barriersCollection.reset();
@@ -80,7 +80,7 @@ define(function(require) {
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }
-          this.playerView.render();
+          this.playerView.render(this._getFrameTimeDiff());
           this.updateScore();
           if (this.isRunning) {
               requestAnimationFrame(_.bind(this.iterate, this));
@@ -111,8 +111,8 @@ define(function(require) {
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
-          resultsView.render('Победа! Вы уничтожили ' + this.blockCount + ' блоков');
           resultsView.show();
+          resultsView.addMessage('Победа! Вы уничтожили ' + this.blockCount + ' блоков');
       },
       restart: function() {
           this.quitGame();

@@ -11,7 +11,7 @@ define(function(require) {
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
-                  maxVelocity: 17,
+                  maxVelocity: 17
               },
               initialize: function(nick) {
                   this.set({
@@ -68,7 +68,7 @@ define(function(require) {
                   this.checkPlayerCollision();
                   this.move();
               },
-              move: function () {
+              move: function (dt) {
                   var velX = this.get('velocity'),
                       posX = this.get('positionX'),
                       sizeX = this.get('playerSizeX'),
@@ -134,7 +134,7 @@ define(function(require) {
               shoot: function () {
                   var angle = this.get('gunAngle'),
                       V = this.get('bulletSpeed'),
-                      velX = V*Math.cos(angle) + this.get('velocity'),
+                      velX = V*Math.cos(angle),
                       velY = V*Math.sin(angle),
                       gunLength = this.get('gunLength'),
                       posX = this.get('positionX') + Math.cos(angle) * gunLength,

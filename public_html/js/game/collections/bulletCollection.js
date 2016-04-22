@@ -52,8 +52,7 @@ define(function(require) {
                         sideParallelX : {},
                         sideParallelY : {}
                     },
-                    fault = 3,
-                    deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
+                    fault = 2;
                 //точки столкновения со сторонами паралельно X или Y
                 intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
                 intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
@@ -62,20 +61,20 @@ define(function(require) {
                 //попадание на угол
                 if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
-                    bullet.set('velX', -1 * bullet.get('velX') + deviation);
-                    bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                    bullet.set('velX', -1 * bullet.get('velX'));
+                    bullet.set('velY', -1 * bullet.get('velY'));
                     return;
                 }
                 //левая или правая грань
                 if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
-                    bullet.set('velX', -1 * bullet.get('velX') + deviation);
+                    bullet.set('velX', -1 * bullet.get('velX'));
                     return;
                 }
                 //нижняя или верхняя грань
                 if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
-                    bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                    bullet.set('velY', -1 * bullet.get('velY'));
                     return;
                 }
             },

@@ -51,6 +51,7 @@ define(function(require) {
               }
           }.bind(this));
           socket.open();
+          this.run();
       },
       run: function() {
           this.state = new State({
