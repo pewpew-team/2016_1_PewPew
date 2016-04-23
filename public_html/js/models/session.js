@@ -11,11 +11,11 @@ define(function(require) {
         urlRoot: '/session',
         initialize: function() {
             this.fetch({
-              success: function(data) {
+              success: function(model, response) {
                 this.set('isAuth', true);
-                user.set('_id', data._id);
+                user.set('id', response.id);
               }.bind(this),
-              error: function() {
+              error: function(model, response) {
                 this.set('isAuth', false);
               }.bind(this)
             });
@@ -30,7 +30,7 @@ define(function(require) {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
-                    user.set('_id', data._id);
+                    user.set('id', data.id);
                     user.fetch();
                     this.set('isAuth', true);
                     this.trigger('login');
@@ -41,10 +41,7 @@ define(function(require) {
             });
         },
         logout: function() {
-            $.ajax({
-                method: 'DELETE',
-                url: '/session',
-                contentType: 'application/json',
+            this.destroy({
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
@@ -67,7 +64,7 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function (data) {
                     this.set('isAuth', true);
-                    user.set('_id', data._id);
+                    user.set('id', data.id);
                     user.fetch();
                     this.trigger('login');
                 }.bind(this),

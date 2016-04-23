@@ -5,22 +5,16 @@ define(function (require) {
     var User = Backbone.Model.extend({
         defaults: {
             'login': 'Guest',
-            'email': '',
-            '_id': ''
+            'email': ''
         },
-        urlRoot: function () {
-            return '/user/' + this.get('_id');
-        },
+        urlRoot: '/user',
         changeData: function(login, email) {
             if ( this.validateLoginEmail(login, email) ) {
-                $.ajax({
-                    method: 'PUT',
-                    url: '/user/'+this.get('_id'),
-                    data: JSON.stringify({
-                        'login': login,
-                        'email': email
-                    }),
-                    contentType: 'application/json',
+                this.set({
+                    'login': login,
+                    'email': email
+                });
+                this.save({
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -32,13 +26,8 @@ define(function (require) {
         },
         changePassword: function (oldPass, newPass1, newPass2) {
             if ( this.validatePass(oldPass, newPass1, newPass2) ) {
-                $.ajax({
-                    method: 'PUT',
-                    url: '/user/'+this.get('_id'),
-                    data: JSON.stringify({
-                        'password': newPass1
-                    }),
-                    contentType: 'application/json',
+                this.set('password', newPass1);
+                this.save({
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -73,8 +62,8 @@ define(function (require) {
           if (this.has('email')) {
             this.set('email', '');
           }
-          if (this.has('_id')) {
-            this.set('_id', '');
+          if (this.has('id')) {
+            this.set('id', '');
           }
         }
     });
