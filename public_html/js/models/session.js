@@ -7,9 +7,11 @@ define(function(require) {
     var Session = Backbone.Model.extend({
         defaults: {
             'isAuth': false,
+            'id': ''
         },
         urlRoot: '/session',
         initialize: function() {
+            this.excludeAttrs = ['isAuth', 'id'];
             this.fetch({
               success: function(model, response) {
                 this.set('isAuth', true);
@@ -41,7 +43,7 @@ define(function(require) {
             });
         },
         logout: function() {
-            this.save({},{
+            this.destroy({
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
@@ -50,17 +52,22 @@ define(function(require) {
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
-                }.bind(this),
-                delete: true
+                }.bind(this)
             });
         },
-        sync: function(method, model, options) {
-            if (method === 'create' && options.delete) {
-                options.url = '/session';
-                console.log('in');
-                return Backbone.sync('delete', model, options);
+        destroy: function(options) {
+            this.isNew = function() {return false;};
+            Backbone.Model.prototype.destroy.apply(this, arguments);
+            this.isNew = Backbone.Model.prototype.isNew;
+        },
+        save: function (attrs, options) {
+            attrs = attrs || this.toJSON();
+            options = options || {};
+            if (this.excludeAttrs) {
+                attrs = _.omit(attrs, this.excludeAttrs);
             }
-            return Backbone.sync(method, model, options);
+            options.attrs = attrs;
+            Backbone.Model.prototype.save.call(this, attrs, options);
         },
         validateLogin: function (login, password1) {
             if ( !(login && password1) ) {

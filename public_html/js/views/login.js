@@ -27,6 +27,13 @@ define(function (require) {
         },
         hideErrorMessage: function () {
             document.getElementById('form__alert').textContent = '';
+        },
+        show: function() {
+            if (session.isLoggedIn()) {
+                window.location.hash = 'gameMenu';
+            } else {
+                baseView.prototype.show.call(this);
+            }
         }
     });
 
