@@ -86,37 +86,6 @@ define(function (require) {
         QUnit.ok(invalidLogoutEvent, 'InvalidLogout event did not fire');
     });
 
-    QUnit.test("Session.register()", function () {
-        var Backbone = require('backbone'),
-            session = require('models/session'),
-            xhr = sinon.useFakeXMLHttpRequest(),
-            requests = [];
-
-        xhr.onCreate = function (request) {
-            requests.push(request);
-        };
-
-        session.set('isAuth', false); // Set isAuth to false for ensurence
-
-        var login = '',
-            password = '',
-            email = '';
-
-        session.register(login, password, email);
-        QUnit.ok(requests.length === 1);
-        requests[0].respond(400);
-        QUnit.ok(!session.isLoggedIn());
-
-        login = 'login';
-        password = 'email';
-        email = 'password';
-
-        session.register(login, password, email);
-        QUnit.ok(requests.length === 2);
-        requests[1].respond(200);
-        QUnit.ok(session.isLoggedIn());
-
-    });
 
     QUnit.test("Session.validateLogin()", function () {
         var Backbone = require('backbone'),
@@ -137,35 +106,5 @@ define(function (require) {
 
     });
 
-    QUnit.test("Session.validateRegistration()", function () {
-        var Backbone = require('backbone'),
-            session = require('models/session');
-
-
-        var login = '',
-            password1 = '',
-            password2 = '',
-            email = '';
-
-        var isValid = session.validateRegistration(email, login, password1, password2);
-        QUnit.ok(!isValid);
-
-        login = 'login';
-        password1 = 'qwerty';
-        password2 = 'ytrewq';
-        email = 'email';
-
-        isValid = session.validateRegistration(email, login, password1, password2);
-        QUnit.ok(!isValid);
-
-        login = 'login';
-        password1 = 'qwerty';
-        password2 = 'qwerty';
-        email = 'email';
-
-        isValid = session.validateRegistration(email, login, password1, password2);
-        QUnit.ok(isValid);
-
-    });
 
 });

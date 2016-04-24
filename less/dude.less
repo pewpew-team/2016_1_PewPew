@@ -1,0 +1,26 @@
+.dude {
+    position: fixed;
+    right: -50%;
+    bottom: -50%;
+    width: 350px;
+    height: 300px;
+    background: url("../img/js-dude.png");
+    transition: all 0.7s;
+    &__title {
+        position: absolute;
+        top: 22px;
+        left: 7px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 10px;
+        width: 215px;
+        height: 62px;
+        padding: 10px;
+        line-height: 20px;
+        overflow: hidden;
+    }
+    &--show {
+      bottom: 0;
+      right: 0;
+      transition: all 0.7s;
+    }
+}

@@ -37,6 +37,7 @@ define(function(require) {
         this.player.on('userDestroyed', this.gameOver.bind(this));
         game.on('quitGame', this.quitGame.bind(this));
         game.on('gameOver', this.gameOver.bind(this));
+        resultsView.off('restart');
         resultsView.on('restart', this.restart.bind(this));
       },
       run: function() {
@@ -111,7 +112,6 @@ define(function(require) {
       },
       restart: function() {
           this.quitGame();
-          resultsView.off('restart');
           this.init();
           this.run();
       },

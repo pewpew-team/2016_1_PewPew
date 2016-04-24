@@ -23,7 +23,6 @@ define(function (require) {
             this.$el.show();
         },
         restart: function() {
-          console.log('here');
             this.hide();
             this.trigger('restart');
         },

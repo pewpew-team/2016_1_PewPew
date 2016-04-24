@@ -5,15 +5,14 @@
       </div>
       <div class = "menu__wrap">
         <div class = "menu__result">
-          <fest:value>json.message</fest:value>
         </div>
         <div class = "menu__double-btn-wrap">
           <a href = "#gameMenu" class = "menu__btn menu__btn--small" id = "js-gameOver">
               Назад
           </a>
-          <a href = "#gameMenu" class = "menu__btn menu__btn--small" id = "js-restart">
+          <span class = "menu__btn menu__btn--small" id = "js-gameRestart">
               Заново
-          </a>
+          </span>
         </div>
       </div>
     </div>
