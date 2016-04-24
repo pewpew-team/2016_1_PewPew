@@ -10,15 +10,15 @@
 .base-form-element() {
     width: 80%;
     height: 40px;
-    margin: 10px 10% 10px 10%;
+    margin: 10px 10%;
     border: 0;
-    border-radius: 5px;
     line-height: 40px;
     font-size: 16px;
 }
 
 #form__alert {
     .base-form-element;
+    height: auto;
     background: @alert-background-color;
     color: @alert-text-color;
     padding-left: 2%;
@@ -27,11 +27,16 @@
 .form{
     &__text_input {
         .base-form-element;
+        border-radius: 5px;
         transition: all 0.3s;
         background: @input-background-color;
         color: @input-text-color;
         padding-left: 2%;
         padding-right: 2%;
+        &:focus {
+            outline: none;
+            background-color: @input-text-color-focus;
+        }
         &:hover {
             outline: none;
             background-color: @input-text-color-focus;
@@ -39,17 +44,36 @@
     }
     &__submit_input {
         .base-form-element;
-        transition: all 0.3s;
-        cursor : pointer;
-
+        position: relative;
+        box-sizing: content-box;
+        padding: 0;
+        width: 70%;
+        height: 45px;
         background-color: @button-color-main;
+        border: 0;
+        margin: 10px auto;
         color: @button-text-color;
+        font-size: 16px;
+        line-height: 45px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        display: block;
         text-align: center;
+        text-decoration: none;
+        user-select: none;
+        border-top-width: 0;
+        border-bottom: 5px solid @button-color-shadow;
         &:focus {
             outline: none;
         }
+        &:active {
+          transition: top 0.3s;
+          border-bottom-width: 0;
+          margin-top: 15px;
+        }
         &:hover {
-            background: @button-color-hover;
+
+            //background: @button-color-hover;
         }
     }
 }
