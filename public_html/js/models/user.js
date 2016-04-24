@@ -10,11 +10,10 @@ define(function (require) {
         urlRoot: '/user',
         changeData: function(login, email) {
             if ( this.validateLoginEmail(login, email) ) {
-                this.set({
+                this.save({
                     'login': login,
                     'email': email
-                });
-                this.save({
+                },{
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -26,8 +25,8 @@ define(function (require) {
         },
         changePassword: function (oldPass, newPass1, newPass2) {
             if ( this.validatePass(oldPass, newPass1, newPass2) ) {
-                this.set('password', newPass1);
-                this.save({
+                this.save('password', newPass1,
+                {
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -36,6 +35,33 @@ define(function (require) {
                     }.bind(this)
                 });
             }
+        },
+        register: function(login, password, email) {
+            this.save({
+                'login': login,
+                'password': password,
+                'email': email
+            },{
+                success: function (model, response) {
+                    this.set('id', response.id);
+                    this.fetch();
+                    this.trigger('login');
+                }.bind(this),
+                error: function (model, response) {
+                    this.trigger('invalidLoginPassword', 'Invalid data');
+                }.bind(this)
+            });
+        },
+        validateRegistration: function (email, login, password1, password2) {
+            if ( !(email && login && password1 && password2) ) {
+                this.trigger('invalidLoginPassword', 'All fields required');
+                return false;
+            }
+            if (password1 !== password2) {
+                this.trigger('invalidLoginPassword', 'Passwords must match');
+                return false;
+            }
+            return true;
         },
         validateLoginEmail: function(login, email) {
             if ( !(login && email) ) {

@@ -2,6 +2,7 @@ define(function (require) {
     var tmpl = require('tmpl/register'),
         baseView = require('views/baseView'),
         session = require('models/session'),
+        user = require('models/user'),
         _ = require('underscore');
 
 
@@ -16,15 +17,16 @@ define(function (require) {
                 password1 = document.getElementById('password-input').value,
                 password2 = document.getElementById('repeat-password-input').value,
                 email = document.getElementById('email-input').value;
-            if (session.validateRegistration(email, login, password1, password2)) {
-                session.register(login, password1, email);
+            if (user.validateRegistration(email, login, password1, password2)) {
+                user.register(login, password1, email);
             }
         },
         initialize: function () {
             this.render();
-            this.listenTo(session, 'invalidLoginPassword', this.showErrorMessage);
+            this.listenTo(user, 'invalidLoginPassword', this.showErrorMessage);
         },
         showErrorMessage: function (message) {
+            console.log(message);
             document.getElementById('form__alert').textContent = message;
         },
         hide: function() {
