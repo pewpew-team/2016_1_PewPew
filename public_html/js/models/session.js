@@ -39,21 +39,21 @@ define(function(require) {
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLoginPassword', 'Invalid login or password');
-                }.bind(this)
+                }.bind(this),
+                method: 'post'
             });
         },
         logout: function() {
-            this.destroy({
+            this.save(null, {
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
-                    console.log('ok');
                     user.clear();
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
-                    console.log('not ok');
-                }.bind(this)
+                }.bind(this),
+                method: 'delete'
             });
         },
         destroy: function(options) {
@@ -69,12 +69,6 @@ define(function(require) {
             }
             options.attrs = attrs;
             Backbone.Model.prototype.save.call(this, attrs, options);
-        },
-        sync: function(method, model, options) {
-            if (method === 'update') {
-                Backbone.sync('create', model, options);
-            }
-            return Backbone.sync(method, model, options);
         },
         validateLogin: function (login, password1) {
             if ( !(login && password1) ) {

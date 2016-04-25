@@ -49,7 +49,8 @@ define(function (require) {
                 }.bind(this),
                 error: function (model, response) {
                     this.trigger('invalidLoginPassword', 'Invalid data');
-                }.bind(this)
+                }.bind(this),
+                method: 'post'
             });
         },
         validateRegistration: function (email, login, password1, password2) {
