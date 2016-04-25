@@ -52,6 +52,7 @@ define(function(require) {
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
+                    console.log('not ok');
                 }.bind(this)
             });
         },
