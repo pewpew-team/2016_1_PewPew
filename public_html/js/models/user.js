@@ -43,7 +43,7 @@ define(function (require) {
                 'email': email
             },{
                 success: function (model, response) {
-                    this.set('id', response.id);
+                    this.set('id', response._id);
                     this.fetch();
                     this.trigger('login');
                 }.bind(this),

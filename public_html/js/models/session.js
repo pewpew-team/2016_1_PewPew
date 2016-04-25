@@ -15,7 +15,7 @@ define(function(require) {
             this.fetch({
               success: function(model, response) {
                 this.set('isAuth', true);
-                user.set('id', response.id);
+                user.set('id', response._id);
               }.bind(this),
               error: function(model, response) {
                 this.set('isAuth', false);
@@ -31,8 +31,8 @@ define(function(require) {
                 'login': login,
                 'password': password
             },{
-                success: function (data) {
-                    user.set('id', data.id);
+                success: function (model, response) {
+                    user.set('id', response._id);
                     user.fetch();
                     this.set('isAuth', true);
                     this.trigger('login');
@@ -47,7 +47,7 @@ define(function(require) {
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
-                    console.log('in');
+                    console.log('ok');
                     user.clear();
                 }.bind(this),
                 error: function () {
@@ -68,6 +68,12 @@ define(function(require) {
             }
             options.attrs = attrs;
             Backbone.Model.prototype.save.call(this, attrs, options);
+        },
+        sync: function(method, model, options) {
+            if (method === 'update') {
+                Backbone.sync('create', model, options);
+            }
+            return Backbone.sync(method, model, options);
         },
         validateLogin: function (login, password1) {
             if ( !(login && password1) ) {

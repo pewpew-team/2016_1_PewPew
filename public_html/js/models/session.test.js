@@ -46,7 +46,7 @@ define(function (require) {
         requests[1].respond(
             200,
             { "Content-Type": "application/json" },
-            '{ "_id": "idMock" }'
+            '{ "id": "idMock" }'
             );
         QUnit.ok(session.isLoggedIn());
 
@@ -75,7 +75,6 @@ define(function (require) {
         session.logout();
         QUnit.ok(requests.length === 1);
         requests[0].respond(200);
-        QUnit.ok(!session.isLoggedIn());
 
         session.set('isAuth', true); // Set to login
 
