@@ -7,6 +7,7 @@ echo "Test running"
 grunt test
 
 echo "Creating a dist version"
+grunt less
 grunt fest
 grunt compile
 

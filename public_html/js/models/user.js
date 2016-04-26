@@ -5,22 +5,15 @@ define(function (require) {
     var User = Backbone.Model.extend({
         defaults: {
             'login': 'Guest',
-            'email': '',
-            '_id': ''
+            'email': ''
         },
-        urlRoot: function () {
-            return '/user/' + this.get('_id');
-        },
+        urlRoot: '/user',
         changeData: function(login, email) {
             if ( this.validateLoginEmail(login, email) ) {
-                $.ajax({
-                    method: 'PUT',
-                    url: '/user/'+this.get('_id'),
-                    data: JSON.stringify({
-                        'login': login,
-                        'email': email
-                    }),
-                    contentType: 'application/json',
+                this.save({
+                    'login': login,
+                    'email': email
+                },{
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -32,13 +25,8 @@ define(function (require) {
         },
         changePassword: function (oldPass, newPass1, newPass2) {
             if ( this.validatePass(oldPass, newPass1, newPass2) ) {
-                $.ajax({
-                    method: 'PUT',
-                    url: '/user/'+this.get('_id'),
-                    data: JSON.stringify({
-                        'password': newPass1
-                    }),
-                    contentType: 'application/json',
+                this.save('password', newPass1,
+                {
                     success: function () {
                         this.trigger('updated');
                     }.bind(this),
@@ -47,6 +35,34 @@ define(function (require) {
                     }.bind(this)
                 });
             }
+        },
+        register: function(login, password, email) {
+            this.save({
+                'login': login,
+                'password': password,
+                'email': email
+            },{
+                success: function (model, response) {
+                    this.set('id', response._id);
+                    this.fetch();
+                    this.trigger('login');
+                }.bind(this),
+                error: function (model, response) {
+                    this.trigger('invalidLoginPassword', 'Invalid data');
+                }.bind(this),
+                method: 'post'
+            });
+        },
+        validateRegistration: function (email, login, password1, password2) {
+            if ( !(email && login && password1 && password2) ) {
+                this.trigger('invalidLoginPassword', 'All fields required');
+                return false;
+            }
+            if (password1 !== password2) {
+                this.trigger('invalidLoginPassword', 'Passwords must match');
+                return false;
+            }
+            return true;
         },
         validateLoginEmail: function(login, email) {
             if ( !(login && email) ) {
@@ -73,8 +89,8 @@ define(function (require) {
           if (this.has('email')) {
             this.set('email', '');
           }
-          if (this.has('_id')) {
-            this.set('_id', '');
+          if (this.has('id')) {
+            this.set('id', '');
           }
         }
     });

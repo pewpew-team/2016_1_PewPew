@@ -17,7 +17,7 @@ define(function (require) {
             requests = [],
             spyUpdated = sinon.spy();
         user.on('updated', spyUpdated);
-        user.set('_id', 'fakeId');
+        user.set('id', 'fakeId');
         xhr.onCreate = function (request) {
             requests.push(request);
         };
@@ -29,7 +29,7 @@ define(function (require) {
         requests[0].respond(
             200,
             { "Content-Type": "application/json" },
-            '{ "_id": "1" }'
+            '{ "id": "1" }'
             );
         QUnit.ok(spyUpdated.calledOnce, 'Event fired once');
 
@@ -59,7 +59,7 @@ define(function (require) {
             requests = [],
             spyUpdated = sinon.spy();
         user.on('updated', spyUpdated);
-        user.set('_id', 'fakeId');
+        user.set('id', 'fakeId');
 
         xhr.onCreate = function (request) {
             requests.push(request);
@@ -73,7 +73,7 @@ define(function (require) {
         requests[0].respond(
             200,
             { "Content-Type": "application/json" },
-            '{ "_id": "1" }'
+            '{ "id": "1" }'
             );
         QUnit.ok(spyUpdated.calledOnce, 'Event fired once');
 
@@ -114,12 +114,42 @@ define(function (require) {
         user.set({
             'login': 'login',
             'email': 'email',
-            '_id': '1'
+            'id': '1'
         });
         user.clear();
         QUnit.ok(user.get('login') === 'Guest', 'Login cleaned');
         QUnit.ok(user.get('email') === '', 'Email cleaned');
-        QUnit.ok(user.get('_id') === '', 'Id cleaned');
+        QUnit.ok(user.get('id') === '', 'Id cleaned');
     });
 
+    QUnit.test("User.validateRegistration()", function () {
+        var Backbone = require('backbone'),
+            user = require('models/user');
+
+
+        var login = '',
+            password1 = '',
+            password2 = '',
+            email = '';
+
+        var isValid = user.validateRegistration(email, login, password1, password2);
+        QUnit.ok(!isValid);
+
+        login = 'login';
+        password1 = 'qwerty';
+        password2 = 'ytrewq';
+        email = 'email';
+
+        isValid = user.validateRegistration(email, login, password1, password2);
+        QUnit.ok(!isValid);
+
+        login = 'login';
+        password1 = 'qwerty';
+        password2 = 'qwerty';
+        email = 'email';
+
+        isValid = user.validateRegistration(email, login, password1, password2);
+        QUnit.ok(isValid);
+
+    });
 });

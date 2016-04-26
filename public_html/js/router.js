@@ -29,12 +29,12 @@ define(function (require) {
             var view = views[Backbone.history.getFragment()];
             if (view) {
                 if (view.loginRequired && !session.isLoggedIn()) {
-                    this.navigate('#login', {trigger: true})
+                    this.navigate('#login', {trigger: true});
                 } else {
                     view.show();
                 }
             } else {
-                this.navigate('#error', {trigger: true})
+                this.navigate('#error', {trigger: true});
             }
         },
         displayMain: function () {
@@ -43,14 +43,14 @@ define(function (require) {
         },
         startTraining: function() {
             var view = views['game'];
-            this.navigate('#training', {trigger: false})
+            this.navigate('#training', {trigger: false});
             view.show();
             game['training'].init();
             game['training'].run();
         },
         startTimeAttack: function() {
             var view = views['game'];
-            this.navigate('#timeAttack', {trigger: false})
+            this.navigate('#timeAttack', {trigger: false});
             view.show();
             game['timeAttack'].init();
             game['timeAttack'].run();

@@ -1,0 +1,96 @@
+@import 'variables.less';
+
+.menu {
+    width: 500px;
+    background: @menu-background-color;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    &__logo {
+        margin: 0 auto;
+        width: 100%;
+        font-size: 42px;
+        height: 120px;
+        line-height: 120px;
+    }
+    &__wrap {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    &__title {
+        width: 100%;
+        font-size: 32px;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    &__btn {
+        position: relative;
+        box-sizing: content-box;
+        width: 70%;
+        height: 45px;
+        background-color: @button-color-main;
+        border: 0;
+        margin: 10px auto;
+        color: @button-text-color;
+        font-size: 16px;
+        line-height: 45px;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        border-top-width: 0;
+        border-bottom: 5px solid @button-color-shadow;
+        padding: 0;
+        &:focus {
+            outline: none;
+            background: lighten(@button-color-main, 10%);
+            border-bottom: 5px solid lighten(@button-color-shadow, 5%);
+        }
+        &:hover {
+            background: lighten(@button-color-main, 10%);
+            border-bottom: 5px solid lighten(@button-color-shadow, 5%);
+        }
+        &:active {
+            transition: top 0.3s;
+            border-bottom-width: 0;
+            top: 5px;
+            margin-bottom: 15px;
+        }
+        &--small {
+            width: 35%;
+            display: inline-block;
+            margin-left: 7.5%;
+            margin-right: 7.5%;
+        }
+    }
+    &__btn--back {
+        background: @button-back-color-main;
+        color: @button-back-text-color;
+        border-bottom: 5px solid @button-back-color-shadow;
+        &:hover {
+          background: darken(@button-back-color-main, 10%);
+          border-bottom: 5px solid darken(@button-back-color-shadow, 5%);
+        }
+        &:active {
+            transition: top 0.3s;
+            border-bottom-width: 0;
+            top: 5px;
+            margin-bottom: 15px;
+        }
+    }
+    &__result {
+        text-align: center;
+    }
+    &__double-btn-wrap {
+        margin: 10px 2.5%;
+    }
+}

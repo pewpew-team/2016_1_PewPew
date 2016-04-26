@@ -1,15 +1,19 @@
-<fest:template xmlns:fest = "http://fest.mail.ru" context_name = "json">
+<fest:template xmlns:fest = "http://fest.mail.ru">
     <div id = "results" class = "menu">
       <div class = "menu__logo logo">
           PewPew
       </div>
       <div class = "menu__wrap">
-          <div class = "menu__result">
-            <fest:value>json.message</fest:value>
-          </div>
-          <a href = "#gameMenu" class = "menu__btn" id = "js-gameOver">
+        <div class = "menu__result">
+        </div>
+        <div class = "menu__double-btn-wrap">
+          <a href = "#gameMenu" class = "menu__btn menu__btn--small" id = "js-gameOver">
               Назад
           </a>
+          <span class = "menu__btn menu__btn--small" id = "js-gameRestart">
+              Заново
+          </span>
+        </div>
       </div>
     </div>
 </fest:template>
