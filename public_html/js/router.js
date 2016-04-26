@@ -2,6 +2,9 @@ define(function (require) {
     var Backbone = require('backbone'),
         session = require('models/session'),
         game = require('game/main'),
+        views = {},
+        isOnline = navigator.onLine;
+    if (isOnline){
         views = {
             main: require('views/main'),
             game: require('views/game'),
@@ -12,10 +15,18 @@ define(function (require) {
             changeUserData: require('views/changeUserData'),
             error: require('views/error')
         };
+    } else {
+        views = {
+            main: require('views/main'),
+            training: require('views/game'),
+            gameMenu: require('views/main')
+        };
+    }
 
-
+    console.log(navigator.onLine);
     var Router = Backbone.Router.extend({
         routes: {
+            'training': 'startOfflineTraning',
             ':query': 'displayView',
             '*default': 'displayMain'
         },
@@ -47,6 +58,14 @@ define(function (require) {
             view.show();
             game['training'].init();
             game['training'].run();
+        },
+        startOfflineTraning: function() {
+            if (!isOnline) {
+                var view = views['training'];
+                view.show();
+                game['training'].init();
+                game['training'].run();
+            }
         },
         startTimeAttack: function() {
             var view = views['game'];

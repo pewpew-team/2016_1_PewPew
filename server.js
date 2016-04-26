@@ -4,7 +4,7 @@ var express = require('express'),
     app = express();
 
 var HOSTNAME = 'localhost',
-    PORT = 8088,
+    PORT = 8079,
     PUBLIC_DIR = __dirname + '/dist';
 
 var counter = 0;

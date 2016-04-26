@@ -75,7 +75,7 @@ define(function(require) {
           resultsView.render('Победа!');
           resultsView.show();
       }
-    })
+  });
 
     return new View();
 });

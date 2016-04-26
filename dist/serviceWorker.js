@@ -1,4 +1,4 @@
-var CACHE_VERSION = 'pewpew-v2';
+var CACHE_VERSION = 'pewpew-v3';
 
 this.addEventListener('fetch', function(event) {
   var response;
@@ -14,7 +14,6 @@ this.addEventListener('fetch', function(event) {
       }
       return response.clone();
     }).catch(function(error) {
-      console.log('Error: ' + error);
       return caches.match(event.request);
     })
   );
