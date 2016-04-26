@@ -1,11 +1,17 @@
+var CACHE_VERSION = 'pewpew-v2';
+
 this.addEventListener('fetch', function(event) {
   var response;
   event.respondWith(
     fetch(event.request).then(function(resp) {
       response = resp;
-      caches.open('pewpew-v1').then(function(cache) {
-        cache.put(event.request, response);
-      });
+      var staticFileExpr = new RegExp('.(jpg|jpeg|gif|png|css|js|ico|xml|rss|txt)$'),
+          googleAPIExpr = new RegExp('(fonts.googleapis.com|fonts.gstatic.com)');
+      if(staticFileExpr.test(event.request.url) || googleAPIExpr.test(event.request.url)) {
+        caches.open(CACHE_VERSION).then(function(cache) {
+          cache.put(event.request, response);
+        });
+      }
       return response.clone();
     }).catch(function(error) {
       console.log('Error: ' + error);
@@ -16,7 +22,7 @@ this.addEventListener('fetch', function(event) {
 
 this.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('pewpew-v1').then(function(cache) {
+    caches.open(CACHE_VERSION).then(function(cache) {
       return cache.addAll([
         '/',
         '/index.html',
@@ -29,7 +35,7 @@ this.addEventListener('install', function(event) {
 });
 
 this.addEventListener('activate', function(event) {
-  var cacheWhitelist = ['pewpew-v1'];
+  var cacheWhitelist = [CACHE_VERSION];
   event.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
