@@ -9,7 +9,8 @@ define(function(require) {
         events: {
             'click #logout' : 'handleLogout',
             'click #training' : 'startTraining',
-            'click #time-attack' : 'startTimeAttack'
+            'click #time-attack' : 'startTimeAttack',
+            'click #multiplayer' : 'startMultiplayer'
         },
         handleLogout: function(e) {
             e.preventDefault();
@@ -23,6 +24,10 @@ define(function(require) {
         startTimeAttack: function(e) {
             e.preventDefault();
             this.trigger('startTimeAttack');
+        },
+        startMultiplayer: function(e) {
+            e.preventDefault();
+            this.trigger('startMultiplayer');
         }
     });
 

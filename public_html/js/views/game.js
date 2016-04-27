@@ -2,7 +2,8 @@ define(function (require) {
     var tmpl = require('tmpl/game'),
         _ = require('underscore'),
         model = require('models/game'),
-        baseView = require('views/baseView');
+        baseView = require('views/baseView'),
+        bulletsCollection = require('game/collections/bulletCollection');
 
     var View = baseView.extend({
         template: tmpl,
@@ -19,6 +20,7 @@ define(function (require) {
             }
         },
         show: function () {
+            bulletsCollection.isAddable = true;
             baseView.prototype.show.apply(this, arguments);
             this.resizeGameArea();
         },
