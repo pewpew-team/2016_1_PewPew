@@ -1,4 +1,4 @@
-var CACHE_VERSION = 'pewpew-v3';
+var CACHE_VERSION = 'pewpew-v5';
 
 this.addEventListener('fetch', function(event) {
   var response;
@@ -19,6 +19,39 @@ this.addEventListener('fetch', function(event) {
   );
 });
 
+var imageURLs = [
+  '/img/green/bg.png',
+  '/img/green/item1.png',
+  '/img/green/item2.png',
+  '/img/green/item3.png',
+  '/img/green/item4.png',
+  '/img/green/item5.png',
+  '/img/green/item6.png',
+  '/img/green2/bg.png',
+  '/img/green2/item1.png',
+  '/img/green2/item2.png',
+  '/img/green2/item3.png',
+  '/img/green2/item4.png',
+  '/img/green2/item5.png',
+  '/img/green2/item6.png',
+  '/img/grey/bg.png',
+  '/img/grey/item1.png',
+  '/img/grey/item2.png',
+  '/img/grey/item3.png',
+  '/img/grey/item4.png',
+  '/img/grey/item5.png',
+  '/img/sandy/bg.png',
+  '/img/sandy/item1.png',
+  '/img/sandy/item2.png',
+  '/img/sandy/item3.png',
+  '/img/sandy/item4.png',
+  '/img/sandy/item5.png',
+  '/img/spacecraft/0.png',
+  '/img/spacecraft/1.png',
+  '/img/spacecraft/-1.png',
+  '/img/js-dude.png'
+];
+
 this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_VERSION).then(function(cache) {
@@ -28,7 +61,7 @@ this.addEventListener('install', function(event) {
         '/favicon.ico',
         '/css/main.min.css',
         '/js/build.min.js'
-      ]);
+      ].concat(imageURLs));
     })
   );
 });
