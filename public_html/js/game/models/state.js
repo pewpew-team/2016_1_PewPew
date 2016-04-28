@@ -74,7 +74,7 @@ define(function(require) {
       barriersCollection.reset();
       data.forEach(function(barrierData) {
         this.add( new Barrier(barrierData.posX, barrierData.posY, barrierData.isRemovable) );
-      });
+      }.bind(barriersCollection));
     }
   });
 
