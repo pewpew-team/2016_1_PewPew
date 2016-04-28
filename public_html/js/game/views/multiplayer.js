@@ -91,7 +91,8 @@ define(function(require) {
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,
-                                    this._getFrameTimeDiff());
+                                    this._getFrameTimeDiff(),
+                                    true);
           if (this.MAX_TIME < this._getTime()) {
               this.win();
           }

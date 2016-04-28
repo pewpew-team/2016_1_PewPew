@@ -7,11 +7,12 @@ define(function(require) {
             initialize: function() {
                 this.isAddable = true;
             },
-            iterate: function(barriersCollection, screenWidth, screenHeight, dt) {
+            iterate: function(barriersCollection, screenWidth, screenHeight, dt, isNotCollide) {
                 this.screenWidth = screenWidth;
                 this.screenHeight = screenHeight;
                 this.barriers = barriersCollection;
                 this.dt = dt;
+                this.isNotCollide = isNotCollide;
                 this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
             },
@@ -21,14 +22,16 @@ define(function(require) {
                 }.bind(this));
                 this.remove(outOfBox);
             },
-            iterateBullet: function (bullet) {
+            iterateBullet: function (bullet, isNotCollide) {
                 bullet.iterate(this.dt);
-                for (var i = 0; i < this.barriers.length; i++) {
-                    if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
-                        this.collide(bullet, this.barriers.at(i));
-                        if (this.barriers.at(i).get("isRemovable")) {
-                            this.barriers.remove(this.barriers.at(i));
-                            this.trigger('barrierDestroy');
+                if (!this.isNotCollide) {
+                    for (var i = 0; i < this.barriers.length; i++) {
+                        if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
+                            this.collide(bullet, this.barriers.at(i));
+                            if (this.barriers.at(i).get("isRemovable")) {
+                                this.barriers.remove(this.barriers.at(i));
+                                this.trigger('barrierDestroy');
+                            }
                         }
                     }
                 }
