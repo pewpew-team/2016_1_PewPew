@@ -315,6 +315,7 @@ body {
   position: relative;
   width: 200px;
   height: 200px;
+  margin: 0 auto;
 }
 .preloader__rect {
   position: absolute;
