@@ -123,13 +123,14 @@ define(function(require) {
       },
       quitGame : function() {
           socket.close();
-          this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
-          delete this.playerView;
-          delete this.player;
-          delete this.enemyView;
-          delete this.enemy;
+          this.playerView.remove();
+          this.player.destroy();
+          this.playerView.destroy();
+          this.enemyView.remove();
+          this.enemy.destroy();
+          this.enemyView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
@@ -138,6 +139,17 @@ define(function(require) {
           resultsView.show();
           resultsView.addMessage('Победа!');
           this.quitGame();
+          this.isRunning = false;
+          bulletsCollection.off('barrierDestroy');
+          this.playerView.remove();
+          this.player.destroy();
+          this.playerView.destroy();
+          this.enemyView.remove();
+          this.enemy.destroy();
+          this.enemyView.destroy();
+          bulletsCollection.reset();
+          barriersCollection.reset();
+          boostersCollection.reset();
       },
       restart: function() {
           this.quitGame();

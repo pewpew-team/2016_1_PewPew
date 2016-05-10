@@ -22,8 +22,6 @@ define(function (require) {
             gameMenu: require('views/main')
         };
     }
-
-    console.log(navigator.onLine);
     var Router = Backbone.Router.extend({
         routes: {
             'training': 'startOfflineTraning',
