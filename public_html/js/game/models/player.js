@@ -11,7 +11,8 @@ define(function(require) {
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
-                  maxVelocity: 17
+                  maxVelocity: 17,
+                  gunAngle: Math.Pi/2
               },
               initialize: function(nick) {
                   this.set({
@@ -26,7 +27,6 @@ define(function(require) {
                       'velocity': 0,
                       'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
-                  this.set('gunAngle', this.getAngle());
               },
               addPushedButton: function(pushedDirection) {
                 var arrDirections = this.get('arrDirections');
