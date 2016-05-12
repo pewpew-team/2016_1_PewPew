@@ -14,6 +14,9 @@ define(function(require) {
 
     var View = Backbone.View.extend({
       init: function() {
+        if (this.player) {
+          this.quitGame();
+        }
         this.dynamicCanvas = document.getElementById('dynamicLayer');
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);

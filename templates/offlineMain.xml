@@ -5,7 +5,7 @@
         </div>
         <div class = "menu__wrap">
             <div class = "menu__title">
-            Нет интернета :*( Самое время тренироваться!
+            Нет интернета :*( <br/> Самое время тренироваться!
             </div>
             <a href = "#training" class = "menu__btn">
                 Тренировка
