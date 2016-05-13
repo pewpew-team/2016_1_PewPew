@@ -105,7 +105,6 @@ define(function(require) {
                   });
                 }
                 this.trigger('shoot', bullet);
-                console.log(this.isAddable);
                 if (this.isAddable) {
                     this.add(bullet);
                 }

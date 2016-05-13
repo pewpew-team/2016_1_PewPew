@@ -16,7 +16,8 @@ define(function (require) {
     QUnit.test("bulletCollection функция iterate и iterateBullet", function () {
         bulletCollection.reset();
         var width = 100,
-            DELTA_T = 10/1000;
+            height = 100,
+            DELTA_T = 10;
         bullet =  new Bullet({
             'posX': width,
             'posY': 0,
@@ -27,11 +28,13 @@ define(function (require) {
             'sizeY': 10
         });
         bulletCollection.add(bullet);
+        bulletCollection.iterate(barriersCollection, width, height, DELTA_T);
+        QUnit.ok(bulletCollection.at(0).get('velX') < 0, "При попадание на стенку скорость меняется, пуля движется");
         bulletCollection.remove(bullet);
         QUnit.ok(bulletCollection.length === 0, "Удаление из коллекции пуль работает");
     });
     QUnit.test("bulletCollection функция deleteOutOfBoxBullets", function () {
-        var DELTA_T = 10/1000;
+        var DELTA_T = 10000;
         bullet =  new Bullet({
             'posX': 0,
             'posY': 0,
@@ -42,7 +45,7 @@ define(function (require) {
             'sizeY': 10
         });
         bulletCollection.add(bullet);
-        bulletCollection.iterate(barriersCollection, 200, DELTA_T);
+        bulletCollection.iterate(barriersCollection, 100, 100, 200, DELTA_T);
         QUnit.ok(bulletCollection.length === 0, "Когда пуля вылетает за границы экрана удаляется");
     });
     QUnit.test("bulletCollection функция tryToCollide", function () {
