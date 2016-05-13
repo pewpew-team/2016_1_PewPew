@@ -1,0 +1,64 @@
+@import "variables.less";
+
+.preloader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.preloader__rect {
+   position: absolute;
+   width: 30px;
+   height: 30px;
+   top: 85px;
+   left: 0;
+   background: @preloader-color-block;
+   transform-origin: 100px 15px;
+ }
+ .preloader__rect--one {
+   animation: motionRect 2s infinite linear;
+ }
+ .preloader__rect--two {
+   animation: motionRect 2s infinite linear;
+   animation-delay: 0.5s;
+ }
+ .preloader__rect--three {
+   animation: motionRect 2s infinite linear;
+   animation-delay: 1s;
+ }
+ .preloader__rect--four {
+   animation: motionRect 2s infinite linear;
+   animation-delay: 1.5s;
+ }
+ .preloader__circle {
+   position: absolute;
+   width: 15px;
+   height: 15px;
+   border-radius: 15px;
+   background: @preloader-color-circle;
+   top: 92.5px;
+   left: 155px;
+   animation: motionCircle 1s infinite linear;
+ }
+ @keyframes motionCircle {
+  from {
+    left: 155px;
+  }
+  50% {
+    left: 30px;
+  }
+  to {
+    left: 155px;
+  }
+}
+@keyframes motionRect {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

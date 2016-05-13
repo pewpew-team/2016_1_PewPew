@@ -48,7 +48,7 @@ define(function (require) {
                         angle = this.model.get('gunAngle');
                     context.beginPath();
                     context.moveTo(this.model.get('positionX'), this.model.get('positionY'));
-                    context.strokeStyle = theme['playerGunColor'];
+                    context.strokeStyle = theme.playerGunColor;
                     context.lineWidth = 5;
                     context.lineTo(this.model.get('positionX') + Math.cos(angle) * this.model.get('gunLength'), this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();

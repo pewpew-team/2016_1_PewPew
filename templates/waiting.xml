@@ -1,0 +1,22 @@
+<fest:template xmlns:fest = "http://fest.mail.ru">
+    <div id = "results" class = "menu">
+      <div class = "menu__logo logo">
+          PewPew
+      </div>
+      <div class = "menu__wrap">
+        <div class = "menu__result">
+            <div class = "preloader">
+              <div class = "preloader__rect preloader__rect--one"> </div>
+              <div class = "preloader__rect preloader__rect--two"> </div>
+              <div class = "preloader__rect preloader__rect--three"> </div>
+              <div class = "preloader__rect preloader__rect--four"> </div>
+              <div class = "preloader__circle"> </div>
+            </div>
+            Ожидаем игрока...
+        </div>
+        <a href = "#gameMenu" class = "menu__btn menu__btn" id = "js-cancel">
+            Отменить
+        </a>
+      </div>
+    </div>
+</fest:template>

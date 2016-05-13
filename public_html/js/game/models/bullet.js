@@ -8,11 +8,12 @@ define(function(require) {
                 velX: 0,
                 velY: 0,
                 sizeX: 15,
-                sizeY: 15
+                sizeY: 15,
+                id_: 0
             },
-            iterate: function() {
-                this.set('posX', this.get('posX') + this.get('velX'));
-                this.set('posY', this.get('posY') + this.get('velY'));
+            iterate: function(dt) {
+                this.set('posX', this.get('posX') + dt*this.get('velX'));
+                this.set('posY', this.get('posY') + dt*this.get('velY'));
             },
             getPreviousPosition: function() {
                 return {

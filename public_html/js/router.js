@@ -2,6 +2,9 @@ define(function (require) {
     var Backbone = require('backbone'),
         session = require('models/session'),
         game = require('game/main'),
+        views = {},
+        isOnline = navigator.onLine;
+    if (isOnline){
         views = {
             main: require('views/main'),
             game: require('views/game'),
@@ -12,18 +15,27 @@ define(function (require) {
             changeUserData: require('views/changeUserData'),
             error: require('views/error')
         };
-
-
+    } else {
+        views = {
+            main: require('views/main'),
+            training: require('views/game'),
+            gameMenu: require('views/main')
+        };
+    }
     var Router = Backbone.Router.extend({
         routes: {
+            'training': 'startOfflineTraning',
             ':query': 'displayView',
             '*default': 'displayMain'
         },
         initialize: function () {
-            this.currentView = views['main'];
-            this.listenTo(session, 'login', function () { this.navigate('#gameMenu', {trigger: true})}.bind(this));
-            this.listenTo(views['gameMenu'], 'startTraining', this.startTraining);
-            this.listenTo(views['gameMenu'], 'startTimeAttack', this.startTimeAttack);
+            this.currentView = views.main;
+            this.listenTo(session, 'login', function () {
+                this.navigate('#gameMenu', {trigger: true});
+            }.bind(this));
+            this.listenTo(views.gameMenu, 'startTraining', this.startTraining);
+            this.listenTo(views.gameMenu, 'startTimeAttack', this.startTimeAttack);
+            this.listenTo(views.gameMenu, 'startMultiplayer', this.startMultiplayer);
         },
         displayView: function () {
             var view = views[Backbone.history.getFragment()];
@@ -38,22 +50,36 @@ define(function (require) {
             }
         },
         displayMain: function () {
-            var mainView = views['main'];
+            var mainView = views.main;
             mainView.show();
         },
         startTraining: function() {
-            var view = views['game'];
+            var view = views.game;
             this.navigate('#training', {trigger: false});
             view.show();
-            game['training'].init();
-            game['training'].run();
+            game.training.init();
+            game.training.run();
+        },
+        startOfflineTraning: function() {
+            if (!isOnline) {
+                var view = views['training'];
+                view.show();
+                game['training'].init();
+                game['training'].run();
+            }
         },
         startTimeAttack: function() {
-            var view = views['game'];
+            var view = views.game;
             this.navigate('#timeAttack', {trigger: false});
             view.show();
-            game['timeAttack'].init();
-            game['timeAttack'].run();
+            game.timeAttack.init();
+            game.timeAttack.run();
+        },
+        startMultiplayer: function() {
+            var view = views.game;
+            this.navigate('#multiplayer', {trigger: false});
+            view.show();
+            game.multiplayer.init();
         }
     });
 

@@ -14,6 +14,9 @@ define(function(require) {
 
     var View = Backbone.View.extend({
       init: function() {
+        if (this.player) {
+          this.quitGame();
+        }
         this.dynamicCanvas = document.getElementById('dynamicLayer');
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
@@ -33,6 +36,7 @@ define(function(require) {
       run: function() {
           this.isRunning = true;
           document.getElementById('js-score').innerHTML = 'Тренировка';
+          this.timeForDiff = Date.now();
           this.frameID = requestAnimationFrame(_.bind(this.iterate, this));
       },
       iterate: function() {
@@ -40,7 +44,10 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
-          bulletsCollection.iterate(barriersCollection, this.dynamicCanvas.width, this.dynamicCanvas.height);
+          bulletsCollection.iterate(barriersCollection,
+                                    this.dynamicCanvas.width,
+                                    this.dynamicCanvas.height,
+                                    this._getFrameTimeDiff());
           if ( !barriersCollection.checkForRemovable() ) {
               this.win();
           }
@@ -50,8 +57,9 @@ define(function(require) {
           }
       },
       gameOver: function() {
-          resultsView.render('Поражение :(');
+          resultsView.render();
           resultsView.show();
+          resultsView.addMessage('Поражение :(');
           this.quitGame();
       },
       quitGame : function() {
@@ -72,10 +80,16 @@ define(function(require) {
           this.playerView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
-          resultsView.render('Победа!');
+          resultsView.render();
           resultsView.show();
+          resultsView.addMessage('Победа!');
+      },
+      _getFrameTimeDiff: function() {
+          var result = Date.now() - this.timeForDiff;
+          this.timeForDiff = Date.now();
+          return result;
       }
-    })
+  });
 
     return new View();
 });

@@ -10,6 +10,9 @@
             <button class = "menu__btn" id = "time-attack">
                 Time Attack
             </button>
+            <button class = "menu__btn" id = "multiplayer">
+                Multiplayer
+            </button>
             <a href = "#changeUserData" class = "menu__btn">
                 Change User Data
             </a>

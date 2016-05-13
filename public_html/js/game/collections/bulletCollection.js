@@ -4,11 +4,16 @@ define(function(require) {
         _ = require('underscore'),
         BulletCollection = Backbone.Collection.extend({
             model: Bullet,
-            iterate: function(barriersCollection, screenWidth, screenHeight) {
+            initialize: function() {
+                this.isAddable = true;
+            },
+            iterate: function(barriersCollection, screenWidth, screenHeight, dt, isNotCollide) {
                 this.screenWidth = screenWidth;
                 this.screenHeight = screenHeight;
                 this.barriers = barriersCollection;
-                this.each(_.bind(this.iterateBullet, this));
+                this.dt = dt;
+                this.isNotCollide = isNotCollide;
+                this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
             },
             deleteOutOfBoxBullets: function() {
@@ -17,14 +22,16 @@ define(function(require) {
                 }.bind(this));
                 this.remove(outOfBox);
             },
-            iterateBullet: function (bullet) {
-                bullet.iterate();
-                for (var i = 0; i < this.barriers.length; i++) {
-                    if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
-                        this.collide(bullet, this.barriers.at(i));
-                        if (this.barriers.at(i).get("isRemovable")) {
-                            this.barriers.remove(this.barriers.at(i));
-                            this.trigger('barrierDestroy');
+            iterateBullet: function (bullet, isNotCollide) {
+                bullet.iterate(this.dt);
+                if (!this.isNotCollide) {
+                    for (var i = 0; i < this.barriers.length; i++) {
+                        if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
+                            this.collide(bullet, this.barriers.at(i));
+                            if (this.barriers.at(i).get("isRemovable")) {
+                                this.barriers.remove(this.barriers.at(i));
+                                this.trigger('barrierDestroy');
+                            }
                         }
                     }
                 }
@@ -48,8 +55,7 @@ define(function(require) {
                         sideParallelX : {},
                         sideParallelY : {}
                     },
-                    fault = 3,
-                    deviation = 0.5 * Math.pow(-1 ,Math.random() * (5) ^ 0);
+                    fault = 2;
                 //точки столкновения со сторонами паралельно X или Y
                 intersectionPoint.sideParallelX.x = (bullet.get('velX') > 0) ?  0 : barrier.get('sizeX');
                 intersectionPoint.sideParallelX.y = k * intersectionPoint.sideParallelX.x + b;
@@ -58,20 +64,20 @@ define(function(require) {
                 //попадание на угол
                 if (Math.abs(intersectionPoint.sideParallelY.x - intersectionPoint.sideParallelX.x) < fault) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
-                    bullet.set('velX', -1 * bullet.get('velX') + deviation);
-                    bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                    bullet.set('velX', -1 * bullet.get('velX'));
+                    bullet.set('velY', -1 * bullet.get('velY'));
                     return;
                 }
                 //левая или правая грань
                 if ((intersectionPoint.sideParallelX.y >= 0) && (intersectionPoint.sideParallelX.y <= barrier.get('sizeY'))) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelX);
-                    bullet.set('velX', -1 * bullet.get('velX') + deviation);
+                    bullet.set('velX', -1 * bullet.get('velX'));
                     return;
                 }
                 //нижняя или верхняя грань
                 if ((intersectionPoint.sideParallelY.x >= 0) && (intersectionPoint.sideParallelY.x <= barrier.get('sizeX'))) {
                     this.moveToIntersectionPoint(bullet, barrier, intersectionPoint.sideParallelY);
-                    bullet.set('velY', -1 * bullet.get('velY') + deviation);
+                    bullet.set('velY', -1 * bullet.get('velY'));
                     return;
                 }
             },
@@ -98,7 +104,10 @@ define(function(require) {
                       'velY': Vy
                   });
                 }
-                this.add(bullet);
+                this.trigger('shoot', bullet);
+                if (this.isAddable) {
+                    this.add(bullet);
+                }
             },
             incSize: function() {
                 if (this._bulletSize) {

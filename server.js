@@ -1,10 +1,10 @@
 var express = require('express'),
     errorHandler = require('errorhandler'),
-	bodyParser = require('body-parser'),
+		bodyParser = require('body-parser'),
     app = express();
 
 var HOSTNAME = 'localhost',
-    PORT = 8080,
+    PORT = 8079,
     PUBLIC_DIR = __dirname + '/public_html';
 
 var counter = 0;

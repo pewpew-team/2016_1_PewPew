@@ -1,0 +1,15 @@
+<fest:template xmlns:fest = "http://fest.mail.ru">
+    <div id = "main" class = "menu">
+        <div class = "menu__logo logo">
+            PewPew
+        </div>
+        <div class = "menu__wrap">
+            <div class = "menu__title">
+            Нет интернета :*( <br/> Самое время тренироваться!
+            </div>
+            <a href = "#training" class = "menu__btn">
+                Тренировка
+            </a>
+        </div>
+    </div>
+</fest:template>

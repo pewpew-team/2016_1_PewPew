@@ -3,47 +3,19 @@ define(function(require) {
       bulletCollection = require('game/collections/bulletCollection'),
       barriersCollection = require('game/collections/barriersCollection'),
       Bullet = require('game/models/bullet'),
-      Barrier = require('game/models/barrier');
+      Barrier = require('game/models/barrier'),
+      socket = require('game/models/socket'),
+      _ = require('underscore');
 
   var GameState = Backbone.Model.extend({
     // Передать игрока и врага
     initialize: function() {
-      this.set('socket', new WebSocket("ws://pewpew.pro/ws"));
-      bulletCollection.listenTo(bulletCollection, 'add', this.sendNewBullet.bind(this));
-      this.get('socket').onmessage = this.handleMessage.bind(this);
+      socket.addMessageHandler(this.handleMessage.bind(this));
+      bulletCollection.on('shoot', this.sendNewBullet.bind(this));
+      this.get('player').on('change', this.sendPlayerPosition);
     },
-    sendState: function() {
-      var bulletArray = [];
-      bulletCollection.each(function(bullet) {
-        bulletArray.push({
-          posX: bullet.get('posX'),
-          posY: bullet.get('posY'),
-          velX: bullet.get('velX'),
-          velY: bullet.get('velY'),
-          sizeX: bullet.get('sizeX'),
-          sizeY: bullet.get('sizeY')
-        });
-      }.bind(this));
-      var barrierArray = [];
-      barrierCollection.each(function(barrier) {
-        barrierArray.push({
-          posX: barrier.get('posX'),
-          posY: barrier.get('posY'),
-          isRemovable: barrier.get('isRemovable')
-        });
-      }.bind(this));
-      var player = {
-        posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity')
-      };
-      var stateObj = {
-        'player': player,
-        'bullets': bulletArray,
-        'barriers': barrierArray
-      };
-      this.get('socket').send(JSON.stringify(stateObj));
-    },
-    sendNewBullet: function(bullet, collection, options) {
+    sendNewBullet: function(bullet) {
+      bulletCollection.remove(bullet);
       var bulletObj = {
         posX: bullet.get('posX'),
         posY: bullet.get('posY'),
@@ -52,56 +24,57 @@ define(function(require) {
         sizeX: bullet.get('sizeX'),
         sizeY: bullet.get('sizeY')
       };
-      this.get('socket').send(JSON.stringify({bullets: bulletObj}));
+      socket.send(JSON.stringify({bullet: bulletObj}));
     },
-    sendPlayerPosition: function() {
+    sendPlayerPosition: function(playerModel) {
       var playerObj = {
-        posX: this.get('player').get('positionX'),
-        velX: this.get('player').get('velocity')
+        posX: playerModel.get('positionX'),
+        velX: playerModel.get('velocity'),
+        gunAngle: playerModel.get('gunAngle')
       };
-      this.get('socket').send(JSON.stringify({player: playerObj}));
+      socket.send(JSON.stringify({player: playerObj}));
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
-      if(data.player) {
-        this.updatePlayer(data.player);
-      }
       if(data.bullets) {
-        this.updateBullets(data.bullet);
+        this.updateBullets(data.bullets);
       }
       if(data.barriers) {
         this.updateBarriers(data.barriers);
       }
     },
-    updatePlayer: function(data) {
-      this.get('player').set({
-        'positionX': data.posX,
-        'velocity': data.velX
-      });
-    },
-    updateBullet: function(data) {
-      if (data.isReset) {
-        bulletCollection.reset();
-      }
-      data.bullets.forEach(function(bulletData) {
-        if(bulletData.friendly) {
-          var bullet = new Bullet({
-                       'posX': bulletData.posX,
-                       'posY': bulletData.posY,
-                       'velX': bulletData.velX,
-                       'velY': bulletData.velY,
-                       'sizeX': bulletData.sizeX,
-                       'sizeY': bulletData.sizeY
-                   });
-          bulletCollection.add(bullet);
-        }
+    updateBullets: function(data) {
+      data.forEach(function(bulletData) {
+          var bulletFromCollection = bulletCollection.where({'id_': bulletData.bulletId})[0];
+          if ( bulletFromCollection ) {
+            bulletFromCollection.set({
+                         'posX': bulletData.posX,
+                         'posY': bulletData.posY,
+                         'velX': bulletData.velX,
+                         'velY': bulletData.velY,
+                         'sizeX': bulletData.sizeX,
+                         'sizeY': bulletData.sizeY,
+                         'id_': bulletData.bulletId
+                     });
+          } else {
+            var bullet = new Bullet({
+                         'posX': bulletData.posX,
+                         'posY': bulletData.posY,
+                         'velX': bulletData.velX,
+                         'velY': bulletData.velY,
+                         'sizeX': bulletData.sizeX,
+                         'sizeY': bulletData.sizeY,
+                         'id_': bulletData.bulletId
+                     });
+            bulletCollection.add(bullet);
+          }
       });
     },
     updateBarriers: function(data) {
       barriersCollection.reset();
       data.forEach(function(barrierData) {
         this.add( new Barrier(barrierData.posX, barrierData.posY, barrierData.isRemovable) );
-      });
+      }.bind(barriersCollection));
     }
   });
 

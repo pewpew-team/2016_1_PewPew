@@ -7,11 +7,12 @@ define(function(require) {
       var Player = Backbone.Model.extend({
               defaults: {
                   gunLength: 50,
-                  bulletSpeed: 15,
+                  bulletSpeed: 1,
                   minPositionX: 0,
                   playerSizeX: 80,
                   playerSizeY: 50,
                   maxVelocity: 17,
+                  gunAngle: Math.Pi/2
               },
               initialize: function(nick) {
                   this.set({
@@ -26,7 +27,6 @@ define(function(require) {
                       'velocity': 0,
                       'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
-                  this.set('angle', this.getAngle());
               },
               addPushedButton: function(pushedDirection) {
                 var arrDirections = this.get('arrDirections');
@@ -68,7 +68,7 @@ define(function(require) {
                   this.checkPlayerCollision();
                   this.move();
               },
-              move: function () {
+              move: function (dt) {
                   var velX = this.get('velocity'),
                       posX = this.get('positionX'),
                       sizeX = this.get('playerSizeX'),
@@ -134,7 +134,7 @@ define(function(require) {
               shoot: function () {
                   var angle = this.get('gunAngle'),
                       V = this.get('bulletSpeed'),
-                      velX = V*Math.cos(angle) + this.get('velocity'),
+                      velX = V*Math.cos(angle),
                       velY = V*Math.sin(angle),
                       gunLength = this.get('gunLength'),
                       posX = this.get('positionX') + Math.cos(angle) * gunLength,
@@ -154,10 +154,10 @@ define(function(require) {
                   }.bind(this));
               },
               speedUpPlayer: function() {
-                    this.set('maxVelocity', this.get('maxVelocity') + 5);
+                    this.set('maxVelocity', this.get('maxVelocity')*1.20);
               },
               speedUpBullets: function() {
-                    this.set('bulletSpeed', this.get('bulletSpeed') + 5);
+                    this.set('bulletSpeed', this.get('bulletSpeed')*1.20);
               },
               sendResults: function(score) {
                     $.ajax({
@@ -171,7 +171,17 @@ define(function(require) {
                                this.trigger('errorResult', 'Cannot send scores');
                          }.bind(this)
                    });
-              }
+             },
+             updateFromWS: function(event) {
+                  var data = JSON.parse(event.data);
+                  if(data.player) {
+                        this.set({
+                              'positionX': data.player.posX,
+                              'velocity': data.player.velX,
+                              'gunAngle': (data.player.gunAngle) % (Math.PI*2)
+                        });
+                  }
+            }
           });
       return Player;
   }

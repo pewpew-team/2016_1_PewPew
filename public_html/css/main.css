@@ -48,10 +48,10 @@ body {
 }
 .menu__title {
   width: 100%;
-  font-size: 32px;
+  font-size: 24px;
   text-align: center;
-  height: 30px;
-  line-height: 30px;
+  height: 50px;
+  line-height: 25px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -310,6 +310,105 @@ body {
   height: 100%;
   opacity: 1;
   overflow: hidden;
+}
+.preloader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.preloader__rect {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 85px;
+  left: 0;
+  background: #556F94;
+  -webkit-transform-origin: 100px 15px;
+          transform-origin: 100px 15px;
+}
+.preloader__rect--one {
+  -webkit-animation: motionRect 2s infinite linear;
+          animation: motionRect 2s infinite linear;
+}
+.preloader__rect--two {
+  -webkit-animation: motionRect 2s infinite linear;
+          animation: motionRect 2s infinite linear;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+.preloader__rect--three {
+  -webkit-animation: motionRect 2s infinite linear;
+          animation: motionRect 2s infinite linear;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+.preloader__rect--four {
+  -webkit-animation: motionRect 2s infinite linear;
+          animation: motionRect 2s infinite linear;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+.preloader__circle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background: #E92F2F;
+  top: 92.5px;
+  left: 155px;
+  -webkit-animation: motionCircle 1s infinite linear;
+          animation: motionCircle 1s infinite linear;
+}
+@-webkit-keyframes motionCircle {
+  from {
+    left: 155px;
+  }
+  50% {
+    left: 30px;
+  }
+  to {
+    left: 155px;
+  }
+}
+@keyframes motionCircle {
+  from {
+    left: 155px;
+  }
+  50% {
+    left: 30px;
+  }
+  to {
+    left: 155px;
+  }
+}
+@-webkit-keyframes motionRect {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes motionRect {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 @media screen and (max-width: 700px) {
   .dude {
