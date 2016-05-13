@@ -15,7 +15,8 @@ define(function (require) {
     });
     QUnit.test("bulletCollection функция iterate и iterateBullet", function () {
         bulletCollection.reset();
-        var width = 100;
+        var width = 100,
+            DELTA_T = 10/1000;
         bullet =  new Bullet({
             'posX': width,
             'posY': 0,
@@ -26,7 +27,7 @@ define(function (require) {
             'sizeY': 10
         });
         bulletCollection.add(bullet);
-        bulletCollection.iterate(barriersCollection, width);
+        bulletCollection.iterate(barriersCollection, width, DELTA_T);
         QUnit.ok(bulletCollection.at(0).get('velX') < 0, "При попадание на стенку скорость меняется, пуля движется");
         bulletCollection.remove(bullet);
         QUnit.ok(bulletCollection.length === 0, "Удаление из коллекции пуль работает");
@@ -42,7 +43,7 @@ define(function (require) {
             'sizeY': 10
         });
         bulletCollection.add(bullet);
-        bulletCollection.iterate(barriersCollection, 200);
+        bulletCollection.iterate(barriersCollection, 200, DELTA_T);
         QUnit.ok(bulletCollection.length === 0, "Когда пуля вылетает за границы экрана удаляется");
     });
     QUnit.test("bulletCollection функция tryToCollide", function () {
@@ -91,22 +92,12 @@ define(function (require) {
             'posY': posY
         });
         bulletCollection.collide( bulletCollection.at(0) , barrier);
-        QUnit.ok( bulletCollection.at(0).get('velY') && bulletCollection.at(0).get('velX')
-            , "Функция колижена работает - относительно угла блока");
+        QUnit.ok( bulletCollection.at(0).get('velY') && bulletCollection.at(0).get('velX'),
+            "Функция колижена работает - относительно угла блока");
         bulletCollection.remove(bullet);
     });
     QUnit.test("bulletCollection функция fire", function () {
-        bulletCollection.fire(
-           new Bullet({
-                'posX': 0,
-                'posY': 0,
-                'VELOCITY' : 0,
-                'velX': 0,
-                'velY': 0,
-                'sizeX': 0,
-                'sizeY': 0
-            })
-        );
+        bulletCollection.fire(0,0,0,0);
         QUnit.ok(bulletCollection.length === 1, "bullet добавляется в коллекцию по вызову метода fire");
     });
 });
