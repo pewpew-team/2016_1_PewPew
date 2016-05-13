@@ -12,7 +12,7 @@ define(function(require) {
                 this.screenHeight = screenHeight;
                 this.barriers = barriersCollection;
                 this.dt = dt;
-                this.isNotCollide = isNotCollide;
+                this.isNotCollide = isNotCollide || false;
                 this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
             },
