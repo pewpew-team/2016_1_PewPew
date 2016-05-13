@@ -31,6 +31,7 @@ define(function (require) {
         QUnit.ok(bulletCollection.length === 0, "Удаление из коллекции пуль работает");
     });
     QUnit.test("bulletCollection функция deleteOutOfBoxBullets", function () {
+        var DELTA_T = 10/1000;
         bullet =  new Bullet({
             'posX': 0,
             'posY': 0,
