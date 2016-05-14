@@ -31,8 +31,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 4;
 }
 .menu__logo {
@@ -248,8 +247,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.41);
   border-bottom-width: 0;
@@ -324,30 +322,22 @@ body {
   top: 85px;
   left: 0;
   background: #556F94;
-  -webkit-transform-origin: 100px 15px;
-          transform-origin: 100px 15px;
+  transform-origin: 100px 15px;
 }
 .preloader__rect--one {
-  -webkit-animation: motionRect 2s infinite linear;
-          animation: motionRect 2s infinite linear;
+  animation: motionRect 2s infinite linear;
 }
 .preloader__rect--two {
-  -webkit-animation: motionRect 2s infinite linear;
-          animation: motionRect 2s infinite linear;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
+  animation: motionRect 2s infinite linear;
+  animation-delay: 0.5s;
 }
 .preloader__rect--three {
-  -webkit-animation: motionRect 2s infinite linear;
-          animation: motionRect 2s infinite linear;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
+  animation: motionRect 2s infinite linear;
+  animation-delay: 1s;
 }
 .preloader__rect--four {
-  -webkit-animation: motionRect 2s infinite linear;
-          animation: motionRect 2s infinite linear;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  animation: motionRect 2s infinite linear;
+  animation-delay: 1.5s;
 }
 .preloader__circle {
   position: absolute;
@@ -357,19 +347,7 @@ body {
   background: #E92F2F;
   top: 92.5px;
   left: 155px;
-  -webkit-animation: motionCircle 1s infinite linear;
-          animation: motionCircle 1s infinite linear;
-}
-@-webkit-keyframes motionCircle {
-  from {
-    left: 155px;
-  }
-  50% {
-    left: 30px;
-  }
-  to {
-    left: 155px;
-  }
+  animation: motionCircle 1s infinite linear;
 }
 @keyframes motionCircle {
   from {
@@ -382,32 +360,15 @@ body {
     left: 155px;
   }
 }
-@-webkit-keyframes motionRect {
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
 @keyframes motionRect {
   from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
+    transform: rotate(180deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 @media screen and (max-width: 700px) {
