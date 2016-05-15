@@ -141,10 +141,8 @@ define(function(require) {
           this.quitGame();
           this.isRunning = false;
           bulletsCollection.off('barrierDestroy');
-          this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
-          this.enemyView.remove();
           this.enemy.destroy();
           this.enemyView.destroy();
           bulletsCollection.reset();
