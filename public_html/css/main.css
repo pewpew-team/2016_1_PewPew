@@ -49,7 +49,7 @@ body {
   width: 100%;
   font-size: 24px;
   text-align: center;
-  height: 50px;
+  height: 30px;
   line-height: 25px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -116,9 +116,9 @@ body {
   margin: 10px 2.5%;
 }
 #form__alert {
-  width: 80%;
+  width: 60%;
   height: 40px;
-  margin: 10px 10%;
+  margin: 10px 20%;
   border: 0;
   line-height: 40px;
   font-size: 16px;
@@ -129,9 +129,9 @@ body {
   padding-right: 2%;
 }
 .form__text_input {
-  width: 80%;
+  width: 60%;
   height: 40px;
-  margin: 10px 10%;
+  margin: 10px 20%;
   border: 0;
   line-height: 40px;
   font-size: 16px;
@@ -149,42 +149,6 @@ body {
 .form__text_input:hover {
   outline: none;
   background-color: #F3F3F3;
-}
-.form__submit_input {
-  width: 80%;
-  height: 40px;
-  margin: 10px 10%;
-  line-height: 40px;
-  position: relative;
-  box-sizing: content-box;
-  padding: 0;
-  width: 70%;
-  height: 45px;
-  background-color: #323A45;
-  border: 0;
-  margin: 10px auto;
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 45px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border-top-width: 0;
-  border-bottom: 5px solid #272e36;
-}
-.form__submit_input:focus {
-  outline: none;
-}
-.form__submit_input:active {
-  transition: top 0.3s;
-  border-bottom-width: 0;
-  margin-top: 15px;
 }
 .scoreboard {
   width: 100%;

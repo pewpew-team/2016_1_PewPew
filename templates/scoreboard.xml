@@ -11,7 +11,7 @@
                 <fest:for iterate = "json.scores" index = "i" value = "v">
                     <tr>
                         <td class = "scoreboard__name">
-                            <fest:value>v.login</fest:value>
+                            <fest:value>i+1</fest:value>. <fest:space/><fest:value>v.login</fest:value>
                         </td>
                         <td class = "scoreboard__rating">
                             <fest:value>v.rating</fest:value>

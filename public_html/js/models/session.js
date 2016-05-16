@@ -44,10 +44,12 @@ define(function(require) {
             });
         },
         logout: function() {
+            this.set('isAuth', false);
             this.save(null, {
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
+                    console.log(this.get('isAuth', false));
                     user.clear();
                 }.bind(this),
                 error: function () {
@@ -55,11 +57,6 @@ define(function(require) {
                 }.bind(this),
                 method: 'delete'
             });
-        },
-        destroy: function(options) {
-            this.isNew = function() {return false;};
-            Backbone.Model.prototype.destroy.apply(this, arguments);
-            this.isNew = Backbone.Model.prototype.isNew;
         },
         save: function (attrs, options) {
             attrs = attrs || this.toJSON();

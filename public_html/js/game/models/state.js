@@ -15,14 +15,12 @@ define(function(require) {
       this.get('player').on('change', this.sendPlayerPosition);
     },
     silence: function() {
-      console.log('destroyed');
       bulletCollection.off('shoot');
       this.get('player').off('change');
       this.set('player', null);
       this.set('enemy', null);
     },
     sendNewBullet: function(bullet) {
-      console.log('sended');
       bulletCollection.remove(bullet);
       var bulletObj = {
         posX: bullet.get('posX'),

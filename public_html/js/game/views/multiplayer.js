@@ -110,13 +110,14 @@ define(function(require) {
           }
       },
       quitGame : function() {
-          console.log('quit');
+          if (this.isRunnig) {
+              this.state.silence();
+          }
           this.isRunnig = false;
-          this.state.silence();
-          bulletsCollection.off('barrierDestroy');
           this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
+          bulletsCollection.off('barrierDestroy');
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
