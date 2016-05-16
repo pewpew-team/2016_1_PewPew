@@ -42,8 +42,8 @@ body {
   line-height: 120px;
 }
 .menu__wrap {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .menu__title {
   width: 100%;
@@ -57,7 +57,7 @@ body {
 .menu__btn {
   position: relative;
   box-sizing: content-box;
-  width: 70%;
+  width: 60%;
   height: 45px;
   background-color: #323A45;
   border: 0;
@@ -74,18 +74,15 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  border-top-width: 0;
-  border-bottom: 5px solid #272e36;
+  border-radius: 10px;
   padding: 0;
 }
 .menu__btn:focus {
   outline: none;
   background: #475363;
-  border-bottom: 5px solid #323a45;
 }
 .menu__btn:hover {
   background: #475363;
-  border-bottom: 5px solid #323a45;
 }
 .menu__btn:active {
   transition: top 0.3s;
@@ -102,11 +99,9 @@ body {
 .menu__btn--back {
   background: #e9ecf0;
   color: #5E6D82;
-  border-bottom: 5px solid #cbd2db;
 }
 .menu__btn--back:hover {
   background: #cbd2db;
-  border-bottom: 5px solid #bcc5d1;
 }
 .menu__btn--back:active {
   transition: top 0.3s;
