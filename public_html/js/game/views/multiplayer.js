@@ -61,18 +61,13 @@ define(function(require) {
           socket.addMessageHandler(function (event) {
               var data = JSON.parse(event.data);
               if (typeof data.win !== 'undefined') {
-                  socket.close();
-                  resultsView.show();
                   if (data.win) {
-                      resultsView.addMessage('Победа!');
+                      this.win();
                   } else {
-                      resultsView.addMessage('Поражение :(');
+                      this.gameOver();
                   }
-                  this.quitGame();
               }
           }.bind(this));
-          game.on('quitGame', this.quitGame.bind(this));
-          game.on('gameOver', this.gameOver.bind(this));
           resultsView.off('restart');
           resultsView.on('restart', this.restart.bind(this));
           this.blockCount = 0;
@@ -87,18 +82,11 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
-          this.boostersView.render();
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,
                                     this._getFrameTimeDiff(),
                                     true);
-          if (this.MAX_TIME < this._getTime()) {
-              this.win();
-          }
-          if (this._getTime() % 1000 === 0) {
-              this.updateScore();
-          }
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {
@@ -122,32 +110,22 @@ define(function(require) {
           }
       },
       quitGame : function() {
-          socket.close();
-          dude.hideDude();
+          console.log('quit');
+          this.isRunnig = false;
+          this.state.silence();
           bulletsCollection.off('barrierDestroy');
           this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
-          this.enemyView.remove();
-          this.enemy.destroy();
-          this.enemyView.destroy();
           bulletsCollection.reset();
           barriersCollection.reset();
           boostersCollection.reset();
+          socket.close();
       },
       win: function() {
           resultsView.show();
           resultsView.addMessage('Победа!');
           this.quitGame();
-          this.isRunning = false;
-          bulletsCollection.off('barrierDestroy');
-          this.player.destroy();
-          this.playerView.destroy();
-          this.enemy.destroy();
-          this.enemyView.destroy();
-          bulletsCollection.reset();
-          barriersCollection.reset();
-          boostersCollection.reset();
       },
       restart: function() {
           this.quitGame();

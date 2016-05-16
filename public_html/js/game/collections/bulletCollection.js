@@ -87,6 +87,7 @@ define(function(require) {
             },
             fire: function(posX0, posY0, Vx, Vy) {
                 var bullet;
+                console.log('fired');
                 if (this._bulletSize) {
                   bullet = new Bullet({
                       'posX': posX0,

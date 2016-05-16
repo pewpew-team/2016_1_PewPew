@@ -11,7 +11,6 @@ define(function(require) {
       this.get('socket').onmessage = this.messageHandler.bind(this);
       this.get('socket').onopen = this.openHandler.bind(this);
       this.get('socket').onclose = function(arg) {
-        console.log('closed');
         this.trigger('closed', arg);
       }.bind(this);
     },
@@ -19,6 +18,13 @@ define(function(require) {
       var messageHandlers = this.get('messageHandlers');
       messageHandlers.push(handler);
       this.set('messageHandlers', messageHandlers);
+      console.log(this.get('messageHandlers'));
+    },
+    clearMessageHandlers: function() {
+      this.set('messageHandlers', []);
+    },
+    clearOpenHandlers: function() {
+      this.set('openHandlers', []);
     },
     messageHandler: function(event) {
       this.get('messageHandlers').forEach(function(handler) {
@@ -39,7 +45,14 @@ define(function(require) {
       });
     },
     close: function () {
-      this.get('socket').close();
+      this.get('socket').onmessage = null;
+      this.get('socket').onopen = null;
+      if (this.get('socket').readyState < 2) {
+        this.get('socket').close();
+      }
+      this.get('socket').onclose = null;
+      this.clearMessageHandlers();
+      this.clearOpenHandlers();
     }
   });
 

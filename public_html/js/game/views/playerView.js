@@ -57,6 +57,7 @@ define(function (require) {
                 handleClick: function(e) {
                     e.preventDefault();
                     this.model.pointGunTo( e.offsetX , e.offsetY );
+                    console.log('clicked');
                     this.model.shoot();
                 },
                 handleMouseMove: function(e) {

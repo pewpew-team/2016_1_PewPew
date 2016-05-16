@@ -10,4 +10,5 @@ define(function (require) {
       });
     }
     Backbone.history.start();
+    console.log('started');
 });
