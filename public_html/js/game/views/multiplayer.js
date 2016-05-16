@@ -86,7 +86,7 @@ define(function(require) {
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,
                                     this._getFrameTimeDiff(),
-                                    true);
+                                    false);
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {
