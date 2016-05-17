@@ -79,16 +79,9 @@ body {
 }
 .menu__btn:focus {
   outline: none;
-  background: #475363;
 }
 .menu__btn:hover {
   background: #475363;
-}
-.menu__btn:active {
-  transition: top 0.3s;
-  border-bottom-width: 0;
-  top: 5px;
-  margin-bottom: 15px;
 }
 .menu__btn--small {
   width: 35%;
