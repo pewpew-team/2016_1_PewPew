@@ -9,13 +9,15 @@ define(function (require) {
         template: tmpl,
         events: {
             'click .js-conway-run' : 'conwayRun',
-            'click .js-conway-stop': 'conwayStop'
+            'click .js-conway-stop': 'conwayStop',
+            'click .js-conwayCanvas': 'addCell'
         },
         show: function() {
             var isOnline = navigator.onLine;
             if (!isOnline) {
                 this.template = tmplOffline;
                 baseView.prototype.render.apply(this);
+                cellsView.canvas = this.$('.js-conwayCanvas')[0];
                 this.drawCells();
             }
             baseView.prototype.show.apply(this);
@@ -43,11 +45,21 @@ define(function (require) {
             if (this.iterationCount % 15 === 0) {
                 cellsCollection.update();
                 canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-                cellsView.draw(canvas);
+                cellsView.draw();
             }
             if (this.conwayRunning) {
                 requestAnimationFrame(this.conwayIteration.bind(this));
             }
+        },
+        addCell: function(event) {
+            event.preventDefault();
+            var x = event.clientX,
+                y = event.clientY,
+                canvas = this.$('.js-conwayCanvas')[0];
+                clientRect = canvas.getBoundingClientRect();
+            x -= clientRect.left;
+            y -= clientRect.top;
+            cellsCollection.addCell(x, y);
         }
     });
 

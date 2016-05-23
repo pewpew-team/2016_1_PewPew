@@ -10,6 +10,8 @@ define(function(require) {
                     stepY = sizeY/numY;
                 this.numX = numX;
                 this.numY = numY;
+                this.sizeX = sizeX;
+                this.sizeY = sizeY;
                 for (var i = 0; i < this.numX; i++) {
                     for (var j = 0; j < this.numY; j++) {
                         var index = i*numY + j;
@@ -85,6 +87,13 @@ define(function(require) {
                 this.each(function(cell, index) {
                     cell.update();
                 }.bind(this));
+            },
+            addCell: function(x, y) {
+                var i = Math.trunc(x/this.at(1).get('sizeX'));
+                    j = Math.trunc(y/this.at(1).get('sizeY'));
+                console.log(x,y);
+                this.at(i*this.numY + j).set('value', 1);
+                this.trigger('updated');
             }
         });
         return new CellsCollection();

@@ -4,11 +4,12 @@ define(function (require) {
             cellsCollection = require('conwayBackground/collections/cellsCollection');
 
         var CellsView = Backbone.View.extend({
-            initialize: function() {
+            initialize: function(canvas) {
                 this.collection = cellsCollection;
+                this.collection.on('updated', this.draw.bind(this));
             },
-            draw: function(canvas) {
-                var context = canvas.getContext('2d');
+            draw: function() {
+                var context = this.canvas.getContext('2d');
                 if (context) {
                     this.collection.each(function(cell, index) {
                         if(cell.isAlive()) {
