@@ -54,6 +54,15 @@ body {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.menu__conway-wrap {
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  height: 150px;
+  line-height: 25px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .menu__btn {
   position: relative;
   box-sizing: content-box;

@@ -5,19 +5,66 @@ define(function(require) {
 
         var CellsCollection = Backbone.Collection.extend({
             model: Cell,
-            fill: function(sizeX, sizeY) {
-                this.sizeX = sizeX;
-                this.sizeY = sizeY;
-                for (var i = 0; i < this.sizeX; i++) {
-                    for (var j = 0; j < this.sizeY; j++) {
-                        var index = i*sizeY + j;
-                        this.add(new Cell(), {at: index});
+            fill: function(sizeX, sizeY, numX, numY) {
+                var stepX = sizeX/numX,
+                    stepY = sizeY/numY;
+                console.log(stepX, stepY);
+                this.numX = numX;
+                this.numY = numY;
+                for (var i = 0; i < this.numX; i++) {
+                    for (var j = 0; j < this.numY; j++) {
+                        var index = i*numY + j;
+                        this.add(new Cell({
+                            posX: stepX*(i+0.5),
+                            posY: stepY*(j+0.5)
+                        }), {at: index});
                     }
                 }
                 this.writeWord();
             },
             writeWord: function() {
-                // TODO
+                var i, x, y;
+                oCoords = wordConfig.O;
+                for (i = 0; i < oCoords.length; i++) {
+                    x = oCoords[i][1];
+                    y = oCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                fCoords = wordConfig.F;
+                for (i = 0; i < fCoords.length; i++) {
+                    x = fCoords[i][1];
+                    y = fCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                for (i = 0; i < fCoords.length; i++) {
+                    x = fCoords[i][1] + 8;
+                    y = fCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                lCoords = wordConfig.L;
+                for (i = 0; i < lCoords.length; i++) {
+                    x = lCoords[i][1];
+                    y = lCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                iCoords = wordConfig.I;
+                for (i = 0; i < iCoords.length; i++) {
+                    x = iCoords[i][1];
+                    y = iCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                nCoords = wordConfig.N;
+                for (i = 0; i < nCoords.length; i++) {
+                    x = nCoords[i][1];
+                    y = nCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
+                eCoords = wordConfig.E;
+                for (i = 0; i < eCoords.length; i++) {
+                    x = eCoords[i][1];
+                    y = eCoords[i][0];
+                    this.at(x*this.numY + y).set('value', 1);
+                }
             },
             update: function() {
                 this.each(function(cell, index) {

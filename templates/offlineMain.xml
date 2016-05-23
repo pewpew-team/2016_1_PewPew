@@ -4,8 +4,8 @@
             PewPew
         </div>
         <div class = "menu__wrap">
-            <div class = "menu__title">
-            Нет интернета :*( <br/> Самое время тренироваться!
+            <div class = "menu__conway-wrap">
+            <canvas width = "500" height="150" class = "js-conwayCanvas"> </canvas>
             </div>
             <a href = "#training" class = "menu__btn">
                 Тренировка
