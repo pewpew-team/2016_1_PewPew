@@ -7,6 +7,14 @@
             <div class = "menu__conway-wrap">
             <canvas width = "500" height="150" class = "js-conwayCanvas"> </canvas>
             </div>
+            <div class = "menu__double-btn-wrap">
+              <span class = "menu__btn menu__btn--conway--left js-conway-run">
+                  Запуск
+              </span>
+              <span class = "menu__btn menu__btn--conway--right js-conway-stop">
+                  Остановить
+              </span>
+            </div>
             <a href = "#training" class = "menu__btn">
                 Тренировка
             </a>

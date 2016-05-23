@@ -8,7 +8,6 @@ define(function(require) {
             fill: function(sizeX, sizeY, numX, numY) {
                 var stepX = sizeX/numX,
                     stepY = sizeY/numY;
-                console.log(stepX, stepY);
                 this.numX = numX;
                 this.numY = numY;
                 for (var i = 0; i < this.numX; i++) {
@@ -73,7 +72,9 @@ define(function(require) {
                                     index-this.sizeY+1, index+this.sizeY, index+this.sizeY-1,
                                     index+this.sizeY+1];
                     for (var i = 0; i < indexes.length; i++) {
-                        count += this.at(indexes[i]).get('value');
+                        if (this.at(indexes[i])) {
+                            count += this.at(indexes[i]).get('value');
+                        }
                     }
                     if (cell.isAlive()) {
                         cell.set('nextValue', count === 2 || count === 3 ? 1 : 0);

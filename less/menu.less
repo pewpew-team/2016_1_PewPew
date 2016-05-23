@@ -36,7 +36,6 @@
         text-align: center;
         height: 150px;
         line-height: 25px;
-        margin-top: 15px;
         margin-bottom: 15px;
     }
     &__btn {
@@ -65,12 +64,6 @@
         &:hover {
             background: lighten(@button-color-main, 10%);
         }
-        &:active {
-            transition: top 0.3s;
-            border-bottom-width: 0;
-            top: 5px;
-            margin-bottom: 15px;
-        }
         &--small {
             width: 35%;
             display: inline-block;
@@ -84,11 +77,27 @@
         &:hover {
           background: darken(@button-back-color-main, 10%);
         }
-        &:active {
-            transition: top 0.3s;
-            border-bottom-width: 0;
-            top: 5px;
-            margin-bottom: 15px;
+    }
+    &__btn--conway--left {
+        width: 26.5%;
+        margin-right: 5%;
+        margin-left: 18%;
+        display: inline-block;
+        background: @button-back-color-main;
+        color: @button-back-text-color;
+        &:hover {
+          background: darken(@button-back-color-main, 10%);
+        }
+    }
+    &__btn--conway--right {
+        width: 26.5%;
+        margin-right: 18%;
+        margin-left: 5%;
+        display: inline-block;
+        background: @button-back-color-main;
+        color: @button-back-text-color;
+        &:hover {
+          background: darken(@button-back-color-main, 10%);
         }
     }
     &__result {
@@ -96,5 +105,8 @@
     }
     &__double-btn-wrap {
         margin: 10px 2.5%;
+        &--conway {
+            margin: 10px 20%;
+        }
     }
 }

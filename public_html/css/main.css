@@ -60,7 +60,6 @@ body {
   text-align: center;
   height: 150px;
   line-height: 25px;
-  margin-top: 15px;
   margin-bottom: 15px;
 }
 .menu__btn {
@@ -93,12 +92,6 @@ body {
 .menu__btn:hover {
   background: #475363;
 }
-.menu__btn:active {
-  transition: top 0.3s;
-  border-bottom-width: 0;
-  top: 5px;
-  margin-bottom: 15px;
-}
 .menu__btn--small {
   width: 35%;
   display: inline-block;
@@ -112,17 +105,36 @@ body {
 .menu__btn--back:hover {
   background: #cbd2db;
 }
-.menu__btn--back:active {
-  transition: top 0.3s;
-  border-bottom-width: 0;
-  top: 5px;
-  margin-bottom: 15px;
+.menu__btn--conway--left {
+  width: 26.5%;
+  margin-right: 5%;
+  margin-left: 18%;
+  display: inline-block;
+  background: #e9ecf0;
+  color: #5E6D82;
+}
+.menu__btn--conway--left:hover {
+  background: #cbd2db;
+}
+.menu__btn--conway--right {
+  width: 26.5%;
+  margin-right: 18%;
+  margin-left: 5%;
+  display: inline-block;
+  background: #e9ecf0;
+  color: #5E6D82;
+}
+.menu__btn--conway--right:hover {
+  background: #cbd2db;
 }
 .menu__result {
   text-align: center;
 }
 .menu__double-btn-wrap {
   margin: 10px 2.5%;
+}
+.menu__double-btn-wrap--conway {
+  margin: 10px 20%;
 }
 #form__alert {
   width: 80%;
