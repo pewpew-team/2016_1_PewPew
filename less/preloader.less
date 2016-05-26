@@ -62,3 +62,39 @@
     transform: rotate(360deg);
   }
 }
+.preloader__wrap {
+  width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  &--fade-out {
+    animation: toTopEdge 1.3s;
+    animation-delay: 1s;
+  }
+}
+.preloader__background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 6;
+  font-family: 'Open Sans', sans-serif;
+  min-width: 368px;
+  transform: all 1s;
+  &--transperent {
+    opacity: 0;
+  }
+}
+
+
+@keyframes toTopEdge {
+  from {
+    top: 50%;
+  }
+  to {
+    top: -50%;
+  }
+}
