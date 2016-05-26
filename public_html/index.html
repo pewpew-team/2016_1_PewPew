@@ -10,11 +10,20 @@
 </head>
 
 <body>
-  <div class="page__background">
+  <div class="page__background page__background--invisible">
     <canvas id="pageBackground"></canvas>
   </div>
-  <div class="page" id="page">
+  <div class="page page--outside" id="page">
 
+  </div>
+  <div class="preloader__wrap">
+    <div class = "preloader">
+      <div class = "preloader__rect preloader__rect--one"> </div>
+      <div class = "preloader__rect preloader__rect--two"> </div>
+      <div class = "preloader__rect preloader__rect--three"> </div>
+      <div class = "preloader__rect preloader__rect--four"> </div>
+      <div class = "preloader__circle"> </div>
+    </div>
   </div>
   <script src="js/config.js"></script>
   <script data-main="index" src="js/lib/require.js"></script>
