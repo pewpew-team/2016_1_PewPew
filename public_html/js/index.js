@@ -21,5 +21,5 @@ define(function (require) {
                 $('.page').removeClass('page--toCenter');
             }, 1200);
         }, 500);
-    }, 1200);
+    }, 2600);
 });
