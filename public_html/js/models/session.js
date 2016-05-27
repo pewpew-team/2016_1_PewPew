@@ -44,7 +44,6 @@ define(function(require) {
             });
         },
         logout: function() {
-            this.set('isAuth', false);
             this.save(null, {
                 success: function() {
                     window.location.hash = 'main';
