@@ -4,7 +4,7 @@
             PewPew
         </div>
         <div class = "menu__wrap">
-            <a href = "#login" class = "menu__btn">
+            <a href = "#gameMenu" class = "menu__btn">
                 Вход
             </a>
             <a href = "#register" class = "menu__btn">

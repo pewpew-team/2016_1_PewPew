@@ -119,7 +119,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
 
-  grunt.registerTask('compile', ['requirejs', 'cssmin']);
+  grunt.registerTask('compile', ['less', 'requirejs', 'cssmin']);
   grunt.registerTask('test', ['qunit:all']);
   grunt.registerTask('default', ['concurrent']);
 

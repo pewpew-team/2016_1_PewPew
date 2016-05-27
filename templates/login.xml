@@ -12,7 +12,7 @@
                 <form name="authentication">
                     <input name = "login" placeholder = "Логин" class = "form__text_input" id = "login-input"></input>
                     <input name = "password" placeholder = "Пароль" class = "form__text_input" id = "password-input" type = "password"></input>
-                    <input type = "submit" placeholder = "Войти" class = "form__submit_input" id = 'sign-in'></input>
+                    <input type = "submit" placeholder = "Войти" class = "menu__btn" id = 'sign-in'></input>
                 </form>
             </div>
             <a href = "#main" class = "menu__btn  menu__btn--back">

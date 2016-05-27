@@ -51,10 +51,6 @@ define(function (require) {
                         this.model.get('positionY') + Math.sin(angle) * this.model.get('gunLength'));
                     context.stroke();
                     context.closePath();
-                },
-                destroy: function() {
-                    $(this.canvas).off('click mousemove');
-                    $(window).off('keydown keyup');
                 }
             });
         return EnemyView;

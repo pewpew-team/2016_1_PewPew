@@ -17,23 +17,36 @@
         height: 120px;
         line-height: 120px;
     }
+    &__filler {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background: black;
+    }
     &__wrap {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     &__title {
         width: 100%;
         font-size: 24px;
         text-align: center;
-        height: 50px;
+        height: 30px;
         line-height: 25px;
         margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    &__conway-wrap {
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+        height: 150px;
+        line-height: 25px;
         margin-bottom: 15px;
     }
     &__btn {
         position: relative;
         box-sizing: content-box;
-        width: 70%;
+        width: 60%;
         height: 45px;
         background-color: @button-color-main;
         border: 0;
@@ -47,23 +60,13 @@
         text-align: center;
         text-decoration: none;
         user-select: none;
-        border-top-width: 0;
-        border-bottom: 5px solid @button-color-shadow;
+        border-radius: 10px;
         padding: 0;
         &:focus {
             outline: none;
-            background: lighten(@button-color-main, 10%);
-            border-bottom: 5px solid lighten(@button-color-shadow, 5%);
         }
         &:hover {
             background: lighten(@button-color-main, 10%);
-            border-bottom: 5px solid lighten(@button-color-shadow, 5%);
-        }
-        &:active {
-            transition: top 0.3s;
-            border-bottom-width: 0;
-            top: 5px;
-            margin-bottom: 15px;
         }
         &--small {
             width: 35%;
@@ -75,16 +78,30 @@
     &__btn--back {
         background: @button-back-color-main;
         color: @button-back-text-color;
-        border-bottom: 5px solid @button-back-color-shadow;
         &:hover {
           background: darken(@button-back-color-main, 10%);
-          border-bottom: 5px solid darken(@button-back-color-shadow, 5%);
         }
-        &:active {
-            transition: top 0.3s;
-            border-bottom-width: 0;
-            top: 5px;
-            margin-bottom: 15px;
+    }
+    &__btn--conway--left {
+        width: 26.5%;
+        margin-right: 5%;
+        margin-left: 18%;
+        display: inline-block;
+        background: @button-back-color-main;
+        color: @button-back-text-color;
+        &:hover {
+          background: darken(@button-back-color-main, 10%);
+        }
+    }
+    &__btn--conway--right {
+        width: 26.5%;
+        margin-right: 18%;
+        margin-left: 5%;
+        display: inline-block;
+        background: @button-back-color-main;
+        color: @button-back-text-color;
+        &:hover {
+          background: darken(@button-back-color-main, 10%);
         }
     }
     &__result {
@@ -92,5 +109,8 @@
     }
     &__double-btn-wrap {
         margin: 10px 2.5%;
+        &--conway {
+            margin: 10px 20%;
+        }
     }
 }

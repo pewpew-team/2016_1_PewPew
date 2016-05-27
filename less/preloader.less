@@ -16,19 +16,19 @@
    transform-origin: 100px 15px;
  }
  .preloader__rect--one {
-   animation: motionRect 2s infinite linear;
+   animation: motionRect 1.6s infinite linear;
  }
  .preloader__rect--two {
-   animation: motionRect 2s infinite linear;
-   animation-delay: 0.5s;
+   animation: motionRect 1.6s infinite linear;
+   animation-delay: 0.4s;
  }
  .preloader__rect--three {
-   animation: motionRect 2s infinite linear;
-   animation-delay: 1s;
+   animation: motionRect 1.6s infinite linear;
+   animation-delay: 0.8s;
  }
  .preloader__rect--four {
-   animation: motionRect 2s infinite linear;
-   animation-delay: 1.5s;
+   animation: motionRect 1.6s infinite linear;
+   animation-delay: 1.2s;
  }
  .preloader__circle {
    position: absolute;
@@ -38,7 +38,7 @@
    background: @preloader-color-circle;
    top: 92.5px;
    left: 155px;
-   animation: motionCircle 1s infinite linear;
+   animation: motionCircle 0.8s infinite linear;
  }
  @keyframes motionCircle {
   from {
@@ -60,5 +60,41 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+.preloader__wrap {
+  width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  &--fade-out {
+    animation: toTopEdge 1.3s;
+    animation-delay: 1.6s;
+  }
+}
+.preloader__background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 6;
+  font-family: 'Open Sans', sans-serif;
+  min-width: 368px;
+  transform: all 1s;
+  &--transperent {
+    opacity: 0;
+  }
+}
+
+
+@keyframes toTopEdge {
+  from {
+    top: 50%;
+  }
+  to {
+    top: -50%;
   }
 }

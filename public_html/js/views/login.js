@@ -1,7 +1,8 @@
 define(function (require) {
     var tmpl = require('tmpl/login'),
         baseView = require('views/baseView'),
-        session = require('models/session');
+        session = require('models/session'),
+        router = require('router');
 
 
     var View = baseView.extend({
@@ -27,13 +28,6 @@ define(function (require) {
         },
         hideErrorMessage: function () {
             document.getElementById('form__alert').textContent = '';
-        },
-        show: function() {
-            if (session.isLoggedIn()) {
-                window.location.hash = 'gameMenu';
-            } else {
-                baseView.prototype.show.call(this);
-            }
         }
     });
 

@@ -12,6 +12,7 @@ define(function(require) {
                   playerSizeX: 80,
                   playerSizeY: 50,
                   maxVelocity: 17,
+                  gunAngle: Math.Pi/2
               },
               initialize: function() {
                   this.set({
@@ -25,7 +26,6 @@ define(function(require) {
                       'velocity': 0,
                       'maxLevelPointer': screenModel.get("baseHeight") * 2 / 3
                   });
-                  this.set('angle', this.getAngle());
               },
               getAngle : function () {
                   return Math.atan2(this.get('currentPointerY') - this.get('positionY'), this.get('currentPointerX') - this.get('positionX'));

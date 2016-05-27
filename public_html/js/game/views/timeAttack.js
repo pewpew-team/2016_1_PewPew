@@ -95,7 +95,6 @@ define(function(require) {
           this.isRunning = false;
           dude.hideDude();
           bulletsCollection.off('barrierDestroy');
-          this.playerView.remove();
           this.player.destroy();
           this.playerView.destroy();
           bulletsCollection.reset();

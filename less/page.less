@@ -8,6 +8,7 @@
     opacity: 1;
     font-family: 'Open Sans', sans-serif;
     min-width: 368px;
+    transition: all 2s;
     &__background {
         position: absolute;
         z-index: 1;
@@ -15,5 +16,24 @@
         height: 100%;
         opacity: 1;
         overflow: hidden;
+        transition: all 1s;
+        &--invisible {
+            opacity: 0.2;
+        }
     }
+    &--toCenter {
+        animation: toCenter 1s;
+    }
+    &--outside {
+        top: -100%;
+    }
+}
+
+@keyframes toCenter {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
 }
