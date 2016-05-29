@@ -4,14 +4,34 @@
     margin-bottom: 20px;
     padding-left: 10%;
     padding-right: 10%;
-    &_name {
-        width: 80%;
+    &:before {
+        content: '';
+        position: absolute;
+        background: url('../img/happyBoy.png');
+        background-size: 80px;
+        background-repeat: no-repeat;
+        width: 80px;
+        height: 80px;
+        right: 0;
+        bottom: 0px;
+    }
+    &__title {
+        position: relative;
+        margin: 40px 0;
+        &:before {
+            content: '';
+            position: absolute;
+            background: url('../img/cup.png');
+            background-size: 63px;
+            background-repeat: no-repeat;
+            width: 63px;
+            height: 63px;
+            top: -17px;
+            left: 63px;
+        }
     }
     &__rating {
         width: 20%;
         text-align: center;
-    }
-    &__title {
-        font-weight: bold;
     }
 }
