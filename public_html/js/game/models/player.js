@@ -29,6 +29,7 @@ define(function(require) {
                   });
               },
               addPushedButton: function(pushedDirection) {
+                console.log(this.get('arrDirections'));
                 var arrDirections = this.get('arrDirections');
                 if (arrDirections[arrDirections.length - 1] !== pushedDirection) {
                   arrDirections.push(pushedDirection);
@@ -181,6 +182,9 @@ define(function(require) {
                               'gunAngle': (data.player.gunAngle) % (Math.PI*2)
                         });
                   }
+            },
+            destroy: function() {
+                  this.off('change');
             }
           });
       return Player;

@@ -11,17 +11,16 @@ define(function(require) {
     // Передать игрока и врага
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
-      bulletCollection.on('shoot', this.sendNewBullet.bind(this));
-      this.get('player').on('change', this.sendPlayerPosition);
+      this.listenTo(bulletCollection, 'shoot', this.sendNewBullet.bind(this));
+      this.listenTo(this.get('player'), 'change:positionX', this.sendPlayerPosition);
     },
     silence: function() {
-      bulletCollection.off('shoot');
-      this.get('player').off('change');
+      this.stopListening(bulletCollection);
+      this.stopListening(this.get('player'));
       this.set('player', null);
       this.set('enemy', null);
     },
     sendNewBullet: function(bullet) {
-      bulletCollection.remove(bullet);
       var bulletObj = {
         posX: bullet.get('posX'),
         posY: bullet.get('posY'),

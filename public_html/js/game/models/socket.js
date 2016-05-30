@@ -18,7 +18,6 @@ define(function(require) {
       var messageHandlers = this.get('messageHandlers');
       messageHandlers.push(handler);
       this.set('messageHandlers', messageHandlers);
-      console.log(this.get('messageHandlers'));
     },
     clearMessageHandlers: function() {
       this.set('messageHandlers', []);
@@ -37,7 +36,7 @@ define(function(require) {
     addOpenHandler: function (handler) {
       var openHandlers = this.get('openHandlers');
       openHandlers.push(handler);
-      this.set('openHandlers', messageHandlers);
+      this.set('openHandlers', openHandlers);
     },
     openHandler: function (event) {
       this.get('openHandlers').forEach(function(handler) {
