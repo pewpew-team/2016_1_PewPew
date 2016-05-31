@@ -7,6 +7,7 @@ define(function(require) {
             this.canvas = canvas;
             this.model = model;
             this.COUNT_STATE = 5;
+            this.RADIUS_PER_STATE = 3;
         },
         getState: function(model) {
             var startMoment = model.get('startLifeTime'),
@@ -22,7 +23,7 @@ define(function(require) {
             context.beginPath();
             context.fillStyle = theme['bulletsColor'];
             context.arc(model.get('posX'), model.get('posY') ,
-                this.getState(model) * 10, 0, 2 * Math.PI, false);
+                this.getState(model) * this.RADIUS_PER_STATE, 0, 2 * Math.PI, false);
             context.fill();
             context.closePath();
         }
