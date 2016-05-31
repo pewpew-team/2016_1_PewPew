@@ -3,6 +3,8 @@ define(function(require) {
         bulletsCollection = require('game/collections/bulletCollection'),
         barriersCollection = require('game/collections/barriersCollection'),
         BarriersView = require('game/views/allBarriersView'),
+        fireShadowCollection = require('game/collections/fireShadowCollection'),
+        FireShadowsView = require('game/views/allFireShadowView'),
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
         _ = require('underscore'),
@@ -21,6 +23,7 @@ define(function(require) {
         this.player = new Player(user.get('login'), this.dynamicCanvas.width, this.dynamicCanvas.height);
         this.playerView = new PlayerView(this.player, this.dynamicCanvas);
         this.bulletsView = new BulletsView(bulletsCollection);
+        this.fireShadowsView = new FireShadowsView(fireShadowCollection, this.dynamicCanvas);
         this.barriersView = new BarriersView({collection : barriersCollection});
         var NUMBER_X = 24,
             NUMBER_Y = 4,
@@ -43,6 +46,8 @@ define(function(require) {
           var context = this.dynamicCanvas.getContext('2d');
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
+          fireShadowCollection.iterate();
+          this.fireShadowsView.render();
           this.barriersView.render();
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
