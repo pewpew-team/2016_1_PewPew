@@ -182,15 +182,24 @@ body {
   padding-left: 10%;
   padding-right: 10%;
 }
-.scoreboard_name {
-  width: 80%;
+.scoreboard__title {
+  position: relative;
+  margin: 40px 0;
+}
+.scoreboard__title:before {
+  content: '';
+  position: absolute;
+  background: url('../img/cup.png');
+  background-size: 63px;
+  background-repeat: no-repeat;
+  width: 63px;
+  height: 63px;
+  top: -17px;
+  left: 63px;
 }
 .scoreboard__rating {
   width: 20%;
   text-align: center;
-}
-.scoreboard__title {
-  font-weight: bold;
 }
 .header {
   clear: both;

@@ -14,7 +14,7 @@
                     <input name = "login" placeholder = "Логин" class = "form__text_input" id = "login-input"></input>
                     <input name = "password" placeholder = "Пароль" type = "password" class = "form__text_input" id = "password-input"></input>
                     <input name = "password" placeholder = "Повторите пароль" type = "password" class = "form__text_input" id = "repeat-password-input"></input>
-                    <input placeholder = "Зарегистрировать" type = "submit" class = "form__submit_input" id = 'sign-up'></input>
+                    <input placeholder = "Зарегистрировать" type = "submit" class = "menu__btn" id = 'sign-up'></input>
                 </form>
             </div>
             <a href = "#main" class="menu__btn  menu__btn--back">

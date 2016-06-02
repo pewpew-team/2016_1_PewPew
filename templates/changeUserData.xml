@@ -12,9 +12,11 @@
                 <form name="registration">
                     <input name = "email" placeholder = "EMail" class = "form__text_input" id = "email-input"></input>
                     <input name = "login" placeholder = "Логин" class = "form__text_input" id = "login-input"></input>
-                    <input placeholder = "Изменить" type = "submit" class = "form__submit_input" id = 'change-data'></input>
                 </form>
             </div>
+            <a href = "#changePass" class="menu__btn" id="change-data">
+                Изменить
+            </a>
             <a href = "#changePass" class="menu__btn">
                 Изменить пароль
             </a>
