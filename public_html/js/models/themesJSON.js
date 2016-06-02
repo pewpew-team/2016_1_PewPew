@@ -18,7 +18,7 @@ define(function (require) {
             unremovableBlockColor: 'black',
             playerColor: 'black',
             bulletsColor: '#FFF119',
-            boosterColor: '#FFF119',
+            boosterColor: '#B3A911',
             boosterBorderColor: '#0986B2',
             playerGunColor: '#CC0C39'
         },{
@@ -38,8 +38,8 @@ define(function (require) {
             unremovableBlockColor: 'black',
             playerColor: 'black',
             bulletsColor: '#FFFC19',
-            boosterColor: '#FFFC19',
-            boosterBorderColor: '#E92F2F',
+            boosterColor: '#FFF119',
+            boosterBorderColor: '#B3A911',
             playerGunColor: '#292929'
         },{
             background : "img/sandy/bg.png",
@@ -59,7 +59,7 @@ define(function (require) {
             playerColor: 'black',
             bulletsColor: '#E92F2F',
             boosterColor: '#E92F2F',
-            boosterBorderColor: '#556F94',
+            boosterBorderColor: '#801A1A',
             playerGunColor: '#AA14CC'
         },{
             background : "img/green2/bg.png",
@@ -80,7 +80,7 @@ define(function (require) {
             playerColor: 'black',
             bulletsColor: '#00FF61',
             boosterColor: '#00FF61',
-            boosterBorderColor: '#E6781E',
+            boosterBorderColor: '#00993A',
             playerGunColor: '#9819FF'
         }
     ];

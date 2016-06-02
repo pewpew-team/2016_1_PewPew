@@ -13,6 +13,8 @@ define(function(require) {
         user = require('models/user'),
         Backbone = require('backbone'),
         dude = require('game/views/dude'),
+        fireShadowCollection = require('game/collections/fireShadowCollection'),
+        FireShadowsView = require('game/views/allFireShadowView'),
         game = require('views/game');
 
     var NUMBER_X = 24,
@@ -28,6 +30,7 @@ define(function(require) {
           this.player = new Player(user.get('login'));
           this.playerView = new PlayerView(this.player, this.dynamicCanvas);
           this.bulletsView = new BulletsView(bulletsCollection);
+          this.fireShadowsView = new FireShadowsView(fireShadowCollection, this.dynamicCanvas);
           this.barriersView = new BarriersView({collection : barriersCollection});
           this.boostersView = new BoostersView({collection : boostersCollection});
           this.MAX_TIME = 60*1000;
@@ -65,6 +68,8 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
+          fireShadowCollection.iterate();
+          this.fireShadowsView.render();
           this.boostersView.render();
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,

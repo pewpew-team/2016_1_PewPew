@@ -18,7 +18,9 @@ define(function(require) {
         waitingView = require('game/views/waiting'),
         socket = require('game/models/socket'),
         Enemy = require('game/models/enemy'),
-        EnemyView = require('game/views/enemyView');
+        EnemyView = require('game/views/enemyView'),
+        fireShadowCollection = require('game/collections/fireShadowCollection'),
+        FireShadowsView = require('game/views/allFireShadowView');
 
     var NUMBER_X = 24,
         NUMBER_Y = 3,
@@ -36,6 +38,7 @@ define(function(require) {
           this.playerView = new PlayerView(this.player, this.dynamicCanvas);
           this.enemy = new Enemy(user.get('login'));
           this.enemyView = new EnemyView(this.enemy, this.dynamicCanvas);
+          this.fireShadowsView = new FireShadowsView(fireShadowCollection, this.dynamicCanvas);
           this.bulletsView = new BulletsView(bulletsCollection);
           this.barriersView = new BarriersView({collection : barriersCollection});
           this.boostersView = new BoostersView({collection : boostersCollection});
@@ -82,6 +85,8 @@ define(function(require) {
           context.clearRect(0, 0, this.dynamicCanvas.width, this.dynamicCanvas.height);
           this.bulletsView.render();
           this.barriersView.render();
+          fireShadowCollection.iterate();
+          this.fireShadowsView.render();
           bulletsCollection.iterate(barriersCollection,
                                     this.dynamicCanvas.width,
                                     this.dynamicCanvas.height,

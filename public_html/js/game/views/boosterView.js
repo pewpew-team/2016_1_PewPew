@@ -19,7 +19,7 @@ define(function(require) {
                   this.model.get('radius'), 0, 2 * Math.PI, false);
                 context.fillStyle = theme['boosterColor'];
                 context.fill();
-                context.lineWidth = 5;
+                context.lineWidth = 7;
                 context.strokeStyle = theme['boosterBorderColor'];
                 context.stroke();
                 context.closePath();     
