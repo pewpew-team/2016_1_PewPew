@@ -1,6 +1,7 @@
 define(function(require) {
       var Backbone = require('backbone'),
           bulletCollection = require('game/collections/bulletCollection'),
+          fireShadowCollection = require('game/collections/fireShadowCollection'),
           screenModel = require('models/game'),
           $ = require('jquery');
 
@@ -139,6 +140,7 @@ define(function(require) {
                       gunLength = this.get('gunLength'),
                       posX = this.get('positionX') + Math.cos(angle) * gunLength,
                       posY = this.get('positionY') + Math.sin(angle) * gunLength;
+                  fireShadowCollection.fire(posX, posY, angle, V);
                   bulletCollection.fire(posX, posY, velX, velY);
               },
               checkPlayerCollision: function() {
