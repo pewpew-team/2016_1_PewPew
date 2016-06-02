@@ -49,17 +49,40 @@ define(function(require) {
       }
     },
     updateBullets: function(data) {
-        bulletCollection.reset();
+      var bulletsToDelete = bulletCollection.filter(function(bullet) {
+        var bulletId = bullet.get('id_');
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].bulletId === bulletId) {
+            return false;
+          }
+        }
+        return true;
+      });
+      bulletCollection.remove(bulletsToDelete);
       data.forEach(function(bulletData) {
-        var bullet = new Bullet({
-             'posX': bulletData.posX,
-             'posY': bulletData.posY,
-             'velX': bulletData.velX,
-             'velY': bulletData.velY,
-             'sizeX': bulletData.sizeX,
-             'sizeY': bulletData.sizeY
-         });
-        bulletCollection.add(bullet);
+        var bulletFromCollection = bulletCollection.where({'id_': bulletData.bulletId})[0];
+        if ( bulletFromCollection ) {
+          bulletFromCollection.set({
+            'posX': bulletData.posX,
+            'posY': bulletData.posY,
+            'velX': bulletData.velX,
+            'velY': bulletData.velY,
+            'sizeX': bulletData.sizeX,
+            'sizeY': bulletData.sizeY,
+            'id_': bulletData.bulletId
+          });
+        } else {
+          var bullet = new Bullet({
+            'posX': bulletData.posX,
+            'posY': bulletData.posY,
+            'velX': bulletData.velX,
+            'velY': bulletData.velY,
+            'sizeX': bulletData.sizeX,
+            'sizeY': bulletData.sizeY,
+            'id_': bulletData.bulletId
+          });
+          bulletCollection.add(bullet);
+        }
       });
     },
     updateBarriers: function(data) {
