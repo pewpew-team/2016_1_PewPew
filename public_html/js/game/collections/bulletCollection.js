@@ -7,12 +7,12 @@ define(function(require) {
             initialize: function() {
                 this.isAddable = true;
             },
-            iterate: function(barriersCollection, screenWidth, screenHeight, dt, isNotCollide) {
+            iterate: function(barriersCollection, screenWidth, screenHeight, dt) {
                 this.screenWidth = screenWidth;
                 this.screenHeight = screenHeight;
                 this.barriers = barriersCollection;
                 this.dt = dt;
-                this.isNotCollide = isNotCollide || false;
+                this.isNotCollide = false;
                 this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
             },
