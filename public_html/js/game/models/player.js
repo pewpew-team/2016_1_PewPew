@@ -29,7 +29,6 @@ define(function(require) {
                   });
               },
               addPushedButton: function(pushedDirection) {
-                console.log(this.get('arrDirections'));
                 var arrDirections = this.get('arrDirections');
                 if (arrDirections[arrDirections.length - 1] !== pushedDirection) {
                   arrDirections.push(pushedDirection);

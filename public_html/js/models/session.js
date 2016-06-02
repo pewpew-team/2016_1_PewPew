@@ -44,17 +44,18 @@ define(function(require) {
             });
         },
         logout: function() {
-            this.save(null, {
+            $.ajax({
+                method: 'DELETE',
+                url: 'session',
+                contentType: 'application/json',
                 success: function() {
                     window.location.hash = 'main';
                     this.set('isAuth', false);
-                    console.log(this.get('isAuth', false));
                     user.clear();
                 }.bind(this),
                 error: function () {
                     this.trigger('invalidLogout');
-                }.bind(this),
-                method: 'delete'
+                }.bind(this)
             });
         },
         save: function (attrs, options) {

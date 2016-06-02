@@ -20,6 +20,6 @@ define(function (require) {
             setTimeout(function() {
                 $('.page').removeClass('page--toCenter');
             }, 1200);
-        }, 500);
-    }, 2600);
+        }, 100);
+    }, 2000);
 });
