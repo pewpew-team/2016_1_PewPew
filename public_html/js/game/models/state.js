@@ -49,7 +49,7 @@ define(function(require) {
       }
     },
     updateBullets: function(data) {
-        barriersCollection.reset();
+        bulletCollection.reset();
       data.forEach(function(bulletData) {
         var bullet = new Bullet({
              'posX': bulletData.posX,
