@@ -49,30 +49,17 @@ define(function(require) {
       }
     },
     updateBullets: function(data) {
+        barriersCollection.reset();
       data.forEach(function(bulletData) {
-          var bulletFromCollection = bulletCollection.where({'id_': bulletData.bulletId})[0];
-          if ( bulletFromCollection ) {
-            bulletFromCollection.set({
-                         'posX': bulletData.posX,
-                         'posY': bulletData.posY,
-                         'velX': bulletData.velX,
-                         'velY': bulletData.velY,
-                         'sizeX': bulletData.sizeX,
-                         'sizeY': bulletData.sizeY,
-                         'id_': bulletData.bulletId
-                     });
-          } else {
-            var bullet = new Bullet({
-                         'posX': bulletData.posX,
-                         'posY': bulletData.posY,
-                         'velX': bulletData.velX,
-                         'velY': bulletData.velY,
-                         'sizeX': bulletData.sizeX,
-                         'sizeY': bulletData.sizeY,
-                         'id_': bulletData.bulletId
-                     });
-            bulletCollection.add(bullet);
-          }
+        var bullet = new Bullet({
+             'posX': bulletData.posX,
+             'posY': bulletData.posY,
+             'velX': bulletData.velX,
+             'velY': bulletData.velY,
+             'sizeX': bulletData.sizeX,
+             'sizeY': bulletData.sizeY
+         });
+        bulletCollection.add(bullet);
       });
     },
     updateBarriers: function(data) {

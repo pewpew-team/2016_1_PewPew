@@ -87,11 +87,11 @@ define(function(require) {
           this.barriersView.render();
           fireShadowCollection.iterate();
           this.fireShadowsView.render();
-          bulletsCollection.iterate(barriersCollection,
-                                    this.dynamicCanvas.width,
-                                    this.dynamicCanvas.height,
-                                    this._getFrameTimeDiff(),
-                                    false);
+          //bulletsCollection.iterate(barriersCollection,
+          //                          this.dynamicCanvas.width,
+          //                          this.dynamicCanvas.height,
+          //                          this._getFrameTimeDiff(),
+          //                          false);
           this.playerView.render();
           this.enemyView.render();
           if (this.isRunning) {
