@@ -7,7 +7,7 @@ define(function (require) {
     var View = Backbone.View.extend({
         template: tmpl,
         events: {
-            'click #js-cancel': 'cancel'
+            'click .js-cancel': 'cancel'
         },
         initialize: function() {
             this.render();
@@ -25,6 +25,7 @@ define(function (require) {
         },
         cancel: function() {
             this.trigger('cancel');
+            window.location.hash = '#gameMenu';
             this.hide();
         }
     });

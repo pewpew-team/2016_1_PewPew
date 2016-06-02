@@ -14,9 +14,9 @@
             </div>
             Ожидаем игрока...
         </div>
-        <a href = "#gameMenu" class = "menu__btn menu__btn" id = "js-cancel">
+        <p class = "menu__btn menu__btn js-cancel">
             Отменить
-        </a>
+        </p>
       </div>
     </div>
 </fest:template>
