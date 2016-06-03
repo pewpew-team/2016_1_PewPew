@@ -7,7 +7,6 @@ define(function(require) {
         BoostersView = require('game/views/allBoostersView'),
         PlayerView = require('game/views/playerView'),
         Player = require('game/models/player'),
-        Booster = require('game/models/booster'),
         _ = require('underscore'),
         resultsView = require('game/views/result'),
         user = require('models/user'),
@@ -21,12 +20,6 @@ define(function(require) {
         EnemyView = require('game/views/enemyView'),
         fireShadowCollection = require('game/collections/fireShadowCollection'),
         FireShadowsView = require('game/views/allFireShadowView');
-
-    var NUMBER_X = 24,
-        NUMBER_Y = 3,
-        RATIO = 0.3,
-        LEFT_CORNER_POS_X = 50,
-        LEFT_CORNER_POS_Y = 300;
 
 
     var View = Backbone.View.extend({
@@ -93,6 +86,7 @@ define(function(require) {
                                     this._getFrameTimeDiff(),
                                     false);
           this.playerView.render();
+          this.enemy.checkPlayerCollision();
           this.enemyView.render();
           if (this.isRunning) {
               requestAnimationFrame(_.bind(this.iterate, this));
@@ -104,7 +98,7 @@ define(function(require) {
           this.quitGame();
       },
       updateScore: function() {
-          var minutes = Math.trunc((this._getTime()/1000) / 60);
+          var minutes = Math.trunc((this._getTime()/1000) / 60),
               seconds = String(Math.trunc((this._getTime()/1000) % 60));
           if (seconds.length == 1) {
             seconds = '0' + seconds;
@@ -118,7 +112,7 @@ define(function(require) {
           if (this.state) {
               this.state.silence();
           }
-          this.isRunnig = false;
+          this.isRunning = false;
           this.player.destroy();
           this.playerView.destroy();
           this.playerView.remove();

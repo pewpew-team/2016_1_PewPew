@@ -9,7 +9,8 @@ define(function(require) {
                 velY: 0,
                 sizeX: 15,
                 sizeY: 15,
-                id_: 0
+                id_: 0,
+                collisionCounter: 0
             },
             iterate: function(dt) {
                 this.set('posX', this.get('posX') + dt*this.get('velX'));

@@ -3,16 +3,14 @@ define(function (require) {
             _ = require('underscore'),
             createjs = require('createjs'),
             bulletCollection = require('game/collections/bulletCollection'),
-            theme = require('models/theme');
+            theme = require('models/theme'),
+            $ = require('jquery');
 
         var PlayerView = Backbone.View.extend({
                 initialize: function (model, canvas) {
                     this.model = model;
                     this.canvas = canvas;
-                    $(this.canvas).on('click', this.handleClick.bind(this));
-                    $(this.canvas).on('mousemove', this.handleMouseMove.bind(this));
-                    $(window).on('keydown', this.handleKeydown.bind(this));
-                    $(window).on('keyup', this.handleKeyup.bind(this));
+                    this.addEvents();
                     //прелоадим все положения игрока
                     this.preloader(0);
                     this.preloader(-1);
@@ -22,6 +20,16 @@ define(function (require) {
                     this.model.iterate();
                     this.drawBase();
                     this.drawGun();
+                },
+                addEvents: function() {
+                    $('.gameArea__canvas').click(this.handleClick.bind(this));
+                    $('.gameArea__canvas').mousemove(this.handleMouseMove.bind(this));
+                    $('body').keydown(this.handleKeydown.bind(this));
+                    $('body').keyup(this.handleKeyup.bind(this));
+                },
+                deleteEvents: function() {
+                    $('.gameArea__canvas').unbind();
+                    $('body').unbind('keyup keydown');
                 },
                 preloaderQueue: {},
                 preloader: function(hash){
@@ -100,8 +108,8 @@ define(function (require) {
                     }
                 },
                 destroy: function() {
-                    $(this.canvas).off('click mousemove');
-                    $(window).off('keydown keyup');
+                    console.log('destroy');
+                    this.deleteEvents();
                 }
             });
         return PlayerView;

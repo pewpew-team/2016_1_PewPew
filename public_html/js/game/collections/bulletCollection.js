@@ -15,6 +15,7 @@ define(function(require) {
                 this.isNotCollide = false;
                 this.each(this.iterateBullet.bind(this));
                 this.deleteOutOfBoxBullets();
+                this.deleteStucked();
             },
             deleteOutOfBoxBullets: function() {
                 var outOfBox = this.filter(function (bullet) {
@@ -22,12 +23,19 @@ define(function(require) {
                 }.bind(this));
                 this.remove(outOfBox);
             },
+            deleteStucked: function() {
+                var stucked = this.filter(function (bullet) {
+                    return bullet.get('collisionCounter') > 30;
+                }.bind(this));
+                this.remove(stucked);
+            },
             iterateBullet: function (bullet, isNotCollide) {
                 bullet.iterate(this.dt);
                 if (!this.isNotCollide) {
                     for (var i = 0; i < this.barriers.length; i++) {
                         if ( this.tryToCollide(bullet, this.barriers.at(i)) ) {
                             this.collide(bullet, this.barriers.at(i));
+                            bullet.set({'collisionCounter': bullet.get('collisionCounter') + 1});
                             if (this.barriers.at(i).get("isRemovable")) {
                                 this.barriers.remove(this.barriers.at(i));
                                 this.trigger('barrierDestroy');

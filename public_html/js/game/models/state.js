@@ -41,8 +41,8 @@ define(function(require) {
     },
     handleMessage: function(event) {
       var data = JSON.parse(event.data);
-      if(data.bullets) {
-        this.updateBullets(data.bullets);
+      if(data.bullet) {
+        this.updateBullets(data.bullet);
       }
       if(data.barriers) {
         this.updateBarriers(data.barriers);
