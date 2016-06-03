@@ -115,7 +115,9 @@ define(function(require) {
           }
       },
       quitGame : function() {
-          this.state.silence();
+          if (this.state) {
+              this.state.silence();
+          }
           this.isRunnig = false;
           this.player.destroy();
           this.playerView.destroy();
