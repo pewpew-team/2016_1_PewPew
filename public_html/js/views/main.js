@@ -3,14 +3,16 @@ define(function (require) {
         tmpl = require('tmpl/main'),
         tmplOffline = require('tmpl/offlineMain'),
         cellsCollection = require('conwayBackground/collections/cellsCollection'),
-        cellsView = require('conwayBackground/views/cellsView');
+        cellsView = require('conwayBackground/views/cellsView'),
+        scoreboard = require('views/scoreboard');
 
     var View = baseView.extend({
         template: tmpl,
         events: {
             'click .js-conway-run' : 'conwayRun',
             'click .js-conway-stop': 'conwayStop',
-            'click .js-conwayCanvas': 'addCell'
+            'click .js-conwayCanvas': 'addCell',
+            'click .js-scoreboard': 'toScoreboard'
         },
         show: function() {
             var isOnline = navigator.onLine;
@@ -21,6 +23,9 @@ define(function (require) {
                 this.drawCells();
             }
             baseView.prototype.show.apply(this);
+        },
+        toScoreboard: function() {
+            scoreboard.referrer = "#main";
         },
         drawCells: function() {
             var canvas = this.$('.js-conwayCanvas')[0],

@@ -18,7 +18,7 @@ define(function (require) {
             unremovableBlockColor: 'black',
             playerColor: 'black',
             bulletsColor: '#FFF119',
-            boosterColor: '#B3A911',
+            boosterColor: '#095CB2',
             boosterBorderColor: '#0986B2',
             playerGunColor: '#CC0C39'
         },{

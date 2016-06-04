@@ -108,7 +108,6 @@ define(function (require) {
                     }
                 },
                 destroy: function() {
-                    console.log('destroy');
                     this.deleteEvents();
                 }
             });

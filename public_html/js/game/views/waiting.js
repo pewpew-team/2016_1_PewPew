@@ -16,12 +16,17 @@ define(function (require) {
             this.$el.html(this.template());
         },
         show: function () {
+            this.isShow = true;
             this.$el.appendTo(".game");
             this.$el.show();
         },
         hide: function () {
+            this.isShow = false;
             this.$el.hide();
             this.$el.detach();
+        },
+        isShowed: function() {
+            return this.isShow;
         },
         cancel: function() {
             this.trigger('cancel');

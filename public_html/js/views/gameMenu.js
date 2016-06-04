@@ -1,7 +1,8 @@
 define(function(require) {
     var baseView = require('views/baseView'),
         tmpl = require('tmpl/gameMenu'),
-        session = require('models/session');
+        session = require('models/session'),
+        scoreboard = require('views/scoreboard');
 
     var GameMenu = baseView.extend({
         template: tmpl,
@@ -10,7 +11,8 @@ define(function(require) {
             'click #logout' : 'handleLogout',
             'click #training' : 'startTraining',
             'click #time-attack' : 'startTimeAttack',
-            'click #multiplayer' : 'startMultiplayer'
+            'click #multiplayer' : 'startMultiplayer',
+            'click .js-scoreboard': 'toScoreboard'
         },
         handleLogout: function(e) {
             e.preventDefault();
@@ -28,6 +30,11 @@ define(function(require) {
         startMultiplayer: function(e) {
             e.preventDefault();
             this.trigger('startMultiplayer');
+        },
+        toScoreboard: function (e) {
+            e.preventDefault();
+            scoreboard.referrer = "#gameMenu";
+            window.location.hash = "#scoreboard";
         }
     });
 

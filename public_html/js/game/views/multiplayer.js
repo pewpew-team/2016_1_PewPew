@@ -44,6 +44,7 @@ define(function(require) {
               if (data.startGame) {
                   waitingView.hide();
                   this.run();
+                  this.setHeader(data.playerName + " vs " + data.enemyName);
               }
           }.bind(this));
           socket.open();
@@ -64,6 +65,7 @@ define(function(require) {
                   }
               }
           }.bind(this));
+          game.on('gameOver', this.gameOver.bind(this));
           resultsView.off('restart');
           resultsView.on('restart', this.restart.bind(this));
           this.blockCount = 0;
@@ -108,9 +110,20 @@ define(function(require) {
             scoreWrapper.innerHTML = minutes + ':' + seconds;
           }
       },
+        setHeader: function(header) {
+            if (header) {
+                var scoreWrapper = document.getElementById('js-score');
+                if (scoreWrapper) {
+                    scoreWrapper.innerHTML = header;
+                }
+            }
+        },
       quitGame : function() {
           if (this.state) {
               this.state.silence();
+          }
+          if (waitingView.isShowed()) {
+              waitingView.hide();
           }
           this.isRunning = false;
           this.player.destroy();

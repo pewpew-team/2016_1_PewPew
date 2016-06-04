@@ -7,6 +7,14 @@
             <div class = "menu__title scoreboard__title">
                 Рейтинг игроков
             </div>
+            <div class = "menu__double-btn-wrap">
+                <span class = "menu__btn menu__btn--small js-timeScores">
+                    Игра на время
+                </span>
+                <span class = "menu__btn menu__btn--small menu__btn--back js-multiScores">
+                    Мультиплеер
+                </span>
+            </div>
             <table class = "scoreboard">
                 <fest:for iterate = "json.scores" index = "i" value = "v">
                     <tr>
@@ -22,7 +30,7 @@
                     </tr>
                 </fest:for>
             </table>
-            <a href = "#main" class = "menu__btn  menu__btn--back">
+            <a href = "#main" class = "menu__btn  menu__btn--back js-back">
                 Назад
             </a>
         </div>

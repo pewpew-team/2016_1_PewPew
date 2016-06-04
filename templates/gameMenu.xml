@@ -5,19 +5,22 @@
         </div>
         <div class = "menu__wrap">
             <button class = "menu__btn" id = "training">
-                Training
+                Тренировка
             </button>
             <button class = "menu__btn" id = "time-attack">
-                Time Attack
+                Игра на время
             </button>
             <button class = "menu__btn" id = "multiplayer">
-                Multiplayer
+                Мультиплеер
             </button>
+            <a href = "#scoreboard" class = "menu__btn js-scoreboard">
+                Рейтинг
+            </a>
             <a href = "#changeUserData" class = "menu__btn">
-                Change User Data
+                Изменить данные
             </a>
             <button class = "menu__btn" id = "logout">
-                Exit
+                Выход
             </button>
         </div>
     </div>

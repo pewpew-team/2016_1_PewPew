@@ -3,7 +3,15 @@ define(function(require) {
     var _ = require('underscore');
     var $ = require('jquery');
     var ScoreboardModel = Backbone.Model.extend({
-        getScores: function() {
+        getScores: function(type) {
+            if (type === 'time') {
+                this.order();
+                return {scores: this.get('scores')};
+            }
+            if (type === 'multi') {
+                this.order();
+                return {scores: this.get('scoresMulti')};
+            }
             this.order();
             return {scores: this.get('scores')};
         },
@@ -14,6 +22,7 @@ define(function(require) {
                 contentType: 'application/json',
                 success: function (data) {
                     this.set('scores', data.scores);
+                    this.set('scoresMulti', data.scoresMultiplayer);
                     complete();
                 }.bind(this),
                 error: function () {
@@ -22,9 +31,12 @@ define(function(require) {
             });
         },
         order: function () {
-            var scores = this.get('scores');
+            var scores = this.get('scores'),
+                scoresMulti = this.get('scoresMulti');
             scores = _.sortBy(scores, 'name');
             this.set('scores', scores);
+            scoresMulti = _.sortBy(scoresMulti, 'name');
+            this.set('scoresMulti', scoresMulti);
         }
     });
     return new ScoreboardModel();

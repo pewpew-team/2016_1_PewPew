@@ -184,7 +184,7 @@ body {
 }
 .scoreboard__title {
   position: relative;
-  margin: 40px 0;
+  margin: 20px 0;
 }
 .scoreboard__title:before {
   content: '';

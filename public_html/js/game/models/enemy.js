@@ -13,7 +13,7 @@ define(function(require) {
               playerSizeX: 80,
               playerSizeY: 50,
               maxVelocity: 17,
-              gunAngle: Math.Pi/2
+              gunAngle: Math.PI/2
           },
           initialize: function() {
               this.set({

@@ -10,7 +10,7 @@
             <a href = "#register" class = "menu__btn">
                 Регистрация
             </a>
-            <a href = "#scoreboard" class = "menu__btn">
+            <a href = "#scoreboard" class = "menu__btn js-scoreboard">
                 Рейтинг
             </a>
         </div>

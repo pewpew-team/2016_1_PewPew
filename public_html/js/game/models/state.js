@@ -12,7 +12,7 @@ define(function(require) {
     initialize: function() {
       socket.addMessageHandler(this.handleMessage.bind(this));
       this.listenTo(bulletCollection, 'shoot', this.sendNewBullet.bind(this));
-      this.listenTo(this.get('player'), 'change:positionX', this.sendPlayerPosition);
+      this.listenTo(this.get('player'), 'change:positionX change:gunAngle', this.sendPlayerPosition);
     },
     silence: function() {
       this.stopListening(bulletCollection);
